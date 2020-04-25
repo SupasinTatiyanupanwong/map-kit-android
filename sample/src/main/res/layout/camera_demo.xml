@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2020 Supasin Tatiyanupanwong
+     Copyright (C) 2012 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/stop_animation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onStopAnimation"
+                android:text="@string/stop_animation" />
+
+            <ToggleButton
+                android:id="@+id/animate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:onClick="onToggleAnimate"
+                android:textOff="@string/animate"
+                android:textOn="@string/animate" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/scroll_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:minWidth="48dp"
+                android:onClick="onScrollLeft"
+                android:text="@string/left_arrow" />
+
+            <Button
+                android:id="@+id/scroll_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/scroll_left"
+                android:minWidth="48dp"
+                android:onClick="onScrollUp"
+                android:text="@string/up_arrow" />
+
+            <Button
+                android:id="@+id/scroll_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scroll_up"
+                android:layout_toRightOf="@id/scroll_left"
+                android:minWidth="48dp"
+                android:onClick="onScrollDown"
+                android:text="@string/down_arrow" />
+
+            <Button
+                android:id="@+id/scroll_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/scroll_down"
+                android:minWidth="48dp"
+                android:onClick="onScrollRight"
+                android:text="@string/right_arrow" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/zoom_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:onClick="onZoomIn"
+                android:text="@string/zoom_in" />
+
+            <Button
+                android:id="@+id/zoom_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:onClick="onZoomOut"
+                android:text="@string/zoom_out" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/tilt_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:onClick="onTiltMore"
+                android:text="@string/tilt_more" />
+
+            <Button
+                android:id="@+id/tilt_less"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:onClick="onTiltLess"
+                android:text="@string/tilt_less" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/duration_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onToggleCustomDuration"
+            android:text="@string/duration" />
+
+        <SeekBar
+            android:id="@+id/duration_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="5000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/sydney"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onGoToSydney"
+            android:text="@string/go_to_sydney"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/bondi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onGoToBondi"
+            android:text="@string/go_to_bondi"
+            tools:ignore="ButtonStyle" />
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/map"
+        class="me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

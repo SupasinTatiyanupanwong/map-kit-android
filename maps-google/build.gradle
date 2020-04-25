@@ -1,0 +1,22 @@
+rootProject.allprojects {
+    repositories {
+        google()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+    }
+}
+
+dependencies {
+    api project(':maps-core')
+
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+}

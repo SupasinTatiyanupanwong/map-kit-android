@@ -1,0 +1,22 @@
+rootProject.allprojects {
+    repositories {
+        maven { url 'https://developer.huawei.com/repo/' }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+    }
+}
+
+dependencies {
+    api project(':maps-core')
+
+    implementation 'com.huawei.hms:maps:4.0.1.301'
+}
