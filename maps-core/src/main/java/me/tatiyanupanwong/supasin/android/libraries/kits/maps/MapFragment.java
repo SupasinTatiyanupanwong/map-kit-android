@@ -53,6 +53,10 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
  */
 public class MapFragment extends Fragment {
 
+    public static MapFragment newInstance() {
+        return new MapFragment();
+    }
+
     @Nullable
     @Override
     public final View onCreateView(

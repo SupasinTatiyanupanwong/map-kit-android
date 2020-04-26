@@ -81,7 +81,7 @@ public class MapInPagerDemoActivity extends AppCompatActivity {
                 case 1:
                     return new TextFragment();
                 case 2:
-                    return new MapFragment();
+                    return MapFragment.newInstance();
                 default:
                     throw new IllegalArgumentException();
             }

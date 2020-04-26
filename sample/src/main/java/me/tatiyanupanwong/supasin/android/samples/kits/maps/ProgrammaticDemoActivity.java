@@ -47,7 +47,7 @@ public class ProgrammaticDemoActivity extends AppCompatActivity implements OnMap
         // We only create a fragment if it doesn't already exist.
         if (mapFragment == null) {
             // To programmatically add the map, we first create a MapFragment.
-            mapFragment = new MapFragment();
+            mapFragment = MapFragment.newInstance();
 
             // Then we add it using a FragmentTransaction.
             FragmentTransaction fragmentTransaction =
