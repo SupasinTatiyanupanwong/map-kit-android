@@ -38,10 +38,10 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
  * component can be added to an activity's layout file simply with the XML below.
  *
  * <pre>
- * &#60;fragment
+ * &lt;fragment
  *     class="me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment"
  *     android:layout_width="match_parent"
- *     android:layout_height="match_parent" />
+ *     android:layout_height="match_parent" /&gt;
  * </pre>
  *
  * <p>A {@link Map} must be acquired using {@link #getMapAsync(OnMapReadyCallback)}. This class
