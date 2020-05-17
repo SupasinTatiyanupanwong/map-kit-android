@@ -26,6 +26,8 @@ import androidx.annotation.UiThread;
  *
  * <p>Methods in this class must be called on the Android UI thread. If not, an {@link
  * IllegalStateException} will be thrown at runtime.
+ *
+ * @since 1.0.0
  */
 @UiThread
 public interface TileOverlay {
@@ -112,7 +114,7 @@ public interface TileOverlay {
 
 
     /**
-     * Defines options for a TileOverlay.
+     * Defines options for a {@link TileOverlay}.
      */
     interface Options {
         /**

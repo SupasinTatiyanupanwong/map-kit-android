@@ -28,6 +28,8 @@ import java.util.List;
  *
  * <p>Methods in this class must be called on the Android UI thread. If not, an {@link
  * IllegalStateException} will be thrown at runtime.
+ *
+ * @since 1.0.0
  */
 @UiThread
 public interface Polygon {
@@ -248,7 +250,7 @@ public interface Polygon {
 
 
     /**
-     * Defines options for a polygon.
+     * Defines options for a {@link Polygon}.
      */
     interface Options {
         /**

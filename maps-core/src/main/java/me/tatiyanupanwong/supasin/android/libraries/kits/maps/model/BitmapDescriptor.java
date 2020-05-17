@@ -28,6 +28,8 @@ import androidx.annotation.NonNull;
  * earth.
  *
  * <p>To obtain a {@link BitmapDescriptor} use the factory class {@link BitmapDescriptor.Factory}.
+ *
+ * @since 1.0.0
  */
 public interface BitmapDescriptor {
 
@@ -91,6 +93,8 @@ public interface BitmapDescriptor {
 
         /**
          * Creates a {@link BitmapDescriptor} that refers to the default marker image.
+         *
+         * @return The {@link BitmapDescriptor} that refers to the default marker image.
          */
         @NonNull
         BitmapDescriptor defaultMarker();
@@ -99,6 +103,7 @@ public interface BitmapDescriptor {
          * Creates a {@link BitmapDescriptor} that refers to the default marker image.
          *
          * @param hue The hue of the marker. Value must be greater or equal to 0 and less than 360.
+         * @return The {@link BitmapDescriptor} that refers to the default marker image.
          */
         @NonNull
         BitmapDescriptor defaultMarker(
@@ -106,6 +111,9 @@ public interface BitmapDescriptor {
 
         /**
          * Creates a {@link BitmapDescriptor} from a given Bitmap image.
+         *
+         * @param image The bitmap image.
+         * @return The {@link BitmapDescriptor} from a given Bitmap image.
          */
         @NonNull
         BitmapDescriptor fromBitmap(Bitmap image);

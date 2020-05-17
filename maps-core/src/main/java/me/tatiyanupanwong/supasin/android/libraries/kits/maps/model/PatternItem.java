@@ -23,6 +23,7 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  * @see Dash
  * @see Dot
  * @see Gap
+ * @since 1.0.0
  */
 public interface PatternItem {
 }

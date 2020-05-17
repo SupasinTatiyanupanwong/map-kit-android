@@ -24,6 +24,8 @@ import androidx.annotation.NonNull;
  *
  * <p>Use {@link CameraPosition.Builder} to construct a {@link CameraPosition} instance, which you
  * can then use in conjunction with {@link CameraUpdate.Factory}.
+ *
+ * @since 1.0.0
  */
 public interface CameraPosition {
 
@@ -65,7 +67,6 @@ public interface CameraPosition {
      * Builds camera position.
      */
     interface Builder {
-
         /**
          * Sets the location that the camera is pointing at.
          *

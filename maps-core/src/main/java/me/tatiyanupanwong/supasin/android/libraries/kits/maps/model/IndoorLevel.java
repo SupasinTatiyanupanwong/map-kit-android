@@ -23,6 +23,8 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  *
  * <p>While a level is usually enclosed by a single building, a level might be enclosed by several
  * buildings (e.g., a carpark level might span multiple buildings).
+ *
+ * @since 1.0.0
  */
 public interface IndoorLevel {
 

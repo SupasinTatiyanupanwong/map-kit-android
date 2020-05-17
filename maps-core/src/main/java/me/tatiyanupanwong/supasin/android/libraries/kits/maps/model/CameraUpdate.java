@@ -27,6 +27,8 @@ import androidx.annotation.NonNull;
  * CancelableCallback)} or {@link Map#moveCamera(CameraUpdate) moveCamera(CameraUpdate)}.
  *
  * <p>To obtain a {@link CameraUpdate} use the factory class {@link CameraUpdate.Factory}.
+ *
+ * @since 1.0.0
  */
 public interface CameraUpdate {
 

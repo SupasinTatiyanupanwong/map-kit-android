@@ -20,6 +20,8 @@ import androidx.annotation.NonNull;
 
 /**
  * Contains information about a PointOfInterest that was clicked on.
+ *
+ * @since 1.0.0
  */
 public interface PointOfInterest {
 

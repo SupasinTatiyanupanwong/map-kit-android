@@ -18,6 +18,8 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
 
 /**
  * Joint types for {@link Polyline} and outline of {@link Polygon}.
+ *
+ * @since 1.0.0
  */
 public final class JointType {
 

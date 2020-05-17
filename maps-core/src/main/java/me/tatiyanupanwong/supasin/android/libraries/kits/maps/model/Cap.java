@@ -23,6 +23,7 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  * @see CustomCap
  * @see RoundCap
  * @see SquareCap
+ * @since 1.0.0
  */
 public interface Cap {
 }

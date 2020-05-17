@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
  * Bitmap overlay centered at the start or end vertex of a {@link Polyline}, orientated according
  * to the direction of the line's first or last edge and scaled with respect to the line's stroke
  * width. {@code CustomCap} can be applied to {@code Polyline} with any stroke pattern.
+ *
+ * @since 1.0.0
  */
 public interface CustomCap extends Cap {
 

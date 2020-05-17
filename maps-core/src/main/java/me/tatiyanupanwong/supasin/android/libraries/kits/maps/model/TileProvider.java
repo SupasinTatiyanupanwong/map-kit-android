@@ -22,6 +22,8 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  *
  * <p>Calls to methods in this interface might be made from multiple threads so implementations
  * of this interface must be threadsafe.
+ *
+ * @since 1.0.0
  */
 public interface TileProvider {
 

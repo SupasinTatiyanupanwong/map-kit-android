@@ -50,6 +50,8 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
  * <p>Any objects obtained from the {@link Map} are associated with the view. It's important to not
  * hold on to objects (e.g. {@link Marker}) beyond the view's life. Otherwise it will cause a
  * memory leak as the view cannot be released.
+ *
+ * @since 1.0.0
  */
 public class MapFragment extends Fragment {
 

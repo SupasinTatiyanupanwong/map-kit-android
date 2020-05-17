@@ -35,6 +35,8 @@ import androidx.annotation.NonNull;
  * services wisely according to the map's lifecycle state. For example, it should only using
  * battery-intensive services (like GPS) occasionally, or only while an activity is in the
  * foreground.
+ *
+ * @since 1.0.0
  */
 public interface LocationSource {
 

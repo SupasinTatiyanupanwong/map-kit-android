@@ -267,6 +267,9 @@ public interface Marker {
     Object getTag();
 
 
+    /**
+     * Defines options for a {@link Marker}.
+     */
     interface Options {
         /**
          * Sets the location for the marker.

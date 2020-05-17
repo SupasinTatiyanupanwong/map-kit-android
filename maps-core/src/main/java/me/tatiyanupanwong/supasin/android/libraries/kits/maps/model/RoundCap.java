@@ -19,6 +19,8 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
 /**
  * Cap that is a semicircle with radius equal to half the stroke width, centered at the start or
  * end vertex of a {@link Polyline} with solid stroke pattern.
+ *
+ * @since 1.0.0
  */
 public interface RoundCap extends Cap {
 }

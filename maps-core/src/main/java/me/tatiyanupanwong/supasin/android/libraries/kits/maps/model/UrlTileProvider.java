@@ -7,6 +7,8 @@ import java.net.URL;
  * provided.
  *
  * <p>Note that this class requires that all the images have the same dimensions.
+ *
+ * @since 1.0.0
  */
 public interface UrlTileProvider {
 

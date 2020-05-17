@@ -20,6 +20,8 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  * Cap that is squared off exactly at the start or end vertex of a {@link Polyline} with solid
  * stroke pattern, equivalent to having no additional cap beyond the start or end vertex. This is
  * the default cap type at start and end vertices of {@link Polyline}s with solid stroke pattern.
+ *
+ * @since 1.0.0
  */
 public interface ButtCap extends Cap {
 }

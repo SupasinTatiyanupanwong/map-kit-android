@@ -27,6 +27,8 @@ import java.util.List;
  *
  * Methods in this class must be called on the Android UI thread. If not, an {@link
  * IllegalStateException} will be thrown at runtime.
+ *
+ * @since 1.0.0
  */
 @UiThread
 public interface Polyline {
@@ -246,7 +248,7 @@ public interface Polyline {
 
 
     /**
-     * Defines options for a polyline.
+     * Defines options for a {@link Polyline}.
      */
     interface Options {
         /**

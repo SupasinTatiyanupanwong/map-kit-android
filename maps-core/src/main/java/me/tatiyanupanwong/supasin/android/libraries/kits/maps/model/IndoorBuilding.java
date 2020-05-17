@@ -25,6 +25,8 @@ import java.util.List;
  * However, if a building's structural model changes, e.g., due to an update to Google's building
  * models, then an old IndoorBuilding object and a new IndoorBuilding object will be .equal(), but
  * might have different contents.
+ *
+ * @since 1.0.0
  */
 public interface IndoorBuilding {
 

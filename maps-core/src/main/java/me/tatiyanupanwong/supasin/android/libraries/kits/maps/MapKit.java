@@ -20,10 +20,22 @@ import androidx.annotation.NonNull;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
 
-public class MapKit {
+/**
+ * Main entry point for Maps API.
+ *
+ * @since 1.0.0
+ */
+public final class MapKit {
 
     private static final Map.Factory FACTORY = MapsPlatform.get().getMapFactory();
 
+    private MapKit() {} // No instances!
+
+    /**
+     * Obtains a factory object to interact with Maps API for the current platform.
+     *
+     * @return The {@link Map.Factory} for the current platform.
+     */
     @NonNull
     public static Map.Factory getFactory() {
         return FACTORY;

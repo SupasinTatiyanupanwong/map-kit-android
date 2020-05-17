@@ -25,6 +25,8 @@ import java.util.List;
 
 /**
  * A circle on the earth's surface (spherical cap).
+ *
+ * @since 1.0.0
  */
 public interface Circle {
 
@@ -36,6 +38,8 @@ public interface Circle {
 
     /**
      * Gets this circle's id. The id will be unique amongst all Circles on a map.
+     *
+     * @return This circle's id.
      */
     String getId();
 
@@ -50,6 +54,7 @@ public interface Circle {
 
     /**
      * Returns the center as a {@link LatLng}.
+     *
      * @return The geographic center as a {@link LatLng}.
      */
     LatLng getCenter();
@@ -66,7 +71,7 @@ public interface Circle {
     /**
      * Returns the circle's radius, in meters.
      *
-     * @return The radius in meters.
+     * @return The radius, in meters.
      */
     double getRadius();
 

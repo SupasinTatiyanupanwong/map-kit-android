@@ -20,6 +20,8 @@ import androidx.annotation.NonNull;
 
 /**
  * An immutable class representing a latitude/longitude aligned rectangle.
+ *
+ * @since 1.0.0
  */
 public interface LatLngBounds {
 

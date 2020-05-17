@@ -16,5 +16,11 @@
 
 package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
 
+/**
+ * An immutable class representing a dot used in the stroke pattern for a {@link Polyline} or
+ * the outline of a {@link Polygon} or {@link Circle}.
+ *
+ * @since 1.0.0
+ */
 public interface Dot extends PatternItem {
 }

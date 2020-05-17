@@ -26,6 +26,8 @@ import androidx.annotation.UiThread;
  *
  * <p>Methods in this class must be called on the Android UI thread. If not, an {@link
  * IllegalStateException} will be thrown at runtime.
+ *
+ * @since 1.0.0
  */
 @UiThread
 public interface GroundOverlay {
@@ -39,7 +41,7 @@ public interface GroundOverlay {
     /**
      * Gets this ground overlay's id. The id will be unique amongst all GroundOverlays on a map.
      *
-     * @return The id of this ground overlay.
+     * @return This ground overlay's id.
      */
     String getId();
 
@@ -217,7 +219,7 @@ public interface GroundOverlay {
 
 
     /**
-     * Defines options for a ground overlay.
+     * Defines options for a {@link GroundOverlay}.
      */
     interface Options {
         /**

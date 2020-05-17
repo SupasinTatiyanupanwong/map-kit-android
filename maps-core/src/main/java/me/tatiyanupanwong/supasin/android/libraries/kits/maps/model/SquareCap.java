@@ -19,6 +19,8 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
 /**
  * Cap that is squared off after extending half the stroke width beyond the start or end vertex of
  * a {@link Polyline} with solid stroke pattern.
+ *
+ * @since 1.0.0
  */
 public interface SquareCap extends Cap {
 }

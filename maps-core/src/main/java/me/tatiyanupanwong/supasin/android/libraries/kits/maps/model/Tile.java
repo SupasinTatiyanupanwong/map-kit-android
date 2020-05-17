@@ -22,6 +22,8 @@ import androidx.annotation.Nullable;
 
 /**
  * Contains information about a Tile that is returned by a {@link TileProvider}.
+ *
+ * @since 1.0.0
  */
 public interface Tile {
 

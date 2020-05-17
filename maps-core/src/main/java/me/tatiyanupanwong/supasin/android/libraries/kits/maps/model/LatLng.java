@@ -18,6 +18,8 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
 
 /**
  * An immutable class representing a pair of latitude and longitude coordinates, stored as degrees.
+ *
+ * @since 1.0.0
  */
 public interface LatLng {
 

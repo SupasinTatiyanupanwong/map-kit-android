@@ -45,6 +45,8 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
  * <p>You can adjust the viewpoint of a map by changing the position of the camera (as opposed to
  * moving the map). You can use the map's camera to set parameters such as location, zoom level,
  * tilt angle, and bearing.
+ *
+ * @since 1.0.0
  */
 @UiThread
 public interface Map {
@@ -1382,7 +1384,6 @@ public interface Map {
 
 
     interface Factory {
-
         @NonNull
         BitmapDescriptor.Factory getBitmapDescriptorFactory();
 
