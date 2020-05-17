@@ -16,8 +16,11 @@
 
 package me.tatiyanupanwong.supasin.android.libraries.kits.maps;
 
+import android.content.Context;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.lang.reflect.Constructor;
@@ -25,10 +28,15 @@ import java.lang.reflect.Constructor;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
 
 abstract class MapsPlatform {
-    private static final MapsPlatform PLATFORM = findPlatform();
+    private static MapsPlatform sPlatform;
 
     static MapsPlatform get() {
-        return PLATFORM;
+        return sPlatform;
+    }
+
+
+    static void init(@NonNull Context context) {
+        sPlatform = findPlatform(context);
     }
 
 
@@ -41,20 +49,20 @@ abstract class MapsPlatform {
     abstract int getDelegateMapFragmentId();
 
 
-    private static MapsPlatform findPlatform() {
-        MapsPlatform google = GoogleMapsPlatform.buildIfSupported();
+    private static MapsPlatform findPlatform(@NonNull Context context) {
+        MapsPlatform google = GoogleMapsPlatform.buildIfSupported(context);
         if (google != null) {
             return google;
         }
 
-        MapsPlatform huawei = HuaweiMapsPlatform.buildIfSupported();
+        MapsPlatform huawei = HuaweiMapsPlatform.buildIfSupported(context);
         if (huawei != null) {
             return huawei;
         }
 
         throw new IllegalStateException(
-                "Can't find supported maps platform, make sure to include one of the next artifacts:"
-                        + " \':maps-google\', or \':maps-huawei\'");
+                "Can't find supported platform, make sure to include one of the next artifacts:"
+                        + " ':maps-google', or ':maps-huawei'");
     }
 
 
@@ -77,6 +85,8 @@ abstract class MapsPlatform {
         private static int sMapFragmentLayoutResId;
         private static int sDelegateMapFragmentId;
 
+        private GoogleMapsPlatform() {}
+
         @Override
         int getMapFragmentLayoutResId() {
             return sMapFragmentLayoutResId;
@@ -94,14 +104,14 @@ abstract class MapsPlatform {
 
 
         @Nullable
-        static MapsPlatform buildIfSupported() {
+        static MapsPlatform buildIfSupported(@NonNull Context context) {
             try {
                 //noinspection unchecked
-                Constructor<Map.Factory> ctor =
+                final Constructor<Map.Factory> ctor =
                         ((Class<Map.Factory>) Class.forName(CLASS_NAME_FACTORY))
-                                .getDeclaredConstructor();
+                                .getDeclaredConstructor(Context.class);
                 ctor.setAccessible(true);
-                sMapFactory = ctor.newInstance();
+                sMapFactory = ctor.newInstance(context);
 
                 sMapFragmentLayoutResId = Class.forName(CLASS_NAME_LAYOUT_RES)
                         .getField(FIELD_NAME_LAYOUT_ID).getInt(null);
@@ -135,6 +145,8 @@ abstract class MapsPlatform {
         private static int sMapFragmentLayoutResId;
         private static int sDelegateMapFragmentId;
 
+        private HuaweiMapsPlatform() {}
+
         @Override
         int getMapFragmentLayoutResId() {
             return sMapFragmentLayoutResId;
@@ -152,14 +164,14 @@ abstract class MapsPlatform {
 
 
         @Nullable
-        static MapsPlatform buildIfSupported() {
+        static MapsPlatform buildIfSupported(@NonNull Context context) {
             try {
                 //noinspection unchecked
-                Constructor<Map.Factory> ctor =
+                final Constructor<Map.Factory> ctor =
                         ((Class<Map.Factory>) Class.forName(CLASS_NAME_FACTORY))
-                                .getDeclaredConstructor();
+                                .getDeclaredConstructor(Context.class);
                 ctor.setAccessible(true);
-                sMapFactory = ctor.newInstance();
+                sMapFactory = ctor.newInstance(context);
 
                 sMapFragmentLayoutResId = Class.forName(CLASS_NAME_LAYOUT_RES)
                         .getField(FIELD_NAME_LAYOUT_ID).getInt(null);

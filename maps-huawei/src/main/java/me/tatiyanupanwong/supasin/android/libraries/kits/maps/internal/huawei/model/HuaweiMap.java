@@ -27,6 +27,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.fragment.app.Fragment;
 
+import com.huawei.hms.api.ConnectionResult;
+import com.huawei.hms.api.HuaweiApiAvailability;
+
+import java.util.Arrays;
+import java.util.List;
+
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescriptor;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.ButtCap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraPosition;
@@ -798,6 +804,19 @@ class HuaweiMap implements Map {
 
 
     static class Factory implements Map.Factory {
+        private static final List<Integer> UNAVAILABLE_RESULTS = Arrays.asList(
+                ConnectionResult.SERVICE_DISABLED,
+                ConnectionResult.SERVICE_MISSING,
+                ConnectionResult.SERVICE_INVALID);
+
+        Factory(Context context) {
+            final int result =
+                    HuaweiApiAvailability.getInstance().isHuaweiMobileServicesAvailable(context);
+            if (UNAVAILABLE_RESULTS.contains(result)) {
+                throw new UnsupportedOperationException("Huawei Maps is not available.");
+            }
+        }
+
         @NonNull
         @Override
         public BitmapDescriptor.Factory getBitmapDescriptorFactory() {

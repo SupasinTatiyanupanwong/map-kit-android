@@ -22,4 +22,13 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <application>
+
+        <provider
+                android:name=".MapKitInitProvider"
+                android:authorities="${applicationId}.MapKitInitProvider"
+                android:exported="false" />
+
+    </application>
+
 </manifest>
