@@ -32,16 +32,6 @@ class HuaweiCameraPosition implements CameraPosition {
         mDelegate = delegate;
     }
 
-    HuaweiCameraPosition(LatLng target, float zoom, float tilt, float bearing) {
-        this(new com.huawei.hms.maps.model.CameraPosition(
-                HuaweiLatLng.unwrap(target), zoom, tilt, bearing));
-    }
-
-    HuaweiCameraPosition(LatLng target, float zoom) {
-        this(new com.huawei.hms.maps.model.CameraPosition(
-                HuaweiLatLng.unwrap(target), zoom, 0.0F, 0.0F));
-    }
-
     @NonNull
     @Override
     public LatLng getTarget() {

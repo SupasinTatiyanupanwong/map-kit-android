@@ -1393,10 +1393,18 @@ public interface Map {
         @NonNull
         CameraUpdate.Factory getCameraUpdateFactory();
 
+        /**
+         * @deprecated Use {@link #newCameraPositionBuilder()} instead.
+         */
+        @Deprecated
         @NonNull
         CameraPosition newCameraPosition(
                 @NonNull LatLng target, float zoom, float tilt, float bearing);
 
+        /**
+         * @deprecated Use {@link #newCameraPositionBuilder()} instead.
+         */
+        @Deprecated
         @NonNull
         CameraPosition newCameraPositionFromLatLngZoom(@NonNull LatLng target, float zoom);
 

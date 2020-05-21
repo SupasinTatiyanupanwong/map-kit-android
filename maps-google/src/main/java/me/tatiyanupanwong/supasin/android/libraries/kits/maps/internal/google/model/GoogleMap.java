@@ -839,13 +839,21 @@ class GoogleMap implements Map {
         @Override
         public CameraPosition newCameraPosition(
                 @NonNull LatLng target, float zoom, float tilt, float bearing) {
-            return new GoogleCameraPosition(target, zoom, tilt, bearing);
+            return newCameraPositionBuilder()
+                    .target(target)
+                    .zoom(zoom)
+                    .tilt(tilt)
+                    .bearing(bearing)
+                    .build();
         }
 
         @NonNull
         @Override
         public CameraPosition newCameraPositionFromLatLngZoom(@NonNull LatLng target, float zoom) {
-            return new GoogleCameraPosition(target, zoom);
+            return newCameraPositionBuilder()
+                    .target(target)
+                    .zoom(zoom)
+                    .build();
         }
 
         @NonNull

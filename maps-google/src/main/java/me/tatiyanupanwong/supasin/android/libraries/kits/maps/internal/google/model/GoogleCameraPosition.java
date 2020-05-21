@@ -32,16 +32,6 @@ class GoogleCameraPosition implements CameraPosition {
         mDelegate = delegate;
     }
 
-    GoogleCameraPosition(LatLng target, float zoom, float tilt, float bearing) {
-        this(new com.google.android.gms.maps.model.CameraPosition(
-                GoogleLatLng.unwrap(target), zoom, tilt, bearing));
-    }
-
-    GoogleCameraPosition(LatLng target, float zoom) {
-        this(new com.google.android.gms.maps.model.CameraPosition(
-                GoogleLatLng.unwrap(target), zoom, 0.0F, 0.0F));
-    }
-
     @NonNull
     @Override
     public LatLng getTarget() {
