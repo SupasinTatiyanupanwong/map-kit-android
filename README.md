@@ -1,6 +1,6 @@
 # Map Kit
 
-Abstraction wrapper that encapsulates maps APIs of supported platforms for Android, allowing access to multiple maps APIs while maintaining your's app single codebase.
+Abstraction wrapper that encapsulates Maps APIs of supported platforms for Android, allowing access to multiple Maps APIs while maintaining your application single codebase.
 
 Map Kit is currently provides support for Google Maps and Huawei Maps.
 
@@ -16,26 +16,41 @@ This project contains 3 artifacts; `maps-core`, `maps-google`, and `maps-huawei`
 
 ### Migration from existing Maps APIs
 
-| Google Name                      | Map Kit Name                                                 |
-|:-------------------------------- |:------------------------------------------------------------ |
-| ``com.google.android.gms.maps*`` | ``me.tatiyanupanwong.supasin.android.libraries.kits.maps.*`` |
-| ``GoogleMap``                    | ``Map``                                                      |
-| ``new *Options()``               | ``MapKit.getFactory().new*Options()``                        |
-| ``new LatLng()``                 | ``MapKit.getFactory().newLatLng()``                          |
-| ``*Factory.*()``                 | ``MapKit.getFactory().get*Factory().*()``                    |
-| ``Tile.NO_TILE``                 | ``MapKit.getFactory().noTile()``                             |
-| ``*.builder()``                  | ``MapKit.getFactory().new*Builder()``                        |
+| Google Name                       | Huawei Name               | Map Kit Name                                                 |
+|:--------------------------------- |:------------------------- |:------------------------------------------------------------ |
+| ``com.google.android.gms.maps.*`` | ``com.huawei.hms.maps.*`` | ``me.tatiyanupanwong.supasin.android.libraries.kits.maps.*`` |
+| ``GoogleMap``                     | ``HuaweiMap``             | ``Map``                                                      |
+| ``new *Options()``                | ``new *Options()``        | ``MapKit.getFactory().new*Options()``                        |
+| ``new LatLng()``                  | ``new LatLng()``          | ``MapKit.getFactory().newLatLng()``                          |
+| ``*Factory.*()``                  | ``*Factory.*()``          | ``MapKit.getFactory().get*Factory().*()``                    |
+| ``*.builder()``                   | ``*.builder()``           | ``MapKit.getFactory().new*Builder()``                        |
+| ``Tile.NO_TILE``                  | ``Tile.NO_TILE``          | ``MapKit.getFactory().noTile()``                             |
 
 ### Limitations
 
-1. Consults with official documentation for their own limitations.
-2. Models are currently not `Parcelable`.
-3. `*MapOptions` is currently not supported.
-4. Google's `StreetView` is currently not supported.
+1. Models are currently not `Parcelable`.
+2. `*MapOptions` is currently not supported.
+3. Google's `StreetView` is currently not supported.
+
+### Additional documentation
+
+* [Maps SDK for Android - Google Developer](https://developers.google.com/maps/documentation/android-sdk/intro)
+* [Map Kit - HMS Core - HUAWEI Developer](https://developer.huawei.com/consumer/en/hms/huawei-MapKit)
 
 ## Download
 
 Add the following to your Gradle build file:
+
+```groovy
+dependencies {
+    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-google:1.1.0'
+    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-huawei:1.1.0'
+}
+```
+
+If both of integration artifacts are included in your final build, the implementation will be selected based on API availability upon application startup.
+
+However, it is recommended to separate builds between them as next:
 
 ```groovy
 android {
@@ -43,7 +58,7 @@ android {
     flavorDimensions 'vendor'
     productFlavors {
         google
-        huawei
+        huawei { applicationIdSuffix '.huawei' }
     }
 }
 
@@ -59,8 +74,8 @@ configurations {
 }
 
 dependencies {
-    google 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-google:1.0.0'
-    huawei 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-huawei:1.0.0'
+    google 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-google:1.1.0'
+    huawei 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-huawei:1.1.0'
 }
 ```
 
@@ -70,10 +85,9 @@ However, make sure to have one of integration artifacts included in your final b
 
 ```groovy
 dependencies {
-    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-core:1.0.0'
+    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-core:1.1.0'
 }  
 ```
-
 
 ## License
 
