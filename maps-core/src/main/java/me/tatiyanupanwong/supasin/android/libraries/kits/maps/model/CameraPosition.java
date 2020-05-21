@@ -16,6 +16,7 @@
 
 package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
 
+import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 
 /**
@@ -74,7 +75,7 @@ public interface CameraPosition {
          * @return This {@link Builder} object for method chaining.
          */
         @NonNull
-        Builder target(LatLng location);
+        Builder target(@NonNull LatLng location);
 
         /**
          * Sets the zoom level of the camera. Zoom level is defined such that at zoom level 0,
@@ -115,7 +116,7 @@ public interface CameraPosition {
          * @return This {@link Builder} object for method chaining.
          */
         @NonNull
-        Builder tilt(float tilt);
+        Builder tilt(@FloatRange(from = 0.0, to = 90.0) float tilt);
 
         /**
          * Sets the direction that the camera is pointing in, in degrees clockwise from north.

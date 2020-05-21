@@ -26,7 +26,7 @@ ext {
 
     libraryName = 'Map Kit (Core)'
     libraryDescription = 'Encapsulates Maps APIs of supported platforms for Android'
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.1.0'
 
     siteUrl = 'https://github.com/SupasinTatiyanupanwong/map-kit-android'
     gitUrl = 'https://github.com/SupasinTatiyanupanwong/map-kit-android.git'

@@ -16,6 +16,7 @@
 
 package me.tatiyanupanwong.supasin.android.libraries.kits.maps.internal.huawei.model;
 
+import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -105,7 +106,7 @@ class HuaweiCameraPosition implements CameraPosition {
 
         @NonNull
         @Override
-        public CameraPosition.Builder target(LatLng location) {
+        public CameraPosition.Builder target(@NonNull LatLng location) {
             mDelegate.target(HuaweiLatLng.unwrap(location));
             return this;
         }
@@ -119,7 +120,7 @@ class HuaweiCameraPosition implements CameraPosition {
 
         @NonNull
         @Override
-        public CameraPosition.Builder tilt(float tilt) {
+        public CameraPosition.Builder tilt(@FloatRange(from = 0.0, to = 90.0) float tilt) {
             mDelegate.tilt(tilt);
             return this;
         }
