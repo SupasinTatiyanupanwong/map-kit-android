@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         // Huawei services configuration
-        maven { url 'http://developer.huawei.com/repo/' }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 
     dependencies {
