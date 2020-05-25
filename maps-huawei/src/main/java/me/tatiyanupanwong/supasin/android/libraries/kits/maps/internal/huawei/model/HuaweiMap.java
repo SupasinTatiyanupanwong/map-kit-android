@@ -264,7 +264,10 @@ class HuaweiMap implements Map {
 
     @Override
     public void setMyLocationEnabled(boolean enabled) {
+        // Huawei Maps will automatically enable the my-location button once its layer is enabled.
+        final boolean isButtonEnabled = mDelegate.getUiSettings().isMyLocationButtonEnabled();
         mDelegate.setMyLocationEnabled(enabled);
+        mDelegate.getUiSettings().setMyLocationButtonEnabled(isButtonEnabled);
     }
 
     @Override
