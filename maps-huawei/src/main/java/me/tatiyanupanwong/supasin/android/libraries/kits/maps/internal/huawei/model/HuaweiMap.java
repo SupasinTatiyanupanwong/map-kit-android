@@ -18,6 +18,7 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.internal.huawei.m
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.location.Location;
 import android.view.View;
 
@@ -65,6 +66,8 @@ class HuaweiMap implements Map {
 
     private final com.huawei.hms.maps.HuaweiMap mDelegate;
     private final UiSettings mSettings;
+
+    private Rect mLastPadding;
 
     private HuaweiMap(@NonNull com.huawei.hms.maps.HuaweiMap map) {
         mDelegate = map;
@@ -264,7 +267,7 @@ class HuaweiMap implements Map {
 
     @Override
     public void setMyLocationEnabled(boolean enabled) {
-        // Huawei Maps will automatically enable the my-location button once its layer is enabled.
+        // Huawei Map will automatically enable the my-location button once its layer is enabled.
         final boolean isButtonEnabled = mDelegate.getUiSettings().isMyLocationButtonEnabled();
         mDelegate.setMyLocationEnabled(enabled);
         mDelegate.getUiSettings().setMyLocationButtonEnabled(isButtonEnabled);
@@ -596,6 +599,21 @@ class HuaweiMap implements Map {
 
     @Override
     public void setPadding(int left, int top, int right, int bottom) {
+        if (mLastPadding == null) {
+            mLastPadding = new Rect(-1, -1, -1, -1);
+        }
+
+        // setPadding causes an entire screen to re-layout which can causes new setPadding call and
+        // that'll going forever, e.g. in ViewTreeObserver.OnGlobalLayoutListener#onGlobalLayout().
+        // Such issue does not exists in Google Map.
+        if (mLastPadding.left == left &&
+                mLastPadding.top == top &&
+                mLastPadding.right == right &&
+                mLastPadding.bottom == bottom) {
+            return;
+        }
+
+        mLastPadding.set(left, top, right, bottom);
         mDelegate.setPadding(left, top, right, bottom);
     }
 
