@@ -32,7 +32,7 @@ ext {
 
     libraryName = 'Map Kit (Huawei)'
     libraryDescription = 'Provides Huawei Maps integration to Map Kit'
-    libraryVersion = '1.1.0'
+    libraryVersion = '1.1.1'
 
     siteUrl = 'https://github.com/SupasinTatiyanupanwong/map-kit-android'
     gitUrl = 'https://github.com/SupasinTatiyanupanwong/map-kit-android.git'
