@@ -233,7 +233,7 @@ public class PolylineDemoActivity extends AppCompatActivity implements
                         MapKit.getFactory().getBitmapDescriptorFactory()
                                 .fromResource(R.drawable.chevron), CUSTOM_CAP_IMAGE_REF_WIDTH_PX);
         }
-        return null;
+        throw new IllegalArgumentException("Unknown cap type at position " + pos);
     }
 
     private int getSelectedJointType(int pos) {
@@ -245,7 +245,7 @@ public class PolylineDemoActivity extends AppCompatActivity implements
             case R.string.joint_type_default:
                 return JointType.DEFAULT;
         }
-        return 0;
+        return JointType.DEFAULT;
     }
 
     private List<PatternItem> getSelectedPattern(int pos) {

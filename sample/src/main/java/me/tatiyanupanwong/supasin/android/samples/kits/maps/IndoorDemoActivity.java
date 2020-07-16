@@ -40,7 +40,7 @@ public class IndoorDemoActivity extends AppCompatActivity implements
 
     private MapClient mMap;
 
-    private boolean showLevelPicker = true;
+    private boolean mShowLevelPicker = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +65,8 @@ public class IndoorDemoActivity extends AppCompatActivity implements
      * Called when the toggle level picker button is clicked.
      */
     public void onToggleLevelPicker(View view) {
-        showLevelPicker = !showLevelPicker;
-        mMap.getUiSettings().setIndoorLevelPickerEnabled(showLevelPicker);
+        mShowLevelPicker = !mShowLevelPicker;
+        mMap.getUiSettings().setIndoorLevelPickerEnabled(mShowLevelPicker);
     }
 
     /**

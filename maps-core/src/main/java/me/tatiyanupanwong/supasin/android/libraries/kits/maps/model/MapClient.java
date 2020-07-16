@@ -368,7 +368,7 @@ public interface MapClient {
      *
      * <p></p>The {@code Projection} returned is a snapshot of the current projection, and will not
      * automatically update when the camera moves. As this operation is expensive, you should get
-     * the projection only once per screen. Google Maps uses the Mercator projection to create its
+     * the projection only once per screen. Map Kit uses the Mercator projection to create its
      * maps from geographic data and convert points on the map into geographic coordinates.
      *
      * @return The {@link Projection} of the map in its current state.
@@ -570,8 +570,8 @@ public interface MapClient {
      * <p>This method allows you to define a visible region on the map, to signal to the map that
      * portions of the map around the edges may be obscured, by setting padding on each of the four
      * edges of the map. Map functions will be adapted to the padding. For example, the zoom
-     * controls, compass, copyright notices and Google logo will be moved to fit inside the defined
-     * region, camera movements will be relative to the center of the visible region, etc.
+     * controls, compass, copyright notices and logo will be moved to fit inside the defined region,
+     * camera movements will be relative to the center of the visible region, etc.
      *
      * @param left The number of pixels of padding to be added on the left of the map.
      * @param top The number of pixels of padding to be added on the top of the map.
@@ -1292,8 +1292,7 @@ public interface MapClient {
         /**
          * Sets the preference for whether the Map Toolbar should be enabled or disabled. If
          * enabled, and the Map Toolbar can be shown in the current context, users will see a bar
-         * with various context-dependent actions, including 'open this map in the Google Maps app'
-         * and 'find directions to the highlighted marker in the Google Maps app'.
+         * with various context-dependent actions.
          *
          * <p>By default, the Map Toolbar is enabled.
          *

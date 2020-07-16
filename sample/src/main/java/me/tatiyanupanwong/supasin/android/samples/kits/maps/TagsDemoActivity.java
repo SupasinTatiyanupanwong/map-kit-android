@@ -24,6 +24,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Circle;
@@ -54,22 +56,22 @@ public class TagsDemoActivity extends AppCompatActivity implements
     private static final LatLng SYDNEY = MapKit.getFactory().newLatLng(-33.87365, 151.20689);
 
     private static class CustomTag {
-        private final String description;
-        private int clickCount;
+        private final String mDescription;
+        private int mClickCount;
 
         CustomTag(String description) {
-            this.description = description;
-            clickCount = 0;
+            mDescription = description;
+            mClickCount = 0;
         }
 
         void incrementClickCount() {
-            clickCount++;
+            mClickCount++;
         }
 
         @NonNull
         @Override
         public String toString() {
-            return "The " + description + " has been clicked " + clickCount + " times.";
+            return "The " + mDescription + " has been clicked " + mClickCount + " times.";
         }
     }
 
@@ -187,14 +189,14 @@ public class TagsDemoActivity extends AppCompatActivity implements
     // Click event listeners.
     //
 
-    private void onClick(CustomTag tag) {
+    private void onClick(@NonNull CustomTag tag) {
         tag.incrementClickCount();
         mTagText.setText(tag.toString());
     }
 
     @Override
     public void onCircleClick(@NonNull Circle circle) {
-        onClick((CustomTag) circle.getTag());
+        onClick((CustomTag) Objects.requireNonNull(circle.getTag()));
     }
 
     @Override
@@ -204,7 +206,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
 
     @Override
     public boolean onMarkerClick(@NonNull final Marker marker) {
-        onClick((CustomTag) marker.getTag());
+        onClick((CustomTag) Objects.requireNonNull(marker.getTag()));
         // We return true to indicate that we have consumed the event and that we do not wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
@@ -213,12 +215,12 @@ public class TagsDemoActivity extends AppCompatActivity implements
 
     @Override
     public void onPolygonClick(@NonNull Polygon polygon) {
-        onClick((CustomTag) polygon.getTag());
+        onClick((CustomTag) Objects.requireNonNull(polygon.getTag()));
     }
 
     @Override
     public void onPolylineClick(@NonNull Polyline polyline) {
-        onClick((CustomTag) polyline.getTag());
+        onClick((CustomTag) Objects.requireNonNull(polyline.getTag()));
     }
 
 }

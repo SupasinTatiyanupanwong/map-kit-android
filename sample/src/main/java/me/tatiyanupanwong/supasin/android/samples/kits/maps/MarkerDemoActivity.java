@@ -45,6 +45,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
@@ -358,7 +359,8 @@ public class MarkerDemoActivity extends AppCompatActivity implements
      * for use as a marker icon.
      */
     private BitmapDescriptor vectorToBitmap(@DrawableRes int id, @ColorInt int color) {
-        Drawable vectorDrawable = ResourcesCompat.getDrawable(getResources(), id, null);
+        Drawable vectorDrawable =
+                Objects.requireNonNull(ResourcesCompat.getDrawable(getResources(), id, null));
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
                 vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);

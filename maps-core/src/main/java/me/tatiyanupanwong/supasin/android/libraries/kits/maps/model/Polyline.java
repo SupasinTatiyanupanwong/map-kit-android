@@ -207,7 +207,7 @@ public interface Polyline {
      * notifications to the {@link MapClient.OnPolylineClickListener} when the user clicks the
      * polyline. The event listener is registered through {@link
      * MapClient#setOnPolylineClickListener(MapClient.OnPolylineClickListener)
-     * setOnPolylineClickListener(GoogleMap.OnPolylineClickListener)}.
+     * setOnPolylineClickListener(MapClient.OnPolylineClickListener)}.
      *
      * @param clickable New clickability setting for the polyline.
      */
@@ -218,7 +218,7 @@ public interface Polyline {
      * notifications to the {@link MapClient.OnPolylineClickListener} when the user clicks the
      * polyline. The event listener is registered through {@link
      * MapClient#setOnPolylineClickListener(MapClient.OnPolylineClickListener)
-     * setOnPolylineClickListener(GoogleMap.OnPolylineClickListener)}
+     * setOnPolylineClickListener(MapClient.OnPolylineClickListener)}
      *
      * @return {@code true} if the polyline is clickable; {@code false} otherwise.
      */

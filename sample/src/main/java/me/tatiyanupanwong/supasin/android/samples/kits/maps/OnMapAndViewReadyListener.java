@@ -27,59 +27,57 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
- * Helper class that will delay triggering the OnMapReady callback until both the GoogleMap and the
+ * Helper class that will delay triggering the OnMapReady callback until both the MapClient and the
  * View having completed initialization. This is only necessary if a developer wishes to immediately
- * invoke any method on the GoogleMap that also requires the View to have finished layout
+ * invoke any method on the MapClient that also requires the View to have finished layout
  * (ie. anything that needs to know the View's true size like snapshotting).
  */
 class OnMapAndViewReadyListener implements
         ViewTreeObserver.OnGlobalLayoutListener,
         MapClient.Factory.OnMapReadyCallback {
 
-    /** A listener that needs to wait for both the GoogleMap and the View to be initialized. */
+    /** A listener that needs to wait for both the MapClient and the View to be initialized. */
     interface OnGlobalLayoutAndMapReadyListener {
         void onMapReady(MapClient map);
     }
 
-    private final MapFragment mapFragment;
-    private final View mapView;
-    private final OnGlobalLayoutAndMapReadyListener devCallback;
+    private final MapFragment mMapFragment;
+    private final View mMapView;
+    private final OnGlobalLayoutAndMapReadyListener mCallback;
 
-    private boolean isViewReady;
-    private boolean isMapReady;
-    private MapClient map;
+    private boolean mIsViewReady;
+    private boolean mIsMapReady;
+    private MapClient mMap;
 
-    OnMapAndViewReadyListener(
-            MapFragment mapFragment, OnGlobalLayoutAndMapReadyListener devCallback) {
-        this.mapFragment = mapFragment;
-        mapView = mapFragment.getView();
-        this.devCallback = devCallback;
-        isViewReady = false;
-        isMapReady = false;
-        map = null;
+    OnMapAndViewReadyListener(MapFragment mapFragment, OnGlobalLayoutAndMapReadyListener callback) {
+        mMapFragment = mapFragment;
+        mMapView = mapFragment.getView();
+        mCallback = callback;
+        mIsViewReady = false;
+        mIsMapReady = false;
+        mMap = null;
 
         registerListeners();
     }
 
     private void registerListeners() {
         // View layout.
-        if ((mapView.getWidth() != 0) && (mapView.getHeight() != 0)) {
+        if ((mMapView.getWidth() != 0) && (mMapView.getHeight() != 0)) {
             // View has already completed layout.
-            isViewReady = true;
+            mIsViewReady = true;
         } else {
             // Map has not undergone layout, register a View observer.
-            mapView.getViewTreeObserver().addOnGlobalLayoutListener(this);
+            mMapView.getViewTreeObserver().addOnGlobalLayoutListener(this);
         }
 
-        // GoogleMap. Note if the GoogleMap is already ready it will still fire the callback later.
-        mapFragment.getMapAsync(this);
+        // Note if the Map is already ready it will still fire the callback later.
+        mMapFragment.getMapAsync(this);
     }
 
     @Override
     public void onMapReady(@NonNull MapClient map) {
-        // NOTE: The GoogleMap API specifies the listener is removed just prior to invocation.
-        this.map = map;
-        isMapReady = true;
+        mMap = map;
+        mIsMapReady = true;
         fireCallbackIfReady();
     }
 
@@ -87,14 +85,14 @@ class OnMapAndViewReadyListener implements
     @Override
     public void onGlobalLayout() {
         // Remove our listener.
-        mapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-        isViewReady = true;
+        mMapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        mIsViewReady = true;
         fireCallbackIfReady();
     }
 
     private void fireCallbackIfReady() {
-        if (isViewReady && isMapReady) {
-            devCallback.onMapReady(map);
+        if (mIsViewReady && mIsMapReady) {
+            mCallback.onMapReady(mMap);
         }
     }
 

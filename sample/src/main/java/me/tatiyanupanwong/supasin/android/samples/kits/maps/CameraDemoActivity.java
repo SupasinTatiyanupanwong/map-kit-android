@@ -122,8 +122,8 @@ public class CameraDemoActivity extends AppCompatActivity implements
     }
 
     /**
-     * When the map is not ready the CameraUpdateFactory cannot be used. This should be called on
-     * all entry points that call methods on the Google Maps API.
+     * When the map is not ready the CameraUpdateFactory cannot be used.
+     * This should be called on all entry points that call methods on the MapClient API.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {

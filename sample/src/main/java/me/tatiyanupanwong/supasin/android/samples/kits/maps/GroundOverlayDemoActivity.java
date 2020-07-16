@@ -111,7 +111,7 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
 
         // Override the default content description on the view, for accessibility mode.
         // Ideally this string would be localised.
-        map.setContentDescription("Google Map with ground overlay.");
+        map.setContentDescription("Map with ground overlay.");
     }
 
     @Override

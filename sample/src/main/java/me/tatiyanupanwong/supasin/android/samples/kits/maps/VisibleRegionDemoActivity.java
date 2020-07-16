@@ -27,6 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
@@ -42,7 +45,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
     /**
-     * Note that this may be null if the Google Play services APK is not available.
+     * Note that this may be null if the MapClient is not available.
      */
     private MapClient mMap;
 
@@ -58,13 +61,13 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
     private TextView mMessageView;
 
     /** Keep track of current values for padding, so we can animate from them. */
-    private int currentLeft = 150;
+    private int mCurrentLeft = 150;
 
-    private int currentTop = 0;
+    private int mCurrentTop = 0;
 
-    private int currentRight = 0;
+    private int mCurrentRight = 0;
 
-    private int currentBottom = 0;
+    private int mCurrentBottom = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +87,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         mMap = map;
 
         // Move to a place with indoor (SFO airport).
-        mMap.setPadding(currentLeft, currentTop, currentRight, currentBottom);
+        mMap.setPadding(mCurrentLeft, mCurrentTop, mCurrentRight, mCurrentBottom);
         mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(SFO, 18));
         // Add a marker to the Opera House.
         mMap.addMarker(MapKit.getFactory().newMarkerOptions()
@@ -100,8 +103,8 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
     }
 
     /**
-     * Checks if the map is ready (which depends on whether the Google Play services APK is
-     * available. This should be called prior to calling any methods on GoogleMap.
+     * Checks if the map is ready (which depends on whether the MapClient is
+     * available. This should be called prior to calling any methods on MapClient.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {
@@ -144,7 +147,9 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         if (!checkReady()) {
             return;
         }
-        View mapView = (getSupportFragmentManager().findFragmentById(R.id.map)).getView();
+        Fragment mapFragment =
+                Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.map));
+        View mapView = Objects.requireNonNull(mapFragment.getView());
         int left = findViewById(R.id.vr_panel).getMeasuredWidth();
         int top = 0;
         int right = mapView.getWidth() / 3;
@@ -161,15 +166,15 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
 
         final Interpolator interpolator = new OvershootInterpolator();
 
-        final int startLeft = currentLeft;
-        final int startTop = currentTop;
-        final int startRight = currentRight;
-        final int startBottom = currentBottom;
+        final int startLeft = mCurrentLeft;
+        final int startTop = mCurrentTop;
+        final int startRight = mCurrentRight;
+        final int startBottom = mCurrentBottom;
 
-        currentLeft = toLeft;
-        currentTop = toTop;
-        currentRight = toRight;
-        currentBottom = toBottom;
+        mCurrentLeft = toLeft;
+        mCurrentTop = toTop;
+        mCurrentRight = toRight;
+        mCurrentBottom = toBottom;
 
         handler.post(new Runnable() {
             @Override

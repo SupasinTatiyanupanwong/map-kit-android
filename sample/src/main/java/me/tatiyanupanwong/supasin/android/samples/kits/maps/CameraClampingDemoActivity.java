@@ -110,7 +110,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
 
     /**
      * Before the map is ready many calls will fail.
-     * This should be called on all entry points that call methods on the Google Maps API.
+     * This should be called on all entry points that call methods on the MapClient API.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {

@@ -33,9 +33,7 @@ public final class FeatureView extends FrameLayout {
     public FeatureView(Context context) {
         super(context);
 
-        LayoutInflater layoutInflater =
-                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        layoutInflater.inflate(R.layout.feature, this);
+        LayoutInflater.from(context).inflate(R.layout.feature, this);
     }
 
     /**

@@ -36,7 +36,7 @@ public class SnapshotDemoActivity extends AppCompatActivity implements
         MapClient.Factory.OnMapReadyCallback {
 
     /**
-     * Note that this may be null if the Google Play services APK is not available.
+     * Note that this may be null if the MapClient is not available.
      */
     private MapClient mMap;
 

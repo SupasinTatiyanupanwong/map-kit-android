@@ -30,10 +30,12 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
@@ -345,9 +347,11 @@ public class CircleDemoActivity extends AppCompatActivity implements
     @Override
     public void onMapLongClick(@NonNull LatLng point) {
         // We know the center, let's place the outline at a point 3/4 along the view.
-        View view = getSupportFragmentManager().findFragmentById(R.id.map).getView();
-        LatLng radiusLatLng = mMap.getProjection().fromScreenLocation(new Point(
-                view.getHeight() * 3 / 4, view.getWidth() * 3 / 4));
+        Fragment mapFragment =
+                Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.map));
+        View mapView = Objects.requireNonNull(mapFragment.getView());
+        LatLng radiusLatLng = Objects.requireNonNull(mMap.getProjection().fromScreenLocation(
+                new Point(mapView.getHeight() * 3 / 4, mapView.getWidth() * 3 / 4)));
 
         // Create the circle.
         DraggableCircle circle = new DraggableCircle(point, toRadiusMeters(point, radiusLatLng));
