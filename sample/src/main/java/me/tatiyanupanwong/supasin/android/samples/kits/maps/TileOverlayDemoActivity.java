@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,8 +31,7 @@ import java.util.Locale;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileProvider;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvider;
@@ -42,8 +40,8 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvi
  * This demonstrates how to add a tile overlay to a map.
  */
 public class TileOverlayDemoActivity extends AppCompatActivity implements
-        OnSeekBarChangeListener,
-        OnMapReadyCallback {
+        SeekBar.OnSeekBarChangeListener,
+        MapClient.Factory.OnMapReadyCallback {
 
     private static final int TRANSPARENCY_MAX = 100;
 
@@ -71,8 +69,8 @@ public class TileOverlayDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
-        map.setMapType(Map.MAP_TYPE_NONE);
+    public void onMapReady(@NonNull MapClient map) {
+        map.setMapType(MapClient.MAP_TYPE_NONE);
 
         TileProvider tileProvider = MapKit.getFactory()
                 .newUrlTileProvider(256, 256, new UrlTileProvider() {

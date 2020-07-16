@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
@@ -35,25 +34,25 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_HYBRID;
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_NONE;
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_NORMAL;
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_SATELLITE;
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_TERRAIN;
+import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient.MAP_TYPE_HYBRID;
+import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient.MAP_TYPE_NONE;
+import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient.MAP_TYPE_NORMAL;
+import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient.MAP_TYPE_SATELLITE;
+import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient.MAP_TYPE_TERRAIN;
 
 /**
  * Demonstrates the different base layers of a map.
  */
-public class LayersDemoActivity extends AppCompatActivity
-        implements OnItemSelectedListener, OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+public class LayersDemoActivity extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener,
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        MapClient.Factory.OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    private Map mMap;
+    private MapClient mMap;
 
     private CheckBox mTrafficCheckbox;
 
@@ -96,7 +95,7 @@ public class LayersDemoActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         updateMapType();
         updateTraffic();

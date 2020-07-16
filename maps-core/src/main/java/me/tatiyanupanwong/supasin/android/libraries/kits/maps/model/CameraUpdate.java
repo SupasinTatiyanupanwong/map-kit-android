@@ -22,9 +22,10 @@ import androidx.annotation.NonNull;
 
 /**
  * Defines a camera move. An object of this type can be used to modify a map's camera by calling
- * {@link Map#animateCamera(CameraUpdate) animateCamera(CameraUpdate)}, {@link
- * Map#animateCamera(CameraUpdate, Map.CancelableCallback) animateCamera(CameraUpdate, MapProvider.
- * CancelableCallback)} or {@link Map#moveCamera(CameraUpdate) moveCamera(CameraUpdate)}.
+ * {@link MapClient#animateCamera(CameraUpdate) animateCamera(CameraUpdate)}, {@link
+ * MapClient#animateCamera(CameraUpdate, MapClient.CancelableCallback) animateCamera(CameraUpdate,
+ * MapClient.CancelableCallback)} or {@link MapClient#moveCamera(CameraUpdate) moveCamera(
+ * CameraUpdate)}.
  *
  * <p>To obtain a {@link CameraUpdate} use the factory class {@link CameraUpdate.Factory}.
  *
@@ -34,11 +35,11 @@ public interface CameraUpdate {
 
     /**
      * A class containing methods for creating {@link CameraUpdate} objects that change a map's
-     * camera. To modify the map's camera, call {@link Map#animateCamera(CameraUpdate)
-     * animateCamera(CameraUpdate)}, {@link Map#animateCamera(CameraUpdate, Map.CancelableCallback)
-     * animateCamera(CameraUpdate, MapProvider.CancelableCallback)} or {@link
-     * Map#moveCamera(CameraUpdate) moveCamera(CameraUpdate)},using a {@link CameraUpdate} object
-     * created with this class.
+     * camera. To modify the map's camera, call {@link MapClient#animateCamera(CameraUpdate)
+     * animateCamera(CameraUpdate)}, {@link MapClient#animateCamera(CameraUpdate,
+     * MapClient.CancelableCallback) animateCamera(CameraUpdate, MapClient.CancelableCallback)}
+     * or {@link MapClient#moveCamera(CameraUpdate) moveCamera(CameraUpdate)},using a {@link
+     * CameraUpdate} object created with this class.
      */
     interface Factory {
         /**

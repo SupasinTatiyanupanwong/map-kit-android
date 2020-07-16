@@ -35,7 +35,7 @@ public interface TileProvider {
      * @param y The y coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
      * inclusive.
      * @param zoom The zoom level of the tile. This will be in the range [{@link
-     * Map#getMinZoomLevel}, {@link Map#getMaxZoomLevel}] inclusive.
+     * MapClient#getMinZoomLevel}, {@link MapClient#getMaxZoomLevel}] inclusive.
      * @return the {@link Tile} to be used for this tile coordinate.
      */
     Tile getTile(int x, int y, int zoom);

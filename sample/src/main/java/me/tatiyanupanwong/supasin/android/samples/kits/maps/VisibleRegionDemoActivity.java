@@ -32,8 +32,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnCameraIdleListener;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * This shows how to use setPadding to allow overlays that obscure part of the map without
@@ -45,7 +44,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
     /**
      * Note that this may be null if the Google Play services APK is not available.
      */
-    private Map mMap;
+    private MapClient mMap;
 
     private static final LatLng SOH = MapKit.getFactory().newLatLng(-33.85704, 151.21522);
 
@@ -81,7 +80,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(Map map) {
+    public void onMapReady(MapClient map) {
         mMap = map;
 
         // Move to a place with indoor (SFO airport).
@@ -92,7 +91,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
                 .position(SOH)
                 .title("Sydney Opera House"));
         // Add a camera idle listener.
-        mMap.setOnCameraIdleListener(new OnCameraIdleListener() {
+        mMap.setOnCameraIdleListener(new MapClient.OnCameraIdleListener() {
             @Override
             public void onCameraIdle() {
                 mMessageView.setText("CameraChangeListener: " + mMap.getCameraPosition());

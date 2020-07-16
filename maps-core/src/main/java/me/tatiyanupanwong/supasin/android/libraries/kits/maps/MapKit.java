@@ -18,7 +18,7 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps;
 
 import androidx.annotation.NonNull;
 
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * Main entry point for Maps API.
@@ -27,17 +27,17 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
  */
 public final class MapKit {
 
-    private static final Map.Factory FACTORY = MapsPlatform.get().getMapFactory();
+    private static final MapClient.Factory FACTORY = MapsPlatform.get().getMapFactory();
 
     private MapKit() {} // No instances!
 
     /**
      * Obtains a factory object to interact with Maps API for the current platform.
      *
-     * @return The {@link Map.Factory} for the current platform.
+     * @return The {@link MapClient.Factory} for the current platform.
      */
     @NonNull
-    public static Map.Factory getFactory() {
+    public static MapClient.Factory getFactory() {
         return FACTORY;
     }
 

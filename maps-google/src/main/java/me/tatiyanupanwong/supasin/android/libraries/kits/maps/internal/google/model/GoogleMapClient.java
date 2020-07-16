@@ -25,6 +25,7 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
+import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -47,7 +48,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.IndoorBuildi
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LocationSource;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
@@ -60,13 +61,16 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileProvider
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvider;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.VisibleRegion;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 @SuppressWarnings("unused")
-class GoogleMap implements Map {
+class GoogleMapClient implements MapClient {
 
     private final com.google.android.gms.maps.GoogleMap mDelegate;
     private final UiSettings mSettings;
 
-    private GoogleMap(@NonNull com.google.android.gms.maps.GoogleMap map) {
+    private GoogleMapClient(@NonNull com.google.android.gms.maps.GoogleMap map) {
         mDelegate = map;
         mSettings = new UiSettings(map.getUiSettings());
     }
@@ -262,6 +266,7 @@ class GoogleMap implements Map {
         return mDelegate.isMyLocationEnabled();
     }
 
+    @RequiresPermission(anyOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
     @Override
     public void setMyLocationEnabled(boolean enabled) {
         mDelegate.setMyLocationEnabled(enabled);
@@ -291,7 +296,7 @@ class GoogleMap implements Map {
 
     @NonNull
     @Override
-    public Map.UiSettings getUiSettings() {
+    public MapClient.UiSettings getUiSettings() {
         return mSettings;
     }
 
@@ -616,7 +621,7 @@ class GoogleMap implements Map {
     }
 
     @Override
-    public boolean setMapStyle(@Nullable Map.Style.Options style) {
+    public boolean setMapStyle(@Nullable MapClient.Style.Options style) {
         return mDelegate.setMapStyle(Style.Options.unwrap(style));
     }
 
@@ -641,8 +646,8 @@ class GoogleMap implements Map {
     }
 
 
-    static class Style implements Map.Style {
-        static class Options implements Map.Style.Options {
+    static class Style implements MapClient.Style {
+        static class Options implements MapClient.Style.Options {
             private final com.google.android.gms.maps.model.MapStyleOptions mDelegate;
 
             Options(String json) {
@@ -682,14 +687,14 @@ class GoogleMap implements Map {
 
             @Nullable
             static com.google.android.gms.maps.model.MapStyleOptions unwrap(
-                    @Nullable Map.Style.Options wrapped) {
+                    @Nullable MapClient.Style.Options wrapped) {
                 return wrapped == null ? null : ((Style.Options) wrapped).mDelegate;
             }
         }
     }
 
 
-    static class UiSettings implements Map.UiSettings {
+    static class UiSettings implements MapClient.UiSettings {
         private final com.google.android.gms.maps.UiSettings mDelegate;
 
         UiSettings(@NonNull com.google.android.gms.maps.UiSettings delegate) {
@@ -803,7 +808,7 @@ class GoogleMap implements Map {
     }
 
 
-    static class Factory implements Map.Factory {
+    static class Factory implements MapClient.Factory {
         private static final List<Integer> UNAVAILABLE_RESULTS = Arrays.asList(
                 ConnectionResult.SERVICE_DISABLED,
                 ConnectionResult.SERVICE_MISSING,
@@ -930,14 +935,15 @@ class GoogleMap implements Map {
 
         @NonNull
         @Override
-        public Map.Style.Options newMapStyleOptions(String json) {
-            return new GoogleMap.Style.Options(json);
+        public MapClient.Style.Options newMapStyleOptions(String json) {
+            return new GoogleMapClient.Style.Options(json);
         }
 
         @NonNull
         @Override
-        public Map.Style.Options newMapStyleOptions(@NonNull Context context, @RawRes int resourceId) {
-            return new GoogleMap.Style.Options(context, resourceId);
+        public MapClient.Style.Options newMapStyleOptions(
+                @NonNull Context context, @RawRes int resourceId) {
+            return new GoogleMapClient.Style.Options(context, resourceId);
         }
 
         @NonNull
@@ -1015,7 +1021,7 @@ class GoogleMap implements Map {
                     .getMapAsync(new com.google.android.gms.maps.OnMapReadyCallback() {
                         @Override
                         public void onMapReady(com.google.android.gms.maps.GoogleMap googleMap) {
-                            callback.onMapReady(new GoogleMap(googleMap));
+                            callback.onMapReady(new GoogleMapClient(googleMap));
                         }
                     });
         }

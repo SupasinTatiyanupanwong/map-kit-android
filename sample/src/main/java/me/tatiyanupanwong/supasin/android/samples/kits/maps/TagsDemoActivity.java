@@ -30,14 +30,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Circle;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnCircleClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnGroundOverlayClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnMarkerClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnPolygonClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnPolylineClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.UiSettings;
-
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
@@ -46,12 +39,12 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
  * This shows how to use setTag/getTag on API objects.
  */
 public class TagsDemoActivity extends AppCompatActivity implements
-        OnCircleClickListener,
-        OnGroundOverlayClickListener,
-        OnMarkerClickListener,
-        OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener,
-        OnPolygonClickListener,
-        OnPolylineClickListener {
+        MapClient.OnCircleClickListener,
+        MapClient.OnGroundOverlayClickListener,
+        MapClient.OnMarkerClickListener,
+        MapClient.OnPolygonClickListener,
+        MapClient.OnPolylineClickListener,
+        OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
     private static final LatLng ADELAIDE = MapKit.getFactory().newLatLng(-34.92873, 138.59995);
     private static final LatLng BRISBANE = MapKit.getFactory().newLatLng(-27.47093, 153.0235);
@@ -80,7 +73,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
         }
     }
 
-    private Map mMap = null;
+    private MapClient mMap = null;
 
     private TextView mTagText;
 
@@ -99,10 +92,10 @@ public class TagsDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(Map map) {
+    public void onMapReady(MapClient map) {
         mMap = map;
 
-        UiSettings uiSettings = mMap.getUiSettings();
+        MapClient.UiSettings uiSettings = mMap.getUiSettings();
 
         // Turn off the map toolbar.
         uiSettings.setMapToolbarEnabled(false);

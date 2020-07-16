@@ -19,13 +19,12 @@ package me.tatiyanupanwong.supasin.android.samples.kits.maps;
 
 import android.annotation.SuppressLint;
 import android.view.View;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.ViewTreeObserver;
 
 import androidx.annotation.NonNull;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * Helper class that will delay triggering the OnMapReady callback until both the GoogleMap and the
@@ -33,11 +32,13 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
  * invoke any method on the GoogleMap that also requires the View to have finished layout
  * (ie. anything that needs to know the View's true size like snapshotting).
  */
-class OnMapAndViewReadyListener implements OnGlobalLayoutListener, OnMapReadyCallback {
+class OnMapAndViewReadyListener implements
+        ViewTreeObserver.OnGlobalLayoutListener,
+        MapClient.Factory.OnMapReadyCallback {
 
     /** A listener that needs to wait for both the GoogleMap and the View to be initialized. */
     interface OnGlobalLayoutAndMapReadyListener {
-        void onMapReady(Map googleMap);
+        void onMapReady(MapClient map);
     }
 
     private final MapFragment mapFragment;
@@ -46,7 +47,7 @@ class OnMapAndViewReadyListener implements OnGlobalLayoutListener, OnMapReadyCal
 
     private boolean isViewReady;
     private boolean isMapReady;
-    private Map googleMap;
+    private MapClient map;
 
     OnMapAndViewReadyListener(
             MapFragment mapFragment, OnGlobalLayoutAndMapReadyListener devCallback) {
@@ -55,7 +56,7 @@ class OnMapAndViewReadyListener implements OnGlobalLayoutListener, OnMapReadyCal
         this.devCallback = devCallback;
         isViewReady = false;
         isMapReady = false;
-        googleMap = null;
+        map = null;
 
         registerListeners();
     }
@@ -75,9 +76,9 @@ class OnMapAndViewReadyListener implements OnGlobalLayoutListener, OnMapReadyCal
     }
 
     @Override
-    public void onMapReady(@NonNull Map googleMap) {
+    public void onMapReady(@NonNull MapClient map) {
         // NOTE: The GoogleMap API specifies the listener is removed just prior to invocation.
-        this.googleMap = googleMap;
+        this.map = map;
         isMapReady = true;
         fireCallbackIfReady();
     }
@@ -93,7 +94,7 @@ class OnMapAndViewReadyListener implements OnGlobalLayoutListener, OnMapReadyCal
 
     private void fireCallbackIfReady() {
         if (isViewReady && isMapReady) {
-            devCallback.onMapReady(googleMap);
+            devCallback.onMapReady(map);
         }
     }
 

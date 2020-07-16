@@ -38,7 +38,7 @@ public interface UrlTileProvider {
      * @param y The y coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
      * inclusive.
      * @param zoom The zoom level of the tile. This will be in the range [{@link
-     * Map#getMinZoomLevel}, {@link Map#getMaxZoomLevel}] inclusive.
+     * MapClient#getMinZoomLevel}, {@link MapClient#getMaxZoomLevel}] inclusive.
      * @return URL a {@link URL} that points to the image to be used for this tile. If you do not
      * wish to provide an image for this tile coordinate, return {@code null}.
      */

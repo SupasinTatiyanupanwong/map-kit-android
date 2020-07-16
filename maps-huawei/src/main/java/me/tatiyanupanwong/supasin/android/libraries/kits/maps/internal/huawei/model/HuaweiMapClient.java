@@ -26,6 +26,7 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
+import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
 
 import com.huawei.hms.api.ConnectionResult;
@@ -48,7 +49,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.IndoorBuildi
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LocationSource;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
@@ -61,15 +62,18 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileProvider
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvider;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.VisibleRegion;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 @SuppressWarnings("unused")
-class HuaweiMap implements Map {
+class HuaweiMapClient implements MapClient {
 
     private final com.huawei.hms.maps.HuaweiMap mDelegate;
     private final UiSettings mSettings;
 
     private Rect mLastPadding;
 
-    private HuaweiMap(@NonNull com.huawei.hms.maps.HuaweiMap map) {
+    private HuaweiMapClient(@NonNull com.huawei.hms.maps.HuaweiMap map) {
         mDelegate = map;
         mSettings = new UiSettings(map.getUiSettings());
     }
@@ -265,6 +269,7 @@ class HuaweiMap implements Map {
         return mDelegate.isMyLocationEnabled();
     }
 
+    @RequiresPermission(anyOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
     @Override
     public void setMyLocationEnabled(boolean enabled) {
         // Huawei Map will automatically enable the my-location button once its layer is enabled.
@@ -297,7 +302,7 @@ class HuaweiMap implements Map {
 
     @NonNull
     @Override
-    public Map.UiSettings getUiSettings() {
+    public MapClient.UiSettings getUiSettings() {
         return mSettings;
     }
 
@@ -637,7 +642,7 @@ class HuaweiMap implements Map {
     }
 
     @Override
-    public boolean setMapStyle(@Nullable Map.Style.Options style) {
+    public boolean setMapStyle(@Nullable MapClient.Style.Options style) {
         return mDelegate.setMapStyle(Style.Options.unwrap(style));
     }
 
@@ -662,8 +667,8 @@ class HuaweiMap implements Map {
     }
 
 
-    static class Style implements Map.Style {
-        static class Options implements Map.Style.Options {
+    static class Style implements MapClient.Style {
+        static class Options implements MapClient.Style.Options {
             private final com.huawei.hms.maps.model.MapStyleOptions mDelegate;
 
             Options(String json) {
@@ -703,14 +708,14 @@ class HuaweiMap implements Map {
 
             @Nullable
             static com.huawei.hms.maps.model.MapStyleOptions unwrap(
-                    @Nullable Map.Style.Options wrapped) {
+                    @Nullable MapClient.Style.Options wrapped) {
                 return wrapped == null ? null : ((Style.Options) wrapped).mDelegate;
             }
         }
     }
 
 
-    static class UiSettings implements Map.UiSettings {
+    static class UiSettings implements MapClient.UiSettings {
         private final com.huawei.hms.maps.UiSettings mDelegate;
 
         UiSettings(@NonNull com.huawei.hms.maps.UiSettings delegate) {
@@ -824,7 +829,7 @@ class HuaweiMap implements Map {
     }
 
 
-    static class Factory implements Map.Factory {
+    static class Factory implements MapClient.Factory {
         private static final List<Integer> UNAVAILABLE_RESULTS = Arrays.asList(
                 ConnectionResult.SERVICE_DISABLED,
                 ConnectionResult.SERVICE_MISSING,
@@ -951,14 +956,15 @@ class HuaweiMap implements Map {
 
         @NonNull
         @Override
-        public Map.Style.Options newMapStyleOptions(String json) {
-            return new HuaweiMap.Style.Options(json);
+        public MapClient.Style.Options newMapStyleOptions(String json) {
+            return new HuaweiMapClient.Style.Options(json);
         }
 
         @NonNull
         @Override
-        public Map.Style.Options newMapStyleOptions(@NonNull Context context, @RawRes int resourceId) {
-            return new HuaweiMap.Style.Options(context, resourceId);
+        public MapClient.Style.Options newMapStyleOptions(
+                @NonNull Context context, @RawRes int resourceId) {
+            return new HuaweiMapClient.Style.Options(context, resourceId);
         }
 
         @NonNull
@@ -1035,8 +1041,8 @@ class HuaweiMap implements Map {
             ((com.huawei.hms.maps.SupportMapFragment) fragment)
                     .getMapAsync(new com.huawei.hms.maps.OnMapReadyCallback() {
                         @Override
-                        public void onMapReady(com.huawei.hms.maps.HuaweiMap HuaweiMap) {
-                            callback.onMapReady(new HuaweiMap(HuaweiMap));
+                        public void onMapReady(com.huawei.hms.maps.HuaweiMap huaweiMap) {
+                            callback.onMapReady(new HuaweiMapClient(huaweiMap));
                         }
                     });
         }

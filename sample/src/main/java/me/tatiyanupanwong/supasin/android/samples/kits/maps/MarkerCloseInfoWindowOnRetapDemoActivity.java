@@ -26,17 +26,15 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnMapClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnMarkerClickListener;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 
 /**
  * This shows how to close the info window when the currently selected marker is re-tapped.
  */
 public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity implements
-        OnMarkerClickListener,
-        OnMapClickListener,
+        MapClient.OnMapClickListener,
+        MapClient.OnMarkerClickListener,
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
     private static final LatLng BRISBANE = MapKit.getFactory().newLatLng(-27.47093, 153.0235);
@@ -45,7 +43,7 @@ public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity 
     private static final LatLng ADELAIDE = MapKit.getFactory().newLatLng(-34.92873, 138.59995);
     private static final LatLng PERTH = MapKit.getFactory().newLatLng(-31.952854, 115.857342);
 
-    private Map mMap = null;
+    private MapClient mMap = null;
 
     /**
      * Keeps track of the selected marker.
@@ -65,7 +63,7 @@ public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity 
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         // Hide the zoom controls.

@@ -21,11 +21,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -42,17 +40,17 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.JointType;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnPolylineClickListener;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
 
 /**
  * This shows how to draw polylines on a map.
  */
-public class PolylineDemoActivity extends AppCompatActivity
-        implements OnSeekBarChangeListener, OnItemSelectedListener, OnMapReadyCallback {
+public class PolylineDemoActivity extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener,
+        SeekBar.OnSeekBarChangeListener,
+        MapClient.Factory.OnMapReadyCallback {
 
     // City locations for mutable polyline.
     private static final LatLng ADELAIDE = MapKit.getFactory().newLatLng(-34.92873, 138.59995);
@@ -169,7 +167,7 @@ public class PolylineDemoActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
 
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.polyline_demo_description));
@@ -213,7 +211,7 @@ public class PolylineDemoActivity extends AppCompatActivity
         map.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(MELBOURNE, 3));
 
         // Add a listener for polyline clicks that changes the clicked polyline's color.
-        map.setOnPolylineClickListener(new OnPolylineClickListener() {
+        map.setOnPolylineClickListener(new MapClient.OnPolylineClickListener() {
             @Override
             public void onPolylineClick(@NonNull Polyline polyline) {
                 // Flip the values of the red, green and blue components of the polyline's color.

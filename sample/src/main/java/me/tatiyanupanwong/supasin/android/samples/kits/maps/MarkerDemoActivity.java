@@ -32,9 +32,7 @@ import android.view.animation.Interpolator;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,25 +52,19 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescriptor;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.InfoWindowAdapter;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnInfoWindowClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnInfoWindowCloseListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnInfoWindowLongClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnMarkerClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnMarkerDragListener;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 
 /**
  * This shows how to place markers on a map.
  */
 public class MarkerDemoActivity extends AppCompatActivity implements
-        OnMarkerClickListener,
-        OnInfoWindowClickListener,
-        OnMarkerDragListener,
-        OnSeekBarChangeListener,
-        OnInfoWindowLongClickListener,
-        OnInfoWindowCloseListener,
+        SeekBar.OnSeekBarChangeListener,
+        MapClient.OnInfoWindowClickListener,
+        MapClient.OnInfoWindowCloseListener,
+        MapClient.OnInfoWindowLongClickListener,
+        MapClient.OnMarkerClickListener,
+        MapClient.OnMarkerDragListener,
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
     private static final LatLng BRISBANE = MapKit.getFactory().newLatLng(-27.47093, 153.0235);
@@ -90,10 +82,10 @@ public class MarkerDemoActivity extends AppCompatActivity implements
     private static final LatLng ALICE_SPRINGS = MapKit.getFactory().newLatLng(-24.6980, 133.8807);
 
     /** Demonstrates customizing the info window and/or its contents. */
-    class CustomInfoWindowAdapter implements InfoWindowAdapter {
+    class CustomInfoWindowAdapter implements MapClient.InfoWindowAdapter {
 
-        // These are both viewgroups containing an ImageView with id "badge" and two TextViews with id
-        // "title" and "snippet".
+        // These are both viewgroups containing an ImageView with id "badge" and two TextViews with
+        // id "title" and "snippet".
         private final View mWindow;
 
         private final View mContents;
@@ -174,7 +166,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         }
     }
 
-    private Map mMap;
+    private MapClient mMap;
 
     private Marker mPerth;
 
@@ -224,7 +216,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         mFlatBox = findViewById(R.id.flat);
 
         mOptions = findViewById(R.id.custom_info_window_options);
-        mOptions.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        mOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (mLastSelectedMarker != null && mLastSelectedMarker.isInfoWindowShown()) {
@@ -242,7 +234,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         // Hide the zoom controls as the button panel will cover it.

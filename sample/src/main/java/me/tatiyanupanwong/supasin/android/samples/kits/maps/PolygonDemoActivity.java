@@ -21,11 +21,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -41,17 +39,17 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.JointType;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnPolygonClickListener;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 
 /**
  * This shows how to draw polygons on a map.
  */
-public class PolygonDemoActivity extends AppCompatActivity
-        implements OnSeekBarChangeListener, OnItemSelectedListener, OnMapReadyCallback {
+public class PolygonDemoActivity extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener,
+        SeekBar.OnSeekBarChangeListener,
+        MapClient.Factory.OnMapReadyCallback {
 
     private static final LatLng CENTER = MapKit.getFactory().newLatLng(-20, 130);
     private static final int MAX_WIDTH_PX = 100;
@@ -146,7 +144,7 @@ public class PolygonDemoActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.polygon_demo_description));
 
@@ -175,14 +173,16 @@ public class PolygonDemoActivity extends AppCompatActivity
         mStrokeJointTypeSpinner.setOnItemSelectedListener(this);
         mStrokePatternSpinner.setOnItemSelectedListener(this);
 
-        mMutablePolygon.setStrokeJointType(getSelectedJointType(mStrokeJointTypeSpinner.getSelectedItemPosition()));
-        mMutablePolygon.setStrokePattern(getSelectedPattern(mStrokePatternSpinner.getSelectedItemPosition()));
+        mMutablePolygon.setStrokeJointType(
+                getSelectedJointType(mStrokeJointTypeSpinner.getSelectedItemPosition()));
+        mMutablePolygon.setStrokePattern(
+                getSelectedPattern(mStrokePatternSpinner.getSelectedItemPosition()));
 
         // Move the map so that it is centered on the mutable polygon.
         map.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(CENTER, 4));
 
         // Add a listener for polygon clicks that changes the clicked polygon's stroke color.
-        map.setOnPolygonClickListener(new OnPolygonClickListener() {
+        map.setOnPolygonClickListener(new MapClient.OnPolygonClickListener() {
             @Override
             public void onPolygonClick(@NonNull Polygon polygon) {
                 // Flip the red, green and blue components of the polygon's stroke color.

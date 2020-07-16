@@ -23,11 +23,9 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -45,11 +43,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dash;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnCircleClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnMarkerDragListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnMapLongClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
 
@@ -57,11 +51,11 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
  * This shows how to draw circles on a map.
  */
 public class CircleDemoActivity extends AppCompatActivity implements
-        OnSeekBarChangeListener,
-        OnMarkerDragListener,
-        OnMapLongClickListener,
-        OnItemSelectedListener,
-        OnMapReadyCallback {
+        AdapterView.OnItemSelectedListener,
+        SeekBar.OnSeekBarChangeListener,
+        MapClient.OnMarkerDragListener,
+        MapClient.OnMapLongClickListener,
+        MapClient.Factory.OnMapReadyCallback {
 
     private static final LatLng SYDNEY = MapKit.getFactory().newLatLng(-33.87365, 151.20689);
     private static final double DEFAULT_RADIUS_METERS = 1000000;
@@ -80,7 +74,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
     private static final List<PatternItem> PATTERN_DASHED = Arrays.asList(DASH, GAP);
     private static final List<PatternItem> PATTERN_MIXED = Arrays.asList(DOT, GAP, DOT, DASH, GAP);
 
-    private Map mMap;
+    private MapClient mMap;
 
     private final List<DraggableCircle> mCircles = new ArrayList<>(1);
 
@@ -223,7 +217,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.map_circle_description));
 
@@ -252,7 +246,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
         mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(SYDNEY, 4.0f));
 
         // Set up the click listener for the circle.
-        map.setOnCircleClickListener(new OnCircleClickListener() {
+        map.setOnCircleClickListener(new MapClient.OnCircleClickListener() {
             @Override
             public void onCircleClick(@NonNull Circle circle) {
                 // Flip the red, green and blue components of the circle's stroke color.

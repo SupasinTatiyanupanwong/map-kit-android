@@ -27,8 +27,7 @@ import androidx.annotation.UiThread;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 
 /**
@@ -44,12 +43,13 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
  *     android:layout_height="match_parent" /&gt;
  * </pre>
  *
- * <p>A {@link Map} must be acquired using {@link #getMapAsync(OnMapReadyCallback)}. This class
- * automatically initializes the maps system and the view.
+ * <p>A {@link MapClient} must be acquired using
+ * {@link #getMapAsync(MapClient.Factory.OnMapReadyCallback)}.
+ * This class automatically initializes the maps system and the view.
  *
- * <p>Any objects obtained from the {@link Map} are associated with the view. It's important to not
- * hold on to objects (e.g. {@link Marker}) beyond the view's life. Otherwise it will cause a
- * memory leak as the view cannot be released.
+ * <p>Any objects obtained from the {@link MapClient} are associated with the view. It's important
+ * to not hold on to objects (e.g. {@link Marker}) beyond the view's life. Otherwise it will cause
+ * a memory leak as the view cannot be released.
  *
  * @since 1.0.0
  */
@@ -69,13 +69,13 @@ public class MapFragment extends Fragment {
     }
 
     /**
-     * Sets a callback object which will be triggered when the {@link Map} instance is ready to be
-     * used.
+     * Sets a callback object which will be triggered when the {@link MapClient} instance is ready
+     * to be used.
      *
      * @param callback The callback object that will be triggered when the map is ready to be used.
      */
     @UiThread
-    public final void getMapAsync(final OnMapReadyCallback callback) {
+    public final void getMapAsync(final MapClient.Factory.OnMapReadyCallback callback) {
         if (getView() != null) {
             getMapAsyncInternal(callback);
         } else {
@@ -95,7 +95,7 @@ public class MapFragment extends Fragment {
     }
 
 
-    private void getMapAsyncInternal(OnMapReadyCallback callback) {
+    private void getMapAsyncInternal(MapClient.Factory.OnMapReadyCallback callback) {
         Fragment fragment = getChildFragmentManager()
                 .findFragmentById(MapsPlatform.get().getDelegateMapFragmentId());
 
