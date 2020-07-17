@@ -178,10 +178,10 @@ public interface Circle {
 
     /**
      * Sets the clickability of the circle. If the circle is clickable, your app will receive
-     * notifications to the {@link Map.OnCircleClickListener} when the user clicks the circle.
+     * notifications to the {@link MapClient.OnCircleClickListener} when the user clicks the circle.
      * The event listener is registered through {@link
-     * Map#setOnCircleClickListener(Map.OnCircleClickListener) setOnCircleClickListener(
-     * MapProvider.OnCircleClickListener)}.
+     * MapClient#setOnCircleClickListener(MapClient.OnCircleClickListener) setOnCircleClickListener(
+     * MapClient.OnCircleClickListener)}.
      *
      * @param clickable New clickability setting for the circle.
      */
@@ -189,10 +189,10 @@ public interface Circle {
 
     /**
      * Gets the clickability of the circle. If the circle is clickable, your app will receive
-     * notifications to the {@link Map.OnCircleClickListener} when the user clicks the circle.
+     * notifications to the {@link MapClient.OnCircleClickListener} when the user clicks the circle.
      * The event listener is registered through {@link
-     * Map#setOnCircleClickListener(Map.OnCircleClickListener) setOnCircleClickListener(
-     * MapProvider.OnCircleClickListener)}.
+     * MapClient#setOnCircleClickListener(MapClient.OnCircleClickListener) setOnCircleClickListener(
+     * MapClient.OnCircleClickListener)}.
      *
      * @return {@code true} if the circle is clickable; {@code false} if it is not clickable.
      */

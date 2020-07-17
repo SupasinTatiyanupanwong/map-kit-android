@@ -20,27 +20,28 @@ package me.tatiyanupanwong.supasin.android.samples.kits.maps;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.Toast;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * This shows how UI settings can be toggled.
  */
-public class UiSettingsDemoActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class UiSettingsDemoActivity extends AppCompatActivity implements
+        MapKit.OnMapReadyCallback {
 
-    private Map mMap;
+    private MapClient mMap;
 
-    private Map.UiSettings mUiSettings;
+    private MapClient.UiSettings mUiSettings;
 
     private CheckBox mMyLocationButtonCheckbox;
 
@@ -79,7 +80,7 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements OnMapRe
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         mUiSettings = mMap.getUiSettings();
@@ -96,8 +97,7 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements OnMapRe
     }
 
     /**
-     * Checks if the map is ready (which depends on whether the Google Play services APK is
-     * available. This should be called prior to calling any methods on GoogleMap.
+     * Checks if the map is ready. This should be called prior to calling any methods on MapClient.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {
@@ -203,8 +203,8 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements OnMapRe
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
             // Display a dialog with rationale.
             PermissionUtils.RationaleDialog
-                    .newInstance(requestCode, false).show(
-                    getSupportFragmentManager(), "dialog");
+                    .newInstance(requestCode, false)
+                    .show(getSupportFragmentManager(), "dialog");
         } else {
             // Location permission has not been granted yet, request it.
             PermissionUtils.requestPermission(this, requestCode,

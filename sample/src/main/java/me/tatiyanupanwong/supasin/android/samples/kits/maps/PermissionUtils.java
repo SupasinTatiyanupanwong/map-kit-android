@@ -40,7 +40,7 @@ abstract class PermissionUtils {
      * be shown to the user, displays a dialog that triggers the request.
      */
     static void requestPermission(AppCompatActivity activity, int requestId,
-                                         String permission, boolean finishActivity) {
+            String permission, boolean finishActivity) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
             // Display a dialog with rationale.
             RationaleDialog.newInstance(requestId, finishActivity)
@@ -94,7 +94,7 @@ abstract class PermissionUtils {
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            mFinishActivity = getArguments().getBoolean(ARGUMENT_FINISH_ACTIVITY);
+            mFinishActivity = requireArguments().getBoolean(ARGUMENT_FINISH_ACTIVITY);
 
             return new AlertDialog.Builder(getActivity())
                     .setMessage(R.string.location_permission_denied)
@@ -153,7 +153,7 @@ abstract class PermissionUtils {
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            Bundle arguments = getArguments();
+            Bundle arguments = requireArguments();
             final int requestCode = arguments.getInt(ARGUMENT_PERMISSION_REQUEST_CODE);
             mFinishActivity = arguments.getBoolean(ARGUMENT_FINISH_ACTIVITY);
 

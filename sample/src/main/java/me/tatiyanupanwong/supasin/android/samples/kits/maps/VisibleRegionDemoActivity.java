@@ -27,13 +27,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnCameraIdleListener;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * This shows how to use setPadding to allow overlays that obscure part of the map without
@@ -43,29 +45,29 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
     /**
-     * Note that this may be null if the Google Play services APK is not available.
+     * Note that this may be null if the MapClient is not available.
      */
-    private Map mMap;
+    private MapClient mMap;
 
-    private static final LatLng SOH = MapKit.getFactory().newLatLng(-33.85704, 151.21522);
+    private static final LatLng SOH = MapKit.newLatLng(-33.85704, 151.21522);
 
-    private static final LatLng SFO = MapKit.getFactory().newLatLng(37.614631, -122.385153);
+    private static final LatLng SFO = MapKit.newLatLng(37.614631, -122.385153);
 
     private static final LatLngBounds AUS =
-            MapKit.getFactory().newLatLngBounds(
-                    MapKit.getFactory().newLatLng(-44, 113),
-                    MapKit.getFactory().newLatLng(-10, 154));
+            MapKit.newLatLngBounds(
+                    MapKit.newLatLng(-44, 113),
+                    MapKit.newLatLng(-10, 154));
 
     private TextView mMessageView;
 
     /** Keep track of current values for padding, so we can animate from them. */
-    private int currentLeft = 150;
+    private int mCurrentLeft = 150;
 
-    private int currentTop = 0;
+    private int mCurrentTop = 0;
 
-    private int currentRight = 0;
+    private int mCurrentRight = 0;
 
-    private int currentBottom = 0;
+    private int mCurrentBottom = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,18 +83,18 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(Map map) {
+    public void onMapReady(MapClient map) {
         mMap = map;
 
         // Move to a place with indoor (SFO airport).
-        mMap.setPadding(currentLeft, currentTop, currentRight, currentBottom);
-        mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(SFO, 18));
+        mMap.setPadding(mCurrentLeft, mCurrentTop, mCurrentRight, mCurrentBottom);
+        mMap.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(SFO, 18));
         // Add a marker to the Opera House.
-        mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mMap.addMarker(MapKit.newMarkerOptions()
                 .position(SOH)
                 .title("Sydney Opera House"));
         // Add a camera idle listener.
-        mMap.setOnCameraIdleListener(new OnCameraIdleListener() {
+        mMap.setOnCameraIdleListener(new MapClient.OnCameraIdleListener() {
             @Override
             public void onCameraIdle() {
                 mMessageView.setText("CameraChangeListener: " + mMap.getCameraPosition());
@@ -101,8 +103,8 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
     }
 
     /**
-     * Checks if the map is ready (which depends on whether the Google Play services APK is
-     * available. This should be called prior to calling any methods on GoogleMap.
+     * Checks if the map is ready (which depends on whether the MapClient is
+     * available. This should be called prior to calling any methods on MapClient.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {
@@ -117,21 +119,21 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         if (!checkReady()) {
             return;
         }
-        mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(SOH, 16));
+        mMap.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(SOH, 16));
     }
 
     public void moveToSFO(View view) {
         if (!checkReady()) {
             return;
         }
-        mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(SFO, 18));
+        mMap.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(SFO, 18));
     }
 
     public void moveToAUS(View view) {
         if (!checkReady()) {
             return;
         }
-        mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngBounds(AUS, 0));
+        mMap.moveCamera(MapKit.getCameraUpdateFactory().newLatLngBounds(AUS, 0));
     }
 
     public void setNoPadding(View view) {
@@ -145,7 +147,9 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         if (!checkReady()) {
             return;
         }
-        View mapView = (getSupportFragmentManager().findFragmentById(R.id.map)).getView();
+        Fragment mapFragment =
+                Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.map));
+        View mapView = Objects.requireNonNull(mapFragment.getView());
         int left = findViewById(R.id.vr_panel).getMeasuredWidth();
         int top = 0;
         int right = mapView.getWidth() / 3;
@@ -162,15 +166,15 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
 
         final Interpolator interpolator = new OvershootInterpolator();
 
-        final int startLeft = currentLeft;
-        final int startTop = currentTop;
-        final int startRight = currentRight;
-        final int startBottom = currentBottom;
+        final int startLeft = mCurrentLeft;
+        final int startTop = mCurrentTop;
+        final int startRight = mCurrentRight;
+        final int startBottom = mCurrentBottom;
 
-        currentLeft = toLeft;
-        currentTop = toTop;
-        currentRight = toRight;
-        currentBottom = toBottom;
+        mCurrentLeft = toLeft;
+        mCurrentTop = toTop;
+        mCurrentRight = toRight;
+        mCurrentBottom = toBottom;
 
         handler.post(new Runnable() {
             @Override

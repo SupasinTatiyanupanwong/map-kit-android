@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2020 Supasin Tatiyanupanwong
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
 
 import android.content.Context;
@@ -30,6 +14,7 @@ import androidx.annotation.UiThread;
 import androidx.fragment.app.Fragment;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -46,9 +31,13 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
  * moving the map). You can use the map's camera to set parameters such as location, zoom level,
  * tilt angle, and bearing.
  *
+ * @see MapClient
  * @since 1.0.0
+ * @deprecated As of 1.2.0, renamed to {@link MapClient} to avoid naming conflicts with {@link
+ * java.util.Map}.
  */
-@UiThread
+@SuppressWarnings("deprecation")
+@Deprecated
 public interface Map {
 
     /**
@@ -367,7 +356,7 @@ public interface Map {
      *
      * <p></p>The {@code Projection} returned is a snapshot of the current projection, and will not
      * automatically update when the camera moves. As this operation is expensive, you should get
-     * the projection only once per screen. Google Maps uses the Mercator projection to create its
+     * the projection only once per screen. Map Kit uses the Mercator projection to create its
      * maps from geographic data and convert points on the map into geographic coordinates.
      *
      * @return The {@link Projection} of the map in its current state.
@@ -569,8 +558,8 @@ public interface Map {
      * <p>This method allows you to define a visible region on the map, to signal to the map that
      * portions of the map around the edges may be obscured, by setting padding on each of the four
      * edges of the map. Map functions will be adapted to the padding. For example, the zoom
-     * controls, compass, copyright notices and Google logo will be moved to fit inside the defined
-     * region, camera movements will be relative to the center of the visible region, etc.
+     * controls, compass, copyright notices and logo will be moved to fit inside the defined region,
+     * camera movements will be relative to the center of the visible region, etc.
      *
      * @param left The number of pixels of padding to be added on the left of the map.
      * @param top The number of pixels of padding to be added on the top of the map.
@@ -602,13 +591,13 @@ public interface Map {
      * Sets the styling of the base map.
      *
      * <p>Using the style options, you can apply custom styles to features and elements on the map.
-     * See {@link Map.Style.Options} for style definition details.
+     * See {@link MapClient.Style.Options} for style definition details.
      *
      * <p>Set to {@code null} to clear any previous custom styling.
      *
      * @param style The style of map to display.
      * @return {@code true} if the style was successfully parsed; {@code false} if problems were
-     * detected with the {@link Map.Style.Options}, including, e.g. unparsable styling JSON,
+     * detected with the {@link MapClient.Style.Options}, including, e.g. unparsable styling JSON,
      * unrecognized feature type, unrecognized element type, or invalid styler keys. If the return
      * value is {@code false}, the current style is left unchanged.
      */
@@ -817,7 +806,7 @@ public interface Map {
     }
 
     /**
-     * A Interface definition for a callback to be invoked when a task is complete or canceled.
+     * Interface definition for a callback to be invoked when a task is complete or canceled.
      */
     interface CancelableCallback {
         /**
@@ -925,19 +914,19 @@ public interface Map {
          * Called when a marker has been clicked.
          *
          * Note: the first thing that happens when a marker is clicked or tapped is that any
-         * currently showing info window is closed, and the {@link Map.OnInfoWindowCloseListener}
+         * currently showing info window is closed, and the {@link OnInfoWindowCloseListener}
          * is triggered. Then the {@code OnMarkerClickListener} is triggered. Therefore, calling
          * {@link Marker#isInfoWindowShown() isInfoWindowShown()} on any marker from the {@code
          * OnMarkerClickListener} will return {@code false}.
          *
-         * @param polygon The marker that was clicked.
+         * @param marker The marker that was clicked.
          * @return {@code true} if the listener has consumed the event (i.e., the default behavior
          * should not occur); {@code false} otherwise (i.e., the default behavior should occur).
          * The default behavior is for the camera to move to the marker and an info window to
          * appear.
          */
         @UiThread
-        boolean onMarkerClick(@NonNull Marker polygon);
+        boolean onMarkerClick(@NonNull Marker marker);
     }
 
     /**
@@ -1054,7 +1043,7 @@ public interface Map {
 
     /**
      * Interface definition for a callback to be invoked when the camera's motion has been stopped
-     * or when the camera starts moving for a new reason..
+     * or when the camera starts moving for a new reason.
      */
     interface OnCameraMoveCanceledListener {
         /**
@@ -1140,7 +1129,7 @@ public interface Map {
 
     interface Style {
         /**
-         * Defines styling options for a {@link Map}.
+         * Defines styling options for a {@link MapClient}.
          *
          * <p>With style options you can customize the presentation of the standard map styles,
          * changing the visual display of features like roads, parks, and other points of interest.
@@ -1154,8 +1143,8 @@ public interface Map {
 
 
     /**
-     * Settings for the user interface for a {@link Map}. To obtain this interface, call {@link
-     * Map#getUiSettings getUiSettings()}.
+     * Settings for the user interface for a {@link MapClient}. To obtain this interface, call
+     * {@link MapClient#getUiSettings getUiSettings()}.
      */
     interface UiSettings {
         /**
@@ -1190,7 +1179,7 @@ public interface Map {
          * move such that the user's location is in the center of the map. If the button is
          * enabled, it is only shown when the my-location layer is enabled.
          *
-         * By default, the my-location button is enabled (and hence shown when the my-location
+         * <p>By default, the my-location button is enabled (and hence shown when the my-location
          * layer is enabled).
          *
          * @param enabled {@code true} to enable the my-location button; {@code false} to disable
@@ -1291,8 +1280,7 @@ public interface Map {
         /**
          * Sets the preference for whether the Map Toolbar should be enabled or disabled. If
          * enabled, and the Map Toolbar can be shown in the current context, users will see a bar
-         * with various context-dependent actions, including 'open this map in the Google Maps app'
-         * and 'find directions to the highlighted marker in the Google Maps app'.
+         * with various context-dependent actions.
          *
          * <p>By default, the Map Toolbar is enabled.
          *
@@ -1383,6 +1371,11 @@ public interface Map {
     }
 
 
+    /**
+     * @see MapKit
+     * @deprecated As of 1.2.0, the usage of {@link Factory} is now restricted to library group.
+     * Its public APIs are now lifted and can be accessed directly through {@link MapKit}.
+     */
     interface Factory {
         @NonNull
         BitmapDescriptor.Factory getBitmapDescriptorFactory();
@@ -1393,18 +1386,6 @@ public interface Map {
         @NonNull
         CameraUpdate.Factory getCameraUpdateFactory();
 
-        /**
-         * @deprecated Use {@link #newCameraPositionBuilder()} instead.
-         */
-        @Deprecated
-        @NonNull
-        CameraPosition newCameraPosition(
-                @NonNull LatLng target, float zoom, float tilt, float bearing);
-
-        /**
-         * @deprecated Use {@link #newCameraPositionBuilder()} instead.
-         */
-        @Deprecated
         @NonNull
         CameraPosition newCameraPositionFromLatLngZoom(@NonNull LatLng target, float zoom);
 
@@ -1445,10 +1426,11 @@ public interface Map {
         LatLngBounds.Builder newLatLngBoundsBuilder();
 
         @NonNull
-        Map.Style.Options newMapStyleOptions(String json);
+        MapClient.Style.Options newMapStyleOptions(String json);
 
         @NonNull
-        Map.Style.Options newMapStyleOptions(@NonNull Context context, @RawRes int resourceId);
+        MapClient.Style.Options newMapStyleOptions(
+                @NonNull Context context, @RawRes int resourceId);
 
         @NonNull
         Marker.Options newMarkerOptions();
@@ -1486,14 +1468,22 @@ public interface Map {
                 LatLng farRight,
                 LatLngBounds latLngBounds);
 
-
+        /**
+         * @deprecated It is not intended to be used outside the library group. As of 1.2.0, its
+         * usage scope is now restricted.
+         */
         @UiThread
         void getMapAsync(
-                @NonNull Fragment fragment, @NonNull OnMapReadyCallback callback);
+                @NonNull Fragment fragment,
+                @SuppressWarnings("deprecation") @NonNull OnMapReadyCallback callback);
 
+        /**
+         * @see MapKit.OnMapReadyCallback
+         * @deprecated As of 1.2.0, use {@link MapKit.OnMapReadyCallback} instead.
+         */
         interface OnMapReadyCallback {
             @UiThread
-            void onMapReady(@NonNull Map map);
+            void onMapReady(@SuppressWarnings("deprecation") @NonNull Map map);
         }
     }
 

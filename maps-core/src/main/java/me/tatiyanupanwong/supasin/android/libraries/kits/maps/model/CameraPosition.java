@@ -86,8 +86,8 @@ public interface CameraPosition {
          *
          * When changing the camera position for a map, the zoom level of the camera is restricted
          * to a certain range depending on various factors including location, map type and map
-         * size. Use {@link Map#getMinZoomLevel} and {@link Map#getMaxZoomLevel} to find the
-         * restrictions. Note that the camera zoom need not be an integer value.
+         * size. Use {@link MapClient#getMinZoomLevel} and {@link MapClient#getMaxZoomLevel} to
+         * find the restrictions. Note that the camera zoom need not be an integer value.
          *
          * @param zoom The zoom level of the camera.
          * @return This {@link Builder} object for method chaining.

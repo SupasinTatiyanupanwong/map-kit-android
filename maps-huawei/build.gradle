@@ -18,33 +18,18 @@ android {
 dependencies {
     api project(':maps-core')
 
-    implementation 'com.huawei.hms:maps:4.0.1.302'
+    implementation 'com.huawei.hms:maps:5.0.0.300'
 }
 
 tasks.withType(Javadoc).all { enabled = false }
 
 ext {
-    bintrayRepo = 'android.libraries.kits.maps'
-    bintrayName = 'maps-huawei'
+    POM_ARTIFACT_ID = 'maps-huawei'
 
-    publishedGroupId = 'me.tatiyanupanwong.supasin.android.libraries.kits.maps'
-    publishedArtifactId = 'maps-huawei'
-
-    libraryName = 'Map Kit (Huawei)'
-    libraryDescription = 'Provides Huawei Maps integration to Map Kit'
-    libraryVersion = '1.1.1'
-
-    siteUrl = 'https://github.com/SupasinTatiyanupanwong/map-kit-android'
-    gitUrl = 'https://github.com/SupasinTatiyanupanwong/map-kit-android.git'
-
-    developerId = 'supasintatiyanupanwong'
-    developerName = 'Supasin Tatiyanupanwong'
-    developerEmail = 'supasin@tatiyanupanwong.me'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    POM_NAME = 'Map Kit (Huawei)'
+    POM_DESCRIPTION = 'Provides Huawei Maps integration to Map Kit.'
+    POM_VERSION = '1.2.0'
 }
 
-apply from: '../install.gradle'
-apply from: '../bintray.gradle'
+apply from: rootProject.file("gradle/install.gradle")
+apply from: rootProject.file("gradle/bintray.gradle")

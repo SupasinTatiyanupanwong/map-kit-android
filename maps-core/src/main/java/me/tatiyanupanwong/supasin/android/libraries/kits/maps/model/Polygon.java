@@ -206,10 +206,10 @@ public interface Polygon {
 
     /**
      * Sets the clickability of the polygon. If the polygon is clickable, your app will receive
-     * notifications to the {@link Map.OnPolygonClickListener} when the user clicks the polygon.
-     * The event listener is registered through {@link
-     * Map#setOnPolygonClickListener(Map.OnPolygonClickListener) setOnPolygonClickListener(
-     * MapProvider.OnPolygonClickListener)}.
+     * notifications to the {@link MapClient.OnPolygonClickListener} when the user clicks the
+     * polygon. The event listener is registered through {@link
+     * MapClient#setOnPolygonClickListener(MapClient.OnPolygonClickListener)
+     * setOnPolygonClickListener(MapClient.OnPolygonClickListener)}.
      *
      * @param clickable New clickability setting for the polygon.
      */
@@ -217,10 +217,10 @@ public interface Polygon {
 
     /**
      * Gets the clickability of the polygon. If the polygon is clickable, your app will receive
-     * notifications to the {@link Map.OnPolygonClickListener} when the user clicks the polygon.
-     * The event listener is registered through {@link
-     * Map#setOnPolygonClickListener(Map.OnPolygonClickListener) setOnPolygonClickListener(
-     * MapProvider.OnPolygonClickListener)}.
+     * notifications to the {@link MapClient.OnPolygonClickListener} when the user clicks the
+     * polygon. The event listener is registered through {@link
+     * MapClient#setOnPolygonClickListener(MapClient.OnPolygonClickListener)
+     * setOnPolygonClickListener(MapClient.OnPolygonClickListener)}.
      *
      * @return {@code true} if the polygon is clickable; otherwise, returns {@code false}.
      */

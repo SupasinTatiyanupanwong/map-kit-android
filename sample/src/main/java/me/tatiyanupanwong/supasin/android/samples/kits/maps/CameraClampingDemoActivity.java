@@ -29,46 +29,44 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraPosition;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnCameraIdleListener;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * This shows how to constrain the camera to specific boundaries and zoom levels.
  */
 public class CameraClampingDemoActivity extends AppCompatActivity implements
-        OnMapReadyCallback,
-        OnCameraIdleListener {
+        MapKit.OnMapReadyCallback,
+        MapClient.OnCameraIdleListener {
 
     private static final float ZOOM_DELTA = 2.0f;
     private static final float DEFAULT_MIN_ZOOM = 2.0f;
     private static final float DEFAULT_MAX_ZOOM = 22.0f;
 
     private static final LatLngBounds ADELAIDE =
-            MapKit.getFactory().newLatLngBounds(
-                    MapKit.getFactory().newLatLng(-35.0, 138.58),
-                    MapKit.getFactory().newLatLng(-34.9, 138.61));
+            MapKit.newLatLngBounds(
+                    MapKit.newLatLng(-35.0, 138.58),
+                    MapKit.newLatLng(-34.9, 138.61));
     private static final CameraPosition ADELAIDE_CAMERA =
-            MapKit.getFactory().newCameraPositionBuilder()
-                    .target(MapKit.getFactory().newLatLng(-34.92873, 138.59995))
+            MapKit.newCameraPositionBuilder()
+                    .target(MapKit.newLatLng(-34.92873, 138.59995))
                     .zoom(20.0f)
                     .bearing(0)
                     .tilt(0)
                     .build();
 
     private static final LatLngBounds PACIFIC =
-            MapKit.getFactory().newLatLngBounds(
-                    MapKit.getFactory().newLatLng(-15.0, 165.0),
-                    MapKit.getFactory().newLatLng(15.0, -165.0));
+            MapKit.newLatLngBounds(
+                    MapKit.newLatLng(-15.0, 165.0),
+                    MapKit.newLatLng(15.0, -165.0));
     private static final CameraPosition PACIFIC_CAMERA =
-            MapKit.getFactory().newCameraPositionBuilder()
-                    .target(MapKit.getFactory().newLatLng(0, -180))
+            MapKit.newCameraPositionBuilder()
+                    .target(MapKit.newLatLng(0, -180))
                     .zoom(4.0f)
                     .bearing(0)
                     .tilt(0)
                     .build();
 
-    private Map mMap;
+    private MapClient mMap;
 
     /**
      * Internal min zoom level that can be toggled via the demo.
@@ -100,7 +98,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         map.setOnCameraIdleListener(this);
     }
@@ -112,7 +110,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
 
     /**
      * Before the map is ready many calls will fail.
-     * This should be called on all entry points that call methods on the Google Maps API.
+     * This should be called on all entry points that call methods on the MapClient API.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {
@@ -141,7 +139,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
         }
         mMap.setLatLngBoundsForCameraTarget(ADELAIDE);
         mMap.animateCamera(
-                MapKit.getFactory().getCameraUpdateFactory().newCameraPosition(ADELAIDE_CAMERA));
+                MapKit.getCameraUpdateFactory().newCameraPosition(ADELAIDE_CAMERA));
     }
 
     /**
@@ -153,7 +151,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
         }
         mMap.setLatLngBoundsForCameraTarget(PACIFIC);
         mMap.animateCamera(
-                MapKit.getFactory().getCameraUpdateFactory().newCameraPosition(PACIFIC_CAMERA));
+                MapKit.getCameraUpdateFactory().newCameraPosition(PACIFIC_CAMERA));
     }
 
     public void onLatLngClampReset(View view) {

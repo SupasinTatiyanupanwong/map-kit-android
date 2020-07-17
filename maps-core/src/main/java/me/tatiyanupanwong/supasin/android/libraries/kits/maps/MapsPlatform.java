@@ -23,30 +23,29 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.lang.reflect.Constructor;
-
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapFactory;
 
 abstract class MapsPlatform {
+
     private static MapsPlatform sPlatform;
 
-    static MapsPlatform get() {
+    static synchronized MapsPlatform get() {
         return sPlatform;
     }
 
-
-    static void init(@NonNull Context context) {
+    static synchronized void init(@NonNull Context context) {
         sPlatform = findPlatform(context);
     }
 
 
-    abstract Map.Factory getMapFactory();
+    @NonNull
+    abstract MapFactory getFactory();
 
     @LayoutRes
-    abstract int getMapFragmentLayoutResId();
+    abstract int getFragmentLayoutId();
 
     @IdRes
-    abstract int getDelegateMapFragmentId();
+    abstract int getFragmentDelegateId();
 
 
     private static MapsPlatform findPlatform(@NonNull Context context) {
@@ -62,16 +61,13 @@ abstract class MapsPlatform {
 
         throw new IllegalStateException(
                 "Can't find supported platform, make sure to include one of the next artifacts:"
-                        + " ':maps-google', or ':maps-huawei'");
+                        + " ':maps-amazon', ':maps-google', or ':maps-huawei'");
     }
 
 
     private static final class GoogleMapsPlatform extends MapsPlatform {
         private static final String LIBRARY_PACKAGE_NAME =
                 "me.tatiyanupanwong.supasin.android.libraries.kits.maps.internal.google";
-
-        private static final String CLASS_NAME_FACTORY =
-                LIBRARY_PACKAGE_NAME + ".model.GoogleMap$Factory";
 
         private static final String CLASS_NAME_LAYOUT_RES = LIBRARY_PACKAGE_NAME + ".R$layout";
 
@@ -81,46 +77,47 @@ abstract class MapsPlatform {
 
         private static final String FIELD_NAME_FRAGMENT_ID = "kits_maps_internal_map_fragment";
 
-        private static Map.Factory sMapFactory;
-        private static int sMapFragmentLayoutResId;
-        private static int sDelegateMapFragmentId;
+        private static MapFactory sFactory;
+        private static int sFragmentLayoutId;
+        private static int sFragmentDelegateId;
 
         private GoogleMapsPlatform() {}
 
+        @NonNull
         @Override
-        int getMapFragmentLayoutResId() {
-            return sMapFragmentLayoutResId;
+        MapFactory getFactory() {
+            return sFactory;
         }
 
+        @LayoutRes
         @Override
-        int getDelegateMapFragmentId() {
-            return sDelegateMapFragmentId;
+        int getFragmentLayoutId() {
+            return sFragmentLayoutId;
         }
 
+        @IdRes
         @Override
-        Map.Factory getMapFactory() {
-            return sMapFactory;
+        int getFragmentDelegateId() {
+            return sFragmentDelegateId;
         }
 
 
         @Nullable
         static MapsPlatform buildIfSupported(@NonNull Context context) {
             try {
-                //noinspection unchecked
-                final Constructor<Map.Factory> ctor =
-                        ((Class<Map.Factory>) Class.forName(CLASS_NAME_FACTORY))
-                                .getDeclaredConstructor(Context.class);
-                ctor.setAccessible(true);
-                sMapFactory = ctor.newInstance(context);
+                sFactory = (MapFactory) Class
+                        .forName(LIBRARY_PACKAGE_NAME + ".model.GoogleMapFactory")
+                        .getMethod("buildIfSupported", Context.class)
+                        .invoke(null, context);
 
-                sMapFragmentLayoutResId = Class.forName(CLASS_NAME_LAYOUT_RES)
+                sFragmentLayoutId = Class.forName(CLASS_NAME_LAYOUT_RES)
                         .getField(FIELD_NAME_LAYOUT_ID).getInt(null);
 
-                sDelegateMapFragmentId = Class.forName(CLASS_NAME_ID_RES)
+                sFragmentDelegateId = Class.forName(CLASS_NAME_ID_RES)
                         .getField(FIELD_NAME_FRAGMENT_ID).getInt(null);
 
                 return new GoogleMapsPlatform();
-            } catch (Exception ex) {
+            } catch (Exception ignored) {
                 return null;
             }
         }
@@ -130,9 +127,6 @@ abstract class MapsPlatform {
         private static final String LIBRARY_PACKAGE_NAME =
                 "me.tatiyanupanwong.supasin.android.libraries.kits.maps.internal.huawei";
 
-        private static final String CLASS_NAME_FACTORY =
-                LIBRARY_PACKAGE_NAME + ".model.HuaweiMap$Factory";
-
         private static final String CLASS_NAME_LAYOUT_RES = LIBRARY_PACKAGE_NAME + ".R$layout";
 
         private static final String CLASS_NAME_ID_RES = LIBRARY_PACKAGE_NAME + ".R$id";
@@ -141,42 +135,43 @@ abstract class MapsPlatform {
 
         private static final String FIELD_NAME_FRAGMENT_ID = "kits_maps_internal_map_fragment";
 
-        private static Map.Factory sMapFactory;
-        private static int sMapFragmentLayoutResId;
-        private static int sDelegateMapFragmentId;
+        private static MapFactory sFactory;
+        private static int sFragmentLayoutId;
+        private static int sFragmentDelegateId;
 
         private HuaweiMapsPlatform() {}
 
+        @NonNull
         @Override
-        int getMapFragmentLayoutResId() {
-            return sMapFragmentLayoutResId;
+        MapFactory getFactory() {
+            return sFactory;
         }
 
+        @LayoutRes
         @Override
-        int getDelegateMapFragmentId() {
-            return sDelegateMapFragmentId;
+        int getFragmentLayoutId() {
+            return sFragmentLayoutId;
         }
 
+        @IdRes
         @Override
-        Map.Factory getMapFactory() {
-            return sMapFactory;
+        int getFragmentDelegateId() {
+            return sFragmentDelegateId;
         }
 
 
         @Nullable
         static MapsPlatform buildIfSupported(@NonNull Context context) {
             try {
-                //noinspection unchecked
-                final Constructor<Map.Factory> ctor =
-                        ((Class<Map.Factory>) Class.forName(CLASS_NAME_FACTORY))
-                                .getDeclaredConstructor(Context.class);
-                ctor.setAccessible(true);
-                sMapFactory = ctor.newInstance(context);
+                sFactory = (MapFactory) Class
+                        .forName(LIBRARY_PACKAGE_NAME + ".model.HuaweiMapFactory")
+                        .getMethod("buildIfSupported", Context.class)
+                        .invoke(null, context);
 
-                sMapFragmentLayoutResId = Class.forName(CLASS_NAME_LAYOUT_RES)
+                sFragmentLayoutId = Class.forName(CLASS_NAME_LAYOUT_RES)
                         .getField(FIELD_NAME_LAYOUT_ID).getInt(null);
 
-                sDelegateMapFragmentId = Class.forName(CLASS_NAME_ID_RES)
+                sFragmentDelegateId = Class.forName(CLASS_NAME_ID_RES)
                         .getField(FIELD_NAME_FRAGMENT_ID).getInt(null);
 
                 return new HuaweiMapsPlatform();

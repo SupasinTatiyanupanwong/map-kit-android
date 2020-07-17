@@ -163,9 +163,9 @@ public interface GroundOverlay {
 
     /**
      * Sets the clickability of the ground overlay. If the ground overlay is clickable, your app
-     * will receive notifications to the {@link Map.OnGroundOverlayClickListener} when the
+     * will receive notifications to the {@link MapClient.OnGroundOverlayClickListener} when the
      * user clicks the ground overlay. The event listener is registered through {@link
-     * Map#setOnGroundOverlayClickListener(Map.OnGroundOverlayClickListener)}.
+     * MapClient#setOnGroundOverlayClickListener(MapClient.OnGroundOverlayClickListener)}.
      *
      * @param clickable New clickability setting for the ground overlay.
      */
@@ -173,9 +173,9 @@ public interface GroundOverlay {
 
     /**
      * Gets the clickability of the ground overlay. If the ground overlay is clickable, your app
-     * will receive notifications to the {@link Map.OnGroundOverlayClickListener} when the
+     * will receive notifications to the {@link MapClient.OnGroundOverlayClickListener} when the
      * user clicks the ground overlay. The event listener is registered through {@link
-     * Map#setOnGroundOverlayClickListener(Map.OnGroundOverlayClickListener)}.
+     * MapClient#setOnGroundOverlayClickListener(MapClient.OnGroundOverlayClickListener)}.
      *
      * @return {@code true} if the circle is clickable; {@code false} otherwise.
      */

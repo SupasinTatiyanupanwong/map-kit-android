@@ -31,6 +31,8 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 /**
  * The main activity of the API library demo gallery.
  * <p>
@@ -62,14 +64,14 @@ public final class MainActivity extends AppCompatActivity implements
                 featureView = new FeatureView(getContext());
             }
 
-            DemoDetails demo = getItem(position);
+            DemoDetails demo = Objects.requireNonNull(getItem(position));
 
-            featureView.setTitleId(demo.titleId);
-            featureView.setDescriptionId(demo.descriptionId);
+            featureView.setTitleId(demo.getTitleId());
+            featureView.setDescriptionId(demo.getDescriptionId());
 
             Resources resources = getContext().getResources();
-            String title = resources.getString(demo.titleId);
-            String description = resources.getString(demo.descriptionId);
+            String title = resources.getString(demo.getTitleId());
+            String description = resources.getString(demo.getDescriptionId());
             featureView.setContentDescription(title + ". " + description);
 
             return featureView;
@@ -92,7 +94,7 @@ public final class MainActivity extends AppCompatActivity implements
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DemoDetails demo = (DemoDetails) parent.getAdapter().getItem(position);
-        startActivity(new Intent(this, demo.activityClass));
+        startActivity(new Intent(this, demo.getActivityClass()));
     }
 
 }

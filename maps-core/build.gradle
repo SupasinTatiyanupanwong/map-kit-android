@@ -18,27 +18,12 @@ dependencies {
 }
 
 ext {
-    bintrayRepo = 'android.libraries.kits.maps'
-    bintrayName = 'maps-core'
+    POM_ARTIFACT_ID = 'maps-core'
 
-    publishedGroupId = 'me.tatiyanupanwong.supasin.android.libraries.kits.maps'
-    publishedArtifactId = 'maps-core'
-
-    libraryName = 'Map Kit (Core)'
-    libraryDescription = 'Encapsulates Maps APIs of supported platforms for Android'
-    libraryVersion = '1.1.0'
-
-    siteUrl = 'https://github.com/SupasinTatiyanupanwong/map-kit-android'
-    gitUrl = 'https://github.com/SupasinTatiyanupanwong/map-kit-android.git'
-
-    developerId = 'supasintatiyanupanwong'
-    developerName = 'Supasin Tatiyanupanwong'
-    developerEmail = 'supasin@tatiyanupanwong.me'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    POM_NAME = 'Map Kit (Core)'
+    POM_DESCRIPTION = 'Encapsulates Maps APIs for Android.'
+    POM_VERSION = '1.2.0'
 }
 
-apply from: '../install.gradle'
-apply from: '../bintray.gradle'
+apply from: rootProject.file("gradle/install.gradle")
+apply from: rootProject.file("gradle/bintray.gradle")

@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
@@ -35,25 +34,20 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_HYBRID;
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_NONE;
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_NORMAL;
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_SATELLITE;
-import static me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.MAP_TYPE_TERRAIN;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * Demonstrates the different base layers of a map.
  */
-public class LayersDemoActivity extends AppCompatActivity
-        implements OnItemSelectedListener, OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+public class LayersDemoActivity extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener,
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        MapKit.OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    private Map mMap;
+    private MapClient mMap;
 
     private CheckBox mTrafficCheckbox;
 
@@ -96,7 +90,7 @@ public class LayersDemoActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         updateMapType();
         updateTraffic();
@@ -225,17 +219,17 @@ public class LayersDemoActivity extends AppCompatActivity
 
         String layerName = ((String) mSpinner.getSelectedItem());
         if (layerName.equals(getString(R.string.normal))) {
-            mMap.setMapType(MAP_TYPE_NORMAL);
+            mMap.setMapType(MapClient.MAP_TYPE_NORMAL);
         } else if (layerName.equals(getString(R.string.hybrid))) {
-            mMap.setMapType(MAP_TYPE_HYBRID);
+            mMap.setMapType(MapClient.MAP_TYPE_HYBRID);
 
 
         } else if (layerName.equals(getString(R.string.satellite))) {
-            mMap.setMapType(MAP_TYPE_SATELLITE);
+            mMap.setMapType(MapClient.MAP_TYPE_SATELLITE);
         } else if (layerName.equals(getString(R.string.terrain))) {
-            mMap.setMapType(MAP_TYPE_TERRAIN);
+            mMap.setMapType(MapClient.MAP_TYPE_TERRAIN);
         } else if (layerName.equals(getString(R.string.none_map))) {
-            mMap.setMapType(MAP_TYPE_NONE);
+            mMap.setMapType(MapClient.MAP_TYPE_NONE);
         } else {
             Log.i("LDA", "Error setting layer with name " + layerName);
         }

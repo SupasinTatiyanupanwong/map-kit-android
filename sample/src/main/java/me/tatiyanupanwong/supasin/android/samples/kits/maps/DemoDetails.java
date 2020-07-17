@@ -17,32 +17,43 @@
 
 package me.tatiyanupanwong.supasin.android.samples.kits.maps;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.app.Activity;
 
 /**
  * A simple POJO that holds the details about the demo that are used by the List Adapter.
  */
 class DemoDetails {
 
+    private final int mTitleId;
+
+    private final int mDescriptionId;
+
+    private final Class<? extends Activity> mActivityClass;
+
+    DemoDetails(int titleId, int descriptionId, Class<? extends Activity> activityClass) {
+        mTitleId = titleId;
+        mDescriptionId = descriptionId;
+        mActivityClass = activityClass;
+    }
+
     /**
      * The resource id of the title of the demo.
      */
-    final int titleId;
+    public int getTitleId() {
+        return mTitleId;
+    }
 
     /**
      * The resources id of the description of the demo.
      */
-    final int descriptionId;
+    public int getDescriptionId() {
+        return mDescriptionId;
+    }
 
     /**
      * The demo activity's class.
      */
-    final Class<? extends AppCompatActivity> activityClass;
-
-    DemoDetails(int titleId, int descriptionId, Class<? extends AppCompatActivity> activityClass) {
-        this.titleId = titleId;
-        this.descriptionId = descriptionId;
-        this.activityClass = activityClass;
+    public Class<? extends Activity> getActivityClass() {
+        return mActivityClass;
     }
-
 }

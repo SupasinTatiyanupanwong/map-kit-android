@@ -53,7 +53,7 @@ public class MapInPagerDemoActivity extends AppCompatActivity {
 
 
     /** A simple fragment that displays a TextView. */
-    static class TextFragment extends Fragment {
+    public static class TextFragment extends Fragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {

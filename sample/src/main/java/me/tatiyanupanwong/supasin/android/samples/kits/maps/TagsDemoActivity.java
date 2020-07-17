@@ -24,20 +24,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Circle;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnCircleClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnGroundOverlayClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnMarkerClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnPolygonClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnPolylineClickListener;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.UiSettings;
-
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
@@ -46,41 +41,41 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
  * This shows how to use setTag/getTag on API objects.
  */
 public class TagsDemoActivity extends AppCompatActivity implements
-        OnCircleClickListener,
-        OnGroundOverlayClickListener,
-        OnMarkerClickListener,
-        OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener,
-        OnPolygonClickListener,
-        OnPolylineClickListener {
+        MapClient.OnCircleClickListener,
+        MapClient.OnGroundOverlayClickListener,
+        MapClient.OnMarkerClickListener,
+        MapClient.OnPolygonClickListener,
+        MapClient.OnPolylineClickListener,
+        OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
-    private static final LatLng ADELAIDE = MapKit.getFactory().newLatLng(-34.92873, 138.59995);
-    private static final LatLng BRISBANE = MapKit.getFactory().newLatLng(-27.47093, 153.0235);
-    private static final LatLng DARWIN = MapKit.getFactory().newLatLng(-12.425892, 130.86327);
-    private static final LatLng HOBART = MapKit.getFactory().newLatLng(-42.8823388, 147.311042);
-    private static final LatLng PERTH = MapKit.getFactory().newLatLng(-31.952854, 115.857342);
-    private static final LatLng SYDNEY = MapKit.getFactory().newLatLng(-33.87365, 151.20689);
+    private static final LatLng ADELAIDE = MapKit.newLatLng(-34.92873, 138.59995);
+    private static final LatLng BRISBANE = MapKit.newLatLng(-27.47093, 153.0235);
+    private static final LatLng DARWIN = MapKit.newLatLng(-12.425892, 130.86327);
+    private static final LatLng HOBART = MapKit.newLatLng(-42.8823388, 147.311042);
+    private static final LatLng PERTH = MapKit.newLatLng(-31.952854, 115.857342);
+    private static final LatLng SYDNEY = MapKit.newLatLng(-33.87365, 151.20689);
 
     private static class CustomTag {
-        private final String description;
-        private int clickCount;
+        private final String mDescription;
+        private int mClickCount;
 
         CustomTag(String description) {
-            this.description = description;
-            clickCount = 0;
+            mDescription = description;
+            mClickCount = 0;
         }
 
         void incrementClickCount() {
-            clickCount++;
+            mClickCount++;
         }
 
         @NonNull
         @Override
         public String toString() {
-            return "The " + description + " has been clicked " + clickCount + " times.";
+            return "The " + mDescription + " has been clicked " + mClickCount + " times.";
         }
     }
 
-    private Map mMap = null;
+    private MapClient mMap = null;
 
     private TextView mTagText;
 
@@ -99,10 +94,10 @@ public class TagsDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(Map map) {
+    public void onMapReady(MapClient map) {
         mMap = map;
 
-        UiSettings uiSettings = mMap.getUiSettings();
+        MapClient.UiSettings uiSettings = mMap.getUiSettings();
 
         // Turn off the map toolbar.
         uiSettings.setMapToolbarEnabled(false);
@@ -129,7 +124,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
         map.setContentDescription(getString(R.string.tags_demo_map_description));
 
         // Create bounds that include all locations of the map.
-        LatLngBounds bounds = MapKit.getFactory().newLatLngBoundsBuilder()
+        LatLngBounds bounds = MapKit.newLatLngBoundsBuilder()
                 .include(ADELAIDE)
                 .include(BRISBANE)
                 .include(DARWIN)
@@ -138,12 +133,12 @@ public class TagsDemoActivity extends AppCompatActivity implements
                 .include(SYDNEY)
                 .build();
         mMap.moveCamera(
-                MapKit.getFactory().getCameraUpdateFactory().newLatLngBounds(bounds, 100));
+                MapKit.getCameraUpdateFactory().newLatLngBounds(bounds, 100));
     }
 
     private void addObjectsToMap() {
         // A circle centered on Adelaide.
-        Circle adelaideCircle = mMap.addCircle(MapKit.getFactory().newCircleOptions()
+        Circle adelaideCircle = mMap.addCircle(MapKit.newCircleOptions()
                 .center(ADELAIDE)
                 .radius(500000)
                 .fillColor(Color.argb(150, 66, 173, 244))
@@ -153,8 +148,8 @@ public class TagsDemoActivity extends AppCompatActivity implements
 
         // A ground overlay at Sydney.
         GroundOverlay sydneyGroundOverlay = mMap.addGroundOverlay(
-                MapKit.getFactory().newGroundOverlayOptions()
-                        .image(MapKit.getFactory().getBitmapDescriptorFactory()
+                MapKit.newGroundOverlayOptions()
+                        .image(MapKit.getBitmapDescriptorFactory()
                                 .fromResource(R.drawable.harbour_bridge))
                         .position(SYDNEY, 700000)
                         .clickable(true));
@@ -162,19 +157,19 @@ public class TagsDemoActivity extends AppCompatActivity implements
 
         // A marker at Hobart.
         Marker hobartMarker = mMap.addMarker(
-                MapKit.getFactory().newMarkerOptions().position(HOBART));
+                MapKit.newMarkerOptions().position(HOBART));
         hobartMarker.setTag(new CustomTag("Hobart marker"));
 
         // A polygon centered at Darwin.
-        Polygon darwinPolygon = mMap.addPolygon(MapKit.getFactory().newPolygonOptions()
+        Polygon darwinPolygon = mMap.addPolygon(MapKit.newPolygonOptions()
                 .add(
-                        MapKit.getFactory()
+                        MapKit
                                 .newLatLng(DARWIN.getLatitude() + 3, DARWIN.getLongitude() - 3),
-                        MapKit.getFactory()
+                        MapKit
                                 .newLatLng(DARWIN.getLatitude() + 3, DARWIN.getLongitude() + 3),
-                        MapKit.getFactory()
+                        MapKit
                                 .newLatLng(DARWIN.getLatitude() - 3, DARWIN.getLongitude() + 3),
-                        MapKit.getFactory()
+                        MapKit
                                 .newLatLng(DARWIN.getLatitude() - 3, DARWIN.getLongitude() - 3))
                 .fillColor(Color.argb(150, 34, 173, 24))
                 .strokeColor(Color.rgb(34, 173, 24))
@@ -182,7 +177,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
         darwinPolygon.setTag(new CustomTag("Darwin polygon"));
 
         // A polyline from Perth to Brisbane.
-        Polyline polyline = mMap.addPolyline(MapKit.getFactory().newPolylineOptions()
+        Polyline polyline = mMap.addPolyline(MapKit.newPolylineOptions()
                 .add(PERTH, BRISBANE)
                 .color(Color.rgb(103, 24, 173))
                 .width(30)
@@ -194,14 +189,14 @@ public class TagsDemoActivity extends AppCompatActivity implements
     // Click event listeners.
     //
 
-    private void onClick(CustomTag tag) {
+    private void onClick(@NonNull CustomTag tag) {
         tag.incrementClickCount();
         mTagText.setText(tag.toString());
     }
 
     @Override
     public void onCircleClick(@NonNull Circle circle) {
-        onClick((CustomTag) circle.getTag());
+        onClick((CustomTag) Objects.requireNonNull(circle.getTag()));
     }
 
     @Override
@@ -211,7 +206,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
 
     @Override
     public boolean onMarkerClick(@NonNull final Marker marker) {
-        onClick((CustomTag) marker.getTag());
+        onClick((CustomTag) Objects.requireNonNull(marker.getTag()));
         // We return true to indicate that we have consumed the event and that we do not wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
@@ -220,12 +215,12 @@ public class TagsDemoActivity extends AppCompatActivity implements
 
     @Override
     public void onPolygonClick(@NonNull Polygon polygon) {
-        onClick((CustomTag) polygon.getTag());
+        onClick((CustomTag) Objects.requireNonNull(polygon.getTag()));
     }
 
     @Override
     public void onPolylineClick(@NonNull Polyline polyline) {
-        onClick((CustomTag) polyline.getTag());
+        onClick((CustomTag) Objects.requireNonNull(polyline.getTag()));
     }
 
 }

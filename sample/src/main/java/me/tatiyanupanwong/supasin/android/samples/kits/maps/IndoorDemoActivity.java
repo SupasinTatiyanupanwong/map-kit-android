@@ -30,17 +30,16 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.IndoorBuilding;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.IndoorLevel;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * A demo activity showing how to use indoor.
  */
-public class IndoorDemoActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class IndoorDemoActivity extends AppCompatActivity implements MapKit.OnMapReadyCallback {
 
-    private Map mMap;
+    private MapClient mMap;
 
-    private boolean showLevelPicker = true;
+    private boolean mShowLevelPicker = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +54,18 @@ public class IndoorDemoActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
-        mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory()
-                .newLatLngZoom(MapKit.getFactory().newLatLng(37.614631, -122.385153), 18));
+        mMap.moveCamera(MapKit.getCameraUpdateFactory()
+                .newLatLngZoom(MapKit.newLatLng(37.614631, -122.385153), 18));
     }
 
     /**
      * Called when the toggle level picker button is clicked.
      */
     public void onToggleLevelPicker(View view) {
-        showLevelPicker = !showLevelPicker;
-        mMap.getUiSettings().setIndoorLevelPickerEnabled(showLevelPicker);
+        mShowLevelPicker = !mShowLevelPicker;
+        mMap.getUiSettings().setIndoorLevelPickerEnabled(mShowLevelPicker);
     }
 
     /**

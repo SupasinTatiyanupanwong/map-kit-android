@@ -30,15 +30,15 @@ import java.io.ByteArrayOutputStream;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Tile;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileProvider;
 
 /**
  * This demonstrates tile overlay coordinates.
  */
-public class TileCoordinateDemoActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class TileCoordinateDemoActivity extends AppCompatActivity implements
+        MapKit.OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +53,10 @@ public class TileCoordinateDemoActivity extends AppCompatActivity implements OnM
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         TileProvider coordTileProvider = new CoordTileProvider(this.getApplicationContext());
         map.addTileOverlay(
-                MapKit.getFactory().newTileOverlayOptions().tileProvider(coordTileProvider));
+                MapKit.newTileOverlayOptions().tileProvider(coordTileProvider));
     }
 
 
@@ -87,7 +87,7 @@ public class TileCoordinateDemoActivity extends AppCompatActivity implements OnM
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             coordTile.compress(Bitmap.CompressFormat.PNG, 0, stream);
             byte[] bitmapData = stream.toByteArray();
-            return MapKit.getFactory().newTile((int) (TILE_SIZE_DP * mScaleFactor),
+            return MapKit.newTile((int) (TILE_SIZE_DP * mScaleFactor),
                     (int) (TILE_SIZE_DP * mScaleFactor), bitmapData);
         }
 

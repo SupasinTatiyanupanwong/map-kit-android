@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,24 +33,22 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescriptor;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.OnGroundOverlayClickListener;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * This shows how to add a ground overlay to a map.
  */
 public class GroundOverlayDemoActivity extends AppCompatActivity implements
-        OnSeekBarChangeListener,
-        OnMapReadyCallback,
-        OnGroundOverlayClickListener {
+        SeekBar.OnSeekBarChangeListener,
+        MapKit.OnMapReadyCallback,
+        MapClient.OnGroundOverlayClickListener {
 
     private static final int TRANSPARENCY_MAX = 100;
 
-    private static final LatLng NEWARK = MapKit.getFactory().newLatLng(40.714086, -74.228697);
+    private static final LatLng NEWARK = MapKit.newLatLng(40.714086, -74.228697);
 
     private static final LatLng NEAR_NEWARK =
-            MapKit.getFactory()
+            MapKit
                     .newLatLng(NEWARK.getLatitude() - 0.001, NEWARK.getLongitude() - 0.025);
 
     private final List<BitmapDescriptor> mImages = new ArrayList<>();
@@ -81,22 +78,22 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         // Register a listener to respond to clicks on GroundOverlays.
         map.setOnGroundOverlayClickListener(this);
 
-        map.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(NEWARK, 11));
+        map.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(NEWARK, 11));
 
         mImages.clear();
-        mImages.add(MapKit.getFactory().getBitmapDescriptorFactory()
+        mImages.add(MapKit.getBitmapDescriptorFactory()
                 .fromResource(R.drawable.newark_nj_1922));
-        mImages.add(MapKit.getFactory().getBitmapDescriptorFactory()
+        mImages.add(MapKit.getBitmapDescriptorFactory()
                 .fromResource(R.drawable.newark_prudential_sunny));
 
         // Add a small, rotated overlay that is clickable by default
         // (set by the initial state of the checkbox.)
         mGroundOverlayRotated = map.addGroundOverlay(
-                MapKit.getFactory().newGroundOverlayOptions()
+                MapKit.newGroundOverlayOptions()
                         .image(mImages.get(1))
                         .anchor(0, 1)
                         .position(NEAR_NEWARK, 4300f, 3025f)
@@ -105,7 +102,7 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
 
         // Add a large overlay at Newark on top of the smaller overlay.
         mGroundOverlay = map.addGroundOverlay(
-                MapKit.getFactory().newGroundOverlayOptions()
+                MapKit.newGroundOverlayOptions()
                         .image(mImages.get(mCurrentEntry))
                         .anchor(0, 1)
                         .position(NEWARK, 8600f, 6500f));
@@ -114,7 +111,7 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
 
         // Override the default content description on the view, for accessibility mode.
         // Ideally this string would be localised.
-        map.setContentDescription("Google Map with ground overlay.");
+        map.setContentDescription("Map with ground overlay.");
     }
 
     @Override
