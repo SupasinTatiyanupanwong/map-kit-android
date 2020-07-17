@@ -1372,8 +1372,9 @@ public interface Map {
 
 
     /**
-     * @see MapFactory
-     * @deprecated As of 1.2.0, use {@link MapFactory} instead.
+     * @see MapKit
+     * @deprecated As of 1.2.0, the usage of {@link Factory} is now restricted to library group.
+     * Its public APIs are now lifted and can be accessed directly through {@link MapKit}.
      */
     interface Factory {
         @NonNull
@@ -1468,9 +1469,8 @@ public interface Map {
                 LatLngBounds latLngBounds);
 
         /**
-         * @see MapFactory#getMapAsync(Fragment, MapKit.OnMapReadyCallback)
-         * @deprecated As of 1.2.0, use {@link MapFactory#getMapAsync(Fragment,
-         * MapKit.OnMapReadyCallback)} instead.
+         * @deprecated It is not intended to be used outside the library group. As of 1.2.0, its
+         * usage scope is now restricted.
          */
         @UiThread
         void getMapAsync(
