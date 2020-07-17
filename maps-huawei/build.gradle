@@ -18,7 +18,7 @@ android {
 dependencies {
     api project(':maps-core')
 
-    implementation 'com.huawei.hms:maps:4.0.1.302'
+    implementation 'com.huawei.hms:maps:5.0.0.300'
 }
 
 tasks.withType(Javadoc).all { enabled = false }
