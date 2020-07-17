@@ -117,7 +117,7 @@ abstract class MapsPlatform {
                         .getField(FIELD_NAME_FRAGMENT_ID).getInt(null);
 
                 return new GoogleMapsPlatform();
-            } catch (Exception ex) {
+            } catch (Exception ignored) {
                 return null;
             }
         }
@@ -126,9 +126,6 @@ abstract class MapsPlatform {
     private static final class HuaweiMapsPlatform extends MapsPlatform {
         private static final String LIBRARY_PACKAGE_NAME =
                 "me.tatiyanupanwong.supasin.android.libraries.kits.maps.internal.huawei";
-
-        private static final String CLASS_NAME_FACTORY =
-                LIBRARY_PACKAGE_NAME + ".model.HuaweiMapClient$Factory";
 
         private static final String CLASS_NAME_LAYOUT_RES = LIBRARY_PACKAGE_NAME + ".R$layout";
 

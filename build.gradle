@@ -19,6 +19,24 @@ allprojects {
     }
 }
 
+ext {
+    BINTARY_REPOSITORY = 'android.libraries.kits.maps'
+    BINTARY_LICENSES = ["Apache-2.0"]
+
+    POM_GROUP_ID = 'me.tatiyanupanwong.supasin.android.libraries.kits.maps'
+
+    POM_URL = 'https://github.com/SupasinTatiyanupanwong/maps-kit-android'
+    POM_SCM_URL = 'https://github.com/SupasinTatiyanupanwong/maps-kit-android'
+    POM_SCM_CONNECTION = 'https://github.com/SupasinTatiyanupanwong/maps-kit-android.git'
+
+    POM_DEVELOPER_ID = 'supasintatiyanupanwong'
+    POM_DEVELOPER_NAME = 'Supasin Tatiyanupanwong'
+    POM_DEVELOPER_EMAIL = 'supasin@tatiyanupanwong.me'
+
+    POM_LICENCE_NAME = 'Apache License 2.0'
+    POM_LICENCE_URL = 'http://www.apache.org/licenses/LICENSE-2.0'
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

@@ -24,6 +24,8 @@ import androidx.annotation.Nullable;
  * An icon placed at a particular point on the map's surface. A marker icon is drawn oriented
  * against the device's screen rather than the map's surface; i.e., it will not necessarily
  * change orientation due to map rotations, tilting, or zooming.
+ *
+ * @since 1.0.0
  */
 public interface Marker {
 

@@ -21,12 +21,11 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 /**
  * This is the main class of the Map Kit and is the entry point for all methods related to the map.
- * You cannot instantiate a {@link MapClient} object directly, rather, you must obtain one from
- * {@link MapFragment#getMapAsync} that you have added to your application.
+ * You cannot instantiate a {@link Map} object directly, rather, you must obtain one from {@link
+ * MapFragment#getMapAsync} that you have added to your application.
  *
- * <p>Note: Similar to a {@link View} object, a {@link MapClient} can only be read and modified from
- * the Android UI thread. Calling {@link MapClient} methods from another thread will result in an
- * exception.
+ * <p>Note: Similar to a {@link View} object, a {@link Map} can only be read and modified from the
+ * Android UI thread. Calling {@link Map} methods from another thread will result in an exception.
  *
  * <p>You can adjust the viewpoint of a map by changing the position of the camera (as opposed to
  * moving the map). You can use the map's camera to set parameters such as location, zoom level,
@@ -37,6 +36,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
  * @deprecated As of 1.2.0, renamed to {@link MapClient} to avoid naming conflicts with {@link
  * java.util.Map}.
  */
+@SuppressWarnings("deprecation")
 @Deprecated
 public interface Map {
 
@@ -1375,7 +1375,6 @@ public interface Map {
      * @see MapFactory
      * @deprecated As of 1.2.0, use {@link MapFactory} instead.
      */
-    @Deprecated
     interface Factory {
         @NonNull
         BitmapDescriptor.Factory getBitmapDescriptorFactory();
@@ -1473,7 +1472,6 @@ public interface Map {
          * @deprecated As of 1.2.0, use {@link MapFactory#getMapAsync(Fragment,
          * MapKit.OnMapReadyCallback)} instead.
          */
-        @Deprecated
         @UiThread
         void getMapAsync(
                 @NonNull Fragment fragment,
@@ -1483,7 +1481,6 @@ public interface Map {
          * @see MapKit.OnMapReadyCallback
          * @deprecated As of 1.2.0, use {@link MapKit.OnMapReadyCallback} instead.
          */
-        @Deprecated
         interface OnMapReadyCallback {
             @UiThread
             void onMapReady(@SuppressWarnings("deprecation") @NonNull Map map);

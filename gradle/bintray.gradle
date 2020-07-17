@@ -1,6 +1,6 @@
 apply plugin: 'com.jfrog.bintray'
 
-version = libraryVersion
+version = POM_VERSION
 
 if (project.hasProperty("android")) {
     // Android libraries
@@ -38,12 +38,12 @@ bintray {
 
     configurations = ['archives']
     pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        desc = libraryDescription
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
+        repo = BINTARY_REPOSITORY
+        name = POM_ARTIFACT_ID
+        desc = POM_DESCRIPTION
+        websiteUrl = POM_SCM_URL
+        vcsUrl = POM_SCM_CONNECTION
+        licenses = BINTARY_LICENSES
         publish = true
         publicDownloadNumbers = true
     }
