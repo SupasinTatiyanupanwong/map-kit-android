@@ -24,21 +24,22 @@ import android.view.ViewTreeObserver;
 import androidx.annotation.NonNull;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
- * Helper class that will delay triggering the OnMapReady callback until both the MapClient and the
+ * Helper class that will delay triggering the OnMapReady callback until both the Map and the
  * View having completed initialization. This is only necessary if a developer wishes to immediately
- * invoke any method on the MapClient that also requires the View to have finished layout
+ * invoke any method on the Map that also requires the View to have finished layout
  * (ie. anything that needs to know the View's true size like snapshotting).
  */
 class OnMapAndViewReadyListener implements
         ViewTreeObserver.OnGlobalLayoutListener,
-        MapClient.Factory.OnMapReadyCallback {
+        OnMapReadyCallback {
 
-    /** A listener that needs to wait for both the MapClient and the View to be initialized. */
+    /** A listener that needs to wait for both the Map and the View to be initialized. */
     interface OnGlobalLayoutAndMapReadyListener {
-        void onMapReady(MapClient map);
+        void onMapReady(Map map);
     }
 
     private final MapFragment mMapFragment;
@@ -47,7 +48,7 @@ class OnMapAndViewReadyListener implements
 
     private boolean mIsViewReady;
     private boolean mIsMapReady;
-    private MapClient mMap;
+    private Map mMap;
 
     OnMapAndViewReadyListener(MapFragment mapFragment, OnGlobalLayoutAndMapReadyListener callback) {
         mMapFragment = mapFragment;
@@ -75,7 +76,7 @@ class OnMapAndViewReadyListener implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         mMap = map;
         mIsMapReady = true;
         fireCallbackIfReady();

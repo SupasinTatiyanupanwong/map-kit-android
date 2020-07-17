@@ -32,7 +32,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Circle;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
@@ -41,11 +41,11 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
  * This shows how to use setTag/getTag on API objects.
  */
 public class TagsDemoActivity extends AppCompatActivity implements
-        MapClient.OnCircleClickListener,
-        MapClient.OnGroundOverlayClickListener,
-        MapClient.OnMarkerClickListener,
-        MapClient.OnPolygonClickListener,
-        MapClient.OnPolylineClickListener,
+        Map.OnCircleClickListener,
+        Map.OnGroundOverlayClickListener,
+        Map.OnMarkerClickListener,
+        Map.OnPolygonClickListener,
+        Map.OnPolylineClickListener,
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
     private static final LatLng ADELAIDE = MapKit.getFactory().newLatLng(-34.92873, 138.59995);
@@ -75,7 +75,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
         }
     }
 
-    private MapClient mMap = null;
+    private Map mMap = null;
 
     private TextView mTagText;
 
@@ -94,10 +94,10 @@ public class TagsDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(MapClient map) {
+    public void onMapReady(Map map) {
         mMap = map;
 
-        MapClient.UiSettings uiSettings = mMap.getUiSettings();
+        Map.UiSettings uiSettings = mMap.getUiSettings();
 
         // Turn off the map toolbar.
         uiSettings.setMapToolbarEnabled(false);

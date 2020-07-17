@@ -53,7 +53,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescriptor;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 
 /**
@@ -61,11 +61,11 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
  */
 public class MarkerDemoActivity extends AppCompatActivity implements
         SeekBar.OnSeekBarChangeListener,
-        MapClient.OnInfoWindowClickListener,
-        MapClient.OnInfoWindowCloseListener,
-        MapClient.OnInfoWindowLongClickListener,
-        MapClient.OnMarkerClickListener,
-        MapClient.OnMarkerDragListener,
+        Map.OnInfoWindowClickListener,
+        Map.OnInfoWindowCloseListener,
+        Map.OnInfoWindowLongClickListener,
+        Map.OnMarkerClickListener,
+        Map.OnMarkerDragListener,
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
     private static final LatLng BRISBANE = MapKit.getFactory().newLatLng(-27.47093, 153.0235);
@@ -83,7 +83,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
     private static final LatLng ALICE_SPRINGS = MapKit.getFactory().newLatLng(-24.6980, 133.8807);
 
     /** Demonstrates customizing the info window and/or its contents. */
-    class CustomInfoWindowAdapter implements MapClient.InfoWindowAdapter {
+    class CustomInfoWindowAdapter implements Map.InfoWindowAdapter {
 
         // These are both viewgroups containing an ImageView with id "badge" and two TextViews with
         // id "title" and "snippet".
@@ -167,7 +167,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         }
     }
 
-    private MapClient mMap;
+    private Map mMap;
 
     private Marker mPerth;
 
@@ -235,7 +235,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         mMap = map;
 
         // Hide the zoom controls as the button panel will cover it.

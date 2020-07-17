@@ -29,14 +29,15 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraPosition;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
  * This shows how to constrain the camera to specific boundaries and zoom levels.
  */
 public class CameraClampingDemoActivity extends AppCompatActivity implements
-        MapClient.OnCameraIdleListener,
-        MapClient.Factory.OnMapReadyCallback {
+        Map.OnCameraIdleListener,
+        OnMapReadyCallback {
 
     private static final float ZOOM_DELTA = 2.0f;
     private static final float DEFAULT_MIN_ZOOM = 2.0f;
@@ -66,7 +67,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
                     .tilt(0)
                     .build();
 
-    private MapClient mMap;
+    private Map mMap;
 
     /**
      * Internal min zoom level that can be toggled via the demo.
@@ -98,7 +99,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         mMap = map;
         map.setOnCameraIdleListener(this);
     }
@@ -110,7 +111,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
 
     /**
      * Before the map is ready many calls will fail.
-     * This should be called on all entry points that call methods on the MapClient API.
+     * This should be called on all entry points that call methods on the Map API.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {

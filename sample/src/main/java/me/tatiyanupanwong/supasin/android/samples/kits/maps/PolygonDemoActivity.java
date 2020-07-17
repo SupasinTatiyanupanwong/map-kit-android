@@ -39,7 +39,8 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.JointType;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 
@@ -49,7 +50,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 public class PolygonDemoActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener,
         SeekBar.OnSeekBarChangeListener,
-        MapClient.Factory.OnMapReadyCallback {
+        OnMapReadyCallback {
 
     private static final LatLng CENTER = MapKit.getFactory().newLatLng(-20, 130);
     private static final int MAX_WIDTH_PX = 100;
@@ -144,7 +145,7 @@ public class PolygonDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.polygon_demo_description));
 
@@ -182,7 +183,7 @@ public class PolygonDemoActivity extends AppCompatActivity implements
         map.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(CENTER, 4));
 
         // Add a listener for polygon clicks that changes the clicked polygon's stroke color.
-        map.setOnPolygonClickListener(new MapClient.OnPolygonClickListener() {
+        map.setOnPolygonClickListener(new Map.OnPolygonClickListener() {
             @Override
             public void onPolygonClick(@NonNull Polygon polygon) {
                 // Flip the red, green and blue components of the polygon's stroke color.

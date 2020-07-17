@@ -34,15 +34,16 @@ import java.util.List;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
  * This shows how to style a map with JSON.
  */
 public class StyledMapDemoActivity extends AppCompatActivity implements
-        MapClient.Factory.OnMapReadyCallback {
+        OnMapReadyCallback {
 
-    private MapClient mMap = null;
+    private Map mMap = null;
 
     private static final String TAG = StyledMapDemoActivity.class.getSimpleName();
 
@@ -87,7 +88,7 @@ public class StyledMapDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         mMap = map;
         mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(SYDNEY, 14));
         setSelectedStyle();
@@ -138,11 +139,11 @@ public class StyledMapDemoActivity extends AppCompatActivity implements
     }
 
     /**
-     * Creates a {@link MapClient.Style.Options} object, then sets it on the {@link MapClient}
-     * instance, via the {@link MapClient#setMapStyle)} method.
+     * Creates a {@link Map.Style.Options} object, then sets it on the {@link Map}
+     * instance, via the {@link Map#setMapStyle)} method.
      */
     private void setSelectedStyle() {
-        MapClient.Style.Options style;
+        Map.Style.Options style;
         switch (mSelectedStyleId) {
             case R.string.style_label_retro:
                 // Sets the retro style via raw resource JSON.

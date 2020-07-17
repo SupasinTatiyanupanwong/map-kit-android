@@ -33,18 +33,19 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraPosition;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraUpdate;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
 
 /**
  * This shows how to change the camera position for the map.
  */
 public class CameraDemoActivity extends AppCompatActivity implements
-        MapClient.OnCameraIdleListener,
-        MapClient.OnCameraMoveCanceledListener,
-        MapClient.OnCameraMoveStartedListener,
-        MapClient.OnCameraMoveListener,
-        MapClient.Factory.OnMapReadyCallback {
+        Map.OnCameraIdleListener,
+        Map.OnCameraMoveCanceledListener,
+        Map.OnCameraMoveStartedListener,
+        Map.OnCameraMoveListener,
+        OnMapReadyCallback {
 
     private static final String TAG = CameraDemoActivity.class.getName();
 
@@ -70,7 +71,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
                     .tilt(25)
                     .build();
 
-    private MapClient mMap;
+    private Map mMap;
 
     private CompoundButton mAnimateToggle;
     private CompoundButton mCustomDurationToggle;
@@ -103,7 +104,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         mMap = map;
 
         mMap.setOnCameraIdleListener(this);
@@ -123,7 +124,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
 
     /**
      * When the map is not ready the CameraUpdateFactory cannot be used.
-     * This should be called on all entry points that call methods on the MapClient API.
+     * This should be called on all entry points that call methods on the Map API.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {
@@ -155,7 +156,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
 
         changeCamera(
                 MapKit.getFactory().getCameraUpdateFactory().newCameraPosition(SYDNEY),
-                new MapClient.CancelableCallback() {
+                new Map.CancelableCallback() {
                     @Override
                     public void onFinish() {
                         Toast.makeText(
@@ -327,7 +328,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
      * Change the camera position by moving or animating the camera depending on the state of the
      * animate toggle button.
      */
-    private void changeCamera(CameraUpdate update, MapClient.CancelableCallback callback) {
+    private void changeCamera(CameraUpdate update, Map.CancelableCallback callback) {
         if (mAnimateToggle.isChecked()) {
             if (mCustomDurationToggle.isChecked()) {
                 int duration = mCustomDurationBar.getProgress();
@@ -350,15 +351,15 @@ public class CameraDemoActivity extends AppCompatActivity implements
         String reasonText = "UNKNOWN_REASON";
         mCurrPolylineOptions = MapKit.getFactory().newPolylineOptions().width(5);
         switch (reason) {
-            case MapClient.OnCameraMoveStartedListener.REASON_GESTURE:
+            case Map.OnCameraMoveStartedListener.REASON_GESTURE:
                 mCurrPolylineOptions.color(Color.BLUE);
                 reasonText = "GESTURE";
                 break;
-            case MapClient.OnCameraMoveStartedListener.REASON_API_ANIMATION:
+            case Map.OnCameraMoveStartedListener.REASON_API_ANIMATION:
                 mCurrPolylineOptions.color(Color.RED);
                 reasonText = "API_ANIMATION";
                 break;
-            case MapClient.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION:
+            case Map.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION:
                 mCurrPolylineOptions.color(Color.GREEN);
                 reasonText = "DEVELOPER_ANIMATION";
                 break;

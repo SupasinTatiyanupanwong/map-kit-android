@@ -35,7 +35,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
 
 /**
  * This shows how to use setPadding to allow overlays that obscure part of the map without
@@ -45,9 +45,9 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
     /**
-     * Note that this may be null if the MapClient is not available.
+     * Note that this may be null if the Map is not available.
      */
-    private MapClient mMap;
+    private Map mMap;
 
     private static final LatLng SOH = MapKit.getFactory().newLatLng(-33.85704, 151.21522);
 
@@ -83,7 +83,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(MapClient map) {
+    public void onMapReady(Map map) {
         mMap = map;
 
         // Move to a place with indoor (SFO airport).
@@ -94,7 +94,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
                 .position(SOH)
                 .title("Sydney Opera House"));
         // Add a camera idle listener.
-        mMap.setOnCameraIdleListener(new MapClient.OnCameraIdleListener() {
+        mMap.setOnCameraIdleListener(new Map.OnCameraIdleListener() {
             @Override
             public void onCameraIdle() {
                 mMessageView.setText("CameraChangeListener: " + mMap.getCameraPosition());
@@ -103,8 +103,8 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
     }
 
     /**
-     * Checks if the map is ready (which depends on whether the MapClient is
-     * available. This should be called prior to calling any methods on MapClient.
+     * Checks if the map is ready (which depends on whether the Map is
+     * available. This should be called prior to calling any methods on Map.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {

@@ -25,13 +25,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
  * Demonstrates how to instantiate a MapFragment programmatically and add a marker to it.
  */
 public class ProgrammaticDemoActivity extends AppCompatActivity implements
-        MapClient.Factory.OnMapReadyCallback {
+        OnMapReadyCallback {
 
     private static final String MAP_FRAGMENT_TAG = "map";
 
@@ -59,7 +60,7 @@ public class ProgrammaticDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         map.addMarker(MapKit.getFactory().newMarkerOptions()
                 .position(MapKit.getFactory().newLatLng(0, 0))
                 .title("Marker"));

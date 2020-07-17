@@ -24,13 +24,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
  * This shows how to create a simple activity with a map and a marker on the map.
  */
 public class BasicMapDemoActivity extends AppCompatActivity implements
-        MapClient.Factory.OnMapReadyCallback {
+        OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class BasicMapDemoActivity extends AppCompatActivity implements
      * we just add a marker near Africa.
      */
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         map.addMarker(
                 MapKit.getFactory().newMarkerOptions()
                         .position(MapKit.getFactory().newLatLng(0, 0))

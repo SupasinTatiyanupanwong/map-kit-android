@@ -26,13 +26,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LocationSource;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
  * This shows how to use a custom location source.
  */
 public class LocationSourceDemoActivity extends AppCompatActivity implements
-        MapClient.Factory.OnMapReadyCallback {
+        OnMapReadyCallback {
 
     /**
      * A {@link LocationSource} which reports a new location whenever a user long presses the map
@@ -40,7 +41,7 @@ public class LocationSourceDemoActivity extends AppCompatActivity implements
      * the point at which a user long pressed the map.
      */
     private static class LongPressLocationSource implements LocationSource,
-            MapClient.OnMapLongClickListener {
+            Map.OnMapLongClickListener {
 
         private OnLocationChangedListener mListener;
 
@@ -111,7 +112,7 @@ public class LocationSourceDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         map.setLocationSource(mLocationSource);
         map.setOnMapLongClickListener(mLocationSource);
         map.setMyLocationEnabled(true);

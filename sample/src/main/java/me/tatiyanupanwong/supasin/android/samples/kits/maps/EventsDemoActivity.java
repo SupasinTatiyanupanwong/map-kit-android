@@ -25,20 +25,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
- * This shows how to listen to some {@link MapClient} events.
+ * This shows how to listen to some {@link Map} events.
  */
 public class EventsDemoActivity extends AppCompatActivity implements
-        MapClient.OnCameraIdleListener,
-        MapClient.OnMapClickListener,
-        MapClient.OnMapLongClickListener,
-        MapClient.Factory.OnMapReadyCallback {
+        Map.OnCameraIdleListener,
+        Map.OnMapClickListener,
+        Map.OnMapLongClickListener,
+        OnMapReadyCallback {
 
     private TextView mTapTextView;
     private TextView mCameraTextView;
-    private MapClient mMap;
+    private Map mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class EventsDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         mMap = map;
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);

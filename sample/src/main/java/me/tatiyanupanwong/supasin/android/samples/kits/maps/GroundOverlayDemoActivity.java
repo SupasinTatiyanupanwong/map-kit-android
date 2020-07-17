@@ -33,15 +33,16 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescriptor;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
  * This shows how to add a ground overlay to a map.
  */
 public class GroundOverlayDemoActivity extends AppCompatActivity implements
         SeekBar.OnSeekBarChangeListener,
-        MapClient.OnGroundOverlayClickListener,
-        MapClient.Factory.OnMapReadyCallback {
+        Map.OnGroundOverlayClickListener,
+        OnMapReadyCallback {
 
     private static final int TRANSPARENCY_MAX = 100;
 
@@ -78,7 +79,7 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         // Register a listener to respond to clicks on GroundOverlays.
         map.setOnGroundOverlayClickListener(this);
 

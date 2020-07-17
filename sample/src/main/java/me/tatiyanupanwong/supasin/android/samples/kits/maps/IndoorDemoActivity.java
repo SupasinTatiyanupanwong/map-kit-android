@@ -30,15 +30,15 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.IndoorBuilding;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.IndoorLevel;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
  * A demo activity showing how to use indoor.
  */
-public class IndoorDemoActivity extends AppCompatActivity implements
-        MapClient.Factory.OnMapReadyCallback {
+public class IndoorDemoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private MapClient mMap;
+    private Map mMap;
 
     private boolean mShowLevelPicker = true;
 
@@ -55,7 +55,7 @@ public class IndoorDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         mMap = map;
         mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory()
                 .newLatLngZoom(MapKit.getFactory().newLatLng(37.614631, -122.385153), 18));

@@ -26,26 +26,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.annotation.RequiresPermission;
-import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-
-import java.util.Arrays;
-import java.util.List;
-
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescriptor;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.ButtCap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraPosition;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraUpdate;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Circle;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CustomCap;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dash;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.IndoorBuilding;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LocationSource;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
@@ -53,13 +39,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Projection;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.RoundCap;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.SquareCap;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Tile;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileOverlay;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileProvider;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvider;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.VisibleRegion;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -70,7 +50,7 @@ class GoogleMapClient implements MapClient {
     private final com.google.android.gms.maps.GoogleMap mDelegate;
     private final UiSettings mSettings;
 
-    private GoogleMapClient(@NonNull com.google.android.gms.maps.GoogleMap map) {
+    GoogleMapClient(@NonNull com.google.android.gms.maps.GoogleMap map) {
         mDelegate = map;
         mSettings = new UiSettings(map.getUiSettings());
     }
@@ -804,226 +784,6 @@ class GoogleMapClient implements MapClient {
         @Override
         public boolean isMapToolbarEnabled() {
             return mDelegate.isMapToolbarEnabled();
-        }
-    }
-
-
-    static class Factory implements MapClient.Factory {
-        private static final List<Integer> UNAVAILABLE_RESULTS = Arrays.asList(
-                ConnectionResult.SERVICE_DISABLED,
-                ConnectionResult.SERVICE_MISSING,
-                ConnectionResult.SERVICE_INVALID);
-
-        Factory(Context context) {
-            final int result =
-                    GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
-            if (UNAVAILABLE_RESULTS.contains(result)) {
-                throw new UnsupportedOperationException("Google Maps is not available.");
-            }
-        }
-
-        @NonNull
-        @Override
-        public BitmapDescriptor.Factory getBitmapDescriptorFactory() {
-            return GoogleBitmapDescriptor.FACTORY;
-        }
-
-        @NonNull
-        @Override
-        public ButtCap newButtCap() {
-            return new GoogleButtCap();
-        }
-
-        @NonNull
-        @Override
-        public CameraUpdate.Factory getCameraUpdateFactory() {
-            return GoogleCameraUpdate.FACTORY;
-        }
-
-        @NonNull
-        @Override
-        public CameraPosition newCameraPosition(
-                @NonNull LatLng target, float zoom, float tilt, float bearing) {
-            return newCameraPositionBuilder()
-                    .target(target)
-                    .zoom(zoom)
-                    .tilt(tilt)
-                    .bearing(bearing)
-                    .build();
-        }
-
-        @NonNull
-        @Override
-        public CameraPosition newCameraPositionFromLatLngZoom(@NonNull LatLng target, float zoom) {
-            return newCameraPositionBuilder()
-                    .target(target)
-                    .zoom(zoom)
-                    .build();
-        }
-
-        @NonNull
-        @Override
-        public CameraPosition.Builder newCameraPositionBuilder() {
-            return new GoogleCameraPosition.Builder();
-        }
-
-        @NonNull
-        @Override
-        public CameraPosition.Builder newCameraPositionBuilder(@NonNull CameraPosition camera) {
-            return new GoogleCameraPosition.Builder(camera);
-        }
-
-        @NonNull
-        @Override
-        public Circle.Options newCircleOptions() {
-            return new GoogleCircle.Options();
-        }
-
-        @NonNull
-        @Override
-        public CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
-            return new GoogleCustomCap(bitmapDescriptor, refWidth);
-        }
-
-        @NonNull
-        @Override
-        public CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
-            return new GoogleCustomCap(bitmapDescriptor);
-        }
-
-        @NonNull
-        @Override
-        public Dot newDot() {
-            return new GoogleDot();
-        }
-
-        @NonNull
-        @Override
-        public Dash newDash(float length) {
-            return new GoogleDash(length);
-        }
-
-        @NonNull
-        @Override
-        public Gap newGap(float length) {
-            return new GoogleGap(length);
-        }
-
-        @NonNull
-        @Override
-        public GroundOverlay.Options newGroundOverlayOptions() {
-            return new GoogleGroundOverlay.Options();
-        }
-
-        @NonNull
-        @Override
-        public LatLng newLatLng(double latitude, double longitude) {
-            return new GoogleLatLng(latitude, longitude);
-        }
-
-        @NonNull
-        @Override
-        public LatLngBounds newLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
-            return new GoogleLatLngBounds(southwest, northeast);
-        }
-
-        @NonNull
-        @Override
-        public LatLngBounds.Builder newLatLngBoundsBuilder() {
-            return new GoogleLatLngBounds.Builder();
-        }
-
-        @NonNull
-        @Override
-        public MapClient.Style.Options newMapStyleOptions(String json) {
-            return new GoogleMapClient.Style.Options(json);
-        }
-
-        @NonNull
-        @Override
-        public MapClient.Style.Options newMapStyleOptions(
-                @NonNull Context context, @RawRes int resourceId) {
-            return new GoogleMapClient.Style.Options(context, resourceId);
-        }
-
-        @NonNull
-        @Override
-        public Marker.Options newMarkerOptions() {
-            return new GoogleMarker.Options();
-        }
-
-        @NonNull
-        @Override
-        public Polygon.Options newPolygonOptions() {
-            return new GooglePolygon.Options();
-        }
-
-        @NonNull
-        @Override
-        public Polyline.Options newPolylineOptions() {
-            return new GooglePolyline.Options();
-        }
-
-        @NonNull
-        @Override
-        public RoundCap newRoundCap() {
-            return new GoogleRoundCap();
-        }
-
-        @NonNull
-        @Override
-        public SquareCap newSquareCap() {
-            return new GoogleSquareCap();
-        }
-
-        @NonNull
-        @Override
-        public TileOverlay.Options newTileOverlayOptions() {
-            return new GoogleTileOverlay.Options();
-        }
-
-        @NonNull
-        @Override
-        public Tile newTile(int width, int height, byte[] data) {
-            return new GoogleTile(width, height, data);
-        }
-
-        @NonNull
-        @Override
-        public Tile noTile() {
-            return GoogleTileProvider.NO_TILE;
-        }
-
-        @NonNull
-        @Override
-        public TileProvider newUrlTileProvider(
-                int width, int height, @NonNull UrlTileProvider tileProvider) {
-            return new GoogleUrlTileProvider(width, height, tileProvider);
-        }
-
-        @NonNull
-        @Override
-        public VisibleRegion newVisibleRegion(
-                LatLng nearLeft,
-                LatLng nearRight,
-                LatLng farLeft,
-                LatLng farRight,
-                LatLngBounds latLngBounds) {
-            return new GoogleVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
-        }
-
-
-        @Override
-        public void getMapAsync(
-                @NonNull Fragment fragment,
-                @NonNull final OnMapReadyCallback callback) {
-            ((com.google.android.gms.maps.SupportMapFragment) fragment)
-                    .getMapAsync(new com.google.android.gms.maps.OnMapReadyCallback() {
-                        @Override
-                        public void onMapReady(com.google.android.gms.maps.GoogleMap googleMap) {
-                            callback.onMapReady(new GoogleMapClient(googleMap));
-                        }
-                    });
         }
     }
 

@@ -29,7 +29,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 
 /**
  * This demo shows how GMS Location can be used to check for changes to the users location.  The
@@ -39,9 +40,9 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
  */
 public class MyLocationDemoActivity extends AppCompatActivity implements
         ActivityCompat.OnRequestPermissionsResultCallback,
-        MapClient.OnMyLocationButtonClickListener,
-        MapClient.OnMyLocationClickListener,
-        MapClient.Factory.OnMapReadyCallback {
+        Map.OnMyLocationButtonClickListener,
+        Map.OnMyLocationClickListener,
+        OnMapReadyCallback {
 
     /**
      * Request code for location permission request.
@@ -56,7 +57,7 @@ public class MyLocationDemoActivity extends AppCompatActivity implements
      */
     private boolean mPermissionDenied = false;
 
-    private MapClient mMap;
+    private Map mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class MyLocationDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapReady(@NonNull Map map) {
         mMap = map;
 
         mMap.setOnMyLocationButtonClickListener(this);

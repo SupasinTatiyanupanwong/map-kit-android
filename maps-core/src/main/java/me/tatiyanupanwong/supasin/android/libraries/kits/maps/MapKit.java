@@ -16,9 +16,37 @@
 
 package me.tatiyanupanwong.supasin.android.libraries.kits.maps;
 
-import androidx.annotation.NonNull;
+import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RawRes;
+import androidx.annotation.UiThread;
+
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescriptor;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.ButtCap;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraPosition;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraUpdate;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Circle;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CustomCap;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dash;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapFactory;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.RoundCap;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.SquareCap;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Tile;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileOverlay;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileProvider;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvider;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.VisibleRegion;
 
 /**
  * Main entry point for Maps API.
@@ -27,18 +55,267 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
  */
 public final class MapKit {
 
-    private static final MapClient.Factory FACTORY = MapsPlatform.get().getMapFactory();
+    private static final MapFactory FACTORY = MapsPlatform.get().getFactory();
 
     private MapKit() {} // No instances!
 
+
     /**
-     * Obtains a factory object to interact with Maps API for the current platform.
+     * Obtains a factory object to interact with Maps APIs for the current platform.
      *
-     * @return The {@link MapClient.Factory} for the current platform.
+     * @return The {@link Map.Factory} for the current platform.
+     * @deprecated As of 1.2.0, the usage of {@link Map.Factory} is now restricted to library group.
+     * Its public APIs are now lifted and can be accessed directly through {@link MapKit}.
+     */
+    @SuppressWarnings("deprecation")
+    @Deprecated
+    @NonNull
+    public static Map.Factory getFactory() {
+        return FACTORY;
+    }
+
+
+    /**
+     * @since 1.2.0
      */
     @NonNull
-    public static MapClient.Factory getFactory() {
-        return FACTORY;
+    public static BitmapDescriptor.Factory getBitmapDescriptorFactory() {
+        return FACTORY.getBitmapDescriptorFactory();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static ButtCap newButtCap() {
+        return FACTORY.newButtCap();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static CameraUpdate.Factory getCameraUpdateFactory() {
+        return FACTORY.getCameraUpdateFactory();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static CameraPosition newCameraPositionFromLatLngZoom(
+            @NonNull LatLng target, float zoom) {
+        return FACTORY.newCameraPositionFromLatLngZoom(target, zoom);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static CameraPosition.Builder newCameraPositionBuilder() {
+        return FACTORY.newCameraPositionBuilder();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static CameraPosition.Builder newCameraPositionBuilder(@NonNull CameraPosition camera) {
+        return FACTORY.newCameraPositionBuilder(camera);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Circle.Options newCircleOptions() {
+        return FACTORY.newCircleOptions();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static CustomCap newCustomCap(
+            @NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
+        return FACTORY.newCustomCap(bitmapDescriptor, refWidth);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
+        return FACTORY.newCustomCap(bitmapDescriptor);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Dot newDot() {
+        return FACTORY.newDot();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Dash newDash(float length) {
+        return FACTORY.newDash(length);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Gap newGap(float length) {
+        return FACTORY.newGap(length);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static GroundOverlay.Options newGroundOverlayOptions() {
+        return FACTORY.newGroundOverlayOptions();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static LatLng newLatLng(double latitude, double longitude) {
+        return FACTORY.newLatLng(latitude, longitude);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static LatLngBounds newLatLngBounds(
+            @NonNull LatLng southwest, @NonNull LatLng northeast) {
+        return FACTORY.newLatLngBounds(southwest, northeast);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static LatLngBounds.Builder newLatLngBoundsBuilder() {
+        return FACTORY.newLatLngBoundsBuilder();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static MapClient.Style.Options newMapStyleOptions(String json) {
+        return FACTORY.newMapStyleOptions(json);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static MapClient.Style.Options newMapStyleOptions(
+            @NonNull Context context, @RawRes int resourceId) {
+        return FACTORY.newMapStyleOptions(context, resourceId);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Marker.Options newMarkerOptions() {
+        return FACTORY.newMarkerOptions();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Polygon.Options newPolygonOptions() {
+        return FACTORY.newPolygonOptions();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Polyline.Options newPolylineOptions() {
+        return FACTORY.newPolylineOptions();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static RoundCap newRoundCap() {
+        return FACTORY.newRoundCap();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static SquareCap newSquareCap() {
+        return FACTORY.newSquareCap();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static TileOverlay.Options newTileOverlayOptions() {
+        return FACTORY.newTileOverlayOptions();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Tile newTile(int width, int height, byte[] data) {
+        return FACTORY.newTile(width, height, data);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static Tile noTile() {
+        return FACTORY.noTile();
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static TileProvider newUrlTileProvider(
+            int width, int height, @NonNull UrlTileProvider tileProvider) {
+        return FACTORY.newUrlTileProvider(width, height, tileProvider);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    @NonNull
+    public static VisibleRegion newVisibleRegion(
+            LatLng nearLeft,
+            LatLng nearRight,
+            LatLng farLeft,
+            LatLng farRight,
+            LatLngBounds latLngBounds) {
+        return FACTORY.newVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
+    }
+
+
+    /**
+     * @since 1.2.0
+     */
+    public interface OnMapReadyCallback {
+        @UiThread
+        void onMapReady(@NonNull MapClient map);
     }
 
 }

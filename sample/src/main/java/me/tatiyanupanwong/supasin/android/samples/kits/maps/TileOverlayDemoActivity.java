@@ -31,7 +31,8 @@ import java.util.Locale;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.TileProvider;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvider;
@@ -41,7 +42,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvi
  */
 public class TileOverlayDemoActivity extends AppCompatActivity implements
         SeekBar.OnSeekBarChangeListener,
-        MapClient.Factory.OnMapReadyCallback {
+        OnMapReadyCallback {
 
     private static final int TRANSPARENCY_MAX = 100;
 
@@ -69,8 +70,8 @@ public class TileOverlayDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
-        map.setMapType(MapClient.MAP_TYPE_NONE);
+    public void onMapReady(@NonNull Map map) {
+        map.setMapType(Map.MAP_TYPE_NONE);
 
         TileProvider tileProvider = MapKit.getFactory()
                 .newUrlTileProvider(256, 256, new UrlTileProvider() {

@@ -27,6 +27,7 @@ import androidx.annotation.UiThread;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 
@@ -43,8 +44,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
  *     android:layout_height="match_parent" /&gt;
  * </pre>
  *
- * <p>A {@link MapClient} must be acquired using
- * {@link #getMapAsync(MapClient.Factory.OnMapReadyCallback)}.
+ * <p>A {@link MapClient} must be acquired using {@link #getMapAsync(MapKit.OnMapReadyCallback)}.
  * This class automatically initializes the maps system and the view.
  *
  * <p>Any objects obtained from the {@link MapClient} are associated with the view. It's important
@@ -65,17 +65,21 @@ public class MapFragment extends Fragment {
             @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(MapsPlatform.get().getMapFragmentLayoutResId(), container, false);
+        return inflater.inflate(MapsPlatform.get().getFragmentLayoutId(), container, false);
     }
 
     /**
-     * Sets a callback object which will be triggered when the {@link MapClient} instance is ready
+     * Sets a callback object which will be triggered when the {@link Map} instance is ready
      * to be used.
      *
      * @param callback The callback object that will be triggered when the map is ready to be used.
+     * @see #getMapAsync(MapKit.OnMapReadyCallback)
+     * @deprecated As of 1.2.0, use {@link #getMapAsync(MapKit.OnMapReadyCallback)} instead.
      */
+    @SuppressWarnings("deprecation")
+    @Deprecated
     @UiThread
-    public final void getMapAsync(final MapClient.Factory.OnMapReadyCallback callback) {
+    public final void getMapAsync(final Map.Factory.OnMapReadyCallback callback) {
         if (getView() != null) {
             getMapAsyncInternal(callback);
         } else {
@@ -94,16 +98,62 @@ public class MapFragment extends Fragment {
         }
     }
 
+    /**
+     * Sets a callback object which will be triggered when the {@link MapClient} instance is ready
+     * to be used.
+     *
+     * @param callback The callback object that will be triggered when the map is ready to be used.
+     * @since 1.2.0
+     */
+    @UiThread
+    public final void getMapAsync(final MapKit.OnMapReadyCallback callback) {
+        if (getView() != null) {
+            getMapAsyncInternal(callback);
+        } else {
+            requireFragmentManager().registerFragmentLifecycleCallbacks(
+                    new FragmentManager.FragmentLifecycleCallbacks() {
+                        @Override
+                        public void onFragmentViewCreated(
+                                @NonNull FragmentManager fragmentManager,
+                                @NonNull Fragment fragment,
+                                @NonNull View view,
+                                @Nullable Bundle savedInstanceState) {
+                            fragmentManager.unregisterFragmentLifecycleCallbacks(this);
+                            getMapAsyncInternal(callback);
+                        }
+                    }, false);
+        }
+    }
 
-    private void getMapAsyncInternal(MapClient.Factory.OnMapReadyCallback callback) {
+    /**
+     * @see #getMapAsyncInternal(MapKit.OnMapReadyCallback)
+     * @deprecated As of 1.2.0, use {@link #getMapAsyncInternal(MapKit.OnMapReadyCallback)} instead.
+     */
+    @SuppressWarnings("deprecation")
+    @Deprecated
+    private void getMapAsyncInternal(Map.Factory.OnMapReadyCallback callback) {
         Fragment fragment = getChildFragmentManager()
-                .findFragmentById(MapsPlatform.get().getDelegateMapFragmentId());
+                .findFragmentById(MapsPlatform.get().getFragmentDelegateId());
 
         if (fragment == null) {
             throw new NullPointerException();
         }
 
-        MapsPlatform.get().getMapFactory().getMapAsync(fragment, callback);
+        MapsPlatform.get().getFactory().getMapAsync(fragment, callback);
+    }
+
+    /**
+     * @since 1.2.0
+     */
+    private void getMapAsyncInternal(MapKit.OnMapReadyCallback callback) {
+        Fragment fragment = getChildFragmentManager()
+                .findFragmentById(MapsPlatform.get().getFragmentDelegateId());
+
+        if (fragment == null) {
+            throw new NullPointerException();
+        }
+
+        MapsPlatform.get().getFactory().getMapAsync(fragment, callback);
     }
 
 }
