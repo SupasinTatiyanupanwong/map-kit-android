@@ -30,18 +30,18 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * This shows how UI settings can be toggled.
  */
 public class UiSettingsDemoActivity extends AppCompatActivity implements
-        OnMapReadyCallback {
+        MapKit.OnMapReadyCallback {
 
-    private Map mMap;
+    private MapClient mMap;
 
-    private Map.UiSettings mUiSettings;
+    private MapClient.UiSettings mUiSettings;
 
     private CheckBox mMyLocationButtonCheckbox;
 
@@ -80,7 +80,7 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         mUiSettings = mMap.getUiSettings();
@@ -97,7 +97,7 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements
     }
 
     /**
-     * Checks if the map is ready. This should be called prior to calling any methods on Map.
+     * Checks if the map is ready. This should be called prior to calling any methods on MapClient.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {

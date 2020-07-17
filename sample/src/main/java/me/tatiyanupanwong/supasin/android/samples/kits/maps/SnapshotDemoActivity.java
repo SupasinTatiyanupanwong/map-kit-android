@@ -27,19 +27,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * This shows how to take a snapshot of the map.
  */
 public class SnapshotDemoActivity extends AppCompatActivity implements
-        OnMapReadyCallback {
+        MapKit.OnMapReadyCallback {
 
     /**
-     * Note that this may be null if the Map is not available.
+     * Note that this may be null if the MapClient is not available.
      */
-    private Map mMap;
+    private MapClient mMap;
 
     private CheckBox mWaitForMapLoadCheckBox;
 
@@ -57,7 +57,7 @@ public class SnapshotDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
     }
 
@@ -75,7 +75,7 @@ public class SnapshotDemoActivity extends AppCompatActivity implements
 
         final ImageView snapshotHolder = findViewById(R.id.snapshot_holder);
 
-        final Map.SnapshotReadyCallback callback = new Map.SnapshotReadyCallback() {
+        final MapClient.SnapshotReadyCallback callback = new MapClient.SnapshotReadyCallback() {
             @Override
             public void onSnapshotReady(Bitmap snapshot) {
                 // Callback is called from the main thread, so we can modify the ImageView safely.
@@ -84,7 +84,7 @@ public class SnapshotDemoActivity extends AppCompatActivity implements
         };
 
         if (mWaitForMapLoadCheckBox.isChecked()) {
-            mMap.setOnMapLoadedCallback(new Map.OnMapLoadedCallback() {
+            mMap.setOnMapLoadedCallback(new MapClient.OnMapLoadedCallback() {
                 @Override
                 public void onMapLoaded() {
                     mMap.snapshot(callback);

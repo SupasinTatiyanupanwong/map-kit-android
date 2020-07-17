@@ -45,8 +45,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dash;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
 
@@ -56,11 +55,11 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
 public class CircleDemoActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener,
         SeekBar.OnSeekBarChangeListener,
-        Map.OnMarkerDragListener,
-        Map.OnMapLongClickListener,
-        OnMapReadyCallback {
+        MapKit.OnMapReadyCallback,
+        MapClient.OnMarkerDragListener,
+        MapClient.OnMapLongClickListener {
 
-    private static final LatLng SYDNEY = MapKit.getFactory().newLatLng(-33.87365, 151.20689);
+    private static final LatLng SYDNEY = MapKit.newLatLng(-33.87365, 151.20689);
     private static final double DEFAULT_RADIUS_METERS = 1000000;
     private static final double RADIUS_OF_EARTH_METERS = 6371009;
 
@@ -70,14 +69,14 @@ public class CircleDemoActivity extends AppCompatActivity implements
 
     private static final int PATTERN_DASH_LENGTH_PX = 100;
     private static final int PATTERN_GAP_LENGTH_PX = 200;
-    private static final Dot DOT = MapKit.getFactory().newDot();
-    private static final Dash DASH = MapKit.getFactory().newDash(PATTERN_DASH_LENGTH_PX);
-    private static final Gap GAP = MapKit.getFactory().newGap(PATTERN_GAP_LENGTH_PX);
+    private static final Dot DOT = MapKit.newDot();
+    private static final Dash DASH = MapKit.newDash(PATTERN_DASH_LENGTH_PX);
+    private static final Gap GAP = MapKit.newGap(PATTERN_GAP_LENGTH_PX);
     private static final List<PatternItem> PATTERN_DOTTED = Arrays.asList(DOT, GAP);
     private static final List<PatternItem> PATTERN_DASHED = Arrays.asList(DASH, GAP);
     private static final List<PatternItem> PATTERN_MIXED = Arrays.asList(DOT, GAP, DOT, DASH, GAP);
 
-    private Map mMap;
+    private MapClient mMap;
 
     private final List<DraggableCircle> mCircles = new ArrayList<>(1);
 
@@ -110,15 +109,15 @@ public class CircleDemoActivity extends AppCompatActivity implements
 
         DraggableCircle(LatLng center, double radiusMeters) {
             mRadiusMeters = radiusMeters;
-            mCenterMarker = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+            mCenterMarker = mMap.addMarker(MapKit.newMarkerOptions()
                     .position(center)
                     .draggable(true));
-            mRadiusMarker = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+            mRadiusMarker = mMap.addMarker(MapKit.newMarkerOptions()
                     .position(toRadiusLatLng(center, radiusMeters))
                     .draggable(true)
-                    .icon(MapKit.getFactory().getBitmapDescriptorFactory()
+                    .icon(MapKit.getBitmapDescriptorFactory()
                             .defaultMarker(BitmapDescriptor.Factory.HUE_AZURE)));
-            mCircle = mMap.addCircle(MapKit.getFactory().newCircleOptions()
+            mCircle = mMap.addCircle(MapKit.newCircleOptions()
                     .center(center)
                     .radius(radiusMeters)
                     .strokeWidth(mStrokeWidthBar.getProgress())
@@ -161,7 +160,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
     private static LatLng toRadiusLatLng(LatLng center, double radiusMeters) {
         double radiusAngle = Math.toDegrees(radiusMeters / RADIUS_OF_EARTH_METERS) /
                 Math.cos(Math.toRadians(center.getLatitude()));
-        return MapKit.getFactory().newLatLng(
+        return MapKit.newLatLng(
                 center.getLatitude(), center.getLongitude() + radiusAngle);
     }
 
@@ -220,7 +219,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.map_circle_description));
 
@@ -246,10 +245,10 @@ public class CircleDemoActivity extends AppCompatActivity implements
         mCircles.add(circle);
 
         // Move the map so that it is centered on the initial circle
-        mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(SYDNEY, 4.0f));
+        mMap.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(SYDNEY, 4.0f));
 
         // Set up the click listener for the circle.
-        map.setOnCircleClickListener(new Map.OnCircleClickListener() {
+        map.setOnCircleClickListener(new MapClient.OnCircleClickListener() {
             @Override
             public void onCircleClick(@NonNull Circle circle) {
                 // Flip the red, green and blue components of the circle's stroke color.

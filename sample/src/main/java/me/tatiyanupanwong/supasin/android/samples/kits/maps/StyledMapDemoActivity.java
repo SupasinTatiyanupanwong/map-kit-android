@@ -34,16 +34,15 @@ import java.util.List;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * This shows how to style a map with JSON.
  */
 public class StyledMapDemoActivity extends AppCompatActivity implements
-        OnMapReadyCallback {
+        MapKit.OnMapReadyCallback {
 
-    private Map mMap = null;
+    private MapClient mMap = null;
 
     private static final String TAG = StyledMapDemoActivity.class.getSimpleName();
 
@@ -63,7 +62,7 @@ public class StyledMapDemoActivity extends AppCompatActivity implements
             R.string.style_label_default,
     };
 
-    private static final LatLng SYDNEY = MapKit.getFactory().newLatLng(-33.8688, 151.2093);
+    private static final LatLng SYDNEY = MapKit.newLatLng(-33.8688, 151.2093);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +87,9 @@ public class StyledMapDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
-        mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(SYDNEY, 14));
+        mMap.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(SYDNEY, 14));
         setSelectedStyle();
     }
 
@@ -139,27 +138,27 @@ public class StyledMapDemoActivity extends AppCompatActivity implements
     }
 
     /**
-     * Creates a {@link Map.Style.Options} object, then sets it on the {@link Map}
-     * instance, via the {@link Map#setMapStyle)} method.
+     * Creates a {@link MapClient.Style.Options} object, then sets it on the {@link MapClient}
+     * instance, via the {@link MapClient#setMapStyle)} method.
      */
     private void setSelectedStyle() {
-        Map.Style.Options style;
+        MapClient.Style.Options style;
         switch (mSelectedStyleId) {
             case R.string.style_label_retro:
                 // Sets the retro style via raw resource JSON.
-                style = MapKit.getFactory().newMapStyleOptions(this, R.raw.mapstyle_retro);
+                style = MapKit.newMapStyleOptions(this, R.raw.mapstyle_retro);
                 break;
             case R.string.style_label_night:
                 // Sets the night style via raw resource JSON.
-                style =  MapKit.getFactory().newMapStyleOptions(this, R.raw.mapstyle_night);
+                style =  MapKit.newMapStyleOptions(this, R.raw.mapstyle_night);
                 break;
             case R.string.style_label_grayscale:
                 // Sets the grayscale style via raw resource JSON.
-                style = MapKit.getFactory().newMapStyleOptions(this, R.raw.mapstyle_grayscale);
+                style = MapKit.newMapStyleOptions(this, R.raw.mapstyle_grayscale);
                 break;
             case R.string.style_label_no_pois_no_transit:
                 // Sets the no POIs or transit style via JSON string.
-                style = MapKit.getFactory().newMapStyleOptions(""
+                style = MapKit.newMapStyleOptions(""
                         + "["
                         + "  {"
                         + "    \"featureType\":\"poi.business\","

@@ -53,7 +53,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescriptor;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 
 /**
@@ -61,29 +61,29 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
  */
 public class MarkerDemoActivity extends AppCompatActivity implements
         SeekBar.OnSeekBarChangeListener,
-        Map.OnInfoWindowClickListener,
-        Map.OnInfoWindowCloseListener,
-        Map.OnInfoWindowLongClickListener,
-        Map.OnMarkerClickListener,
-        Map.OnMarkerDragListener,
+        MapClient.OnInfoWindowClickListener,
+        MapClient.OnInfoWindowCloseListener,
+        MapClient.OnInfoWindowLongClickListener,
+        MapClient.OnMarkerClickListener,
+        MapClient.OnMarkerDragListener,
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
-    private static final LatLng BRISBANE = MapKit.getFactory().newLatLng(-27.47093, 153.0235);
+    private static final LatLng BRISBANE = MapKit.newLatLng(-27.47093, 153.0235);
 
-    private static final LatLng MELBOURNE = MapKit.getFactory().newLatLng(-37.81319, 144.96298);
+    private static final LatLng MELBOURNE = MapKit.newLatLng(-37.81319, 144.96298);
 
-    private static final LatLng DARWIN = MapKit.getFactory().newLatLng(-12.4634, 130.8456);
+    private static final LatLng DARWIN = MapKit.newLatLng(-12.4634, 130.8456);
 
-    private static final LatLng SYDNEY = MapKit.getFactory().newLatLng(-33.87365, 151.20689);
+    private static final LatLng SYDNEY = MapKit.newLatLng(-33.87365, 151.20689);
 
-    private static final LatLng ADELAIDE = MapKit.getFactory().newLatLng(-34.92873, 138.59995);
+    private static final LatLng ADELAIDE = MapKit.newLatLng(-34.92873, 138.59995);
 
-    private static final LatLng PERTH = MapKit.getFactory().newLatLng(-31.952854, 115.857342);
+    private static final LatLng PERTH = MapKit.newLatLng(-31.952854, 115.857342);
 
-    private static final LatLng ALICE_SPRINGS = MapKit.getFactory().newLatLng(-24.6980, 133.8807);
+    private static final LatLng ALICE_SPRINGS = MapKit.newLatLng(-24.6980, 133.8807);
 
     /** Demonstrates customizing the info window and/or its contents. */
-    class CustomInfoWindowAdapter implements Map.InfoWindowAdapter {
+    class CustomInfoWindowAdapter implements MapClient.InfoWindowAdapter {
 
         // These are both viewgroups containing an ImageView with id "badge" and two TextViews with
         // id "title" and "snippet".
@@ -167,7 +167,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         }
     }
 
-    private Map mMap;
+    private MapClient mMap;
 
     private Marker mPerth;
 
@@ -235,7 +235,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         // Hide the zoom controls as the button panel will cover it.
@@ -259,7 +259,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         // Ideally this string would be localised.
         mMap.setContentDescription("Map with lots of markers.");
 
-        LatLngBounds bounds = MapKit.getFactory().newLatLngBoundsBuilder()
+        LatLngBounds bounds = MapKit.newLatLngBoundsBuilder()
                 .include(PERTH)
                 .include(SYDNEY)
                 .include(ADELAIDE)
@@ -267,51 +267,51 @@ public class MarkerDemoActivity extends AppCompatActivity implements
                 .include(MELBOURNE)
                 .include(DARWIN)
                 .build();
-        mMap.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngBounds(bounds, 50));
+        mMap.moveCamera(MapKit.getCameraUpdateFactory().newLatLngBounds(bounds, 50));
     }
 
     private void addMarkersToMap() {
         // Uses a colored icon.
-        mBrisbane = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mBrisbane = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(BRISBANE)
                 .title("Brisbane")
                 .snippet("Population: 2,074,200")
-                .icon(MapKit.getFactory().getBitmapDescriptorFactory()
+                .icon(MapKit.getBitmapDescriptorFactory()
                         .defaultMarker(BitmapDescriptor.Factory.HUE_AZURE)));
 
         // Uses a custom icon with the info window popping out of the center of the icon.
-        mSydney = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mSydney = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(SYDNEY)
                 .title("Sydney")
                 .snippet("Population: 4,627,300")
-                .icon(MapKit.getFactory().getBitmapDescriptorFactory()
+                .icon(MapKit.getBitmapDescriptorFactory()
                         .fromResource(R.drawable.arrow))
                 .infoWindowAnchor(0.5f, 0.5f));
 
         // Creates a draggable marker. Long press to drag.
-        mMelbourne = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mMelbourne = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(MELBOURNE)
                 .title("Melbourne")
                 .snippet("Population: 4,137,400")
                 .draggable(true));
 
         // Place four markers on top of each other with differing z-indexes.
-        mDarwin1 = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mDarwin1 = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(DARWIN)
                 .title("Darwin Marker 1")
                 .snippet("z-index 1")
                 .zIndex(1));
-        mDarwin2 = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mDarwin2 = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(DARWIN)
                 .title("Darwin Marker 2")
                 .snippet("z-index 2")
                 .zIndex(2));
-        mDarwin3 = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mDarwin3 = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(DARWIN)
                 .title("Darwin Marker 3")
                 .snippet("z-index 3")
                 .zIndex(3));
-        mDarwin4 = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mDarwin4 = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(DARWIN)
                 .title("Darwin Marker 4")
                 .snippet("z-index 4")
@@ -319,17 +319,17 @@ public class MarkerDemoActivity extends AppCompatActivity implements
 
 
         // A few more markers for good measure.
-        mPerth = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mPerth = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(PERTH)
                 .title("Perth")
                 .snippet("Population: 1,738,800"));
-        mAdelaide = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mAdelaide = mMap.addMarker(MapKit.newMarkerOptions()
                 .position(ADELAIDE)
                 .title("Adelaide")
                 .snippet("Population: 1,213,000"));
 
         // Vector drawable resource as a marker icon.
-        mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mMap.addMarker(MapKit.newMarkerOptions()
                 .position(ALICE_SPRINGS)
                 .icon(vectorToBitmap(R.drawable.ic_android, Color.parseColor("#A4C639")))
                 .title("Alice Springs"));
@@ -341,12 +341,12 @@ public class MarkerDemoActivity extends AppCompatActivity implements
 
         int numMarkersInRainbow = 12;
         for (int i = 0; i < numMarkersInRainbow; i++) {
-            Marker marker = mMap.addMarker(MapKit.getFactory().newMarkerOptions()
-                    .position(MapKit.getFactory().newLatLng(
+            Marker marker = mMap.addMarker(MapKit.newMarkerOptions()
+                    .position(MapKit.newLatLng(
                             -30 + 10 * Math.sin(i * Math.PI / (numMarkersInRainbow - 1)),
                             135 - 10 * Math.cos(i * Math.PI / (numMarkersInRainbow - 1))))
                     .title("Marker " + i)
-                    .icon(MapKit.getFactory().getBitmapDescriptorFactory()
+                    .icon(MapKit.getBitmapDescriptorFactory()
                             .defaultMarker(i * 360f / numMarkersInRainbow))
                     .flat(flat)
                     .rotation(rotation));
@@ -367,7 +367,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         DrawableCompat.setTint(vectorDrawable, color);
         vectorDrawable.draw(canvas);
-        return MapKit.getFactory().getBitmapDescriptorFactory().fromBitmap(bitmap);
+        return MapKit.getBitmapDescriptorFactory().fromBitmap(bitmap);
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -459,7 +459,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
             });
         } else if (marker.equals(mAdelaide)) {
             // This causes the marker at Adelaide to change color and alpha.
-            marker.setIcon(MapKit.getFactory().getBitmapDescriptorFactory()
+            marker.setIcon(MapKit.getBitmapDescriptorFactory()
                     .defaultMarker(mRandom.nextFloat() * 360));
             marker.setAlpha(mRandom.nextFloat());
         }

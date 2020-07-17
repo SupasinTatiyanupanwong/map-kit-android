@@ -26,24 +26,24 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLngBounds;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 
 /**
  * This shows how to close the info window when the currently selected marker is re-tapped.
  */
 public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity implements
-        Map.OnMapClickListener,
-        Map.OnMarkerClickListener,
+        MapClient.OnMapClickListener,
+        MapClient.OnMarkerClickListener,
         OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
 
-    private static final LatLng BRISBANE = MapKit.getFactory().newLatLng(-27.47093, 153.0235);
-    private static final LatLng MELBOURNE = MapKit.getFactory().newLatLng(-37.81319, 144.96298);
-    private static final LatLng SYDNEY = MapKit.getFactory().newLatLng(-33.87365, 151.20689);
-    private static final LatLng ADELAIDE = MapKit.getFactory().newLatLng(-34.92873, 138.59995);
-    private static final LatLng PERTH = MapKit.getFactory().newLatLng(-31.952854, 115.857342);
+    private static final LatLng BRISBANE = MapKit.newLatLng(-27.47093, 153.0235);
+    private static final LatLng MELBOURNE = MapKit.newLatLng(-37.81319, 144.96298);
+    private static final LatLng SYDNEY = MapKit.newLatLng(-33.87365, 151.20689);
+    private static final LatLng ADELAIDE = MapKit.newLatLng(-34.92873, 138.59995);
+    private static final LatLng PERTH = MapKit.newLatLng(-31.952854, 115.857342);
 
-    private Map mMap = null;
+    private MapClient mMap = null;
 
     /**
      * Keeps track of the selected marker.
@@ -63,7 +63,7 @@ public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity 
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         // Hide the zoom controls.
@@ -83,7 +83,7 @@ public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity 
         map.setContentDescription("Demo showing how to close the info window when the currently"
             + " selected marker is re-tapped.");
 
-        LatLngBounds bounds = MapKit.getFactory().newLatLngBoundsBuilder()
+        LatLngBounds bounds = MapKit.newLatLngBoundsBuilder()
                 .include(PERTH)
                 .include(SYDNEY)
                 .include(ADELAIDE)
@@ -91,31 +91,31 @@ public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity 
                 .include(MELBOURNE)
                 .build();
         mMap.moveCamera(
-                MapKit.getFactory().getCameraUpdateFactory().newLatLngBounds(bounds, 50));
+                MapKit.getCameraUpdateFactory().newLatLngBounds(bounds, 50));
     }
 
     private void addMarkersToMap() {
-       mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+       mMap.addMarker(MapKit.newMarkerOptions()
                 .position(BRISBANE)
                 .title("Brisbane")
                 .snippet("Population: 2,074,200"));
 
-        mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mMap.addMarker(MapKit.newMarkerOptions()
                 .position(SYDNEY)
                 .title("Sydney")
                 .snippet("Population: 4,627,300"));
 
-        mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mMap.addMarker(MapKit.newMarkerOptions()
                 .position(MELBOURNE)
                 .title("Melbourne")
                 .snippet("Population: 4,137,400"));
 
-        mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mMap.addMarker(MapKit.newMarkerOptions()
                 .position(PERTH)
                 .title("Perth")
                 .snippet("Population: 1,738,800"));
 
-        mMap.addMarker(MapKit.getFactory().newMarkerOptions()
+        mMap.addMarker(MapKit.newMarkerOptions()
                 .position(ADELAIDE)
                 .title("Adelaide")
                 .snippet("Population: 1,213,000"));

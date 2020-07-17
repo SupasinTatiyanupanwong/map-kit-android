@@ -24,22 +24,22 @@ import android.view.ViewTreeObserver;
 import androidx.annotation.NonNull;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
- * Helper class that will delay triggering the OnMapReady callback until both the Map and the
+ * Helper class that will delay triggering the OnMapReady callback until both the MapClient and the
  * View having completed initialization. This is only necessary if a developer wishes to immediately
- * invoke any method on the Map that also requires the View to have finished layout
+ * invoke any method on the MapClient that also requires the View to have finished layout
  * (ie. anything that needs to know the View's true size like snapshotting).
  */
 class OnMapAndViewReadyListener implements
         ViewTreeObserver.OnGlobalLayoutListener,
-        OnMapReadyCallback {
+        MapKit.OnMapReadyCallback {
 
-    /** A listener that needs to wait for both the Map and the View to be initialized. */
+    /** A listener that needs to wait for both the MapClient and the View to be initialized. */
     interface OnGlobalLayoutAndMapReadyListener {
-        void onMapReady(Map map);
+        void onMapReady(MapClient map);
     }
 
     private final MapFragment mMapFragment;
@@ -48,7 +48,7 @@ class OnMapAndViewReadyListener implements
 
     private boolean mIsViewReady;
     private boolean mIsMapReady;
-    private Map mMap;
+    private MapClient mMap;
 
     OnMapAndViewReadyListener(MapFragment mapFragment, OnGlobalLayoutAndMapReadyListener callback) {
         mMapFragment = mapFragment;
@@ -71,12 +71,12 @@ class OnMapAndViewReadyListener implements
             mMapView.getViewTreeObserver().addOnGlobalLayoutListener(this);
         }
 
-        // Note if the Map is already ready it will still fire the callback later.
+        // Note if the MapClient is already ready it will still fire the callback later.
         mMapFragment.getMapAsync(this);
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         mIsMapReady = true;
         fireCallbackIfReady();

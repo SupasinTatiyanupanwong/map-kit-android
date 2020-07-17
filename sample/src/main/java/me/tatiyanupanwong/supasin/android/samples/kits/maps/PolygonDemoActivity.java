@@ -39,8 +39,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.JointType;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 
@@ -50,18 +49,18 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
 public class PolygonDemoActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener,
         SeekBar.OnSeekBarChangeListener,
-        OnMapReadyCallback {
+        MapKit.OnMapReadyCallback {
 
-    private static final LatLng CENTER = MapKit.getFactory().newLatLng(-20, 130);
+    private static final LatLng CENTER = MapKit.newLatLng(-20, 130);
     private static final int MAX_WIDTH_PX = 100;
     private static final int MAX_HUE_DEGREES = 360;
     private static final int MAX_ALPHA = 255;
 
     private static final int PATTERN_DASH_LENGTH_PX = 50;
     private static final int PATTERN_GAP_LENGTH_PX = 10;
-    private static final Dot DOT = MapKit.getFactory().newDot();
-    private static final Dash DASH = MapKit.getFactory().newDash(PATTERN_DASH_LENGTH_PX);
-    private static final Gap GAP = MapKit.getFactory().newGap(PATTERN_GAP_LENGTH_PX);
+    private static final Dot DOT = MapKit.newDot();
+    private static final Dash DASH = MapKit.newDash(PATTERN_DASH_LENGTH_PX);
+    private static final Gap GAP = MapKit.newGap(PATTERN_GAP_LENGTH_PX);
     private static final List<PatternItem> PATTERN_DOTTED = Arrays.asList(DOT, GAP);
     private static final List<PatternItem> PATTERN_DASHED = Arrays.asList(DASH, GAP);
     private static final List<PatternItem> PATTERN_MIXED = Arrays.asList(DOT, GAP, DOT, DASH, GAP);
@@ -145,7 +144,7 @@ public class PolygonDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.polygon_demo_description));
 
@@ -155,10 +154,10 @@ public class PolygonDemoActivity extends AppCompatActivity implements
                 mStrokeAlphaBar.getProgress(), new float[]{mStrokeHueBar.getProgress(), 1, 1});
 
         // Create a rectangle with two rectangular holes.
-        mMutablePolygon = map.addPolygon(MapKit.getFactory().newPolygonOptions()
+        mMutablePolygon = map.addPolygon(MapKit.newPolygonOptions()
                 .addAll(createRectangle(CENTER, 5, 5))
-                .addHole(createRectangle(MapKit.getFactory().newLatLng(-22, 128), 1, 1))
-                .addHole(createRectangle(MapKit.getFactory().newLatLng(-18, 133), 0.5, 1.5))
+                .addHole(createRectangle(MapKit.newLatLng(-22, 128), 1, 1))
+                .addHole(createRectangle(MapKit.newLatLng(-18, 133), 0.5, 1.5))
                 .fillColor(fillColorArgb)
                 .strokeColor(strokeColorArgb)
                 .strokeWidth(mStrokeWidthBar.getProgress())
@@ -180,10 +179,10 @@ public class PolygonDemoActivity extends AppCompatActivity implements
                 getSelectedPattern(mStrokePatternSpinner.getSelectedItemPosition()));
 
         // Move the map so that it is centered on the mutable polygon.
-        map.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(CENTER, 4));
+        map.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(CENTER, 4));
 
         // Add a listener for polygon clicks that changes the clicked polygon's stroke color.
-        map.setOnPolygonClickListener(new Map.OnPolygonClickListener() {
+        map.setOnPolygonClickListener(new MapClient.OnPolygonClickListener() {
             @Override
             public void onPolygonClick(@NonNull Polygon polygon) {
                 // Flip the red, green and blue components of the polygon's stroke color.
@@ -197,15 +196,15 @@ public class PolygonDemoActivity extends AppCompatActivity implements
      */
     private List<LatLng> createRectangle(LatLng center, double halfWidth, double halfHeight) {
         return Arrays.asList(
-                MapKit.getFactory().newLatLng(
+                MapKit.newLatLng(
                         center.getLatitude() - halfHeight, center.getLongitude() - halfWidth),
-                MapKit.getFactory().newLatLng(
+                MapKit.newLatLng(
                         center.getLatitude() - halfHeight, center.getLongitude() + halfWidth),
-                MapKit.getFactory().newLatLng(
+                MapKit.newLatLng(
                         center.getLatitude() + halfHeight, center.getLongitude() + halfWidth),
-                MapKit.getFactory().newLatLng(
+                MapKit.newLatLng(
                         center.getLatitude() + halfHeight, center.getLongitude() - halfWidth),
-                MapKit.getFactory().newLatLng(
+                MapKit.newLatLng(
                         center.getLatitude() - halfHeight, center.getLongitude() - halfWidth));
     }
 

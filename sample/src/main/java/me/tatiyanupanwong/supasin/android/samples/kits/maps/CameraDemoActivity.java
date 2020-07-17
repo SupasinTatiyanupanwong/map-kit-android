@@ -33,19 +33,18 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapKit;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraPosition;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.CameraUpdate;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
 
 /**
  * This shows how to change the camera position for the map.
  */
 public class CameraDemoActivity extends AppCompatActivity implements
-        Map.OnCameraIdleListener,
-        Map.OnCameraMoveCanceledListener,
-        Map.OnCameraMoveStartedListener,
-        Map.OnCameraMoveListener,
-        OnMapReadyCallback {
+        MapKit.OnMapReadyCallback,
+        MapClient.OnCameraIdleListener,
+        MapClient.OnCameraMoveCanceledListener,
+        MapClient.OnCameraMoveStartedListener,
+        MapClient.OnCameraMoveListener {
 
     private static final String TAG = CameraDemoActivity.class.getName();
 
@@ -56,22 +55,22 @@ public class CameraDemoActivity extends AppCompatActivity implements
     private static final int SCROLL_BY_PX = 100;
 
     private static final CameraPosition BONDI =
-            MapKit.getFactory().newCameraPositionBuilder()
-                    .target(MapKit.getFactory().newLatLng(-33.891614, 151.276417))
+            MapKit.newCameraPositionBuilder()
+                    .target(MapKit.newLatLng(-33.891614, 151.276417))
                     .zoom(15.5f)
                     .bearing(300)
                     .tilt(50)
                     .build();
 
     private static final CameraPosition SYDNEY =
-            MapKit.getFactory().newCameraPositionBuilder()
-                    .target(MapKit.getFactory().newLatLng(-33.87365, 151.20689))
+            MapKit.newCameraPositionBuilder()
+                    .target(MapKit.newLatLng(-33.87365, 151.20689))
                     .zoom(15.5f)
                     .bearing(0)
                     .tilt(25)
                     .build();
 
-    private Map mMap;
+    private MapClient mMap;
 
     private CompoundButton mAnimateToggle;
     private CompoundButton mCustomDurationToggle;
@@ -104,7 +103,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         mMap.setOnCameraIdleListener(this);
@@ -118,13 +117,13 @@ public class CameraDemoActivity extends AppCompatActivity implements
 
         // Show Sydney
         mMap.moveCamera(
-                MapKit.getFactory().getCameraUpdateFactory()
-                        .newLatLngZoom(MapKit.getFactory().newLatLng(-33.87365, 151.20689), 10));
+                MapKit.getCameraUpdateFactory()
+                        .newLatLngZoom(MapKit.newLatLng(-33.87365, 151.20689), 10));
     }
 
     /**
      * When the map is not ready the CameraUpdateFactory cannot be used.
-     * This should be called on all entry points that call methods on the Map API.
+     * This should be called on all entry points that call methods on the MapClient API.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkReady() {
@@ -143,7 +142,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
             return;
         }
 
-        changeCamera(MapKit.getFactory().getCameraUpdateFactory().newCameraPosition(BONDI));
+        changeCamera(MapKit.getCameraUpdateFactory().newCameraPosition(BONDI));
     }
 
     /**
@@ -155,8 +154,8 @@ public class CameraDemoActivity extends AppCompatActivity implements
         }
 
         changeCamera(
-                MapKit.getFactory().getCameraUpdateFactory().newCameraPosition(SYDNEY),
-                new Map.CancelableCallback() {
+                MapKit.getCameraUpdateFactory().newCameraPosition(SYDNEY),
+                new MapClient.CancelableCallback() {
                     @Override
                     public void onFinish() {
                         Toast.makeText(
@@ -192,7 +191,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
             return;
         }
 
-        changeCamera(MapKit.getFactory().getCameraUpdateFactory().zoomIn());
+        changeCamera(MapKit.getCameraUpdateFactory().zoomIn());
     }
 
     /**
@@ -203,7 +202,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
             return;
         }
 
-        changeCamera(MapKit.getFactory().getCameraUpdateFactory().zoomOut());
+        changeCamera(MapKit.getCameraUpdateFactory().zoomOut());
     }
 
     /**
@@ -221,12 +220,12 @@ public class CameraDemoActivity extends AppCompatActivity implements
         newTilt = (newTilt > 90) ? 90 : newTilt;
 
         CameraPosition cameraPosition =
-                MapKit.getFactory().newCameraPositionBuilder(currentCameraPosition)
+                MapKit.newCameraPositionBuilder(currentCameraPosition)
                         .tilt(newTilt)
                         .build();
 
         changeCamera(
-                MapKit.getFactory().getCameraUpdateFactory().newCameraPosition(cameraPosition));
+                MapKit.getCameraUpdateFactory().newCameraPosition(cameraPosition));
     }
 
     /**
@@ -245,12 +244,12 @@ public class CameraDemoActivity extends AppCompatActivity implements
         newTilt = (newTilt > 0) ? newTilt : 0;
 
         CameraPosition cameraPosition =
-                MapKit.getFactory().newCameraPositionBuilder(currentCameraPosition)
+                MapKit.newCameraPositionBuilder(currentCameraPosition)
                         .tilt(newTilt)
                         .build();
 
         changeCamera(
-                MapKit.getFactory().getCameraUpdateFactory().newCameraPosition(cameraPosition));
+                MapKit.getCameraUpdateFactory().newCameraPosition(cameraPosition));
     }
 
     /**
@@ -261,7 +260,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
             return;
         }
 
-        changeCamera(MapKit.getFactory().getCameraUpdateFactory().scrollBy(-SCROLL_BY_PX, 0));
+        changeCamera(MapKit.getCameraUpdateFactory().scrollBy(-SCROLL_BY_PX, 0));
     }
 
     /**
@@ -272,7 +271,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
             return;
         }
 
-        changeCamera(MapKit.getFactory().getCameraUpdateFactory().scrollBy(SCROLL_BY_PX, 0));
+        changeCamera(MapKit.getCameraUpdateFactory().scrollBy(SCROLL_BY_PX, 0));
     }
 
     /**
@@ -283,7 +282,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
             return;
         }
 
-        changeCamera(MapKit.getFactory().getCameraUpdateFactory().scrollBy(0, -SCROLL_BY_PX));
+        changeCamera(MapKit.getCameraUpdateFactory().scrollBy(0, -SCROLL_BY_PX));
     }
 
     /**
@@ -294,7 +293,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
             return;
         }
 
-        changeCamera(MapKit.getFactory().getCameraUpdateFactory().scrollBy(0, SCROLL_BY_PX));
+        changeCamera(MapKit.getCameraUpdateFactory().scrollBy(0, SCROLL_BY_PX));
     }
 
     /**
@@ -328,7 +327,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
      * Change the camera position by moving or animating the camera depending on the state of the
      * animate toggle button.
      */
-    private void changeCamera(CameraUpdate update, Map.CancelableCallback callback) {
+    private void changeCamera(CameraUpdate update, MapClient.CancelableCallback callback) {
         if (mAnimateToggle.isChecked()) {
             if (mCustomDurationToggle.isChecked()) {
                 int duration = mCustomDurationBar.getProgress();
@@ -349,17 +348,17 @@ public class CameraDemoActivity extends AppCompatActivity implements
         }
 
         String reasonText = "UNKNOWN_REASON";
-        mCurrPolylineOptions = MapKit.getFactory().newPolylineOptions().width(5);
+        mCurrPolylineOptions = MapKit.newPolylineOptions().width(5);
         switch (reason) {
-            case Map.OnCameraMoveStartedListener.REASON_GESTURE:
+            case MapClient.OnCameraMoveStartedListener.REASON_GESTURE:
                 mCurrPolylineOptions.color(Color.BLUE);
                 reasonText = "GESTURE";
                 break;
-            case Map.OnCameraMoveStartedListener.REASON_API_ANIMATION:
+            case MapClient.OnCameraMoveStartedListener.REASON_API_ANIMATION:
                 mCurrPolylineOptions.color(Color.RED);
                 reasonText = "API_ANIMATION";
                 break;
-            case Map.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION:
+            case MapClient.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION:
                 mCurrPolylineOptions.color(Color.GREEN);
                 reasonText = "DEVELOPER_ANIMATION";
                 break;

@@ -40,8 +40,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Dot;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Gap;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.JointType;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map;
-import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Map.Factory.OnMapReadyCallback;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.PatternItem;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
 
@@ -51,19 +50,19 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
 public class PolylineDemoActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener,
         SeekBar.OnSeekBarChangeListener,
-        OnMapReadyCallback {
+        MapKit.OnMapReadyCallback {
 
     // City locations for mutable polyline.
-    private static final LatLng ADELAIDE = MapKit.getFactory().newLatLng(-34.92873, 138.59995);
-    private static final LatLng DARWIN = MapKit.getFactory().newLatLng(-12.4258647, 130.7932231);
-    private static final LatLng MELBOURNE = MapKit.getFactory().newLatLng(-37.81319, 144.96298);
-    private static final LatLng PERTH = MapKit.getFactory().newLatLng(-31.95285, 115.85734);
+    private static final LatLng ADELAIDE = MapKit.newLatLng(-34.92873, 138.59995);
+    private static final LatLng DARWIN = MapKit.newLatLng(-12.4258647, 130.7932231);
+    private static final LatLng MELBOURNE = MapKit.newLatLng(-37.81319, 144.96298);
+    private static final LatLng PERTH = MapKit.newLatLng(-31.95285, 115.85734);
 
     // Airport locations for geodesic polyline.
-    private static final LatLng AKL = MapKit.getFactory().newLatLng(-37.006254, 174.783018);
-    private static final LatLng JFK = MapKit.getFactory().newLatLng(40.641051, -73.777485);
-    private static final LatLng LAX = MapKit.getFactory().newLatLng(33.936524, -118.377686);
-    private static final LatLng LHR = MapKit.getFactory().newLatLng(51.471547, -0.460052);
+    private static final LatLng AKL = MapKit.newLatLng(-37.006254, 174.783018);
+    private static final LatLng JFK = MapKit.newLatLng(40.641051, -73.777485);
+    private static final LatLng LAX = MapKit.newLatLng(33.936524, -118.377686);
+    private static final LatLng LHR = MapKit.newLatLng(51.471547, -0.460052);
 
     private static final int MAX_WIDTH_PX = 100;
     private static final int MAX_HUE_DEGREES = 360;
@@ -73,9 +72,9 @@ public class PolylineDemoActivity extends AppCompatActivity implements
 
     private static final int PATTERN_DASH_LENGTH_PX = 50;
     private static final int PATTERN_GAP_LENGTH_PX = 20;
-    private static final Dot DOT = MapKit.getFactory().newDot();
-    private static final Dash DASH = MapKit.getFactory().newDash(PATTERN_DASH_LENGTH_PX);
-    private static final Gap GAP = MapKit.getFactory().newGap(PATTERN_GAP_LENGTH_PX);
+    private static final Dot DOT = MapKit.newDot();
+    private static final Dash DASH = MapKit.newDash(PATTERN_DASH_LENGTH_PX);
+    private static final Gap GAP = MapKit.newGap(PATTERN_GAP_LENGTH_PX);
     private static final List<PatternItem> PATTERN_DOTTED = Arrays.asList(DOT, GAP);
     private static final List<PatternItem> PATTERN_DASHED = Arrays.asList(DASH, GAP);
     private static final List<PatternItem> PATTERN_MIXED = Arrays.asList(DOT, GAP, DOT, DASH, GAP);
@@ -168,13 +167,13 @@ public class PolylineDemoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMapReady(@NonNull Map map) {
+    public void onMapReady(@NonNull MapClient map) {
 
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.polyline_demo_description));
 
         // A geodesic polyline that goes around the world.
-        map.addPolyline(MapKit.getFactory().newPolylineOptions()
+        map.addPolyline(MapKit.newPolylineOptions()
                 .add(LHR, AKL, LAX, JFK, LHR)
                 .width(INITIAL_STROKE_WIDTH_PX)
                 .color(Color.BLUE)
@@ -184,7 +183,7 @@ public class PolylineDemoActivity extends AppCompatActivity implements
         // A simple polyline across Australia. This polyline will be mutable.
         int color = Color.HSVToColor(
                 mAlphaBar.getProgress(), new float[]{mHueBar.getProgress(), 1, 1});
-        mMutablePolyline = map.addPolyline(MapKit.getFactory().newPolylineOptions()
+        mMutablePolyline = map.addPolyline(MapKit.newPolylineOptions()
                 .color(color)
                 .width(mWidthBar.getProgress())
                 .clickable(mClickabilityCheckbox.isChecked())
@@ -209,10 +208,10 @@ public class PolylineDemoActivity extends AppCompatActivity implements
                 getSelectedPattern(mPatternSpinner.getSelectedItemPosition()));
 
         // Move the map so that it is centered on the mutable polyline.
-        map.moveCamera(MapKit.getFactory().getCameraUpdateFactory().newLatLngZoom(MELBOURNE, 3));
+        map.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(MELBOURNE, 3));
 
         // Add a listener for polyline clicks that changes the clicked polyline's color.
-        map.setOnPolylineClickListener(new Map.OnPolylineClickListener() {
+        map.setOnPolylineClickListener(new MapClient.OnPolylineClickListener() {
             @Override
             public void onPolylineClick(@NonNull Polyline polyline) {
                 // Flip the values of the red, green and blue components of the polyline's color.
@@ -224,14 +223,14 @@ public class PolylineDemoActivity extends AppCompatActivity implements
     private Cap getSelectedCap(int pos) {
         switch (CAP_TYPE_NAME_RESOURCE_IDS[pos]) {
             case R.string.cap_butt:
-                return MapKit.getFactory().newButtCap();
+                return MapKit.newButtCap();
             case R.string.cap_square:
-                return MapKit.getFactory().newSquareCap();
+                return MapKit.newSquareCap();
             case R.string.cap_round:
-                return MapKit.getFactory().newRoundCap();
+                return MapKit.newRoundCap();
             case R.string.cap_image:
-                return MapKit.getFactory().newCustomCap(
-                        MapKit.getFactory().getBitmapDescriptorFactory()
+                return MapKit.newCustomCap(
+                        MapKit.getBitmapDescriptorFactory()
                                 .fromResource(R.drawable.chevron), CUSTOM_CAP_IMAGE_REF_WIDTH_PX);
         }
         throw new IllegalArgumentException("Unknown cap type at position " + pos);
