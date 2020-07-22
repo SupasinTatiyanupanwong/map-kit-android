@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+    }
+
+    sourceSets {
+        main.manifest.srcFile 'AndroidManifest.xml'
+    }
+}
+
+dependencies {
+    api project(':maps-utils-base')
+    api project(':maps-utils-clustering')
+    api project(':maps-utils-collections')
+    api project(':maps-utils-data')
+    api project(':maps-utils-geometry')
+    api project(':maps-utils-heatmaps')
+    api project(':maps-utils-projection')
+    api project(':maps-utils-ui')
+}

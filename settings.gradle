@@ -1,1 +1,38 @@
-include ':sample', ':maps-core', ':maps-google', ':maps-huawei'
+include ':sample'
+project(':sample').projectDir = new File(rootDir, 'sample')
+
+include ':maps-core'
+project(':maps-core').projectDir = new File(rootDir, 'maps-core')
+
+include ':maps-google'
+project(':maps-google').projectDir = new File(rootDir, 'maps-google')
+
+include ':maps-huawei'
+project(':maps-huawei').projectDir = new File(rootDir, 'maps-huawei')
+
+include ':maps-utils'
+project(':maps-utils').projectDir = new File(rootDir, 'maps-utils')
+
+include ':maps-utils-base'
+project(':maps-utils-base').projectDir = new File(rootDir, 'maps-utils/base')
+
+include ':maps-utils-clustering'
+project(':maps-utils-clustering').projectDir = new File(rootDir, 'maps-utils/clustering')
+
+include ':maps-utils-collections'
+project(':maps-utils-collections').projectDir = new File(rootDir, 'maps-utils/collections')
+
+include ':maps-utils-data'
+project(':maps-utils-data').projectDir = new File(rootDir, 'maps-utils/data')
+
+include ':maps-utils-geometry'
+project(':maps-utils-geometry').projectDir = new File(rootDir, 'maps-utils/geometry')
+
+include ':maps-utils-heatmaps'
+project(':maps-utils-heatmaps').projectDir = new File(rootDir, 'maps-utils/heatmaps')
+
+include ':maps-utils-projection'
+project(':maps-utils-projection').projectDir = new File(rootDir, 'maps-utils/projection')
+
+include ':maps-utils-ui'
+project(':maps-utils-ui').projectDir = new File(rootDir, 'maps-utils/ui')
