@@ -180,28 +180,25 @@ public class MarkerManager extends
         }
 
         public void setOnInfoWindowClickListener(
-                @Nullable MapClient.OnInfoWindowClickListener infoWindowClickListener) {
-            mInfoWindowClickListener = infoWindowClickListener;
+                @Nullable MapClient.OnInfoWindowClickListener listener) {
+            mInfoWindowClickListener = listener;
         }
 
         public void setOnInfoWindowLongClickListener(
-                @Nullable MapClient.OnInfoWindowLongClickListener infoWindowLongClickListener) {
-            mInfoWindowLongClickListener = infoWindowLongClickListener;
+                @Nullable MapClient.OnInfoWindowLongClickListener listener) {
+            mInfoWindowLongClickListener = listener;
         }
 
-        public void setOnMarkerClickListener(
-                @Nullable MapClient.OnMarkerClickListener markerClickListener) {
-            mMarkerClickListener = markerClickListener;
+        public void setOnMarkerClickListener(@Nullable MapClient.OnMarkerClickListener listener) {
+            mMarkerClickListener = listener;
         }
 
-        public void setOnMarkerDragListener(
-                @Nullable MapClient.OnMarkerDragListener markerDragListener) {
-            mMarkerDragListener = markerDragListener;
+        public void setOnMarkerDragListener(@Nullable MapClient.OnMarkerDragListener listener) {
+            mMarkerDragListener = listener;
         }
 
-        public void setInfoWindowAdapter(
-                @Nullable MapClient.InfoWindowAdapter infoWindowAdapter) {
-            mInfoWindowAdapter = infoWindowAdapter;
+        public void setInfoWindowAdapter(@Nullable MapClient.InfoWindowAdapter adapter) {
+            mInfoWindowAdapter = adapter;
         }
     }
 
