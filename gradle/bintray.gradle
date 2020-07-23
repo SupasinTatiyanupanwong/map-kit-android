@@ -38,12 +38,12 @@ bintray {
 
     configurations = ['archives']
     pkg {
-        repo = BINTARY_REPOSITORY
+        repo = BINTRAY_REPOSITORY
         name = POM_ARTIFACT_ID
         desc = POM_DESCRIPTION
         websiteUrl = POM_SCM_URL
         vcsUrl = POM_SCM_CONNECTION
-        licenses = BINTARY_LICENSES
+        licenses = BINTRAY_LICENSES
         publish = true
         publicDownloadNumbers = true
     }

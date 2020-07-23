@@ -20,8 +20,8 @@ allprojects {
 }
 
 ext {
-    BINTARY_REPOSITORY = 'android.libraries.kits.maps'
-    BINTARY_LICENSES = ["Apache-2.0"]
+    BINTRAY_REPOSITORY = 'android.libraries.kits.maps'
+    BINTRAY_LICENSES = ["Apache-2.0"]
 
     POM_GROUP_ID = 'me.tatiyanupanwong.supasin.android.libraries.kits.maps'
 
