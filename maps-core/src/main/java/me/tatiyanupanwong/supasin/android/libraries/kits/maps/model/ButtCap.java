@@ -23,5 +23,4 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  *
  * @since 1.0.0
  */
-public interface ButtCap extends Cap {
-}
+public interface ButtCap extends Cap {}

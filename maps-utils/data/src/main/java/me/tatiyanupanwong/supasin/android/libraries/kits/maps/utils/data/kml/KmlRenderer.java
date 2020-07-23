@@ -42,6 +42,8 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.BitmapDescri
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polygon;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Polyline;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.collections.GroundOverlayManager;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.collections.MarkerManager;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.collections.PolygonManager;
@@ -52,8 +54,9 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.MultiGe
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.Renderer;
 
 /**
- * Renders all visible KmlPlacemark and KmlGroundOverlay objects onto the GoogleMap as Marker,
- * Polyline, Polygon, GroundOverlay objects. Also removes objects from the map.
+ * Renders all visible {@link KmlPlacemark} and {@link KmlGroundOverlay} objects onto the {@link
+ * MapClient} as {@link Marker}, {@link Polyline}, {@link Polygon}, {@link GroundOverlay} objects.
+ * Also removes objects from the map.
  */
 public class KmlRenderer extends Renderer {
 

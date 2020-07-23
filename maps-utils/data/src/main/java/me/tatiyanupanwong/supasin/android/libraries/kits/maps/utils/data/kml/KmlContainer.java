@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.GroundOverlay;
+import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
 
 /**
  * Represents a KML Document or Folder.
@@ -70,9 +71,8 @@ public class KmlContainer {
 
     /**
      * @param placemarks Placemark for the container to contain
-     * @param object     Corresponding GoogleMap map object of the basic_placemark (if it has been
-     *                   added
-     *                   to the map)
+     * @param object Corresponding MapClient map object of the basic_placemark (if it has
+     * been added to the map)
      */
     void setPlacemark(KmlPlacemark placemarks, Object object) {
         mPlacemarks.put(placemarks, object);

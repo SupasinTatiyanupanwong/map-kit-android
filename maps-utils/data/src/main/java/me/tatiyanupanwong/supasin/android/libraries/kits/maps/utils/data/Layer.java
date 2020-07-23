@@ -71,7 +71,7 @@ public abstract class Layer {
     }
 
     /**
-     * Sets a single click listener for the entire GoogleMap object, that will be called
+     * Sets a single click listener for the entire MapClient object, that will be called
      * with the corresponding Feature object when an object on the map (Polygon,
      * Marker, Polyline) is clicked.
      * <p>

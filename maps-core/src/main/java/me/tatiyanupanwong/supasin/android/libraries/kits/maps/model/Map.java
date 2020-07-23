@@ -1137,8 +1137,7 @@ public interface Map {
          * This means that you can emphasize particular components of the map or make the map
          * complement the content of your app.
          */
-        interface Options {
-        }
+        interface Options {}
     }
 
 

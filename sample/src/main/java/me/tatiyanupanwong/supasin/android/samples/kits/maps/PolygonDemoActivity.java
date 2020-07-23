@@ -192,7 +192,7 @@ public class PolygonDemoActivity extends AppCompatActivity implements
     }
 
     /**
-     * Creates a List of LatLngs that form a rectangle with the given dimensions.
+     * Creates a List of {@link LatLng}s that form a rectangle with the given dimensions.
      */
     private List<LatLng> createRectangle(LatLng center, double halfWidth, double halfHeight) {
         return Arrays.asList(

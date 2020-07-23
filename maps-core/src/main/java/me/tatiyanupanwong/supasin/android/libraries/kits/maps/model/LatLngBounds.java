@@ -42,7 +42,7 @@ public interface LatLngBounds {
     LatLng getNortheast();
 
     /**
-     * Returns whether this contains the given LatLng.
+     * Returns whether this contains the given {@link LatLng}.
      *
      * @param point the LatLng to test.
      * @return {@code true} if this contains the given point; {@code false} if not.

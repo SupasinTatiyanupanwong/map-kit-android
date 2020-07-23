@@ -25,5 +25,4 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  * @see Gap
  * @since 1.0.0
  */
-public interface PatternItem {
-}
+public interface PatternItem {}

@@ -396,14 +396,10 @@ class HuaweiMapClient implements MapClient {
                     }
 
                     @Override
-                    public void onMarkerDrag(com.huawei.hms.maps.model.Marker marker) {
-
-                    }
+                    public void onMarkerDrag(com.huawei.hms.maps.model.Marker marker) {}
 
                     @Override
-                    public void onMarkerDragEnd(com.huawei.hms.maps.model.Marker marker) {
-
-                    }
+                    public void onMarkerDragEnd(com.huawei.hms.maps.model.Marker marker) {}
                 }
         );
     }

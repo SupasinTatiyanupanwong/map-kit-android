@@ -23,8 +23,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.LineString;
 
 /**
- * A GeoJsonLineString geometry represents a number of connected {@link
- * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng}s.
+ * A GeoJsonLineString geometry represents a number of connected {@link LatLng}s.
  */
 public class GeoJsonLineString extends LineString {
     private final List<Double> mAltitudes;

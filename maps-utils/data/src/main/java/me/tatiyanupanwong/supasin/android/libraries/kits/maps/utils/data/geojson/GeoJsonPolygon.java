@@ -25,8 +25,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.DataPolygon;
 
 /**
- * A GeoJsonPolygon geometry contains an array of arrays of {@link
- * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng}s. The first array is the
+ * A GeoJsonPolygon geometry contains an array of arrays of {@link LatLng}s. The first array is the
  * polygon exterior boundary. Subsequent arrays are holes.
  */
 

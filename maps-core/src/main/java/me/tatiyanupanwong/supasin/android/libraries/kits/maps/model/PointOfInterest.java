@@ -26,7 +26,7 @@ import androidx.annotation.NonNull;
 public interface PointOfInterest {
 
     /**
-     * The LatLng of the POI.
+     *The {@link LatLng} of the POI.
      */
     @NonNull
     LatLng getLatLng();

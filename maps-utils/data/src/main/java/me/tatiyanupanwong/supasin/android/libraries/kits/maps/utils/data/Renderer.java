@@ -71,8 +71,8 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.kml.Kml
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.kml.KmlUtils;
 
 /**
- * An abstraction that shares the common properties of {@link KmlRenderer KmlRenderer} and {@link
- * GeoJsonRenderer GeoJsonRenderer}
+ * An abstraction that shares the common properties of {@link KmlRenderer} and {@link
+ * GeoJsonRenderer}.
  */
 public class Renderer {
 
@@ -257,9 +257,9 @@ public class Renderer {
     }
 
     /**
-     * Gets the GoogleMap that Feature objects are being placed on
+     * Gets the MapClient that Feature objects are being placed on
      *
-     * @return GoogleMap
+     * @return MapClient
      */
     public MapClient getMap() {
         return mMap;

@@ -29,7 +29,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.Feature
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.Renderer;
 
 /**
- * Renders GeoJsonFeature objects onto the GoogleMap as Marker, Polyline and Polygon objects. Also
+ * Renders GeoJsonFeature objects onto the MapClient as Marker, Polyline and Polygon objects. Also
  * removes GeoJsonFeature objects and redraws features when updated.
  */
 public class GeoJsonRenderer extends Renderer implements Observer {
@@ -60,7 +60,7 @@ public class GeoJsonRenderer extends Renderer implements Observer {
      * Changes the map that GeoJsonFeature objects are being drawn onto. Existing objects are
      * removed from the previous map and drawn onto the new map.
      *
-     * @param map GoogleMap to place GeoJsonFeature objects on
+     * @param map MapClient to place {@link GeoJsonFeature} objects on
      */
     public void setMap(MapClient map) {
         super.setMap(map);

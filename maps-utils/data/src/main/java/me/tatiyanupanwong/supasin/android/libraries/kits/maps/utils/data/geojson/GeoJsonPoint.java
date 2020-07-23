@@ -20,8 +20,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.utils.data.Point;
 
 /**
- * A GeoJsonPoint geometry contains a single {@link
- * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.LatLng}.
+ * A GeoJsonPoint geometry contains a single {@link LatLng}.
  */
 public class GeoJsonPoint extends Point {
     private final Double mAltitude;

@@ -73,7 +73,7 @@ public class GeoJsonPointStyle extends Style implements GeoJsonStyle {
     /**
      * Gets the Anchor U coordinate of the GeoJsonPoint. Normalized to [0, 1], of the anchor from
      * the left edge. This is equivalent to the same U value used in {@link
-     * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker.Options#getAnchorU()}.
+     * Marker.Options#getAnchorU()}.
      *
      * @return Anchor U coordinate of the GeoJsonPoint
      */
@@ -84,7 +84,7 @@ public class GeoJsonPointStyle extends Style implements GeoJsonStyle {
     /**
      * Gets the Anchor V coordinate of the GeoJsonPoint. Normalized to [0, 1], of the anchor from
      * the top edge. This is equivalent to the same V value used in {@link
-     * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker.Options#getAnchorV()}.
+     * Marker.Options#getAnchorV()}.
      *
      * @return Anchor V coordinate of the GeoJsonPoint
      */
@@ -96,8 +96,7 @@ public class GeoJsonPointStyle extends Style implements GeoJsonStyle {
      * Sets the Anchor U and V coordinates of the GeoJsonPoint. The anchor point is specified in
      * the continuous space [0.0, 1.0] x [0.0, 1.0], where (0, 0) is the top-left corner of the
      * image, and (1, 1) is the bottom-right corner. The U &amp; V values are the same U &amp; V
-     * values used in {@link
-     * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker.Options#anchor(float, float)}.
+     * values used in {@link Marker.Options#anchor(float, float)}.
      *
      * @param anchorU Anchor U coordinate of the GeoJsonPoint
      * @param anchorV Anchor V coordinate of the GeoJsonPoint
@@ -167,7 +166,7 @@ public class GeoJsonPointStyle extends Style implements GeoJsonStyle {
     /**
      * Gets the info window anchor U coordinate of the GeoJsonPoint. Normalized to [0, 1], of the
      * info window anchor from the left edge. This is equivalent to the same U value used in {@link
-     * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker.Options#getInfoWindowAnchorU()}.
+     * Marker.Options#getInfoWindowAnchorU()}.
      *
      * @return info window anchor U coordinate of the GeoJsonPoint
      */
@@ -178,7 +177,7 @@ public class GeoJsonPointStyle extends Style implements GeoJsonStyle {
     /**
      * Gets the info window anchor V coordinate of the GeoJsonPoint. Normalized to [0, 1], of the
      * info window anchor from the top edge. This is equivalent to the same V value used in {@link
-     * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker.Options#getInfoWindowAnchorV()}.
+     * Marker.Options#getInfoWindowAnchorV()}.
      *
      * @return info window anchor V coordinate of the GeoJsonPoint
      */
@@ -189,8 +188,7 @@ public class GeoJsonPointStyle extends Style implements GeoJsonStyle {
     /**
      * Sets the info window anchor U and V coordinates of the GeoJsonPoint. This is specified in
      * the same coordinate system as the anchor. The U &amp; V values are the same U &amp; V values
-     * used in {@link
-     * me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker.Options(float, float)}.
+     * used in {@link Marker.Options(float, float)}.
      *
      * @param infoWindowAnchorU info window anchor U coordinate of the GeoJsonPoint
      * @param infoWindowAnchorV info window anchor V coordinate of the GeoJsonPoint
