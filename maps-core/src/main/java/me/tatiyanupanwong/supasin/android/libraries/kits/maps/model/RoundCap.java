@@ -22,5 +22,4 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  *
  * @since 1.0.0
  */
-public interface RoundCap extends Cap {
-}
+public interface RoundCap extends Cap {}

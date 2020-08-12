@@ -226,13 +226,13 @@ public interface Circle {
      */
     interface Options {
         /**
-         * Sets the center using a LatLng.
+         * Sets the center using a {@link LatLng}.
          *
          * <p>The center must not be null.
          *
          * <p>This method is mandatory because there is no default center.
          *
-         * @param center The geographic center as a LatLng.
+         * @param center The geographic center as a {@link LatLng}.
          * @return This {@link Options} object for method chaining.
          */
         @NonNull

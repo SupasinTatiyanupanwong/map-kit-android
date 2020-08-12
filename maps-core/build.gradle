@@ -22,7 +22,7 @@ ext {
 
     POM_NAME = 'Map Kit (Core)'
     POM_DESCRIPTION = 'Encapsulates Maps APIs for Android.'
-    POM_VERSION = '1.2.0'
+    POM_VERSION = '1.2.1'
 }
 
 apply from: rootProject.file("gradle/install.gradle")

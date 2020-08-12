@@ -39,5 +39,4 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.MapFragment;
  */
 @SuppressWarnings("deprecation")
 @UiThread
-public interface MapClient extends Map {
-}
+public interface MapClient extends Map {}

@@ -25,5 +25,4 @@ package me.tatiyanupanwong.supasin.android.libraries.kits.maps.model;
  * @see SquareCap
  * @since 1.0.0
  */
-public interface Cap {
-}
+public interface Cap {}
