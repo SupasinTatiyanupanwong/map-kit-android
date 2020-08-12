@@ -26,6 +26,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -42,7 +43,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.MapClient;
  * obscuring the map UI or copyright notices.
  */
 public class VisibleRegionDemoActivity extends AppCompatActivity implements
-        OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
+        MapKit.OnMapAndViewReadyCallback {
 
     /**
      * Note that this may be null if the MapClient is not available.
@@ -78,12 +79,12 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         MapFragment mapFragment =
                 (MapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
-            new OnMapAndViewReadyListener(mapFragment, this);
+            mapFragment.getMapAsync(this);
         }
     }
 
     @Override
-    public void onMapReady(MapClient map) {
+    public void onMapAndViewReady(@NonNull MapClient map) {
         mMap = map;
 
         // Move to a place with indoor (SFO airport).

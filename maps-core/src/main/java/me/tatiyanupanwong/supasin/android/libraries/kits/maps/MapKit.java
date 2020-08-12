@@ -49,7 +49,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.UrlTileProvi
 import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.VisibleRegion;
 
 /**
- * Main entry point for Maps API.
+ * The main entry point for Maps APIs.
  *
  * @since 1.0.0
  */
@@ -311,11 +311,56 @@ public final class MapKit {
 
 
     /**
+     * Interface definition for a callback to be invoked when the map is ready to be used.
+     *
+     * <p>Once an instance of this interface is set on a {@link MapFragment} object, the {@link
+     * #onMapReady(MapClient)} method is triggered when the map is ready to be used and provides
+     * a non-null instance of {@link MapClient}.
+     *
      * @since 1.2.0
      */
     public interface OnMapReadyCallback {
+        /**
+         * Called when the map is ready to be used.
+         *
+         * <p>Note that this does not guarantee that the map has undergone layout. Therefore, the
+         * map's size may not have been determined by the time the callback method is called. If
+         * you need to know the dimensions or call a method in the API that needs to know the
+         * dimensions, use {@link OnMapAndViewReadyCallback} instead which encapsulate the logic
+         * of {@code OnMapReadyCallback} and {@code View.OnGlobalLayoutListener}.
+         *
+         * <p>As an example, if you want to update the map's camera using a {@link LatLngBounds}
+         * without dimensions, there is a race condition that could trigger an {@link
+         * IllegalStateException} if the map has not undergone layout.
+         *
+         * @param map A non-null instance of a {@link MapClient} associated with the {@link
+         * MapFragment} that defines the callback.
+         */
         @UiThread
         void onMapReady(@NonNull MapClient map);
+    }
+
+    /**
+     * Interface definition for a callback to be invoked when the map has undergone layout and
+     * ready to be used.
+     *
+     * <p>Note that this is only necessary if a developer wishes to immediately invoke any method
+     * on the {@link MapClient} that also requires the View to have finished layout (ie. anything
+     * that needs to know the View's true size like snapshotting).
+     *
+     * <p>Once an instance of this interface is set on a {@link MapFragment} object, the {@link
+     * #onMapAndViewReady(MapClient)} method is triggered when the map has undergone layout and is
+     * ready to be used and provides a non-null instance of {@link MapClient}.
+     */
+    public interface OnMapAndViewReadyCallback {
+        /**
+         * Called when the map has undergone layout and ready to be used.
+         *
+         * @param map A non-null instance of a {@link MapClient} associated with the {@link
+         * MapFragment} that defines the callback.
+         */
+        @UiThread
+        void onMapAndViewReady(@NonNull MapClient map);
     }
 
 }

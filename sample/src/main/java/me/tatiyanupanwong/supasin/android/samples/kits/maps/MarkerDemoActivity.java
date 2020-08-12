@@ -66,7 +66,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         MapClient.OnInfoWindowLongClickListener,
         MapClient.OnMarkerClickListener,
         MapClient.OnMarkerDragListener,
-        OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
+        MapKit.OnMapAndViewReadyCallback {
 
     private static final LatLng BRISBANE = MapKit.newLatLng(-27.47093, 153.0235);
 
@@ -230,12 +230,12 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         MapFragment mapFragment =
                 (MapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
-            new OnMapAndViewReadyListener(mapFragment, this);
+            mapFragment.getMapAsync(this);
         }
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapAndViewReady(@NonNull MapClient map) {
         mMap = map;
 
         // Hide the zoom controls as the button panel will cover it.

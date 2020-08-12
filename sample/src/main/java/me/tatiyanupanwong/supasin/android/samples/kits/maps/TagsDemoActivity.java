@@ -46,7 +46,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
         MapClient.OnMarkerClickListener,
         MapClient.OnPolygonClickListener,
         MapClient.OnPolylineClickListener,
-        OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
+        MapKit.OnMapAndViewReadyCallback {
 
     private static final LatLng ADELAIDE = MapKit.newLatLng(-34.92873, 138.59995);
     private static final LatLng BRISBANE = MapKit.newLatLng(-27.47093, 153.0235);
@@ -89,12 +89,12 @@ public class TagsDemoActivity extends AppCompatActivity implements
         MapFragment mapFragment =
                 (MapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
-            new OnMapAndViewReadyListener(mapFragment, this);
+            mapFragment.getMapAsync(this);
         }
     }
 
     @Override
-    public void onMapReady(MapClient map) {
+    public void onMapAndViewReady(@NonNull MapClient map) {
         mMap = map;
 
         MapClient.UiSettings uiSettings = mMap.getUiSettings();

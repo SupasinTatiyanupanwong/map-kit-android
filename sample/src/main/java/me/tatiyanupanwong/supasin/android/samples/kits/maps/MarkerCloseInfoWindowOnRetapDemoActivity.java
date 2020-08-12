@@ -35,7 +35,7 @@ import me.tatiyanupanwong.supasin.android.libraries.kits.maps.model.Marker;
 public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity implements
         MapClient.OnMapClickListener,
         MapClient.OnMarkerClickListener,
-        OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener {
+        MapKit.OnMapAndViewReadyCallback {
 
     private static final LatLng BRISBANE = MapKit.newLatLng(-27.47093, 153.0235);
     private static final LatLng MELBOURNE = MapKit.newLatLng(-37.81319, 144.96298);
@@ -58,12 +58,12 @@ public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity 
         MapFragment mapFragment =
                 (MapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
-            new OnMapAndViewReadyListener(mapFragment, this);
+            mapFragment.getMapAsync(this);
         }
     }
 
     @Override
-    public void onMapReady(@NonNull MapClient map) {
+    public void onMapAndViewReady(@NonNull MapClient map) {
         mMap = map;
 
         // Hide the zoom controls.

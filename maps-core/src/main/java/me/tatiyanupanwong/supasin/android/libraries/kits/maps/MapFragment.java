@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -126,6 +127,17 @@ public class MapFragment extends Fragment {
     }
 
     /**
+     * Sets a callback object which will be triggered when the map has undergone layout and the
+     * {@link MapClient} instance is ready to be used.
+     *
+     * @param callback The callback object that will be triggered when the map has undergone layout
+     * and ready to be used.
+     */
+    public final void getMapAsync(final MapKit.OnMapAndViewReadyCallback callback) {
+        getMapAsync(new OnMapAndViewReadyCallbackImpl(this, callback));
+    }
+
+    /**
      * @see #getMapAsyncInternal(MapKit.OnMapReadyCallback)
      * @deprecated As of 1.2.0, use {@link #getMapAsyncInternal(MapKit.OnMapReadyCallback)} instead.
      */
@@ -154,6 +166,68 @@ public class MapFragment extends Fragment {
         }
 
         MapsPlatform.get().getFactory().getMapAsync(fragment, callback);
+    }
+
+
+    private static class OnMapAndViewReadyCallbackImpl implements
+            ViewTreeObserver.OnGlobalLayoutListener,
+            MapKit.OnMapReadyCallback {
+        private final MapFragment mMapFragment;
+        private final View mMapView;
+        private final MapKit.OnMapAndViewReadyCallback mDelegate;
+
+        private boolean mIsViewReady;
+        private boolean mIsMapReady;
+        private MapClient mMap;
+
+        public OnMapAndViewReadyCallbackImpl(
+                @NonNull MapFragment mapFragment,
+                @NonNull MapKit.OnMapAndViewReadyCallback delegate) {
+            mMapFragment = mapFragment;
+            mMapView = mapFragment.getView();
+            mDelegate = delegate;
+            mIsViewReady = false;
+            mIsMapReady = false;
+            mMap = null;
+
+            registerListeners();
+        }
+
+
+        private void registerListeners() {
+            // View layout.
+            if ((mMapView.getWidth() != 0) && (mMapView.getHeight() != 0)) {
+                // View has already completed layout.
+                mIsViewReady = true;
+            } else {
+                // Map has not undergone layout, register a View observer.
+                mMapView.getViewTreeObserver().addOnGlobalLayoutListener(this);
+            }
+
+            // Note if the MapClient is already ready it will still fire the callback later.
+            mMapFragment.getMapAsync(this);
+        }
+
+        @Override
+        public final void onMapReady(@NonNull MapClient map) {
+            mMap = map;
+            mIsMapReady = true;
+            fireCallbackIfReady();
+        }
+
+        @Override
+        public final void onGlobalLayout() {
+            // Remove our listener.
+            mMapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            mIsViewReady = true;
+            fireCallbackIfReady();
+        }
+
+        private void fireCallbackIfReady() {
+            if (mIsViewReady && mIsMapReady) {
+                mDelegate.onMapAndViewReady(mMap);
+            }
+        }
     }
 
 }
