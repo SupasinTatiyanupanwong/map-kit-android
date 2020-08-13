@@ -1,5 +1,9 @@
 # Map Kit
 
+[![Download](https://api.bintray.com/packages/supasintatiyanupanwong/android.libraries.kits.maps/maps-core/images/download.svg)](https://bintray.com/supasintatiyanupanwong/android.libraries.kits.maps/maps-core/_latestVersion)
+[![javadoc](https://javadoc.io/badge2/me.tatiyanupanwong.supasin.android.libraries.kits.maps/maps-core/javadoc.svg)](https://javadoc.io/doc/me.tatiyanupanwong.supasin.android.libraries.kits.maps/maps-core)
+[![license](https://img.shields.io/github/license/SupasinTatiyanupanwong/map-kit-android.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 Abstraction wrapper that encapsulates Maps APIs of supported platforms for Android, allowing access to multiple Maps APIs while maintaining your application single codebase.
 
 Map Kit is currently providing support for Google Maps and Huawei Maps.
