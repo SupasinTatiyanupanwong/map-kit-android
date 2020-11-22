@@ -43,8 +43,8 @@ Add the following to your Gradle build file:
 
 ```groovy
 dependencies {
-    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-google:1.2.0'
-    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-huawei:1.2.0'
+    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-google:1.2.2'
+    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-huawei:1.2.2'
 }
 ```
 
@@ -74,8 +74,8 @@ configurations {
 }
 
 dependencies {
-    google 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-google:1.2.0'
-    huawei 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-huawei:1.2.0'
+    google 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-google:1.2.2'
+    huawei 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-huawei:1.2.2'
 }
 ```
 
@@ -83,7 +83,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-core:1.2.0'
+    implementation 'me.tatiyanupanwong.supasin.android.libraries.kits.maps:maps-core:1.2.1'
 }  
 ```
 
