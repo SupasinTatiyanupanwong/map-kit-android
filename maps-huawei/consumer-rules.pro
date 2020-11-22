@@ -1,9 +1,8 @@
 -keep class me.tatiyanupanwong.supasin.android.libraries.kits.maps.internal.huawei.model.HuaweiMapFactory {
-     public static *** buildIfSupported(android.content.Context);
+    public static *** buildIfSupported(android.content.Context);
 }
 
 # https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/configuration-obfuscation-script
-
 -ignorewarnings
 -keepattributes *Annotation*
 -keepattributes Exceptions
