@@ -24,14 +24,3 @@ dependencies {
 }
 
 tasks.withType(Javadoc).all { enabled = false }
-
-ext {
-    POM_ARTIFACT_ID = 'maps-huawei'
-
-    POM_NAME = 'Map Kit (Huawei)'
-    POM_DESCRIPTION = 'Provides Huawei Maps integration to Map Kit.'
-    POM_VERSION = '1.2.2'
-}
-
-apply from: rootProject.file("gradle/install.gradle")
-apply from: rootProject.file("gradle/bintray.gradle")

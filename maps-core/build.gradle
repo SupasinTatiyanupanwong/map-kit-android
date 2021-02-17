@@ -16,14 +16,3 @@ dependencies {
     // Keeping version 1.0.0 to avoid Java 8 requirement and version conflicts
     api 'androidx.fragment:fragment:1.0.0'
 }
-
-ext {
-    POM_ARTIFACT_ID = 'maps-core'
-
-    POM_NAME = 'Map Kit (Core)'
-    POM_DESCRIPTION = 'Encapsulates Maps APIs for Android.'
-    POM_VERSION = '1.2.1'
-}
-
-apply from: rootProject.file("gradle/install.gradle")
-apply from: rootProject.file("gradle/bintray.gradle")
