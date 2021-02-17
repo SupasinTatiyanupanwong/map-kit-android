@@ -265,7 +265,7 @@ public class HuaweiMapFactory implements MapFactory {
         final int result =
                 HuaweiApiAvailability.getInstance().isHuaweiMobileServicesAvailable(context);
         if (UNAVAILABLE_RESULTS.contains(result)) {
-            throw new UnsupportedOperationException("Google Maps is not available.");
+            throw new UnsupportedOperationException("Huawei Maps is not available.");
         }
 
         return new HuaweiMapFactory();

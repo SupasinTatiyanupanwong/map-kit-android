@@ -12,6 +12,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 29
+
+        consumerProguardFiles 'consumer-rules.pro'
     }
 }
 
@@ -28,7 +30,7 @@ ext {
 
     POM_NAME = 'Map Kit (Huawei)'
     POM_DESCRIPTION = 'Provides Huawei Maps integration to Map Kit.'
-    POM_VERSION = '1.2.1'
+    POM_VERSION = '1.2.2'
 }
 
 apply from: rootProject.file("gradle/install.gradle")
