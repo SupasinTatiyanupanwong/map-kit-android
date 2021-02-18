@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="6dp"
-        android:background="@color/white"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
         <Spinner
