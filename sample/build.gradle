@@ -32,7 +32,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId 'me.tatiyanupanwong.supasin.android.samples.kits.maps'
+        applicationId 'dev.supasintatiyanupanwong.samples.android.kits.maps'
 
         minSdkVersion 19
         targetSdkVersion 29

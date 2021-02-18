@@ -18,7 +18,7 @@
 
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.tatiyanupanwong.supasin.android.samples.kits.maps">
+    package="dev.supasintatiyanupanwong.samples.android.kits.maps">
 
     <!-- EXTERNAL_STORAGE permissions are optional for Android 6.0 onwards. -->
     <uses-permission
