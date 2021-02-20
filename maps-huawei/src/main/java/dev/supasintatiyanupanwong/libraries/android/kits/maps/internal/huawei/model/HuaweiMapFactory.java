@@ -241,27 +241,6 @@ public class HuaweiMapFactory implements MapFactory {
         return new HuaweiVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
     }
 
-
-    /**
-     * @see #getMapAsync(Fragment, MapKit.OnMapReadyCallback)
-     * @deprecated As of 1.2.0, use {@link #getMapAsync(Fragment, MapKit.OnMapReadyCallback)}
-     * instead.
-     */
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    @Override
-    public void getMapAsync(
-            @NonNull Fragment fragment,
-            @NonNull final OnMapReadyCallback callback) {
-        ((com.huawei.hms.maps.SupportMapFragment) fragment)
-                .getMapAsync(new com.huawei.hms.maps.OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(com.huawei.hms.maps.HuaweiMap huaweiMap) {
-                        callback.onMapReady(new HuaweiMapClient(huaweiMap));
-                    }
-                });
-    }
-
     @Override
     public void getMapAsync(
             @NonNull Fragment fragment,

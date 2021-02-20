@@ -34,7 +34,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Map;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapFactory;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
@@ -58,21 +57,6 @@ public final class MapKit {
     private static final MapFactory FACTORY = MapsPlatform.get().getFactory();
 
     private MapKit() {} // No instances!
-
-
-    /**
-     * Obtains a factory object to interact with Maps APIs for the current platform.
-     *
-     * @return The {@link Map.Factory} for the current platform.
-     * @deprecated As of 1.2.0, the usage of {@link Map.Factory} is now restricted to library group.
-     * Its public APIs are now lifted and can be accessed directly through {@link MapKit}.
-     */
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    @NonNull
-    public static Map.Factory getFactory() {
-        return FACTORY;
-    }
 
 
     /**

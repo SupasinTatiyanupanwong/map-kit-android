@@ -242,27 +242,6 @@ class GoogleMapFactory implements MapFactory {
         return new GoogleVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
     }
 
-
-    /**
-     * @see #getMapAsync(Fragment, MapKit.OnMapReadyCallback)
-     * @deprecated As of 1.2.0, use {@link #getMapAsync(Fragment, MapKit.OnMapReadyCallback)}
-     * instead.
-     */
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    @Override
-    public void getMapAsync(
-            @NonNull Fragment fragment,
-            @NonNull final OnMapReadyCallback callback) {
-        ((com.google.android.gms.maps.SupportMapFragment) fragment)
-                .getMapAsync(new com.google.android.gms.maps.OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(com.google.android.gms.maps.GoogleMap googleMap) {
-                        callback.onMapReady(new GoogleMapClient(googleMap));
-                    }
-                });
-    }
-
     @Override
     public void getMapAsync(
             @NonNull Fragment fragment,
