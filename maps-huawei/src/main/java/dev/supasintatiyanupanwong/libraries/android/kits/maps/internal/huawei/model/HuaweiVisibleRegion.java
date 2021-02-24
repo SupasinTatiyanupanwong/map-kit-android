@@ -51,45 +51,40 @@ class HuaweiVisibleRegion implements VisibleRegion {
                 HuaweiLatLngBounds.unwrap(latLngBounds)));
     }
 
-    @NonNull
     @Override
-    public LatLng getNearLeft() {
+    public @NonNull LatLng getNearLeft() {
         if (mNearLeft == null) {
             mNearLeft = HuaweiLatLng.wrap(mDelegate.nearLeft);
         }
         return mNearLeft;
     }
 
-    @NonNull
     @Override
-    public LatLng getNearRight() {
+    public @NonNull LatLng getNearRight() {
         if (mNearRight == null) {
             mNearRight = HuaweiLatLng.wrap(mDelegate.nearRight);
         }
         return mNearRight;
     }
 
-    @NonNull
     @Override
-    public LatLng getFarLeft() {
+    public @NonNull LatLng getFarLeft() {
         if (mFarLeft == null) {
             mFarLeft = HuaweiLatLng.wrap(mDelegate.farLeft);
         }
         return mFarLeft;
     }
 
-    @NonNull
     @Override
-    public LatLng getFarRight() {
+    public @NonNull LatLng getFarRight() {
         if (mFarRight == null) {
             mFarRight = HuaweiLatLng.wrap(mDelegate.farRight);
         }
         return mFarRight;
     }
 
-    @NonNull
     @Override
-    public LatLngBounds getLatLngBounds() {
+    public @NonNull LatLngBounds getLatLngBounds() {
         if (mLatLngBounds == null) {
             mLatLngBounds = HuaweiLatLngBounds.wrap(mDelegate.latLngBounds);
         }
@@ -115,9 +110,8 @@ class HuaweiVisibleRegion implements VisibleRegion {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

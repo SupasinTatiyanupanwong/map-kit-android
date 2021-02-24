@@ -43,9 +43,8 @@ class HuaweiTile implements Tile {
         return mDelegate.height;
     }
 
-    @Nullable
     @Override
-    public byte[] getData() {
+    public @Nullable byte[] getData() {
         return mDelegate.data;
     }
 
@@ -68,9 +67,8 @@ class HuaweiTile implements Tile {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

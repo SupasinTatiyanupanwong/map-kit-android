@@ -52,9 +52,8 @@ class HuaweiDot extends HuaweiPatternItem implements Dot {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

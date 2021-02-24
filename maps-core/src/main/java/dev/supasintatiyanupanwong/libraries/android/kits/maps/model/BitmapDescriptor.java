@@ -55,8 +55,7 @@ public interface BitmapDescriptor {
          * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
          * to load.
          */
-        @NonNull
-        BitmapDescriptor fromResource(int resourceId);
+        @NonNull BitmapDescriptor fromResource(int resourceId);
 
         /**
          * Creates a {@link BitmapDescriptor} using the name of a Bitmap image in the assets
@@ -66,8 +65,7 @@ public interface BitmapDescriptor {
          * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
          * to load.
          */
-        @NonNull
-        BitmapDescriptor fromAsset(String assetName);
+        @NonNull BitmapDescriptor fromAsset(String assetName);
 
         /**
          * Creates a {@link BitmapDescriptor} using the name of a Bitmap image file located in the
@@ -78,8 +76,7 @@ public interface BitmapDescriptor {
          * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
          * to load.
          */
-        @NonNull
-        BitmapDescriptor fromFile(String fileName);
+        @NonNull BitmapDescriptor fromFile(String fileName);
 
         /**
          * Creates a {@link BitmapDescriptor} from the absolute file path of a Bitmap image.
@@ -88,16 +85,14 @@ public interface BitmapDescriptor {
          * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
          * to load.
          */
-        @NonNull
-        BitmapDescriptor fromPath(String absolutePath);
+        @NonNull BitmapDescriptor fromPath(String absolutePath);
 
         /**
          * Creates a {@link BitmapDescriptor} that refers to the default marker image.
          *
          * @return The {@link BitmapDescriptor} that refers to the default marker image.
          */
-        @NonNull
-        BitmapDescriptor defaultMarker();
+        @NonNull BitmapDescriptor defaultMarker();
 
         /**
          * Creates a {@link BitmapDescriptor} that refers to the default marker image.
@@ -105,8 +100,7 @@ public interface BitmapDescriptor {
          * @param hue The hue of the marker. Value must be greater or equal to 0 and less than 360.
          * @return The {@link BitmapDescriptor} that refers to the default marker image.
          */
-        @NonNull
-        BitmapDescriptor defaultMarker(
+        @NonNull BitmapDescriptor defaultMarker(
                 @FloatRange(from = 0, to = 360, toInclusive = false) float hue);
 
         /**
@@ -115,8 +109,7 @@ public interface BitmapDescriptor {
          * @param image The bitmap image.
          * @return The {@link BitmapDescriptor} from a given Bitmap image.
          */
-        @NonNull
-        BitmapDescriptor fromBitmap(Bitmap image);
+        @NonNull BitmapDescriptor fromBitmap(Bitmap image);
     }
 
 }

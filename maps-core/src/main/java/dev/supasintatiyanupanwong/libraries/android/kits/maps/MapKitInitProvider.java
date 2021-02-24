@@ -40,9 +40,8 @@ public class MapKitInitProvider extends ContentProvider {
         return false;
     }
 
-    @Nullable
     @Override
-    public Cursor query(
+    public @Nullable Cursor query(
             @NonNull Uri uri,
             @Nullable String[] projection,
             @Nullable String selection,
@@ -51,21 +50,21 @@ public class MapKitInitProvider extends ContentProvider {
         return null;
     }
 
-    @Nullable
     @Override
-    public String getType(@NonNull Uri uri) {
+    public @Nullable String getType(@NonNull Uri uri) {
         return null;
     }
 
-    @Nullable
     @Override
-    public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+    public @Nullable Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         return null;
     }
 
     @Override
     public int delete(
-            @NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+            @NonNull Uri uri,
+            @Nullable String selection,
+            @Nullable String[] selectionArgs) {
         return 0;
     }
 

@@ -28,8 +28,7 @@ public interface PointOfInterest {
     /**
      *The {@link LatLng} of the POI.
      */
-    @NonNull
-    LatLng getLatLng();
+    @NonNull LatLng getLatLng();
 
     /**
      * The placeId of the POI.

@@ -33,21 +33,18 @@ class GoogleProjection implements Projection {
         mDelegate = delegate;
     }
 
-    @Nullable
     @Override
-    public LatLng fromScreenLocation(Point point) {
+    public @Nullable LatLng fromScreenLocation(Point point) {
         return GoogleLatLng.wrap(mDelegate.fromScreenLocation(point));
     }
 
-    @NonNull
     @Override
-    public Point toScreenLocation(LatLng location) {
+    public @NonNull Point toScreenLocation(LatLng location) {
         return mDelegate.toScreenLocation(GoogleLatLng.unwrap(location));
     }
 
-    @NonNull
     @Override
-    public VisibleRegion getVisibleRegion() {
+    public @NonNull VisibleRegion getVisibleRegion() {
         return GoogleVisibleRegion.wrap(mDelegate.getVisibleRegion());
     }
 
@@ -70,9 +67,8 @@ class GoogleProjection implements Projection {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

@@ -40,8 +40,7 @@ public interface Projection {
      * ray through the given screen point does not intersect the ground plane (this might be the
      * case if the map is heavily tilted).
      */
-    @Nullable
-    LatLng fromScreenLocation(Point point);
+    @Nullable LatLng fromScreenLocation(Point point);
 
     /**
      * Returns a screen location that corresponds to a geographical coordinate ({@link LatLng}).
@@ -51,8 +50,7 @@ public interface Projection {
      * @param location A {@link LatLng} on the map to convert to a screen location.
      * @return A {@link Point} representing the screen location in screen pixels.
      */
-    @NonNull
-    Point toScreenLocation(LatLng location);
+    @NonNull Point toScreenLocation(LatLng location);
 
     /**
      * Gets a projection of the viewing frustum for converting between screen coordinates and
@@ -60,7 +58,6 @@ public interface Projection {
      *
      * @return The projection of the viewing frustum in its current state.
      */
-    @NonNull
-    VisibleRegion getVisibleRegion();
+    @NonNull VisibleRegion getVisibleRegion();
 
 }

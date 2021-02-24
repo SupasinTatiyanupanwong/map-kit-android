@@ -48,8 +48,7 @@ public interface CameraUpdate {
          *
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate zoomIn();
+        @NonNull CameraUpdate zoomIn();
 
         /**
          * Returns a {@link CameraUpdate} that zooms out on the map by moving the viewpoint's
@@ -57,8 +56,7 @@ public interface CameraUpdate {
          *
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate zoomOut();
+        @NonNull CameraUpdate zoomOut();
 
         /**
          * Returns a {@link CameraUpdate} that scrolls the camera over the map, shifting the
@@ -76,8 +74,7 @@ public interface CameraUpdate {
          * camera upwards, with respect to its current orientation.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate scrollBy(float xPixel, float yPixel);
+        @NonNull CameraUpdate scrollBy(float xPixel, float yPixel);
 
         /**
          * Returns a {@link CameraUpdate} that moves the camera viewpoint to a particular zoom
@@ -88,8 +85,7 @@ public interface CameraUpdate {
          * zoom in. Not all areas have tiles at the largest zoom levels.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate zoomTo(float zoom);
+        @NonNull CameraUpdate zoomTo(float zoom);
 
         /**
          * Returns a {@link CameraUpdate} that shifts the zoom level of the current camera
@@ -103,8 +99,7 @@ public interface CameraUpdate {
          * surface of the Earth.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate zoomBy(float amount);
+        @NonNull CameraUpdate zoomBy(float amount);
 
         /**
          * Returns a {@link CameraUpdate} that shifts the zoom level of the current camera
@@ -128,8 +123,7 @@ public interface CameraUpdate {
          * remain the same after the camera has moved.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate zoomBy(float amount, Point focus);
+        @NonNull CameraUpdate zoomBy(float amount, Point focus);
 
         /**
          * Returns a {@link CameraUpdate} that moves the camera to a specified
@@ -138,8 +132,7 @@ public interface CameraUpdate {
          *
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate newCameraPosition(CameraPosition cameraPosition);
+        @NonNull CameraUpdate newCameraPosition(CameraPosition cameraPosition);
 
         /**
          * Returns a {@link CameraUpdate} that moves the camera to a specified
@@ -149,8 +142,7 @@ public interface CameraUpdate {
          * @param latLng A {@link LatLng} object containing the desired latitude and longitude.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate newLatLng(@NonNull LatLng latLng);
+        @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng);
 
         /**
          * Returns a {@link CameraUpdate} that moves the center of the screen to a latitude and
@@ -162,8 +154,7 @@ public interface CameraUpdate {
          * in. Not all areas have tiles at the largest zoom levels.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom);
+        @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom);
 
         /**
          * Returns a {@link CameraUpdate} that transforms the camera such that the specified
@@ -184,8 +175,7 @@ public interface CameraUpdate {
          * edges. This value is applied to all four sides of the bounding box.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding);
+        @NonNull CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding);
 
         /**
          * Returns a {@link CameraUpdate} that transforms the camera such that the specified
@@ -204,9 +194,11 @@ public interface CameraUpdate {
          * @param padding Additional size restriction (in px) of the bounding box.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull
-        CameraUpdate newLatLngBounds(
-                @NonNull LatLngBounds bounds, int width, int height, int padding);
+        @NonNull CameraUpdate newLatLngBounds(
+                @NonNull LatLngBounds bounds,
+                int width,
+                int height,
+                int padding);
     }
 
 }

@@ -73,9 +73,8 @@ public class MapInPagerDemoActivity extends AppCompatActivity {
             return 3;
         }
 
-        @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public @NonNull Fragment getItem(int position) {
             switch (position) {
                 case 0:
                 case 1:

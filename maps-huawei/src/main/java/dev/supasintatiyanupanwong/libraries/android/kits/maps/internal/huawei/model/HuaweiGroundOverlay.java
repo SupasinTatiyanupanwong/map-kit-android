@@ -166,9 +166,8 @@ class HuaweiGroundOverlay implements GroundOverlay {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -185,72 +184,65 @@ class HuaweiGroundOverlay implements GroundOverlay {
             mDelegate = new com.huawei.hms.maps.model.GroundOverlayOptions();
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options image(@NonNull BitmapDescriptor imageDescriptor) {
+        public @NonNull GroundOverlay.Options image(@NonNull BitmapDescriptor imageDescriptor) {
             mDelegate.image(HuaweiBitmapDescriptor.unwrap(imageDescriptor));
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options anchor(float anchorU, float anchorV) {
+        public @NonNull GroundOverlay.Options anchor(float anchorU, float anchorV) {
             mDelegate.anchor(anchorU, anchorV);
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options position(@NonNull LatLng location, float width) {
+        public @NonNull GroundOverlay.Options position(@NonNull LatLng location, float width) {
             mDelegate.position(HuaweiLatLng.unwrap(location), width);
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options position(@NonNull LatLng location, float width, float height) {
+        public @NonNull GroundOverlay.Options position(
+                @NonNull LatLng location,
+                float width,
+                float height) {
             mDelegate.position(HuaweiLatLng.unwrap(location), width, height);
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options positionFromBounds(LatLngBounds bounds) {
+        public @NonNull GroundOverlay.Options positionFromBounds(LatLngBounds bounds) {
             mDelegate.positionFromBounds(HuaweiLatLngBounds.unwrap(bounds));
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options bearing(float bearing) {
+        public @NonNull GroundOverlay.Options bearing(float bearing) {
             mDelegate.bearing(bearing);
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options zIndex(float zIndex) {
+        public @NonNull GroundOverlay.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options visible(boolean visible) {
+        public @NonNull GroundOverlay.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options transparency(float transparency) {
+        public @NonNull GroundOverlay.Options transparency(float transparency) {
             mDelegate.transparency(transparency);
             return this;
         }
 
-        @NonNull
         @Override
-        public GroundOverlay.Options clickable(boolean clickable) {
+        public @NonNull GroundOverlay.Options clickable(boolean clickable) {
             mDelegate.clickable(clickable);
             return this;
         }

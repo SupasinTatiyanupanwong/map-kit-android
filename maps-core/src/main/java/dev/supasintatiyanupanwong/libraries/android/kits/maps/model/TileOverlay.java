@@ -123,8 +123,7 @@ public interface TileOverlay {
          * @param tileProvider The {@link TileProvider} to use for this tile overlay.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options tileProvider(TileProvider tileProvider);
+        @NonNull Options tileProvider(TileProvider tileProvider);
 
         /**
          * Specifies the tile overlay's zIndex, i.e., the order in which it will be drawn where
@@ -133,8 +132,7 @@ public interface TileOverlay {
          * @param zIndex The zIndex to use for this tile overlay.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options zIndex(float zIndex);
+        @NonNull Options zIndex(float zIndex);
 
         /**
          * Specifies the visibility for the tile overlay. The default visibility is {@code true}.
@@ -142,8 +140,7 @@ public interface TileOverlay {
          * @param visible The visibility setting to use for this tile overlay.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options visible(boolean visible);
+        @NonNull Options visible(boolean visible);
 
         /**
          * Specifies whether the tiles should fade in. The default is {@code true}.
@@ -151,8 +148,7 @@ public interface TileOverlay {
          * @param fadeIn The visibility setting to use for this tile overlay.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options fadeIn(boolean fadeIn);
+        @NonNull Options fadeIn(boolean fadeIn);
 
         /**
          * Specifies the transparency of the tile overlay. The default transparency is 0 (opaque).
@@ -162,8 +158,7 @@ public interface TileOverlay {
          * @return This {@link Options} object for method chaining.
          * @throws IllegalArgumentException If the transparency is outside the range {@code 0..1}.
          */
-        @NonNull
-        Options transparency(@FloatRange(from = 0.0, to = 1.0) float transparency);
+        @NonNull Options transparency(@FloatRange(from = 0.0, to = 1.0) float transparency);
 
         /**
          * Gets the tile provider set for this {@link Options} object.

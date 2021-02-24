@@ -42,9 +42,8 @@ class GoogleCustomCap extends GoogleCap implements CustomCap {
                 GoogleBitmapDescriptor.unwrap(bitmapDescriptor)));
     }
 
-    @NonNull
     @Override
-    public BitmapDescriptor getBitmapDescriptor() {
+    public @NonNull BitmapDescriptor getBitmapDescriptor() {
         if (mBitmapDescriptor == null) {
             mBitmapDescriptor = GoogleBitmapDescriptor.wrap(mDelegate.bitmapDescriptor);
         }
@@ -75,9 +74,8 @@ class GoogleCustomCap extends GoogleCap implements CustomCap {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

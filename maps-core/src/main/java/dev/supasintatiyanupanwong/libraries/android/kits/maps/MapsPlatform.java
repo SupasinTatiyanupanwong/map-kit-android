@@ -23,13 +23,15 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Objects;
+
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapFactory;
 
 abstract class MapsPlatform {
 
     private static MapsPlatform sPlatform;
 
-    static synchronized MapsPlatform get() {
+    static synchronized @NonNull MapsPlatform get() {
         return sPlatform;
     }
 
@@ -38,8 +40,7 @@ abstract class MapsPlatform {
     }
 
 
-    @NonNull
-    abstract MapFactory getFactory();
+    abstract @NonNull MapFactory getFactory();
 
     @LayoutRes
     abstract int getFragmentLayoutId();
@@ -88,9 +89,8 @@ abstract class MapsPlatform {
 
         private AmazonMapsPlatform() {}
 
-        @NonNull
         @Override
-        MapFactory getFactory() {
+        @NonNull MapFactory getFactory() {
             return sFactory;
         }
 
@@ -107,13 +107,13 @@ abstract class MapsPlatform {
         }
 
 
-        @Nullable
-        static AmazonMapsPlatform buildIfSupported(@NonNull Context context) {
+        static @Nullable AmazonMapsPlatform buildIfSupported(@NonNull Context context) {
             try {
-                sFactory = (MapFactory) Class
-                        .forName(LIBRARY_PACKAGE_NAME + ".model.AmazonMapFactory")
-                        .getMethod("buildIfSupported", Context.class)
-                        .invoke(null, context);
+                sFactory = Objects.requireNonNull(
+                        (MapFactory) Class
+                                .forName(LIBRARY_PACKAGE_NAME + ".model.AmazonMapFactory")
+                                .getMethod("buildIfSupported", Context.class)
+                                .invoke(null, context));
 
                 sFragmentLayoutId = Class.forName(CLASS_NAME_LAYOUT_RES)
                         .getField(FIELD_NAME_LAYOUT_ID).getInt(null);
@@ -146,9 +146,8 @@ abstract class MapsPlatform {
 
         private GoogleMapsPlatform() {}
 
-        @NonNull
         @Override
-        MapFactory getFactory() {
+        @NonNull MapFactory getFactory() {
             return sFactory;
         }
 
@@ -165,13 +164,13 @@ abstract class MapsPlatform {
         }
 
 
-        @Nullable
-        static GoogleMapsPlatform buildIfSupported(@NonNull Context context) {
+        static @Nullable GoogleMapsPlatform buildIfSupported(@NonNull Context context) {
             try {
-                sFactory = (MapFactory) Class
-                        .forName(LIBRARY_PACKAGE_NAME + ".model.GoogleMapFactory")
-                        .getMethod("buildIfSupported", Context.class)
-                        .invoke(null, context);
+                sFactory = Objects.requireNonNull(
+                        (MapFactory) Class
+                                .forName(LIBRARY_PACKAGE_NAME + ".model.GoogleMapFactory")
+                                .getMethod("buildIfSupported", Context.class)
+                                .invoke(null, context));
 
                 sFragmentLayoutId = Class.forName(CLASS_NAME_LAYOUT_RES)
                         .getField(FIELD_NAME_LAYOUT_ID).getInt(null);
@@ -204,9 +203,8 @@ abstract class MapsPlatform {
 
         private HuaweiMapsPlatform() {}
 
-        @NonNull
         @Override
-        MapFactory getFactory() {
+        @NonNull MapFactory getFactory() {
             return sFactory;
         }
 
@@ -223,13 +221,13 @@ abstract class MapsPlatform {
         }
 
 
-        @Nullable
-        static HuaweiMapsPlatform buildIfSupported(@NonNull Context context) {
+        static @Nullable HuaweiMapsPlatform buildIfSupported(@NonNull Context context) {
             try {
-                sFactory = (MapFactory) Class
-                        .forName(LIBRARY_PACKAGE_NAME + ".model.HuaweiMapFactory")
-                        .getMethod("buildIfSupported", Context.class)
-                        .invoke(null, context);
+                sFactory = Objects.requireNonNull(
+                        (MapFactory) Class
+                                .forName(LIBRARY_PACKAGE_NAME + ".model.HuaweiMapFactory")
+                                .getMethod("buildIfSupported", Context.class)
+                                .invoke(null, context));
 
                 sFragmentLayoutId = Class.forName(CLASS_NAME_LAYOUT_RES)
                         .getField(FIELD_NAME_LAYOUT_ID).getInt(null);

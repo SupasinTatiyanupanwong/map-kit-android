@@ -30,16 +30,14 @@ public interface LatLngBounds {
      *
      * @return Southwest corner of the bound.
      */
-    @NonNull
-    LatLng getSouthwest();
+    @NonNull LatLng getSouthwest();
 
     /**
      * Returns northeast corner of the bound.
      *
      * @return Northeast corner of the bound.
      */
-    @NonNull
-    LatLng getNortheast();
+    @NonNull LatLng getNortheast();
 
     /**
      * Returns whether this contains the given {@link LatLng}.
@@ -62,8 +60,7 @@ public interface LatLngBounds {
      * @param point A {@link LatLng} to be included in the new bounds
      * @return A new {@link LatLngBounds} that contains this and the extra point.
      */
-    @NonNull
-    LatLngBounds including(@NonNull LatLng point);
+    @NonNull LatLngBounds including(@NonNull LatLng point);
 
     /**
      * Returns the center of this LatLngBounds. The center is simply the average of the coordinates
@@ -73,8 +70,7 @@ public interface LatLngBounds {
      *
      * @return A {@link LatLng} that is the center of the LatLngBounds.
      */
-    @NonNull
-    LatLng getCenter();
+    @NonNull LatLng getCenter();
 
 
     /**
@@ -94,8 +90,7 @@ public interface LatLngBounds {
          * @param point A {@link LatLng} to be included in the bounds.
          * @return This {@link Builder} object for method chaining.
          */
-        @NonNull
-        Builder include(@NonNull LatLng point);
+        @NonNull Builder include(@NonNull LatLng point);
 
         /**
          * Creates the LatLng bounds.
@@ -103,8 +98,7 @@ public interface LatLngBounds {
          * @return The created {@link LatLngBounds} object.
          * @throws IllegalStateException If no points have been included.
          */
-        @NonNull
-        LatLngBounds build();
+        @NonNull LatLngBounds build();
     }
 
 }

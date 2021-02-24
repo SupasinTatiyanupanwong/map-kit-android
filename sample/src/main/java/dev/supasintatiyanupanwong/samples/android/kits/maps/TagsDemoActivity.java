@@ -68,9 +68,8 @@ public class TagsDemoActivity extends AppCompatActivity implements
             mClickCount++;
         }
 
-        @NonNull
         @Override
-        public String toString() {
+        public @NonNull String toString() {
             return "The " + mDescription + " has been clicked " + mClickCount + " times.";
         }
     }

@@ -52,9 +52,8 @@ class GoogleSquareCap extends GoogleCap implements SquareCap {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

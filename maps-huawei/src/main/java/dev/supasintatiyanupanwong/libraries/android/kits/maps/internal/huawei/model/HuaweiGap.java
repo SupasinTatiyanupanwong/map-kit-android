@@ -57,9 +57,8 @@ class HuaweiGap extends HuaweiPatternItem implements Gap {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

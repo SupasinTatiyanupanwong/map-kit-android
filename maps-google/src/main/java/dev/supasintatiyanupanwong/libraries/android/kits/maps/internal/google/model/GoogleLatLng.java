@@ -66,9 +66,8 @@ class GoogleLatLng implements LatLng {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

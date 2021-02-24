@@ -40,8 +40,7 @@ public interface Marker {
      *
      * @return This marker's id.
      */
-    @NonNull
-    String getId();
+    @NonNull String getId();
 
     /**
      * Sets the position of the marker.
@@ -53,8 +52,7 @@ public interface Marker {
      *
      * @return A {@link LatLng} object specifying the marker's current position.
      */
-    @NonNull
-    LatLng getPosition();
+    @NonNull LatLng getPosition();
 
     /**
      * Sets the zIndex of the marker.
@@ -265,8 +263,7 @@ public interface Marker {
      *
      * @return The tag if a tag was set with {@code setTag}; {@code null} if no tag has been set.
      */
-    @Nullable
-    Object getTag();
+    @Nullable Object getTag();
 
 
     /**
@@ -276,22 +273,19 @@ public interface Marker {
         /**
          * Sets the location for the marker.
          */
-        @NonNull
-        Options position(@NonNull LatLng latLng);
+        @NonNull Options position(@NonNull LatLng latLng);
 
         /**
          * Sets the zIndex for the marker.
          */
-        @NonNull
-        Options zIndex(float zIndex);
+        @NonNull Options zIndex(float zIndex);
 
         /**
          * Sets the icon for the marker.
          *
          * @param iconDescriptor If {@code null} , the default marker is used.
          */
-        @NonNull
-        Options icon(@Nullable BitmapDescriptor iconDescriptor);
+        @NonNull Options icon(@Nullable BitmapDescriptor iconDescriptor);
 
         /**
          * Sets the anchor point for the marker.
@@ -326,8 +320,7 @@ public interface Marker {
          * @param anchorU u-coordinate of the anchor, as a ratio of the image width.
          * @param anchorV v-coordinate of the anchor, as a ratio of the image height.
          */
-        @NonNull
-        Options anchor(
+        @NonNull Options anchor(
                 @FloatRange(from = 0.0, to = 1.0) float anchorU,
                 @FloatRange(from = 0.0, to = 1.0) float anchorV);
 
@@ -340,34 +333,29 @@ public interface Marker {
          * @param anchorU u-coordinate of the anchor, as a ratio of the image width.
          * @param anchorV v-coordinate of the anchor, as a ratio of the image height.
          */
-        @NonNull
-        Options infoWindowAnchor(
+        @NonNull Options infoWindowAnchor(
                 @FloatRange(from = 0.0, to = 1.0) float anchorU,
                 @FloatRange(from = 0.0, to = 1.0) float anchorV);
 
         /**
          * Sets the title for the marker.
          */
-        @NonNull
-        Options title(@Nullable String title);
+        @NonNull Options title(@Nullable String title);
 
         /**
          * Sets the snippet for the marker.
          */
-        @NonNull
-        Options snippet(@Nullable String snippet);
+        @NonNull Options snippet(@Nullable String snippet);
 
         /**
          * Sets the draggability for the marker.
          */
-        @NonNull
-        Options draggable(boolean draggable);
+        @NonNull Options draggable(boolean draggable);
 
         /**
          * Sets the visibility for the marker.
          */
-        @NonNull
-        Options visible(boolean visible);
+        @NonNull Options visible(boolean visible);
 
         /**
          * Sets whether this marker should be flat against the map {@code true} or a billboard
@@ -377,8 +365,7 @@ public interface Marker {
          * always be drawn facing the camera and will rotate and tilt with the camera. The default
          * value is {@code false}.
          */
-        @NonNull
-        Options flat(boolean flat);
+        @NonNull Options flat(boolean flat);
 
         /**
          * Sets the rotation of the marker in degrees clockwise about the marker's anchor point.
@@ -388,15 +375,13 @@ public interface Marker {
          * When the marker is a billboard, the default position is pointing up and the rotation is
          * such that the marker is always facing the camera. The default value is 0.
          */
-        @NonNull
-        Options rotation(float rotation);
+        @NonNull Options rotation(float rotation);
 
         /**
          * Sets the alpha (opacity) of the marker. This is a value from 0 to 1, where 0 means the
          * marker is completely transparent and 1 means the marker is completely opaque.
          */
-        @NonNull
-        Options alpha(@FloatRange(from = 0.0, to = 1.0) float alpha);
+        @NonNull Options alpha(@FloatRange(from = 0.0, to = 1.0) float alpha);
 
         /**
          * Gets the title set for this {@link Marker.Options object}.
@@ -425,8 +410,7 @@ public interface Marker {
          * @return A {@link BitmapDescriptor} representing the custom icon, or {@code null} if no
          * custom icon is set.
          */
-        @Nullable
-        BitmapDescriptor getIcon();
+        @Nullable BitmapDescriptor getIcon();
 
         /**
          * Horizontal distance, normalized to [0, 1], of the anchor from the left edge.

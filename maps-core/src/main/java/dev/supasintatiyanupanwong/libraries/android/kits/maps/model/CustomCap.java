@@ -30,8 +30,7 @@ public interface CustomCap extends Cap {
     /**
      * Descriptor of the bitmap to be overlaid at the start or end vertex.
      */
-    @NonNull
-    BitmapDescriptor getBitmapDescriptor();
+    @NonNull BitmapDescriptor getBitmapDescriptor();
 
     /**
      * Reference stroke width (in pixels) - the stroke width for which the cap bitmap at its native

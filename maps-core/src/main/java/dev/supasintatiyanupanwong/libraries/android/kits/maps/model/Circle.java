@@ -123,8 +123,7 @@ public interface Circle {
      *
      * @return The stroke pattern.
      */
-    @Nullable
-    List<PatternItem> getStrokePattern();
+    @Nullable List<PatternItem> getStrokePattern();
 
     /**
      * Sets the fill color.
@@ -217,8 +216,7 @@ public interface Circle {
      *
      * @return The tag if a tag was set with {@code setTag}; {@code null} if no tag has been set.
      */
-    @Nullable
-    Object getTag();
+    @Nullable Object getTag();
 
 
     /**
@@ -235,8 +233,7 @@ public interface Circle {
          * @param center The geographic center as a {@link LatLng}.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options center(LatLng center);
+        @NonNull Options center(LatLng center);
 
         /**
          * Sets the radius in meters.
@@ -246,8 +243,7 @@ public interface Circle {
          * @param radius Radius in meters.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options radius(double radius);
+        @NonNull Options radius(double radius);
 
         /**
          * Sets the stroke width.
@@ -260,8 +256,7 @@ public interface Circle {
          * @param width Width in pixels.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options strokeWidth(float width);
+        @NonNull Options strokeWidth(float width);
 
         /**
          * Sets the stroke color.
@@ -274,8 +269,7 @@ public interface Circle {
          * @param color Color in the {@link Color} format.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options strokeColor(int color);
+        @NonNull Options strokeColor(int color);
 
         /**
          * Sets a stroke pattern for the circle's outline. The default stroke pattern is solid,
@@ -284,8 +278,7 @@ public interface Circle {
          * @param pattern A stroke pattern for the circle's outline.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options strokePattern(@Nullable List<PatternItem> pattern);
+        @NonNull Options strokePattern(@Nullable List<PatternItem> pattern);
 
         /**
          * Sets the fill color.
@@ -298,8 +291,7 @@ public interface Circle {
          * @param color Color in the {@link Color} format.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options fillColor(int color);
+        @NonNull Options fillColor(int color);
 
         /**
          * Sets the zIndex.
@@ -312,8 +304,7 @@ public interface Circle {
          * @param zIndex The zIndex value.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options zIndex(float zIndex);
+        @NonNull Options zIndex(float zIndex);
 
         /**
          * Sets the visibility.
@@ -323,8 +314,7 @@ public interface Circle {
          * @param visible {@code false} to make this circle invisible.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options visible(boolean visible);
+        @NonNull Options visible(boolean visible);
 
         /**
          * Specifies whether this circle is clickable. The default setting is {@code false}.
@@ -332,8 +322,7 @@ public interface Circle {
          * @param clickable {@code false} to make this circle not clickable.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options clickable(boolean clickable);
+        @NonNull Options clickable(boolean clickable);
 
         /**
          * Returns the center as a {@link LatLng}.
@@ -368,8 +357,7 @@ public interface Circle {
          *
          * @return The stroke pattern of the circle's outline.
          */
-        @Nullable
-        List<PatternItem> getStrokePattern();
+        @Nullable List<PatternItem> getStrokePattern();
 
         /**
          * Returns the fill color.

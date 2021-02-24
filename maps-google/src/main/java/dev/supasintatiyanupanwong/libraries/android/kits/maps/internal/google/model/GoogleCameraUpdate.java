@@ -31,78 +31,70 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds
 class GoogleCameraUpdate implements CameraUpdate {
 
     static final CameraUpdate.Factory FACTORY = new CameraUpdate.Factory() {
-        @NonNull
         @Override
-        public CameraUpdate zoomIn() {
+        public @NonNull CameraUpdate zoomIn() {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomIn());
         }
 
-        @NonNull
         @Override
-        public CameraUpdate zoomOut() {
+        public @NonNull CameraUpdate zoomOut() {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomOut());
         }
 
-        @NonNull
         @Override
-        public CameraUpdate scrollBy(float xPixel, float yPixel) {
+        public @NonNull CameraUpdate scrollBy(float xPixel, float yPixel) {
             return new GoogleCameraUpdate(CameraUpdateFactory.scrollBy(xPixel, yPixel));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate zoomTo(float zoom) {
+        public @NonNull CameraUpdate zoomTo(float zoom) {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomTo(zoom));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate zoomBy(float amount) {
+        public @NonNull CameraUpdate zoomBy(float amount) {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomBy(amount));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate zoomBy(float amount, Point focus) {
+        public @NonNull CameraUpdate zoomBy(float amount, Point focus) {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomBy(amount, focus));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newCameraPosition(CameraPosition cameraPosition) {
+        public @NonNull CameraUpdate newCameraPosition(CameraPosition cameraPosition) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newCameraPosition(
                     GoogleCameraPosition.unwrap(cameraPosition)
             ));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newLatLng(@NonNull LatLng latLng) {
+        public @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newLatLng(
                     GoogleLatLng.unwrap(latLng)
             ));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
+        public @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newLatLngZoom(
                     GoogleLatLng.unwrap(latLng), zoom
             ));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding) {
+        public @NonNull CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newLatLngBounds(
                     GoogleLatLngBounds.unwrap(bounds), padding
             ));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newLatLngBounds(
-                @NonNull LatLngBounds bounds, int width, int height, int padding) {
+        public @NonNull CameraUpdate newLatLngBounds(
+                @NonNull LatLngBounds bounds,
+                int width,
+                int height,
+                int padding) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newLatLngBounds(
                     GoogleLatLngBounds.unwrap(bounds), width, height, padding
             ));
@@ -135,9 +127,8 @@ class GoogleCameraUpdate implements CameraUpdate {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

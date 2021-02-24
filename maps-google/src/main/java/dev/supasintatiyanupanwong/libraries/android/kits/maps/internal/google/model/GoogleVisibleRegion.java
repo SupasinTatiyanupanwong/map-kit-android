@@ -51,45 +51,40 @@ class GoogleVisibleRegion implements VisibleRegion {
                 GoogleLatLngBounds.unwrap(latLngBounds)));
     }
 
-    @NonNull
     @Override
-    public LatLng getNearLeft() {
+    public @NonNull LatLng getNearLeft() {
         if (mNearLeft == null) {
             mNearLeft = GoogleLatLng.wrap(mDelegate.nearLeft);
         }
         return mNearLeft;
     }
 
-    @NonNull
     @Override
-    public LatLng getNearRight() {
+    public @NonNull LatLng getNearRight() {
         if (mNearRight == null) {
             mNearRight = GoogleLatLng.wrap(mDelegate.nearRight);
         }
         return mNearRight;
     }
 
-    @NonNull
     @Override
-    public LatLng getFarLeft() {
+    public @NonNull LatLng getFarLeft() {
         if (mFarLeft == null) {
             mFarLeft = GoogleLatLng.wrap(mDelegate.farLeft);
         }
         return mFarLeft;
     }
 
-    @NonNull
     @Override
-    public LatLng getFarRight() {
+    public @NonNull LatLng getFarRight() {
         if (mFarRight == null) {
             mFarRight = GoogleLatLng.wrap(mDelegate.farRight);
         }
         return mFarRight;
     }
 
-    @NonNull
     @Override
-    public LatLngBounds getLatLngBounds() {
+    public @NonNull LatLngBounds getLatLngBounds() {
         if (mLatLngBounds == null) {
             mLatLngBounds = GoogleLatLngBounds.wrap(mDelegate.latLngBounds);
         }
@@ -115,9 +110,8 @@ class GoogleVisibleRegion implements VisibleRegion {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

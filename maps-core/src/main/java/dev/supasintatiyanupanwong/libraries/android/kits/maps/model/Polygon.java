@@ -141,8 +141,7 @@ public interface Polygon {
      *
      * @return The stroke pattern.
      */
-    @Nullable
-    List<PatternItem> getStrokePattern();
+    @Nullable List<PatternItem> getStrokePattern();
 
     /**
      * Sets the fill color of this polygon.
@@ -245,8 +244,7 @@ public interface Polygon {
      *
      * @return The tag if a tag was set with {@code setTag}; {@code null} if no tag has been set.
      */
-    @Nullable
-    Object getTag();
+    @Nullable Object getTag();
 
 
     /**
@@ -258,40 +256,35 @@ public interface Polygon {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options add(LatLng point);
+        @NonNull Options add(LatLng point);
 
         /**
          * Adds vertices to the outline of the polygon being built.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options add(LatLng... points);
+        @NonNull Options add(LatLng... points);
 
         /**
          * Adds vertices to the outline of the polygon being built.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options addAll(Iterable<LatLng> points);
+        @NonNull Options addAll(Iterable<LatLng> points);
 
         /**
          * Adds a hole to the polygon being built.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options addHole(Iterable<LatLng> points);
+        @NonNull Options addHole(Iterable<LatLng> points);
 
         /**
          * Specifies the polygon's stroke width, in display pixels. The default width is 10.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options strokeWidth(float width);
+        @NonNull Options strokeWidth(float width);
 
         /**
          * Specifies the polygon's stroke color, as a 32-bit ARGB color. The default color is
@@ -299,16 +292,14 @@ public interface Polygon {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options strokeColor(int color);
+        @NonNull Options strokeColor(int color);
 
         /**
          * Specifies the joint type for all vertices of the polygon's outline.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options strokeJointType(int jointType);
+        @NonNull Options strokeJointType(int jointType);
 
         /**
          * Specifies a stroke pattern for the polygon's outline. The default stroke pattern is
@@ -316,8 +307,7 @@ public interface Polygon {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options strokePattern(@Nullable List<PatternItem> pattern);
+        @NonNull Options strokePattern(@Nullable List<PatternItem> pattern);
 
         /**
          * Sets the color of the polygon as a 32-bit ARGB color. The default color is black
@@ -325,24 +315,21 @@ public interface Polygon {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options fillColor(int color);
+        @NonNull Options fillColor(int color);
 
         /**
          * Specifies the polygon's zIndex, i.e., the order in which it will be drawn.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options zIndex(float zIndex);
+        @NonNull Options zIndex(float zIndex);
 
         /**
          * Specifies the visibility for the polygon. The default visibility is {@code true}.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options visible(boolean visible);
+        @NonNull Options visible(boolean visible);
 
         /**
          * Specifies whether to draw each segment of this polygon as a geodesic. The default
@@ -350,16 +337,14 @@ public interface Polygon {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options geodesic(boolean geodesic);
+        @NonNull Options geodesic(boolean geodesic);
 
         /**
          * Specifies whether this polygon is clickable. The default setting is {@code false}.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options clickable(boolean clickable);
+        @NonNull Options clickable(boolean clickable);
 
         /**
          * Gets the outline set for this {@link Options} object.
@@ -403,8 +388,7 @@ public interface Polygon {
          *
          * @return The stroke pattern of the polygon's outline.
          */
-        @Nullable
-        List<PatternItem> getStrokePattern();
+        @Nullable List<PatternItem> getStrokePattern();
 
         /**
          * Gets the fill color set for this {@link Options} object.

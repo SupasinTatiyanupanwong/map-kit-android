@@ -80,9 +80,8 @@ class GooglePolyline implements Polyline {
         mDelegate.setStartCap(GoogleCap.unwrap(startCap));
     }
 
-    @NonNull
     @Override
-    public Cap getStartCap() {
+    public @NonNull Cap getStartCap() {
         return GoogleCap.wrap(mDelegate.getStartCap());
     }
 
@@ -91,9 +90,8 @@ class GooglePolyline implements Polyline {
         mDelegate.setEndCap(GoogleCap.unwrap(endCap));
     }
 
-    @NonNull
     @Override
-    public Cap getEndCap() {
+    public @NonNull Cap getEndCap() {
         return GoogleCap.wrap(mDelegate.getEndCap());
     }
 
@@ -112,9 +110,8 @@ class GooglePolyline implements Polyline {
         mDelegate.setPattern(GooglePatternItem.unwrap(pattern));
     }
 
-    @Nullable
     @Override
-    public List<PatternItem> getPattern() {
+    public @Nullable List<PatternItem> getPattern() {
         return GooglePatternItem.wrap(mDelegate.getPattern());
     }
 
@@ -163,9 +160,8 @@ class GooglePolyline implements Polyline {
         mDelegate.setTag(tag);
     }
 
-    @Nullable
     @Override
-    public Object getTag() {
+    public @Nullable Object getTag() {
         return mDelegate.getTag();
     }
 
@@ -188,9 +184,8 @@ class GooglePolyline implements Polyline {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -207,93 +202,80 @@ class GooglePolyline implements Polyline {
             mDelegate = new com.google.android.gms.maps.model.PolylineOptions();
         }
 
-        @NonNull
         @Override
-        public Polyline.Options add(LatLng point) {
+        public @NonNull Polyline.Options add(LatLng point) {
             mDelegate.add(GoogleLatLng.unwrap(point));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options add(LatLng... points) {
+        public @NonNull Polyline.Options add(LatLng... points) {
             mDelegate.addAll(GoogleLatLng.unwrap(Arrays.asList(points)));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options addAll(Iterable<LatLng> points) {
+        public @NonNull Polyline.Options addAll(Iterable<LatLng> points) {
             mDelegate.addAll(GoogleLatLng.unwrap(points));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options width(float width) {
+        public @NonNull Polyline.Options width(float width) {
             mDelegate.width(width);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options color(int color) {
+        public @NonNull Polyline.Options color(int color) {
             mDelegate.color(color);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options startCap(@NonNull Cap startCap) {
+        public @NonNull Polyline.Options startCap(@NonNull Cap startCap) {
             mDelegate.startCap(GoogleCap.unwrap(startCap));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options endCap(@NonNull Cap endCap) {
+        public @NonNull Polyline.Options endCap(@NonNull Cap endCap) {
             mDelegate.endCap(GoogleCap.unwrap(endCap));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options jointType(int jointType) {
+        public @NonNull Polyline.Options jointType(int jointType) {
             mDelegate.jointType(jointType);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options pattern(@Nullable List<PatternItem> pattern) {
+        public @NonNull Polyline.Options pattern(@Nullable List<PatternItem> pattern) {
             mDelegate.pattern(GooglePatternItem.unwrap(pattern));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options zIndex(float zIndex) {
+        public @NonNull Polyline.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options visible(boolean visible) {
+        public @NonNull Polyline.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options geodesic(boolean geodesic) {
+        public @NonNull Polyline.Options geodesic(boolean geodesic) {
             mDelegate.geodesic(geodesic);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polyline.Options clickable(boolean clickable) {
+        public @NonNull Polyline.Options clickable(boolean clickable) {
             mDelegate.clickable(clickable);
             return this;
         }
@@ -313,15 +295,13 @@ class GooglePolyline implements Polyline {
             return mDelegate.getColor();
         }
 
-        @NonNull
         @Override
-        public Cap getStartCap() {
+        public @NonNull Cap getStartCap() {
             return GoogleCap.wrap(mDelegate.getStartCap());
         }
 
-        @NonNull
         @Override
-        public Cap getEndCap() {
+        public @NonNull Cap getEndCap() {
             return GoogleCap.wrap(mDelegate.getEndCap());
         }
 
@@ -330,9 +310,8 @@ class GooglePolyline implements Polyline {
             return mDelegate.getJointType();
         }
 
-        @Nullable
         @Override
-        public List<PatternItem> getPattern() {
+        public @Nullable List<PatternItem> getPattern() {
             return GooglePatternItem.wrap(mDelegate.getPattern());
         }
 

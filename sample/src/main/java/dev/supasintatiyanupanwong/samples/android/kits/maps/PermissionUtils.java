@@ -91,9 +91,8 @@ abstract class PermissionUtils {
             return dialog;
         }
 
-        @NonNull
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public @NonNull Dialog onCreateDialog(Bundle savedInstanceState) {
             mFinishActivity = requireArguments().getBoolean(ARGUMENT_FINISH_ACTIVITY);
 
             return new AlertDialog.Builder(getActivity())
@@ -150,9 +149,8 @@ abstract class PermissionUtils {
             return dialog;
         }
 
-        @NonNull
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public @NonNull Dialog onCreateDialog(Bundle savedInstanceState) {
             Bundle arguments = requireArguments();
             final int requestCode = arguments.getInt(ARGUMENT_PERMISSION_REQUEST_CODE);
             mFinishActivity = arguments.getBoolean(ARGUMENT_FINISH_ACTIVITY);

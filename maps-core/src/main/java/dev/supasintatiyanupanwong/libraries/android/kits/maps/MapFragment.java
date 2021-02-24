@@ -59,9 +59,8 @@ public class MapFragment extends Fragment {
         return new MapFragment();
     }
 
-    @Nullable
     @Override
-    public final View onCreateView(
+    public final @NonNull View onCreateView(
             @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {

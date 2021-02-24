@@ -108,9 +108,8 @@ class GooglePolygon implements Polygon {
         mDelegate.setStrokePattern(GooglePatternItem.unwrap(pattern));
     }
 
-    @Nullable
     @Override
-    public List<PatternItem> getStrokePattern() {
+    public @Nullable List<PatternItem> getStrokePattern() {
         return GooglePatternItem.wrap(mDelegate.getStrokePattern());
     }
 
@@ -169,9 +168,8 @@ class GooglePolygon implements Polygon {
         mDelegate.setTag(tag);
     }
 
-    @Nullable
     @Override
-    public Object getTag() {
+    public @Nullable Object getTag() {
         return mDelegate.getTag();
     }
 
@@ -194,9 +192,8 @@ class GooglePolygon implements Polygon {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -213,93 +210,80 @@ class GooglePolygon implements Polygon {
             mDelegate = new com.google.android.gms.maps.model.PolygonOptions();
         }
 
-        @NonNull
         @Override
-        public Polygon.Options add(LatLng point) {
+        public @NonNull Polygon.Options add(LatLng point) {
             mDelegate.add(GoogleLatLng.unwrap(point));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options add(LatLng... points) {
+        public @NonNull Polygon.Options add(LatLng... points) {
             mDelegate.addAll(GoogleLatLng.unwrap(Arrays.asList(points)));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options addAll(Iterable<LatLng> points) {
+        public @NonNull Polygon.Options addAll(Iterable<LatLng> points) {
             mDelegate.addAll(GoogleLatLng.unwrap(points));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options addHole(Iterable<LatLng> points) {
+        public @NonNull Polygon.Options addHole(Iterable<LatLng> points) {
             mDelegate.addHole(GoogleLatLng.unwrap(points));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options strokeWidth(float width) {
+        public @NonNull Polygon.Options strokeWidth(float width) {
             mDelegate.strokeWidth(width);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options strokeColor(int color) {
+        public @NonNull Polygon.Options strokeColor(int color) {
             mDelegate.strokeColor(color);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options strokeJointType(int jointType) {
+        public @NonNull Polygon.Options strokeJointType(int jointType) {
             mDelegate.strokeJointType(jointType);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options strokePattern(@Nullable List<PatternItem> pattern) {
+        public @NonNull Polygon.Options strokePattern(@Nullable List<PatternItem> pattern) {
             mDelegate.strokePattern(GooglePatternItem.unwrap(pattern));
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options fillColor(int color) {
+        public @NonNull Polygon.Options fillColor(int color) {
             mDelegate.fillColor(color);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options zIndex(float zIndex) {
+        public @NonNull Polygon.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options visible(boolean visible) {
+        public @NonNull Polygon.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options geodesic(boolean geodesic) {
+        public @NonNull Polygon.Options geodesic(boolean geodesic) {
             mDelegate.geodesic(geodesic);
             return this;
         }
 
-        @NonNull
         @Override
-        public Polygon.Options clickable(boolean clickable) {
+        public @NonNull Polygon.Options clickable(boolean clickable) {
             mDelegate.clickable(clickable);
             return this;
         }
@@ -333,9 +317,8 @@ class GooglePolygon implements Polygon {
             return mDelegate.getStrokeJointType();
         }
 
-        @Nullable
         @Override
-        public List<PatternItem> getStrokePattern() {
+        public @Nullable List<PatternItem> getStrokePattern() {
             return GooglePatternItem.wrap(mDelegate.getStrokePattern());
         }
 

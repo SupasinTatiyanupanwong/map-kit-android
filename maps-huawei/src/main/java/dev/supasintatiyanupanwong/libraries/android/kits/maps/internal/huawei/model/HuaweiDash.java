@@ -57,9 +57,8 @@ class HuaweiDash extends HuaweiPatternItem implements Dash {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

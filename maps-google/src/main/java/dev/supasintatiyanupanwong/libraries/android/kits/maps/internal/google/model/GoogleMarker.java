@@ -36,9 +36,8 @@ class GoogleMarker implements Marker {
         mDelegate.remove();
     }
 
-    @NonNull
     @Override
-    public String getId() {
+    public @NonNull String getId() {
         return mDelegate.getId();
     }
 
@@ -47,9 +46,8 @@ class GoogleMarker implements Marker {
         mDelegate.setPosition(GoogleLatLng.unwrap(latLng));
     }
 
-    @NonNull
     @Override
-    public LatLng getPosition() {
+    public @NonNull LatLng getPosition() {
         return GoogleLatLng.wrap(mDelegate.getPosition());
     }
 
@@ -168,9 +166,8 @@ class GoogleMarker implements Marker {
         mDelegate.setTag(tag);
     }
 
-    @Nullable
     @Override
-    public Object getTag() {
+    public @Nullable Object getTag() {
         return mDelegate.getTag();
     }
 
@@ -193,9 +190,8 @@ class GoogleMarker implements Marker {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -212,86 +208,74 @@ class GoogleMarker implements Marker {
             mDelegate = new com.google.android.gms.maps.model.MarkerOptions();
         }
 
-        @NonNull
         @Override
-        public Marker.Options position(@NonNull LatLng latLng) {
+        public @NonNull Marker.Options position(@NonNull LatLng latLng) {
             mDelegate.position(GoogleLatLng.unwrap(latLng));
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options zIndex(float zIndex) {
+        public @NonNull Marker.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options icon(@Nullable BitmapDescriptor iconDescriptor) {
+        public @NonNull Marker.Options icon(@Nullable BitmapDescriptor iconDescriptor) {
             mDelegate.icon(GoogleBitmapDescriptor.unwrap(iconDescriptor));
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options anchor(float anchorU, float anchorV) {
+        public @NonNull Marker.Options anchor(float anchorU, float anchorV) {
             mDelegate.anchor(anchorU, anchorV);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options infoWindowAnchor(float anchorU, float anchorV) {
+        public @NonNull Marker.Options infoWindowAnchor(float anchorU, float anchorV) {
             mDelegate.infoWindowAnchor(anchorU, anchorV);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options title(@Nullable String title) {
+        public @NonNull Marker.Options title(@Nullable String title) {
             mDelegate.title(title);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options snippet(@Nullable String snippet) {
+        public @NonNull Marker.Options snippet(@Nullable String snippet) {
             mDelegate.snippet(snippet);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options draggable(boolean draggable) {
+        public @NonNull Marker.Options draggable(boolean draggable) {
             mDelegate.draggable(draggable);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options visible(boolean visible) {
+        public @NonNull Marker.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options flat(boolean flat) {
+        public @NonNull Marker.Options flat(boolean flat) {
             mDelegate.flat(flat);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options rotation(float rotation) {
+        public @NonNull Marker.Options rotation(float rotation) {
             mDelegate.rotation(rotation);
             return this;
         }
 
-        @NonNull
         @Override
-        public Marker.Options alpha(float alpha) {
+        public @NonNull Marker.Options alpha(float alpha) {
             mDelegate.alpha(alpha);
             return this;
         }
@@ -311,9 +295,8 @@ class GoogleMarker implements Marker {
             return mDelegate.getSnippet();
         }
 
-        @Nullable
         @Override
-        public BitmapDescriptor getIcon() {
+        public @Nullable BitmapDescriptor getIcon() {
             return GoogleBitmapDescriptor.wrap(mDelegate.getIcon());
         }
 

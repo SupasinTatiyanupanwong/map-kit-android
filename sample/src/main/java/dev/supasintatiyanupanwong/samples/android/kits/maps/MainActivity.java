@@ -54,9 +54,8 @@ public final class MainActivity extends AppCompatActivity implements
             super(context, R.layout.feature, R.id.title, demos);
         }
 
-        @NonNull
         @Override
-        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        public @NonNull View getView(int position, View convertView, @NonNull ViewGroup parent) {
             FeatureView featureView;
             if (convertView instanceof FeatureView) {
                 featureView = (FeatureView) convertView;

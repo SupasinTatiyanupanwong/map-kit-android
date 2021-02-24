@@ -28,45 +28,38 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescri
 class GoogleBitmapDescriptor implements BitmapDescriptor {
 
     static final BitmapDescriptor.Factory FACTORY = new BitmapDescriptor.Factory() {
-        @NonNull
         @Override
-        public BitmapDescriptor defaultMarker() {
+        public @NonNull BitmapDescriptor defaultMarker() {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());
         }
 
-        @NonNull
         @Override
-        public BitmapDescriptor defaultMarker(float hue) {
+        public @NonNull BitmapDescriptor defaultMarker(float hue) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.defaultMarker(hue));
         }
 
-        @NonNull
         @Override
-        public BitmapDescriptor fromAsset(String assetName) {
+        public @NonNull BitmapDescriptor fromAsset(String assetName) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromAsset(assetName));
         }
 
-        @NonNull
         @Override
-        public BitmapDescriptor fromBitmap(Bitmap image) {
+        public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromBitmap(image));
         }
 
-        @NonNull
         @Override
-        public BitmapDescriptor fromFile(String fileName) {
+        public @NonNull BitmapDescriptor fromFile(String fileName) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromFile(fileName));
         }
 
-        @NonNull
         @Override
-        public BitmapDescriptor fromPath(String absolutePath) {
+        public @NonNull BitmapDescriptor fromPath(String absolutePath) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromPath(absolutePath));
         }
 
-        @NonNull
         @Override
-        public BitmapDescriptor fromResource(int resourceId) {
+        public @NonNull BitmapDescriptor fromResource(int resourceId) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromResource(resourceId));
         }
     };
@@ -97,9 +90,8 @@ class GoogleBitmapDescriptor implements BitmapDescriptor {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

@@ -236,8 +236,7 @@ public interface GroundOverlay {
          *
          * @see <a href="https://en.wikipedia.org/wiki/Mipmap">Mipmap (Wikipedia)</a>
          */
-        @NonNull
-        Options image(@NonNull BitmapDescriptor imageDescriptor);
+        @NonNull Options image(@NonNull BitmapDescriptor imageDescriptor);
 
         /**
          * Specifies the anchor.
@@ -261,8 +260,7 @@ public interface GroundOverlay {
          * @param anchorV v-coordinate of the anchor
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options anchor(
+        @NonNull Options anchor(
                 @FloatRange(from = 0.0, to = 1.0) float anchorU,
                 @FloatRange(from = 0.0, to = 1.0) float anchorV);
 
@@ -278,8 +276,7 @@ public interface GroundOverlay {
          * automatically based on the image aspect ratio.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options position(@NonNull LatLng location, float width);
+        @NonNull Options position(@NonNull LatLng location, float width);
 
         /**
          * Specifies the position for this ground overlay using an anchor point (a {@link LatLng}),
@@ -293,8 +290,7 @@ public interface GroundOverlay {
          * @param height The height of the overlay (in meters).
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options position(@NonNull LatLng location, float width, float height);
+        @NonNull Options position(@NonNull LatLng location, float width, float height);
 
         /**
          * Specifies the position for this ground overlay.
@@ -302,8 +298,7 @@ public interface GroundOverlay {
          * @param bounds A {@link LatLngBounds} in which to place the ground overlay.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options positionFromBounds(LatLngBounds bounds);
+        @NonNull Options positionFromBounds(LatLngBounds bounds);
 
         /**
          * Specifies the bearing of the ground overlay in degrees clockwise from north.
@@ -316,8 +311,7 @@ public interface GroundOverlay {
          * [0, 360) will be normalized.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options bearing(float bearing);
+        @NonNull Options bearing(float bearing);
 
         /**
          * Specifies the ground overlay's zIndex, i.e., the order in which it will be drawn.
@@ -325,8 +319,7 @@ public interface GroundOverlay {
          * @param zIndex The zIndex for this ground overlay.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options zIndex(float zIndex);
+        @NonNull Options zIndex(float zIndex);
 
         /**
          * Specifies the visibility for the ground overlay. The default visibility is {@code true}.
@@ -334,8 +327,7 @@ public interface GroundOverlay {
          * @param visible The visibility for this ground overlay.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options visible(boolean visible);
+        @NonNull Options visible(boolean visible);
 
         /**
          * Specifies the transparency of the ground overlay. The default transparency is {@code 0}
@@ -345,8 +337,7 @@ public interface GroundOverlay {
          * ground overlay is opaque and {@code 1} means that the ground overlay is transparent.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options transparency(@FloatRange(from = 0.0, to = 1.0) float transparency);
+        @NonNull Options transparency(@FloatRange(from = 0.0, to = 1.0) float transparency);
 
         /**
          * Specifies whether the ground overlay is clickable. The default clickability is {@code
@@ -355,8 +346,7 @@ public interface GroundOverlay {
          * @param clickable The new clickability setting.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options clickable(boolean clickable);
+        @NonNull Options clickable(boolean clickable);
 
         /**
          * Gets the image descriptor set for this {@link Options} object.

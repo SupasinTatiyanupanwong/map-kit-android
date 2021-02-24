@@ -33,32 +33,28 @@ public interface VisibleRegion {
      *
      * @return {@link LatLng} object that defines the bottom left corner of the camera.
      */
-    @NonNull
-    LatLng getNearLeft();
+    @NonNull LatLng getNearLeft();
 
     /**
      * {@link LatLng} object that defines the bottom right corner of the camera.
      *
      * @return {@link LatLng} object that defines the bottom right corner of the camera.
      */
-    @NonNull
-    LatLng getNearRight();
+    @NonNull LatLng getNearRight();
 
     /**
      * {@link LatLng} object that defines the far left corner of the camera.
      *
      * @return {@link LatLng} object that defines the far left corner of the camera.
      */
-    @NonNull
-    LatLng getFarLeft();
+    @NonNull LatLng getFarLeft();
 
     /**
      * {@link LatLng} object that defines the far right corner of the camera.
      *
      * @return {@link LatLng} object that defines the far right corner of the camera.
      */
-    @NonNull
-    LatLng getFarRight();
+    @NonNull LatLng getFarRight();
 
     /**
      * The smallest bounding box that includes the visible region defined in this class.
@@ -70,7 +66,6 @@ public interface VisibleRegion {
      *
      * @return The smallest bounding box that includes the visible region defined in this class.
      */
-    @NonNull
-    LatLngBounds getLatLngBounds();
+    @NonNull LatLngBounds getLatLngBounds();
 
 }

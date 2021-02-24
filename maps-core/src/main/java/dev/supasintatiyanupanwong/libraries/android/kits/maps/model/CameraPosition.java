@@ -35,8 +35,7 @@ public interface CameraPosition {
      *
      * @return The location that the camera is pointing at.
      */
-    @NonNull
-    LatLng getTarget();
+    @NonNull LatLng getTarget();
 
     /**
      * Gets zoom level near the center of the screen. See {@link Builder#zoom(float) zoom(float)}
@@ -74,8 +73,7 @@ public interface CameraPosition {
          * @param location The location that the camera is pointing at.
          * @return This {@link Builder} object for method chaining.
          */
-        @NonNull
-        Builder target(@NonNull LatLng location);
+        @NonNull Builder target(@NonNull LatLng location);
 
         /**
          * Sets the zoom level of the camera. Zoom level is defined such that at zoom level 0,
@@ -92,8 +90,7 @@ public interface CameraPosition {
          * @param zoom The zoom level of the camera.
          * @return This {@link Builder} object for method chaining.
          */
-        @NonNull
-        Builder zoom(float zoom);
+        @NonNull Builder zoom(float zoom);
 
         /**
          * Sets the angle, in degrees, of the camera from the nadir (directly facing the Earth).
@@ -115,8 +112,7 @@ public interface CameraPosition {
          * Earth).
          * @return This {@link Builder} object for method chaining.
          */
-        @NonNull
-        Builder tilt(@FloatRange(from = 0.0, to = 90.0) float tilt);
+        @NonNull Builder tilt(@FloatRange(from = 0.0, to = 90.0) float tilt);
 
         /**
          * Sets the direction that the camera is pointing in, in degrees clockwise from north.
@@ -125,16 +121,14 @@ public interface CameraPosition {
          * north.
          * @return This {@link Builder} object for method chaining.
          */
-        @NonNull
-        Builder bearing(float bearing);
+        @NonNull Builder bearing(float bearing);
 
         /**
          * Builds a {@link CameraPosition}.
          *
          * @return The constructed {@link CameraPosition} object.
          */
-        @NonNull
-        CameraPosition build();
+        @NonNull CameraPosition build();
     }
 
 }

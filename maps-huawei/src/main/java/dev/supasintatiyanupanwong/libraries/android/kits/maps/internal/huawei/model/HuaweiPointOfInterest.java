@@ -32,9 +32,8 @@ class HuaweiPointOfInterest implements PointOfInterest {
         mDelegate = delegate;
     }
 
-    @NonNull
     @Override
-    public LatLng getLatLng() {
+    public @NonNull LatLng getLatLng() {
         if (mLatLng == null) {
             mLatLng = HuaweiLatLng.wrap(mDelegate.latLng);
         }
@@ -70,9 +69,8 @@ class HuaweiPointOfInterest implements PointOfInterest {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

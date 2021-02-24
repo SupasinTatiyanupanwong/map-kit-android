@@ -83,8 +83,7 @@ public interface MapClient {
      *
      * @return The current position of the Camera.
      */
-    @NonNull
-    CameraPosition getCameraPosition();
+    @NonNull CameraPosition getCameraPosition();
 
     /**
      * Returns the maximum zoom level for the current camera position. This takes into account what
@@ -178,8 +177,7 @@ public interface MapClient {
      * @param options A polyline options object that defines how to render the Polyline.
      * @return The {@link Polyline} object that is added to the map.
      */
-    @NonNull
-    Polyline addPolyline(Polyline.Options options);
+    @NonNull Polyline addPolyline(Polyline.Options options);
 
     /**
      * Adds a polygon to this map.
@@ -187,8 +185,7 @@ public interface MapClient {
      * @param options A polygon options object that defines how to render the Polygon.
      * @return The {@link Polygon} object that is added to the map.
      */
-    @NonNull
-    Polygon addPolygon(Polygon.Options options);
+    @NonNull Polygon addPolygon(Polygon.Options options);
 
     /**
      * Add a circle to this map.
@@ -196,8 +193,7 @@ public interface MapClient {
      * @param options A circle options object that defines how to render the Circle.
      * @return The {@link Circle} object that is added to the map.
      */
-    @NonNull
-    Circle addCircle(Circle.Options options);
+    @NonNull Circle addCircle(Circle.Options options);
 
     /**
      * Adds a marker to this map.
@@ -210,8 +206,7 @@ public interface MapClient {
      * @param options A marker options object that defines how to render the marker.
      * @return The {@link Marker} that was added to the map.
      */
-    @NonNull
-    Marker addMarker(Marker.Options options);
+    @NonNull Marker addMarker(Marker.Options options);
 
     /**
      * Adds an image to this map.
@@ -220,8 +215,7 @@ public interface MapClient {
      * Options must have an image (AnchoredBitmap) and position specified.
      * @return The {@link GroundOverlay} that was added to the map.
      */
-    @NonNull
-    GroundOverlay addGroundOverlay(GroundOverlay.Options options);
+    @NonNull GroundOverlay addGroundOverlay(GroundOverlay.Options options);
 
     /**
      * Adds a tile overlay to this map. See {@link TileOverlay} for more information.
@@ -234,8 +228,7 @@ public interface MapClient {
      * IllegalArgumentException} will be thrown.
      * @return The {@link TileOverlay} that was added to the map.
      */
-    @NonNull
-    TileOverlay addTileOverlay(TileOverlay.Options options);
+    @NonNull TileOverlay addTileOverlay(TileOverlay.Options options);
 
     /**
      * Removes all markers, polylines, polygons, overlays, etc from the map.
@@ -247,8 +240,7 @@ public interface MapClient {
      *
      * @return The current focused building or {@code null} if no building is focused.
      */
-    @Nullable
-    IndoorBuilding getFocusedBuilding();
+    @Nullable IndoorBuilding getFocusedBuilding();
 
     /**
      * Sets or clears the listener for indoor events. Only one listener can ever be set. Setting a
@@ -356,8 +348,7 @@ public interface MapClient {
      *
      * @return The {@link UiSettings} for this map.
      */
-    @NonNull
-    UiSettings getUiSettings();
+    @NonNull UiSettings getUiSettings();
 
     /**
      * Returns a {@link Projection} object that you can use to convert between screen coordinates
@@ -370,8 +361,7 @@ public interface MapClient {
      *
      * @return The {@link Projection} of the map in its current state.
      */
-    @NonNull
-    Projection getProjection();
+    @NonNull Projection getProjection();
 
     /**
      * Sets a callback that's invoked when the camera starts moving or the reason for camera motion
@@ -779,8 +769,7 @@ public interface MapClient {
          * @return A custom info window for {@code marker}, or {@code null} to use the default
          * info window frame with {@linkplain #getInfoContents(Marker) custom contents}.
          */
-        @Nullable
-        View getInfoWindow(@NonNull Marker marker);
+        @Nullable View getInfoWindow(@NonNull Marker marker);
 
         /**
          * Provides custom contents for the default info window frame of a marker. This method is
@@ -794,8 +783,7 @@ public interface MapClient {
          * @return A custom view to display as contents in the info window for {@code marker}, or
          * {@code null} to use the default content rendering instead.
          */
-        @Nullable
-        View getInfoContents(@NonNull Marker marker);
+        @Nullable View getInfoContents(@NonNull Marker marker);
     }
 
     /**

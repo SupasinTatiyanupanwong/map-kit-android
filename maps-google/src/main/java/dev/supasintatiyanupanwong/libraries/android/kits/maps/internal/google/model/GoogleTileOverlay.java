@@ -104,9 +104,8 @@ class GoogleTileOverlay implements TileOverlay {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -123,37 +122,32 @@ class GoogleTileOverlay implements TileOverlay {
             mDelegate = new com.google.android.gms.maps.model.TileOverlayOptions();
         }
 
-        @NonNull
         @Override
-        public TileOverlay.Options tileProvider(TileProvider tileProvider) {
+        public @NonNull TileOverlay.Options tileProvider(TileProvider tileProvider) {
             mDelegate.tileProvider(GoogleTileProvider.unwrap(tileProvider));
             return this;
         }
 
-        @NonNull
         @Override
-        public TileOverlay.Options zIndex(float zIndex) {
+        public @NonNull TileOverlay.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @NonNull
         @Override
-        public TileOverlay.Options visible(boolean visible) {
+        public @NonNull TileOverlay.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @NonNull
         @Override
-        public TileOverlay.Options fadeIn(boolean fadeIn) {
+        public @NonNull TileOverlay.Options fadeIn(boolean fadeIn) {
             mDelegate.fadeIn(fadeIn);
             return this;
         }
 
-        @NonNull
         @Override
-        public TileOverlay.Options transparency(float transparency) {
+        public @NonNull TileOverlay.Options transparency(float transparency) {
             mDelegate.transparency(transparency);
             return this;
         }

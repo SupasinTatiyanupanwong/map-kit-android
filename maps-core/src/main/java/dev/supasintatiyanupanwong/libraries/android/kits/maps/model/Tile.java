@@ -41,7 +41,6 @@ public interface Tile {
      * A byte array containing the image data. The image will be created from this data by calling
      * {@link BitmapFactory#decodeByteArray(byte[], int, int) decodeByteArray(byte[], int, int)}.
      */
-    @Nullable
-    byte[] getData();
+    @Nullable byte[] getData();
 
 }

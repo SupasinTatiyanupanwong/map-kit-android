@@ -33,9 +33,8 @@ class GoogleCameraPosition implements CameraPosition {
         mDelegate = delegate;
     }
 
-    @NonNull
     @Override
-    public LatLng getTarget() {
+    public @NonNull LatLng getTarget() {
         if (mTarget == null) {
             mTarget = GoogleLatLng.wrap(mDelegate.target);
         }
@@ -76,9 +75,8 @@ class GoogleCameraPosition implements CameraPosition {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -104,37 +102,32 @@ class GoogleCameraPosition implements CameraPosition {
                     GoogleCameraPosition.unwrap(camera));
         }
 
-        @NonNull
         @Override
-        public CameraPosition.Builder target(@NonNull LatLng location) {
+        public @NonNull CameraPosition.Builder target(@NonNull LatLng location) {
             mDelegate.target(GoogleLatLng.unwrap(location));
             return this;
         }
 
-        @NonNull
         @Override
-        public CameraPosition.Builder zoom(float zoom) {
+        public @NonNull CameraPosition.Builder zoom(float zoom) {
             mDelegate.zoom(zoom);
             return this;
         }
 
-        @NonNull
         @Override
-        public CameraPosition.Builder tilt(@FloatRange(from = 0.0, to = 90.0) float tilt) {
+        public @NonNull CameraPosition.Builder tilt(@FloatRange(from = 0.0, to = 90.0) float tilt) {
             mDelegate.tilt(tilt);
             return this;
         }
 
-        @NonNull
         @Override
-        public CameraPosition.Builder bearing(float bearing) {
+        public @NonNull CameraPosition.Builder bearing(float bearing) {
             mDelegate.bearing(bearing);
             return this;
         }
 
-        @NonNull
         @Override
-        public CameraPosition build() {
+        public @NonNull CameraPosition build() {
             return GoogleCameraPosition.wrap(mDelegate.build());
         }
     }

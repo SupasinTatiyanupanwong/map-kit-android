@@ -104,8 +104,7 @@ public interface Polyline {
      *
      * @return The start cap.
      */
-    @NonNull
-    Cap getStartCap();
+    @NonNull Cap getStartCap();
 
     /**
      * Sets the cap at the end vertex of this polyline. The default end cap is {@link ButtCap}.
@@ -119,8 +118,7 @@ public interface Polyline {
      *
      * @return The endCap cap.
      */
-    @NonNull
-    Cap getEndCap();
+    @NonNull Cap getEndCap();
 
     /**
      * Sets the joint type for all vertices of the polyline except the start and end vertices.
@@ -153,8 +151,7 @@ public interface Polyline {
      *
      * @return The stroke pattern.
      */
-    @Nullable
-    List<PatternItem> getPattern();
+    @Nullable List<PatternItem> getPattern();
 
     /**
      * Sets the zIndex of this polyline. Polylines with higher zIndices are drawn above those with
@@ -243,8 +240,7 @@ public interface Polyline {
      *
      * @return The tag if a tag was set with {@code setTag}; {@code null} if no tag has been set.
      */
-    @Nullable
-    Object getTag();
+    @Nullable Object getTag();
 
 
     /**
@@ -256,32 +252,28 @@ public interface Polyline {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options add(LatLng point);
+        @NonNull Options add(LatLng point);
 
         /**
          * Adds vertices to the end of the polyline being built.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options add(LatLng... points);
+        @NonNull Options add(LatLng... points);
 
         /**
          * Adds vertices to the end of the polyline being built.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options addAll(Iterable<LatLng> points);
+        @NonNull Options addAll(Iterable<LatLng> points);
 
         /**
          * Sets the width of the polyline in screen pixels. The default is 10.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options width(float width);
+        @NonNull Options width(float width);
 
         /**
          * Sets the color of the polyline as a 32-bit ARGB color. The default color is black
@@ -289,8 +281,7 @@ public interface Polyline {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options color(int color);
+        @NonNull Options color(int color);
 
         /**
          * Sets the cap at the start vertex of the polyline. The default start cap is {@link
@@ -298,16 +289,14 @@ public interface Polyline {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options startCap(@NonNull Cap startCap);
+        @NonNull Options startCap(@NonNull Cap startCap);
 
         /**
          * Sets the cap at the end vertex of the polyline. The default end cap is {@link ButtCap}.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options endCap(@NonNull Cap endCap);
+        @NonNull Options endCap(@NonNull Cap endCap);
 
         /**
          * Sets the joint type for all vertices of the polyline except the start and end vertices.
@@ -317,8 +306,7 @@ public interface Polyline {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options jointType(int jointType);
+        @NonNull Options jointType(int jointType);
 
         /**
          * Sets the stroke pattern for the polyline. The default stroke pattern is solid,
@@ -326,24 +314,21 @@ public interface Polyline {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options pattern(@Nullable List<PatternItem> pattern);
+        @NonNull Options pattern(@Nullable List<PatternItem> pattern);
 
         /**
          * Specifies the polyline's zIndex, i.e., the order in which it will be drawn.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options zIndex(float zIndex);
+        @NonNull Options zIndex(float zIndex);
 
         /**
          * Specifies the visibility for the polyline. The default visibility is {@code true}.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options visible(boolean visible);
+        @NonNull Options visible(boolean visible);
 
         /**
          * Specifies whether to draw each segment of this polyline as a geodesic. The default
@@ -351,16 +336,14 @@ public interface Polyline {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options geodesic(boolean geodesic);
+        @NonNull Options geodesic(boolean geodesic);
 
         /**
          * Specifies whether this polyline is clickable. The default setting is {@code false}.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull
-        Options clickable(boolean clickable);
+        @NonNull Options clickable(boolean clickable);
 
         /**
          * Gets the points set for this {@link Options} object.
@@ -388,16 +371,14 @@ public interface Polyline {
          *
          * @return The start cap of the polyline.
          */
-        @NonNull
-        Cap getStartCap();
+        @NonNull Cap getStartCap();
 
         /**
          * Gets the cap set for the end vertex in this {@link Options} object.
          *
          * @return The end cap of the polyline.
          */
-        @NonNull
-        Cap getEndCap();
+        @NonNull Cap getEndCap();
 
         /**
          * Gets the joint type set in this {@link Options} object for all vertices except the
@@ -412,8 +393,7 @@ public interface Polyline {
          *
          * @return The stroke pattern of the polyline.
          */
-        @Nullable
-        List<PatternItem> getPattern();
+        @Nullable List<PatternItem> getPattern();
 
         /**
          * Gets the zIndex set for this {@link Options} object.

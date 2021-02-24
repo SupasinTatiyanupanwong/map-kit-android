@@ -72,15 +72,14 @@ class HuaweiIndoorBuilding implements IndoorBuilding {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    @Nullable
-    static IndoorBuilding wrap(@Nullable com.huawei.hms.maps.model.IndoorBuilding delegate) {
+    static @Nullable IndoorBuilding wrap(
+            @Nullable com.huawei.hms.maps.model.IndoorBuilding delegate) {
         return delegate == null ? null : new HuaweiIndoorBuilding(delegate);
     }
 

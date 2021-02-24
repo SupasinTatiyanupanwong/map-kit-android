@@ -55,9 +55,8 @@ class GoogleMapClient implements MapClient {
         mSettings = new UiSettings(map.getUiSettings());
     }
 
-    @NonNull
     @Override
-    public CameraPosition getCameraPosition() {
+    public @NonNull CameraPosition getCameraPosition() {
         return GoogleCameraPosition.wrap(mDelegate.getCameraPosition());
     }
 
@@ -131,40 +130,34 @@ class GoogleMapClient implements MapClient {
         mDelegate.stopAnimation();
     }
 
-    @NonNull
     @Override
-    public Polyline addPolyline(Polyline.Options options) {
+    public @NonNull Polyline addPolyline(Polyline.Options options) {
         return GooglePolyline.wrap(mDelegate.addPolyline(GooglePolyline.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public Polygon addPolygon(Polygon.Options options) {
+    public @NonNull Polygon addPolygon(Polygon.Options options) {
         return GooglePolygon.wrap(mDelegate.addPolygon(GooglePolygon.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public Circle addCircle(Circle.Options options) {
+    public @NonNull Circle addCircle(Circle.Options options) {
         return GoogleCircle.wrap(mDelegate.addCircle(GoogleCircle.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public Marker addMarker(Marker.Options options) {
+    public @NonNull Marker addMarker(Marker.Options options) {
         return GoogleMarker.wrap(mDelegate.addMarker(GoogleMarker.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public GroundOverlay addGroundOverlay(GroundOverlay.Options options) {
+    public @NonNull GroundOverlay addGroundOverlay(GroundOverlay.Options options) {
         return GoogleGroundOverlay.wrap(
                 mDelegate.addGroundOverlay(GoogleGroundOverlay.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public TileOverlay addTileOverlay(TileOverlay.Options options) {
+    public @NonNull TileOverlay addTileOverlay(TileOverlay.Options options) {
         return GoogleTileOverlay.wrap(
                 mDelegate.addTileOverlay(GoogleTileOverlay.Options.unwrap(options)));
     }
@@ -174,9 +167,8 @@ class GoogleMapClient implements MapClient {
         mDelegate.clear();
     }
 
-    @Nullable
     @Override
-    public IndoorBuilding getFocusedBuilding() {
+    public @Nullable IndoorBuilding getFocusedBuilding() {
         return GoogleIndoorBuilding.wrap(mDelegate.getFocusedBuilding());
     }
 
@@ -274,15 +266,13 @@ class GoogleMapClient implements MapClient {
                 });
     }
 
-    @NonNull
     @Override
-    public MapClient.UiSettings getUiSettings() {
+    public @NonNull MapClient.UiSettings getUiSettings() {
         return mSettings;
     }
 
-    @NonNull
     @Override
-    public Projection getProjection() {
+    public @NonNull Projection getProjection() {
         return GoogleProjection.wrap(mDelegate.getProjection());
     }
 
@@ -658,15 +648,13 @@ class GoogleMapClient implements MapClient {
                 return mDelegate.hashCode();
             }
 
-            @NonNull
             @Override
-            public String toString() {
+            public @NonNull String toString() {
                 return mDelegate.toString();
             }
 
 
-            @Nullable
-            static com.google.android.gms.maps.model.MapStyleOptions unwrap(
+            static @Nullable com.google.android.gms.maps.model.MapStyleOptions unwrap(
                     @Nullable MapClient.Style.Options wrapped) {
                 return wrapped == null ? null : ((Style.Options) wrapped).mDelegate;
             }

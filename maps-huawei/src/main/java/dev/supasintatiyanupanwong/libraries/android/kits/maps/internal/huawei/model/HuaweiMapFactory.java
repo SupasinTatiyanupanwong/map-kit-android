@@ -19,6 +19,7 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.m
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.fragment.app.Fragment;
 
@@ -63,176 +64,158 @@ public class HuaweiMapFactory implements MapFactory {
 
     private HuaweiMapFactory() {}
 
-    @NonNull
     @Override
-    public BitmapDescriptor.Factory getBitmapDescriptorFactory() {
+    public @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory() {
         return HuaweiBitmapDescriptor.FACTORY;
     }
 
-    @NonNull
     @Override
-    public ButtCap newButtCap() {
+    public @NonNull ButtCap newButtCap() {
         return new HuaweiButtCap();
     }
 
-    @NonNull
     @Override
-    public CameraUpdate.Factory getCameraUpdateFactory() {
+    public @NonNull CameraUpdate.Factory getCameraUpdateFactory() {
         return HuaweiCameraUpdate.FACTORY;
     }
 
-    @NonNull
     @Override
-    public CameraPosition newCameraPositionFromLatLngZoom(@NonNull LatLng target, float zoom) {
+    public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
+            @NonNull LatLng target,
+            float zoom) {
         return newCameraPositionBuilder()
                 .target(target)
                 .zoom(zoom)
                 .build();
     }
 
-    @NonNull
     @Override
-    public CameraPosition.Builder newCameraPositionBuilder() {
+    public @NonNull CameraPosition.Builder newCameraPositionBuilder() {
         return new HuaweiCameraPosition.Builder();
     }
 
-    @NonNull
     @Override
-    public CameraPosition.Builder newCameraPositionBuilder(@NonNull CameraPosition camera) {
+    public @NonNull CameraPosition.Builder newCameraPositionBuilder(
+            @NonNull CameraPosition camera) {
         return new HuaweiCameraPosition.Builder(camera);
     }
 
-    @NonNull
     @Override
-    public Circle.Options newCircleOptions() {
+    public @NonNull Circle.Options newCircleOptions() {
         return new HuaweiCircle.Options();
     }
 
-    @NonNull
     @Override
-    public CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
+    public @NonNull CustomCap newCustomCap(
+            @NonNull BitmapDescriptor bitmapDescriptor,
+            float refWidth) {
         return new HuaweiCustomCap(bitmapDescriptor, refWidth);
     }
 
-    @NonNull
     @Override
-    public CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
+    public @NonNull CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
         return new HuaweiCustomCap(bitmapDescriptor);
     }
 
-    @NonNull
     @Override
-    public Dot newDot() {
+    public @NonNull Dot newDot() {
         return new HuaweiDot();
     }
 
-    @NonNull
     @Override
-    public Dash newDash(float length) {
+    public @NonNull Dash newDash(float length) {
         return new HuaweiDash(length);
     }
 
-    @NonNull
     @Override
-    public Gap newGap(float length) {
+    public @NonNull Gap newGap(float length) {
         return new HuaweiGap(length);
     }
 
-    @NonNull
     @Override
-    public GroundOverlay.Options newGroundOverlayOptions() {
+    public @NonNull GroundOverlay.Options newGroundOverlayOptions() {
         return new HuaweiGroundOverlay.Options();
     }
 
-    @NonNull
     @Override
-    public LatLng newLatLng(double latitude, double longitude) {
+    public @NonNull LatLng newLatLng(double latitude, double longitude) {
         return new HuaweiLatLng(latitude, longitude);
     }
 
-    @NonNull
     @Override
-    public LatLngBounds newLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
+    public @NonNull LatLngBounds newLatLngBounds(
+            @NonNull LatLng southwest,
+            @NonNull LatLng northeast) {
         return new HuaweiLatLngBounds(southwest, northeast);
     }
 
-    @NonNull
     @Override
-    public LatLngBounds.Builder newLatLngBoundsBuilder() {
+    public @NonNull LatLngBounds.Builder newLatLngBoundsBuilder() {
         return new HuaweiLatLngBounds.Builder();
     }
 
-    @NonNull
     @Override
-    public MapClient.Style.Options newMapStyleOptions(String json) {
+    public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
         return new HuaweiMapClient.Style.Options(json);
     }
 
-    @NonNull
     @Override
-    public MapClient.Style.Options newMapStyleOptions(
-            @NonNull Context context, @RawRes int resourceId) {
+    public @NonNull MapClient.Style.Options newMapStyleOptions(
+            @NonNull Context context,
+            @RawRes int resourceId) {
         return new HuaweiMapClient.Style.Options(context, resourceId);
     }
 
-    @NonNull
     @Override
-    public Marker.Options newMarkerOptions() {
+    public @NonNull Marker.Options newMarkerOptions() {
         return new HuaweiMarker.Options();
     }
 
-    @NonNull
     @Override
-    public Polygon.Options newPolygonOptions() {
+    public @NonNull Polygon.Options newPolygonOptions() {
         return new HuaweiPolygon.Options();
     }
 
-    @NonNull
     @Override
-    public Polyline.Options newPolylineOptions() {
+    public @NonNull Polyline.Options newPolylineOptions() {
         return new HuaweiPolyline.Options();
     }
 
-    @NonNull
     @Override
-    public RoundCap newRoundCap() {
+    public @NonNull RoundCap newRoundCap() {
         return new HuaweiRoundCap();
     }
 
-    @NonNull
     @Override
-    public SquareCap newSquareCap() {
+    public @NonNull SquareCap newSquareCap() {
         return new HuaweiSquareCap();
     }
 
-    @NonNull
     @Override
-    public TileOverlay.Options newTileOverlayOptions() {
+    public @NonNull TileOverlay.Options newTileOverlayOptions() {
         return new HuaweiTileOverlay.Options();
     }
 
-    @NonNull
     @Override
-    public Tile newTile(int width, int height, byte[] data) {
+    public @NonNull Tile newTile(int width, int height, byte[] data) {
         return new HuaweiTile(width, height, data);
     }
 
-    @NonNull
     @Override
-    public Tile noTile() {
+    public @NonNull Tile noTile() {
         return HuaweiTileProvider.NO_TILE;
     }
 
-    @NonNull
     @Override
-    public TileProvider newUrlTileProvider(
-            int width, int height, @NonNull UrlTileProvider tileProvider) {
+    public @NonNull TileProvider newUrlTileProvider(
+            int width,
+            int height,
+            @NonNull UrlTileProvider tileProvider) {
         return new HuaweiUrlTileProvider(width, height, tileProvider);
     }
 
-    @NonNull
     @Override
-    public VisibleRegion newVisibleRegion(
+    public @NonNull VisibleRegion newVisibleRegion(
             LatLng nearLeft,
             LatLng nearRight,
             LatLng farLeft,
@@ -255,12 +238,11 @@ public class HuaweiMapFactory implements MapFactory {
     }
 
 
-    @NonNull
-    public static MapFactory buildIfSupported(@NonNull Context context) {
+    public static @Nullable MapFactory buildIfSupported(@NonNull Context context) {
         final int result =
                 HuaweiApiAvailability.getInstance().isHuaweiMobileServicesAvailable(context);
         if (UNAVAILABLE_RESULTS.contains(result)) {
-            throw new UnsupportedOperationException("Huawei Maps is not available.");
+            return null;
         }
 
         return new HuaweiMapFactory();

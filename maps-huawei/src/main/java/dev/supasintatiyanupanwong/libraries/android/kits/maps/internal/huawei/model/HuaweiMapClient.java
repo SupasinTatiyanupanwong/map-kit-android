@@ -58,9 +58,8 @@ class HuaweiMapClient implements MapClient {
         mSettings = new UiSettings(map.getUiSettings());
     }
 
-    @NonNull
     @Override
-    public CameraPosition getCameraPosition() {
+    public @NonNull CameraPosition getCameraPosition() {
         return HuaweiCameraPosition.wrap(mDelegate.getCameraPosition());
     }
 
@@ -134,40 +133,34 @@ class HuaweiMapClient implements MapClient {
         mDelegate.stopAnimation();
     }
 
-    @NonNull
     @Override
-    public Polyline addPolyline(Polyline.Options options) {
+    public @NonNull Polyline addPolyline(Polyline.Options options) {
         return HuaweiPolyline.wrap(mDelegate.addPolyline(HuaweiPolyline.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public Polygon addPolygon(Polygon.Options options) {
+    public @NonNull Polygon addPolygon(Polygon.Options options) {
         return HuaweiPolygon.wrap(mDelegate.addPolygon(HuaweiPolygon.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public Circle addCircle(Circle.Options options) {
+    public @NonNull Circle addCircle(Circle.Options options) {
         return HuaweiCircle.wrap(mDelegate.addCircle(HuaweiCircle.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public Marker addMarker(Marker.Options options) {
+    public @NonNull Marker addMarker(Marker.Options options) {
         return HuaweiMarker.wrap(mDelegate.addMarker(HuaweiMarker.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public GroundOverlay addGroundOverlay(GroundOverlay.Options options) {
+    public @NonNull GroundOverlay addGroundOverlay(GroundOverlay.Options options) {
         return HuaweiGroundOverlay.wrap(
                 mDelegate.addGroundOverlay(HuaweiGroundOverlay.Options.unwrap(options)));
     }
 
-    @NonNull
     @Override
-    public TileOverlay addTileOverlay(TileOverlay.Options options) {
+    public @NonNull TileOverlay addTileOverlay(TileOverlay.Options options) {
         return HuaweiTileOverlay.wrap(
                 mDelegate.addTileOverlay(HuaweiTileOverlay.Options.unwrap(options)));
     }
@@ -177,9 +170,8 @@ class HuaweiMapClient implements MapClient {
         mDelegate.clear();
     }
 
-    @Nullable
     @Override
-    public IndoorBuilding getFocusedBuilding() {
+    public @Nullable IndoorBuilding getFocusedBuilding() {
         return HuaweiIndoorBuilding.wrap(mDelegate.getFocusedBuilding());
     }
 
@@ -280,15 +272,13 @@ class HuaweiMapClient implements MapClient {
                 });
     }
 
-    @NonNull
     @Override
-    public MapClient.UiSettings getUiSettings() {
+    public @NonNull MapClient.UiSettings getUiSettings() {
         return mSettings;
     }
 
-    @NonNull
     @Override
-    public Projection getProjection() {
+    public @NonNull Projection getProjection() {
         return HuaweiProjection.wrap(mDelegate.getProjection());
     }
 
@@ -675,15 +665,13 @@ class HuaweiMapClient implements MapClient {
                 return mDelegate.hashCode();
             }
 
-            @NonNull
             @Override
-            public String toString() {
+            public @NonNull String toString() {
                 return mDelegate.toString();
             }
 
 
-            @Nullable
-            static com.huawei.hms.maps.model.MapStyleOptions unwrap(
+            static @Nullable com.huawei.hms.maps.model.MapStyleOptions unwrap(
                     @Nullable MapClient.Style.Options wrapped) {
                 return wrapped == null ? null : ((Style.Options) wrapped).mDelegate;
             }

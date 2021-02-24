@@ -65,9 +65,8 @@ class HuaweiTileProvider implements TileProvider {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

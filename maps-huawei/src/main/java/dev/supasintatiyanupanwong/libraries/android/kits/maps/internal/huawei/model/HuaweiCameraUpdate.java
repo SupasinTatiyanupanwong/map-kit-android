@@ -31,78 +31,70 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds
 class HuaweiCameraUpdate implements CameraUpdate {
 
     static final Factory FACTORY = new Factory() {
-        @NonNull
         @Override
-        public CameraUpdate zoomIn() {
+        public @NonNull CameraUpdate zoomIn() {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomIn());
         }
 
-        @NonNull
         @Override
-        public CameraUpdate zoomOut() {
+        public @NonNull CameraUpdate zoomOut() {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomOut());
         }
 
-        @NonNull
         @Override
-        public CameraUpdate scrollBy(float xPixel, float yPixel) {
+        public @NonNull CameraUpdate scrollBy(float xPixel, float yPixel) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.scrollBy(xPixel, yPixel));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate zoomTo(float zoom) {
+        public @NonNull CameraUpdate zoomTo(float zoom) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomTo(zoom));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate zoomBy(float amount) {
+        public @NonNull CameraUpdate zoomBy(float amount) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomBy(amount));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate zoomBy(float amount, Point focus) {
+        public @NonNull CameraUpdate zoomBy(float amount, Point focus) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomBy(amount, focus));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newCameraPosition(CameraPosition cameraPosition) {
+        public @NonNull CameraUpdate newCameraPosition(CameraPosition cameraPosition) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newCameraPosition(
                     HuaweiCameraPosition.unwrap(cameraPosition)
             ));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newLatLng(@NonNull LatLng latLng) {
+        public @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newLatLng(
                     HuaweiLatLng.unwrap(latLng)
             ));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
+        public @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newLatLngZoom(
                     HuaweiLatLng.unwrap(latLng), zoom
             ));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding) {
+        public @NonNull CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newLatLngBounds(
                     HuaweiLatLngBounds.unwrap(bounds), padding
             ));
         }
 
-        @NonNull
         @Override
-        public CameraUpdate newLatLngBounds(
-                @NonNull LatLngBounds bounds, int width, int height, int padding) {
+        public @NonNull CameraUpdate newLatLngBounds(
+                @NonNull LatLngBounds bounds,
+                int width,
+                int height,
+                int padding) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newLatLngBounds(
                     HuaweiLatLngBounds.unwrap(bounds), width, height, padding
             ));
@@ -135,9 +127,8 @@ class HuaweiCameraUpdate implements CameraUpdate {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

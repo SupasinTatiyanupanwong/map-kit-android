@@ -42,9 +42,8 @@ class HuaweiCustomCap extends HuaweiCap implements CustomCap {
                 HuaweiBitmapDescriptor.unwrap(bitmapDescriptor)));
     }
 
-    @NonNull
     @Override
-    public BitmapDescriptor getBitmapDescriptor() {
+    public @NonNull BitmapDescriptor getBitmapDescriptor() {
         if (mBitmapDescriptor == null) {
             mBitmapDescriptor = HuaweiBitmapDescriptor.wrap(mDelegate.bitmapDescriptor);
         }
@@ -75,9 +74,8 @@ class HuaweiCustomCap extends HuaweiCap implements CustomCap {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 

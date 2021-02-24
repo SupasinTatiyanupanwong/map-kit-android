@@ -72,15 +72,13 @@ class GoogleIndoorBuilding implements IndoorBuilding {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    @Nullable
-    static IndoorBuilding wrap(
+    static @Nullable IndoorBuilding wrap(
             @Nullable com.google.android.gms.maps.model.IndoorBuilding delegate) {
         return delegate == null ? null : new GoogleIndoorBuilding(delegate);
     }

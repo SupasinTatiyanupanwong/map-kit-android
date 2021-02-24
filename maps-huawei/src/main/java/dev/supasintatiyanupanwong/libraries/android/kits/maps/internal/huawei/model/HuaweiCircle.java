@@ -88,9 +88,8 @@ class HuaweiCircle implements Circle {
         mDelegate.setStrokePattern(HuaweiPatternItem.unwrap(pattern));
     }
 
-    @Nullable
     @Override
-    public List<PatternItem> getStrokePattern() {
+    public @Nullable List<PatternItem> getStrokePattern() {
         return HuaweiPatternItem.wrap(mDelegate.getStrokePattern());
     }
 
@@ -139,9 +138,8 @@ class HuaweiCircle implements Circle {
         mDelegate.setTag(tag);
     }
 
-    @Nullable
     @Override
-    public Object getTag() {
+    public @Nullable Object getTag() {
         return mDelegate.getTag();
     }
 
@@ -164,9 +162,8 @@ class HuaweiCircle implements Circle {
         return mDelegate.hashCode();
     }
 
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -183,65 +180,56 @@ class HuaweiCircle implements Circle {
             mDelegate = new com.huawei.hms.maps.model.CircleOptions();
         }
 
-        @NonNull
         @Override
-        public Circle.Options center(LatLng center) {
+        public @NonNull Circle.Options center(LatLng center) {
             mDelegate.center(HuaweiLatLng.unwrap(center));
             return this;
         }
 
-        @NonNull
         @Override
-        public Circle.Options radius(double radius) {
+        public @NonNull Circle.Options radius(double radius) {
             mDelegate.radius(radius);
             return this;
         }
 
-        @NonNull
         @Override
-        public Circle.Options strokeWidth(float width) {
+        public @NonNull Circle.Options strokeWidth(float width) {
             mDelegate.strokeWidth(width);
             return this;
         }
 
-        @NonNull
         @Override
-        public Circle.Options strokeColor(int color) {
+        public @NonNull Circle.Options strokeColor(int color) {
             mDelegate.strokeColor(color);
             return this;
         }
 
-        @NonNull
         @Override
-        public Circle.Options strokePattern(@Nullable List<PatternItem> pattern) {
+        public @NonNull Circle.Options strokePattern(@Nullable List<PatternItem> pattern) {
             mDelegate.strokePattern(HuaweiPatternItem.unwrap(pattern));
             return this;
         }
 
-        @NonNull
         @Override
-        public Circle.Options fillColor(int color) {
+        public @NonNull Circle.Options fillColor(int color) {
             mDelegate.fillColor(color);
             return this;
         }
 
-        @NonNull
         @Override
-        public Circle.Options zIndex(float zIndex) {
+        public @NonNull Circle.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @NonNull
         @Override
-        public Circle.Options visible(boolean visible) {
+        public @NonNull Circle.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @NonNull
         @Override
-        public Circle.Options clickable(boolean clickable) {
+        public @NonNull Circle.Options clickable(boolean clickable) {
             mDelegate.clickable(clickable);
             return this;
         }
@@ -266,9 +254,8 @@ class HuaweiCircle implements Circle {
             return mDelegate.getStrokeColor();
         }
 
-        @Nullable
         @Override
-        public List<PatternItem> getStrokePattern() {
+        public @Nullable List<PatternItem> getStrokePattern() {
             return HuaweiPatternItem.wrap(mDelegate.getStrokePattern());
         }
 
