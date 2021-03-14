@@ -70,7 +70,7 @@ class HuaweiMarker implements Marker {
 
     @Override
     public void setAnchor(float anchorU, float anchorV) {
-        mDelegate.setAnchor(anchorU, anchorV);
+        mDelegate.setMarkerAnchor(anchorU, anchorV);
     }
 
     @Override
