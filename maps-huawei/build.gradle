@@ -30,7 +30,7 @@ ext {
 
     POM_NAME = 'Map Kit (Huawei)'
     POM_DESCRIPTION = 'Provides Huawei Maps integration to Map Kit.'
-    POM_VERSION = '1.2.3'
+    POM_VERSION = '1.2.4'
 }
 
 apply from: rootProject.file("gradle/install.gradle")

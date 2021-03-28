@@ -236,7 +236,7 @@ class HuaweiMarker implements Marker {
         @NonNull
         @Override
         public Marker.Options anchor(float anchorU, float anchorV) {
-            mDelegate.anchor(anchorU, anchorV);
+            mDelegate.anchorMarker(anchorU, anchorV);
             return this;
         }
 
@@ -319,12 +319,12 @@ class HuaweiMarker implements Marker {
 
         @Override
         public float getAnchorU() {
-            return mDelegate.getAnchorU();
+            return mDelegate.getMarkerAnchorU();
         }
 
         @Override
         public float getAnchorV() {
-            return mDelegate.getAnchorV();
+            return mDelegate.getMarkerAnchorV();
         }
 
         @Override
