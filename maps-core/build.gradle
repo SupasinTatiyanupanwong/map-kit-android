@@ -17,16 +17,16 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
     }
 }
 
 dependencies {
-    api 'androidx.annotation:annotation:1.1.0'
+    api 'androidx.annotation:annotation:1.2.0'
 
     // Assuming that Fragment APIs is very stable and clients will use compatible version
     // Keeping version 1.0.0 to avoid Java 8 requirement and version conflicts
