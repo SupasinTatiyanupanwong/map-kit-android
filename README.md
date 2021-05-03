@@ -23,6 +23,7 @@ The library consists of 3 artifacts; `maps-core`, `maps-google`, and `maps-huawe
 | Google Maps SDK for Android       | HUAWEI Map Kit            | Map Kit                                                      |
 |:--------------------------------- |:------------------------- |:------------------------------------------------------------ |
 | ``com.google.android.gms.maps.*`` | ``com.huawei.hms.maps.*`` | ``dev.supasintatiyanupanwong.libraries.android.kits.maps.*`` |
+| ``SupportMapFragment``            | ``SupportMapFragment``    | ``MapFragment``                                              |
 | ``GoogleMap``                     | ``HuaweiMap``             | ``MapClient``                                                |
 | ``new LatLng()``                  | ``new LatLng()``          | ``MapKit.newLatLng()``                                       |
 | ``new *Options()``                | ``new *Options()``        | ``MapKit.new*Options()``                                     |
