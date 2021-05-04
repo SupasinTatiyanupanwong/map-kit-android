@@ -65,20 +65,9 @@ android {
     }
 }
 
-configurations {
-    google
-    huawei
-
-    googleImplementation.extendsFrom(google)
-    googleCompileOnly.extendsFrom(huawei)
-
-    huaweiImplementation.extendsFrom(huawei)
-    huaweiCompileOnly.extendsFrom(google)
-}
-
 dependencies {
-    google 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.0.0'
-    huawei 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.0.0'
+    googleImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.0.0'
+    huaweiImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.0.0'
 }
 ```
 
