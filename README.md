@@ -4,17 +4,19 @@
 [![javadoc](https://javadoc.io/badge2/dev.supasintatiyanupanwong.libraries.android.kits.maps/maps-core/javadoc.svg)](https://javadoc.io/doc/dev.supasintatiyanupanwong.libraries.android.kits.maps/maps-core)
 [![license](https://img.shields.io/github/license/SupasinTatiyanupanwong/map-kit-android.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
-Map Kit is an abstraction wrapper that encapsulates Android's Maps APIs of Google Maps SDK for Android and HUAWEI Map Kit.
+Map Kit is an abstraction wrapper that encapsulates Android's Maps APIs of Google Maps SDK for Android, HUAWEI Map Kit, and Amazon Maps SDK.
 
 ## Architecture
 
-The library consists of 3 artifacts; `maps-core`, `maps-google`, and `maps-huawei`.
+The library consists of 4 artifacts; `maps-core`, `maps-google`, `maps-huawei`, and `maps-amazon`.
 
 `maps-core` artifact provides an abstraction interface to interact with Maps APIs.
 
 `maps-google` artifact provides the Google Maps SDK for Android integration to Map Kit.
 
 `maps-huawei` artifact provides the HUAWEI Map Kit integration to Map Kit.
+
+`maps-amazon` artifact provides the Amazon Maps SDK integration to Map Kit.
 
 ## Usage
 
@@ -48,6 +50,9 @@ dependencies {
 
     // To use the HUAWEI Map Kit via Map Kit
     implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.0.0'
+
+    // To use the Amazon Maps SDK via Map Kit
+    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.0.0-alpha01'
 }
 ```
 
@@ -62,12 +67,14 @@ android {
     productFlavors {
         google
         huawei { applicationIdSuffix '.huawei' }
+        amazon { applicationIdSuffix '.amazon' }
     }
 }
 
 dependencies {
     googleImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.0.0'
     huaweiImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.0.0'
+    amazonImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.0.0-alpha01'
 }
 ```
 

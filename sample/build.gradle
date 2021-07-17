@@ -44,12 +44,18 @@ android {
         huawei {
             applicationIdSuffix '.huawei'
         }
+        amazon {
+            applicationIdSuffix '.amazon'
+
+            minSdkVersion 22 // The minimum supported API level is Fire OS 5 (API 22).
+        }
     }
 }
 
 dependencies {
     googleImplementation project(':maps-google')
     huaweiImplementation project(':maps-huawei')
+    amazonImplementation project(':maps-amazon')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

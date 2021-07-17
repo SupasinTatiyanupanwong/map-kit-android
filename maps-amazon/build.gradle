@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Supasin Tatiyanupanwong
+ * Copyright 2021 Supasin Tatiyanupanwong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,4 +14,30 @@
  * limitations under the License.
  */
 
-include ':sample', ':maps-core', ':maps-google', ':maps-huawei', ':maps-amazon'
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.vanniktech.maven.publish'
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 30
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+}
+
+dependencies {
+    api project(':maps-core')
+
+    compileOnly(name:'amazon-maps-api-v2', ext:'aar')
+}
+
+tasks.withType(Javadoc).all { enabled = false }
