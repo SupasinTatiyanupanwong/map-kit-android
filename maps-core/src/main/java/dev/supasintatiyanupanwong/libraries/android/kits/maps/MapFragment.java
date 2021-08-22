@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
@@ -59,12 +60,29 @@ public class MapFragment extends Fragment {
         return new MapFragment();
     }
 
+    // Used to verify that subclasses call through to super.onCreateView().
+    private boolean mOnCreateViewCalled = false;
+
+    @CallSuper
     @Override
-    public final @NonNull View onCreateView(
+    public @NonNull View onCreateView(
             @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
+        mOnCreateViewCalled = true;
         return inflater.inflate(MapsPlatform.get().getFragmentLayoutId(), container, false);
+    }
+
+    @CallSuper
+    @Override
+    public void onStart() {
+        // FM enforced super.onStart() to be called if overridden, checking our view first.
+        if (!mOnCreateViewCalled) {
+            throw new IllegalStateException("MapFragment " + this
+                    + " did not call through to super.onCreateView()");
+        }
+
+        super.onStart();
     }
 
     /**
@@ -100,6 +118,7 @@ public class MapFragment extends Fragment {
      *
      * @param callback The callback object that will be triggered when the map has undergone layout
      * and ready to be used.
+     * @since 2.0.0
      */
     public final void getMapAsync(final MapKit.OnMapAndViewReadyCallback callback) {
         getMapAsync(new OnMapAndViewReadyCallbackImpl(this, callback));
