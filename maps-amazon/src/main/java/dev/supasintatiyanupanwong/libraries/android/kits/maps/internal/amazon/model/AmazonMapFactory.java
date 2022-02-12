@@ -232,9 +232,9 @@ class AmazonMapFactory implements MapFactory {
 
     public static @Nullable MapFactory buildIfSupported(@NonNull Context context) {
         final int result = AmazonMapsRuntimeUtil.isAmazonMapsRuntimeAvailable(context);
-//        if (result != ConnectionResult.SUCCESS) {
-//            return null;
-//        }
+        if (result != ConnectionResult.SUCCESS) {
+            return null;
+        }
 
         return new AmazonMapFactory();
     }
