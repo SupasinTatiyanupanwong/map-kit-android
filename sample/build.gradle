@@ -50,6 +50,11 @@ android {
             minSdkVersion 22 // The minimum supported API level is Fire OS 5 (API 22).
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
