@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 
-class GoogleCameraPosition implements CameraPosition {
+@RestrictTo(LIBRARY)
+public class GoogleCameraPosition implements CameraPosition {
 
     private final com.google.android.gms.maps.model.CameraPosition mDelegate;
 
@@ -90,14 +94,14 @@ class GoogleCameraPosition implements CameraPosition {
     }
 
 
-    static class Builder implements CameraPosition.Builder {
+    public static class Builder implements CameraPosition.Builder {
         private final com.google.android.gms.maps.model.CameraPosition.Builder mDelegate;
 
-        Builder() {
+        public Builder() {
             mDelegate = com.google.android.gms.maps.model.CameraPosition.builder();
         }
 
-        Builder(CameraPosition camera) {
+        public Builder(CameraPosition camera) {
             mDelegate = com.google.android.gms.maps.model.CameraPosition.builder(
                     GoogleCameraPosition.unwrap(camera));
         }

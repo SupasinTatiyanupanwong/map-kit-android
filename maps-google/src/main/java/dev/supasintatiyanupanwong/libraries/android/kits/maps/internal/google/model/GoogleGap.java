@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 
-class GoogleGap extends GooglePatternItem implements Gap {
+@RestrictTo(LIBRARY)
+public class GoogleGap extends GooglePatternItem implements Gap {
 
     private final com.google.android.gms.maps.model.Gap mDelegate;
 
@@ -29,7 +33,7 @@ class GoogleGap extends GooglePatternItem implements Gap {
         mDelegate = delegate;
     }
 
-    GoogleGap(float length) {
+    public GoogleGap(float length) {
         this(new com.google.android.gms.maps.model.Gap(length));
     }
 

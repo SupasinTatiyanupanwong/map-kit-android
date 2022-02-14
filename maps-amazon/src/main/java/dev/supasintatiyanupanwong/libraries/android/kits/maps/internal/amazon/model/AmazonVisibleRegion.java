@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
-class AmazonVisibleRegion implements VisibleRegion {
+@RestrictTo(LIBRARY)
+public class AmazonVisibleRegion implements VisibleRegion {
 
     private final com.amazon.geo.mapsv2.model.VisibleRegion mDelegate;
 
@@ -37,7 +41,7 @@ class AmazonVisibleRegion implements VisibleRegion {
         mDelegate = delegate;
     }
 
-    AmazonVisibleRegion(
+    public AmazonVisibleRegion(
             LatLng nearLeft,
             LatLng nearRight,
             LatLng farLeft,

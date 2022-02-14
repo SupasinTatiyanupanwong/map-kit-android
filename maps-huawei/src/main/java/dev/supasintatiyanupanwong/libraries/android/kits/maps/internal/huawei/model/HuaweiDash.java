@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
 
-class HuaweiDash extends HuaweiPatternItem implements Dash {
+@RestrictTo(LIBRARY)
+public class HuaweiDash extends HuaweiPatternItem implements Dash {
 
     private final com.huawei.hms.maps.model.Dash mDelegate;
 
@@ -29,7 +33,7 @@ class HuaweiDash extends HuaweiPatternItem implements Dash {
         mDelegate = delegate;
     }
 
-    HuaweiDash(float length) {
+    public HuaweiDash(float length) {
         this(new com.huawei.hms.maps.model.Dash(length));
     }
 

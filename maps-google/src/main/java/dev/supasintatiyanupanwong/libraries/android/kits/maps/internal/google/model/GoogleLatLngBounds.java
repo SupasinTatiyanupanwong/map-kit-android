@@ -16,13 +16,17 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
-class GoogleLatLngBounds implements LatLngBounds {
+@RestrictTo(LIBRARY)
+public class GoogleLatLngBounds implements LatLngBounds {
 
     private final com.google.android.gms.maps.model.LatLngBounds mDelegate;
 
@@ -34,7 +38,7 @@ class GoogleLatLngBounds implements LatLngBounds {
         mDelegate = delegate;
     }
 
-    GoogleLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
+    public GoogleLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
         this(new com.google.android.gms.maps.model.LatLngBounds(
                 GoogleLatLng.unwrap(southwest), GoogleLatLng.unwrap(northeast)));
     }
@@ -108,10 +112,10 @@ class GoogleLatLngBounds implements LatLngBounds {
     }
 
 
-    static class Builder implements LatLngBounds.Builder {
+    public static class Builder implements LatLngBounds.Builder {
         private final com.google.android.gms.maps.model.LatLngBounds.Builder mDelegate;
 
-        Builder() {
+        public Builder() {
             mDelegate = com.google.android.gms.maps.model.LatLngBounds.builder();
         }
 

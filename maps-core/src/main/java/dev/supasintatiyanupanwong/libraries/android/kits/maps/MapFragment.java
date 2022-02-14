@@ -70,7 +70,7 @@ public class MapFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         mOnCreateViewCalled = true;
-        return inflater.inflate(MapsPlatform.get().getFragmentLayoutId(), container, false);
+        return inflater.inflate(MapKit.getBackend().getMapFragmentLayoutRes(), container, false);
     }
 
     @CallSuper
@@ -129,13 +129,13 @@ public class MapFragment extends Fragment {
      */
     private void getMapAsyncInternal(MapKit.OnMapReadyCallback callback) {
         Fragment fragment = getChildFragmentManager()
-                .findFragmentById(MapsPlatform.get().getFragmentDelegateId());
+                .findFragmentById(MapKit.getBackend().getMapFragmentIdRes());
 
         if (fragment == null) {
             throw new NullPointerException();
         }
 
-        MapsPlatform.get().getFactory().getMapAsync(fragment, callback);
+        MapKit.getBackend().getMapAsync(fragment, callback);
     }
 
 

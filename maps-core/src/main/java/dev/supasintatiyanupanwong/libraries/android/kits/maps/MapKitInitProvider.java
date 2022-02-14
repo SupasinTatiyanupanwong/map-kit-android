@@ -18,8 +18,6 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -29,14 +27,8 @@ import androidx.annotation.Nullable;
 public class MapKitInitProvider extends ContentProvider {
 
     @Override
-    public void attachInfo(@NonNull Context context, @NonNull ProviderInfo info) {
-        // super.attachInfo calls onCreate. Fail as early as possible.
-        MapsPlatform.init(context);
-        super.attachInfo(context, info);
-    }
-
-    @Override
     public boolean onCreate() {
+        MapKit.setBackend(MapsPlatform.findPlatform(getContext()).getMapKitBackend());
         return false;
     }
 

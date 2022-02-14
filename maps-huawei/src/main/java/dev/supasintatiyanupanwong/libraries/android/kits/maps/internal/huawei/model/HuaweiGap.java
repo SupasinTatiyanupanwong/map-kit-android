@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 
-class HuaweiGap extends HuaweiPatternItem implements Gap {
+@RestrictTo(LIBRARY)
+public class HuaweiGap extends HuaweiPatternItem implements Gap {
 
     private final com.huawei.hms.maps.model.Gap mDelegate;
 
@@ -29,7 +33,7 @@ class HuaweiGap extends HuaweiPatternItem implements Gap {
         mDelegate = delegate;
     }
 
-    HuaweiGap(float length) {
+    public HuaweiGap(float length) {
         this(new com.huawei.hms.maps.model.Gap(length));
     }
 

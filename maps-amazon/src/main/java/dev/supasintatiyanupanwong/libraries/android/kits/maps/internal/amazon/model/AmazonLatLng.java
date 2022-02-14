@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,7 +28,8 @@ import java.util.List;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 
-class AmazonLatLng implements LatLng {
+@RestrictTo(LIBRARY)
+public class AmazonLatLng implements LatLng {
 
     private final com.amazon.geo.mapsv2.model.LatLng mDelegate;
 
@@ -33,7 +37,7 @@ class AmazonLatLng implements LatLng {
         mDelegate = delegate;
     }
 
-    AmazonLatLng(double latitude, double longitude) {
+    public AmazonLatLng(double latitude, double longitude) {
         this(new com.amazon.geo.mapsv2.model.LatLng(latitude, longitude));
     }
 

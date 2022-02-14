@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.List;
 
@@ -25,7 +28,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 
-class HuaweiCircle implements Circle {
+@RestrictTo(LIBRARY)
+public class HuaweiCircle implements Circle {
 
     private final com.huawei.hms.maps.model.Circle mDelegate;
 
@@ -173,10 +177,10 @@ class HuaweiCircle implements Circle {
     }
 
 
-    static class Options implements Circle.Options {
+    public static class Options implements Circle.Options {
         private final com.huawei.hms.maps.model.CircleOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.huawei.hms.maps.model.CircleOptions();
         }
 

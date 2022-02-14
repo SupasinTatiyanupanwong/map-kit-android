@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
 
-class GoogleDot extends GooglePatternItem implements Dot {
+@RestrictTo(LIBRARY)
+public class GoogleDot extends GooglePatternItem implements Dot {
 
     private final com.google.android.gms.maps.model.Dot mDelegate;
 
@@ -29,7 +33,7 @@ class GoogleDot extends GooglePatternItem implements Dot {
         mDelegate = delegate;
     }
 
-    GoogleDot() {
+    public GoogleDot() {
         this(new com.google.android.gms.maps.model.Dot());
     }
 

@@ -14,25 +14,54 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps;
+
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 import androidx.annotation.RestrictTo;
 import androidx.annotation.UiThread;
 import androidx.fragment.app.Fragment;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
-
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 /**
  * @since 1.2.0
  */
 @RestrictTo(LIBRARY_GROUP)
-public interface MapFactory {
+public interface MapKitBackend {
+
+    @LayoutRes int getMapFragmentLayoutRes();
+
+    @IdRes int getMapFragmentIdRes();
+
 
     @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory();
 

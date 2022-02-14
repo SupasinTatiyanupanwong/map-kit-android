@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,7 +28,8 @@ import java.util.List;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 
-class GoogleLatLng implements LatLng {
+@RestrictTo(LIBRARY)
+public class GoogleLatLng implements LatLng {
 
     private final com.google.android.gms.maps.model.LatLng mDelegate;
 
@@ -33,7 +37,7 @@ class GoogleLatLng implements LatLng {
         mDelegate = delegate;
     }
 
-    GoogleLatLng(double latitude, double longitude) {
+    public GoogleLatLng(double latitude, double longitude) {
         this(new com.google.android.gms.maps.model.LatLng(latitude, longitude));
     }
 

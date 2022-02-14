@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 
-class HuaweiButtCap extends HuaweiCap implements ButtCap {
+@RestrictTo(LIBRARY)
+public class HuaweiButtCap extends HuaweiCap implements ButtCap {
 
     private final com.huawei.hms.maps.model.ButtCap mDelegate;
 
@@ -29,7 +33,7 @@ class HuaweiButtCap extends HuaweiCap implements ButtCap {
         mDelegate = delegate;
     }
 
-    HuaweiButtCap() {
+    public HuaweiButtCap() {
         this(new com.huawei.hms.maps.model.ButtCap());
     }
 

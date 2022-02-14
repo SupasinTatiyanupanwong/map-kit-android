@@ -16,6 +16,10 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.view.View;
@@ -24,6 +28,7 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
@@ -39,16 +44,14 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Projection;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-
 @SuppressWarnings("unused")
-class AmazonMapClient implements MapClient {
+@RestrictTo(LIBRARY)
+public class AmazonMapClient implements MapClient {
 
     private final com.amazon.geo.mapsv2.AmazonMap mDelegate;
     private final UiSettings mSettings;
 
-    AmazonMapClient(@NonNull com.amazon.geo.mapsv2.AmazonMap map) {
+    public AmazonMapClient(@NonNull com.amazon.geo.mapsv2.AmazonMap map) {
         mDelegate = map;
         mSettings = new UiSettings(map.getUiSettings());
     }
@@ -515,9 +518,9 @@ class AmazonMapClient implements MapClient {
     }
 
 
-    static class Style implements MapClient.Style {
-        static class Options implements MapClient.Style.Options {
-            static final @NonNull Options NULL = new Options();
+    public static class Style implements MapClient.Style {
+        public static class Options implements MapClient.Style.Options {
+            public static final @NonNull Options NULL = new Options();
 
             private Options() {}
         }

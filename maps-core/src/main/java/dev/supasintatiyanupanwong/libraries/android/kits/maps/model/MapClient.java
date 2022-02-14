@@ -16,6 +16,9 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.view.View;
@@ -27,9 +30,6 @@ import androidx.annotation.RequiresPermission;
 import androidx.annotation.UiThread;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapFragment;
-
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 /**
  * This is the main class of the Map Kit and is the entry point for all methods related to the map.

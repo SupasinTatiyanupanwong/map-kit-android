@@ -16,15 +16,19 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 
-class AmazonPatternItem implements Dash, Dot, Gap {
+@RestrictTo(LIBRARY)
+public class AmazonPatternItem implements Dash, Dot, Gap {
 
-    static final @NonNull AmazonPatternItem NULL = new AmazonPatternItem();
+    public static final @NonNull AmazonPatternItem NULL = new AmazonPatternItem();
 
     private AmazonPatternItem() {}
 

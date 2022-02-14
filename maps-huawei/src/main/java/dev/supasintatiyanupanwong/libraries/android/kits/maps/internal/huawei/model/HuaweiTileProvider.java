@@ -16,14 +16,19 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
-class HuaweiTileProvider implements TileProvider {
-    static final Tile NO_TILE =
+@RestrictTo(LIBRARY)
+public class HuaweiTileProvider implements TileProvider {
+
+    public static final Tile NO_TILE =
             HuaweiTile.wrap(com.huawei.hms.maps.model.TileProvider.NO_TILE);
 
     private final com.huawei.hms.maps.model.TileProvider mDelegate;

@@ -35,7 +35,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverla
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapFactory;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -54,30 +53,38 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegio
  */
 public final class MapKit {
 
-    private static final @NonNull MapFactory FACTORY = MapsPlatform.get().getFactory();
+    private static MapKitBackend sBackend;
 
     private MapKit() {} // No instances!
+
+    static @NonNull MapKitBackend getBackend() {
+        return sBackend;
+    }
+
+    static void setBackend(@NonNull MapKitBackend backend) {
+        sBackend = backend;
+    }
 
 
     /**
      * @since 1.2.0
      */
     public static @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory() {
-        return FACTORY.getBitmapDescriptorFactory();
+        return getBackend().getBitmapDescriptorFactory();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull ButtCap newButtCap() {
-        return FACTORY.newButtCap();
+        return getBackend().newButtCap();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull CameraUpdate.Factory getCameraUpdateFactory() {
-        return FACTORY.getCameraUpdateFactory();
+        return getBackend().getCameraUpdateFactory();
     }
 
     /**
@@ -86,14 +93,14 @@ public final class MapKit {
     public static @NonNull CameraPosition newCameraPositionFromLatLngZoom(
             @NonNull LatLng target,
             float zoom) {
-        return FACTORY.newCameraPositionFromLatLngZoom(target, zoom);
+        return getBackend().newCameraPositionFromLatLngZoom(target, zoom);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull CameraPosition.Builder newCameraPositionBuilder() {
-        return FACTORY.newCameraPositionBuilder();
+        return getBackend().newCameraPositionBuilder();
     }
 
     /**
@@ -101,14 +108,14 @@ public final class MapKit {
      */
     public static @NonNull CameraPosition.Builder newCameraPositionBuilder(
             @NonNull CameraPosition camera) {
-        return FACTORY.newCameraPositionBuilder(camera);
+        return getBackend().newCameraPositionBuilder(camera);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Circle.Options newCircleOptions() {
-        return FACTORY.newCircleOptions();
+        return getBackend().newCircleOptions();
     }
 
     /**
@@ -116,49 +123,49 @@ public final class MapKit {
      */
     public static @NonNull CustomCap newCustomCap(
             @NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
-        return FACTORY.newCustomCap(bitmapDescriptor, refWidth);
+        return getBackend().newCustomCap(bitmapDescriptor, refWidth);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
-        return FACTORY.newCustomCap(bitmapDescriptor);
+        return getBackend().newCustomCap(bitmapDescriptor);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Dot newDot() {
-        return FACTORY.newDot();
+        return getBackend().newDot();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Dash newDash(float length) {
-        return FACTORY.newDash(length);
+        return getBackend().newDash(length);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Gap newGap(float length) {
-        return FACTORY.newGap(length);
+        return getBackend().newGap(length);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull GroundOverlay.Options newGroundOverlayOptions() {
-        return FACTORY.newGroundOverlayOptions();
+        return getBackend().newGroundOverlayOptions();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull LatLng newLatLng(double latitude, double longitude) {
-        return FACTORY.newLatLng(latitude, longitude);
+        return getBackend().newLatLng(latitude, longitude);
     }
 
     /**
@@ -166,21 +173,21 @@ public final class MapKit {
      */
     public static @NonNull LatLngBounds newLatLngBounds(
             @NonNull LatLng southwest, @NonNull LatLng northeast) {
-        return FACTORY.newLatLngBounds(southwest, northeast);
+        return getBackend().newLatLngBounds(southwest, northeast);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull LatLngBounds.Builder newLatLngBoundsBuilder() {
-        return FACTORY.newLatLngBoundsBuilder();
+        return getBackend().newLatLngBoundsBuilder();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
-        return FACTORY.newMapStyleOptions(json);
+        return getBackend().newMapStyleOptions(json);
     }
 
     /**
@@ -188,63 +195,63 @@ public final class MapKit {
      */
     public static @NonNull MapClient.Style.Options newMapStyleOptions(
             @NonNull Context context, @RawRes int resourceId) {
-        return FACTORY.newMapStyleOptions(context, resourceId);
+        return getBackend().newMapStyleOptions(context, resourceId);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Marker.Options newMarkerOptions() {
-        return FACTORY.newMarkerOptions();
+        return getBackend().newMarkerOptions();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Polygon.Options newPolygonOptions() {
-        return FACTORY.newPolygonOptions();
+        return getBackend().newPolygonOptions();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Polyline.Options newPolylineOptions() {
-        return FACTORY.newPolylineOptions();
+        return getBackend().newPolylineOptions();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull RoundCap newRoundCap() {
-        return FACTORY.newRoundCap();
+        return getBackend().newRoundCap();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull SquareCap newSquareCap() {
-        return FACTORY.newSquareCap();
+        return getBackend().newSquareCap();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull TileOverlay.Options newTileOverlayOptions() {
-        return FACTORY.newTileOverlayOptions();
+        return getBackend().newTileOverlayOptions();
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Tile newTile(int width, int height, byte[] data) {
-        return FACTORY.newTile(width, height, data);
+        return getBackend().newTile(width, height, data);
     }
 
     /**
      * @since 1.2.0
      */
     public static @NonNull Tile noTile() {
-        return FACTORY.noTile();
+        return getBackend().noTile();
     }
 
     /**
@@ -254,7 +261,7 @@ public final class MapKit {
             int width,
             int height,
             @NonNull UrlTileProvider tileProvider) {
-        return FACTORY.newUrlTileProvider(width, height, tileProvider);
+        return getBackend().newUrlTileProvider(width, height, tileProvider);
     }
 
     /**
@@ -266,7 +273,7 @@ public final class MapKit {
             LatLng farLeft,
             LatLng farRight,
             LatLngBounds latLngBounds) {
-        return FACTORY.newVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
+        return getBackend().newVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
     }
 
 

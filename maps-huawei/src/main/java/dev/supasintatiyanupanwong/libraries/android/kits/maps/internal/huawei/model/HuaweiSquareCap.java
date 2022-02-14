@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 
-class HuaweiSquareCap extends HuaweiCap implements SquareCap {
+@RestrictTo(LIBRARY)
+public class HuaweiSquareCap extends HuaweiCap implements SquareCap {
 
     private final com.huawei.hms.maps.model.SquareCap mDelegate;
 
@@ -29,7 +33,7 @@ class HuaweiSquareCap extends HuaweiCap implements SquareCap {
         mDelegate = delegate;
     }
 
-    HuaweiSquareCap() {
+    public HuaweiSquareCap() {
         this(new com.huawei.hms.maps.model.SquareCap());
     }
 

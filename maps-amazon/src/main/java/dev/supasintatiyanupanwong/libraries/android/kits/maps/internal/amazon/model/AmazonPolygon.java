@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +32,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 
-class AmazonPolygon implements Polygon {
+@RestrictTo(LIBRARY)
+public class AmazonPolygon implements Polygon {
 
     private final com.amazon.geo.mapsv2.model.Polygon mDelegate;
 
@@ -207,10 +211,10 @@ class AmazonPolygon implements Polygon {
     }
 
 
-    static class Options implements Polygon.Options {
+    public static class Options implements Polygon.Options {
         private final com.amazon.geo.mapsv2.model.PolygonOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.amazon.geo.mapsv2.model.PolygonOptions();
         }
 

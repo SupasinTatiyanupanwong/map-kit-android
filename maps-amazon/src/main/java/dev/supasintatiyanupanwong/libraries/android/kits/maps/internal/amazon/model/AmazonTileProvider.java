@@ -16,14 +16,19 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
-class AmazonTileProvider implements TileProvider {
-    static final Tile NO_TILE =
+@RestrictTo(LIBRARY)
+public class AmazonTileProvider implements TileProvider {
+
+    public static final Tile NO_TILE =
             AmazonTile.wrap(com.amazon.geo.mapsv2.model.TileProvider.NO_TILE);
 
     private final com.amazon.geo.mapsv2.model.TileProvider mDelegate;

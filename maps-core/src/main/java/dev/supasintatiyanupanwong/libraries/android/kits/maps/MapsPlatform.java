@@ -18,38 +18,17 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps;
 
 import android.content.Context;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Objects;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapFactory;
-
 abstract class MapsPlatform {
 
-    private static MapsPlatform sPlatform;
-
-    static synchronized @NonNull MapsPlatform get() {
-        return sPlatform;
-    }
-
-    static synchronized void init(@NonNull Context context) {
-        sPlatform = findPlatform(context);
-    }
+    abstract @NonNull MapKitBackend getMapKitBackend();
 
 
-    abstract @NonNull MapFactory getFactory();
-
-    @LayoutRes
-    abstract int getFragmentLayoutId();
-
-    @IdRes
-    abstract int getFragmentDelegateId();
-
-
-    private static MapsPlatform findPlatform(@NonNull Context context) {
+    static @NonNull MapsPlatform findPlatform(@NonNull Context context) {
         MapsPlatform amazon = AmazonMapsPlatform.buildIfSupported(context);
         if (amazon != null) {
             return amazon;
@@ -73,53 +52,23 @@ abstract class MapsPlatform {
 
     private static final class AmazonMapsPlatform extends MapsPlatform {
         private static final String LIBRARY_PACKAGE_NAME =
-                "dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon";
+                BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.amazon";
 
-        private static final String CLASS_NAME_LAYOUT_RES = LIBRARY_PACKAGE_NAME + ".R$layout";
-
-        private static final String CLASS_NAME_ID_RES = LIBRARY_PACKAGE_NAME + ".R$id";
-
-        private static final String FIELD_NAME_LAYOUT_ID = "kits_maps_internal_amazon_map_view";
-
-        private static final String FIELD_NAME_FRAGMENT_ID = "kits_maps_internal_map_fragment";
-
-        private static MapFactory sFactory;
-        private static int sFragmentLayoutId;
-        private static int sFragmentDelegateId;
+        private static MapKitBackend sBackend;
 
         private AmazonMapsPlatform() {}
 
-        @Override
-        @NonNull MapFactory getFactory() {
-            return sFactory;
+        @Override @NonNull MapKitBackend getMapKitBackend() {
+            return sBackend;
         }
-
-        @LayoutRes
-        @Override
-        int getFragmentLayoutId() {
-            return sFragmentLayoutId;
-        }
-
-        @IdRes
-        @Override
-        int getFragmentDelegateId() {
-            return sFragmentDelegateId;
-        }
-
 
         static @Nullable AmazonMapsPlatform buildIfSupported(@NonNull Context context) {
             try {
-                sFactory = Objects.requireNonNull(
-                        (MapFactory) Class
-                                .forName(LIBRARY_PACKAGE_NAME + ".model.AmazonMapFactory")
+                sBackend = Objects.requireNonNull(
+                        (MapKitBackend) Class
+                                .forName(LIBRARY_PACKAGE_NAME + ".AmazonMapsBackend")
                                 .getMethod("buildIfSupported", Context.class)
                                 .invoke(null, context));
-
-                sFragmentLayoutId = Class.forName(CLASS_NAME_LAYOUT_RES)
-                        .getField(FIELD_NAME_LAYOUT_ID).getInt(null);
-
-                sFragmentDelegateId = Class.forName(CLASS_NAME_ID_RES)
-                        .getField(FIELD_NAME_FRAGMENT_ID).getInt(null);
 
                 return new AmazonMapsPlatform();
             } catch (Exception ignored) {
@@ -130,53 +79,23 @@ abstract class MapsPlatform {
 
     private static final class GoogleMapsPlatform extends MapsPlatform {
         private static final String LIBRARY_PACKAGE_NAME =
-                "dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google";
+                BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.google";
 
-        private static final String CLASS_NAME_LAYOUT_RES = LIBRARY_PACKAGE_NAME + ".R$layout";
-
-        private static final String CLASS_NAME_ID_RES = LIBRARY_PACKAGE_NAME + ".R$id";
-
-        private static final String FIELD_NAME_LAYOUT_ID = "kits_maps_internal_google_map_view";
-
-        private static final String FIELD_NAME_FRAGMENT_ID = "kits_maps_internal_map_fragment";
-
-        private static MapFactory sFactory;
-        private static int sFragmentLayoutId;
-        private static int sFragmentDelegateId;
+        private static MapKitBackend sBackend;
 
         private GoogleMapsPlatform() {}
 
-        @Override
-        @NonNull MapFactory getFactory() {
-            return sFactory;
+        @Override @NonNull MapKitBackend getMapKitBackend() {
+            return sBackend;
         }
-
-        @LayoutRes
-        @Override
-        int getFragmentLayoutId() {
-            return sFragmentLayoutId;
-        }
-
-        @IdRes
-        @Override
-        int getFragmentDelegateId() {
-            return sFragmentDelegateId;
-        }
-
 
         static @Nullable GoogleMapsPlatform buildIfSupported(@NonNull Context context) {
             try {
-                sFactory = Objects.requireNonNull(
-                        (MapFactory) Class
-                                .forName(LIBRARY_PACKAGE_NAME + ".model.GoogleMapFactory")
+                sBackend = Objects.requireNonNull(
+                        (MapKitBackend) Class
+                                .forName(LIBRARY_PACKAGE_NAME + ".GoogleMapsBackend")
                                 .getMethod("buildIfSupported", Context.class)
                                 .invoke(null, context));
-
-                sFragmentLayoutId = Class.forName(CLASS_NAME_LAYOUT_RES)
-                        .getField(FIELD_NAME_LAYOUT_ID).getInt(null);
-
-                sFragmentDelegateId = Class.forName(CLASS_NAME_ID_RES)
-                        .getField(FIELD_NAME_FRAGMENT_ID).getInt(null);
 
                 return new GoogleMapsPlatform();
             } catch (Exception ignored) {
@@ -187,53 +106,23 @@ abstract class MapsPlatform {
 
     private static final class HuaweiMapsPlatform extends MapsPlatform {
         private static final String LIBRARY_PACKAGE_NAME =
-                "dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei";
+                BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.huawei";
 
-        private static final String CLASS_NAME_LAYOUT_RES = LIBRARY_PACKAGE_NAME + ".R$layout";
-
-        private static final String CLASS_NAME_ID_RES = LIBRARY_PACKAGE_NAME + ".R$id";
-
-        private static final String FIELD_NAME_LAYOUT_ID = "kits_maps_internal_huawei_map_view";
-
-        private static final String FIELD_NAME_FRAGMENT_ID = "kits_maps_internal_map_fragment";
-
-        private static MapFactory sFactory;
-        private static int sFragmentLayoutId;
-        private static int sFragmentDelegateId;
+        private static MapKitBackend sBackend;
 
         private HuaweiMapsPlatform() {}
 
-        @Override
-        @NonNull MapFactory getFactory() {
-            return sFactory;
+        @Override @NonNull MapKitBackend getMapKitBackend() {
+            return sBackend;
         }
-
-        @LayoutRes
-        @Override
-        int getFragmentLayoutId() {
-            return sFragmentLayoutId;
-        }
-
-        @IdRes
-        @Override
-        int getFragmentDelegateId() {
-            return sFragmentDelegateId;
-        }
-
 
         static @Nullable HuaweiMapsPlatform buildIfSupported(@NonNull Context context) {
             try {
-                sFactory = Objects.requireNonNull(
-                        (MapFactory) Class
-                                .forName(LIBRARY_PACKAGE_NAME + ".model.HuaweiMapFactory")
+                sBackend = Objects.requireNonNull(
+                        (MapKitBackend) Class
+                                .forName(LIBRARY_PACKAGE_NAME + ".HuaweiMapsBackend")
                                 .getMethod("buildIfSupported", Context.class)
                                 .invoke(null, context));
-
-                sFragmentLayoutId = Class.forName(CLASS_NAME_LAYOUT_RES)
-                        .getField(FIELD_NAME_LAYOUT_ID).getInt(null);
-
-                sFragmentDelegateId = Class.forName(CLASS_NAME_ID_RES)
-                        .getField(FIELD_NAME_FRAGMENT_ID).getInt(null);
 
                 return new HuaweiMapsPlatform();
             } catch (Exception ignored) {

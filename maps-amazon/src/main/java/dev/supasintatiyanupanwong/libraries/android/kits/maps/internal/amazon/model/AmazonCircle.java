@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +29,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 
-class AmazonCircle implements Circle {
+@RestrictTo(LIBRARY)
+public class AmazonCircle implements Circle {
 
     private final com.amazon.geo.mapsv2.model.Circle mDelegate;
 
@@ -176,10 +180,10 @@ class AmazonCircle implements Circle {
     }
 
 
-    static class Options implements Circle.Options {
+    public static class Options implements Circle.Options {
         private final com.amazon.geo.mapsv2.model.CircleOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.amazon.geo.mapsv2.model.CircleOptions();
         }
 

@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 
-class HuaweiRoundCap extends HuaweiCap implements RoundCap {
+@RestrictTo(LIBRARY)
+public class HuaweiRoundCap extends HuaweiCap implements RoundCap {
 
     private final com.huawei.hms.maps.model.RoundCap mDelegate;
 
@@ -29,7 +33,7 @@ class HuaweiRoundCap extends HuaweiCap implements RoundCap {
         mDelegate = delegate;
     }
 
-    HuaweiRoundCap() {
+    public HuaweiRoundCap() {
         this(new com.huawei.hms.maps.model.RoundCap());
     }
 

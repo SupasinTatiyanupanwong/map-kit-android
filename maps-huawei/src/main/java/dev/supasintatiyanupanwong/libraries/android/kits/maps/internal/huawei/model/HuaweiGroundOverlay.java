@@ -16,15 +16,19 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
-class HuaweiGroundOverlay implements GroundOverlay {
+@RestrictTo(LIBRARY)
+public class HuaweiGroundOverlay implements GroundOverlay {
 
     private final com.huawei.hms.maps.model.GroundOverlay mDelegate;
 
@@ -177,10 +181,10 @@ class HuaweiGroundOverlay implements GroundOverlay {
     }
 
 
-    static class Options implements GroundOverlay.Options {
+    public static class Options implements GroundOverlay.Options {
         private final com.huawei.hms.maps.model.GroundOverlayOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.huawei.hms.maps.model.GroundOverlayOptions();
         }
 

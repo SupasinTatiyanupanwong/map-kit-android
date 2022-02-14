@@ -16,9 +16,12 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
@@ -26,9 +29,10 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 
-class AmazonCap implements ButtCap, CustomCap, RoundCap, SquareCap {
+@RestrictTo(LIBRARY)
+public class AmazonCap implements ButtCap, CustomCap, RoundCap, SquareCap {
 
-    static final @NonNull AmazonCap NULL = new AmazonCap();
+    public static final @NonNull AmazonCap NULL = new AmazonCap();
 
     private BitmapDescriptor mBitmapDescriptor;
 

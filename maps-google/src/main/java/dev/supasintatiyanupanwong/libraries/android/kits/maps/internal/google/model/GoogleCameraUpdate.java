@@ -16,10 +16,13 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Point;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 
@@ -28,9 +31,10 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
-class GoogleCameraUpdate implements CameraUpdate {
+@RestrictTo(LIBRARY)
+public class GoogleCameraUpdate implements CameraUpdate {
 
-    static final CameraUpdate.Factory FACTORY = new CameraUpdate.Factory() {
+    public static final CameraUpdate.Factory FACTORY = new CameraUpdate.Factory() {
         @Override
         public @NonNull CameraUpdate zoomIn() {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomIn());

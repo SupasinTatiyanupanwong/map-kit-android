@@ -14,6 +14,6 @@
 # limitations under the License.
 #
 
--keep class dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonMapFactory {
+-keep class dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.AmazonMapsBackend {
     public static *** buildIfSupported(android.content.Context);
 }

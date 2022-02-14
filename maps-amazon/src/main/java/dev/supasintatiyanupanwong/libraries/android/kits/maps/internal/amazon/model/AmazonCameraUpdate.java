@@ -16,10 +16,13 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Point;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.amazon.geo.mapsv2.CameraUpdateFactory;
 
@@ -28,9 +31,10 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
-class AmazonCameraUpdate implements CameraUpdate {
+@RestrictTo(LIBRARY)
+public class AmazonCameraUpdate implements CameraUpdate {
 
-    static final Factory FACTORY = new Factory() {
+    public static final Factory FACTORY = new Factory() {
         @Override
         public @NonNull CameraUpdate zoomIn() {
             return new AmazonCameraUpdate(CameraUpdateFactory.zoomIn());

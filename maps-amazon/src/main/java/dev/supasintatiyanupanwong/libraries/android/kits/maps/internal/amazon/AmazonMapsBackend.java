@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon;
 
 import android.content.Context;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
@@ -27,6 +29,25 @@ import com.amazon.geo.mapsv2.util.AmazonMapsRuntimeUtil;
 import com.amazon.geo.mapsv2.util.ConnectionResult;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonBitmapDescriptor;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonCameraPosition;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonCameraUpdate;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonCircle;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonGroundOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonLatLng;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonLatLngBounds;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonMarker;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPatternItem;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPolygon;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPolyline;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTile;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTileOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTileProvider;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonUrlTileProvider;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
@@ -40,7 +61,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverla
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapFactory;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -53,27 +73,32 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
-class AmazonMapFactory implements MapFactory {
+class AmazonMapsBackend implements MapKitBackend {
 
-    private AmazonMapFactory() {}
+    private AmazonMapsBackend() {}
 
-    @Override
-    public @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory() {
+    @Override public @LayoutRes int getMapFragmentLayoutRes() {
+        return R.layout.kits_maps_internal_amazon_map_view;
+    }
+
+    @Override public @IdRes int getMapFragmentIdRes() {
+        return R.id.kits_maps_internal_map_fragment;
+    }
+
+
+    @Override public @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory() {
         return AmazonBitmapDescriptor.FACTORY;
     }
 
-    @Override
-    public @NonNull ButtCap newButtCap() {
+    @Override public @NonNull ButtCap newButtCap() {
         return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull CameraUpdate.Factory getCameraUpdateFactory() {
+    @Override public @NonNull CameraUpdate.Factory getCameraUpdateFactory() {
         return AmazonCameraUpdate.FACTORY;
     }
 
-    @Override
-    public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
+    @Override public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
             @NonNull LatLng target,
             float zoom) {
         return newCameraPositionBuilder()
@@ -82,132 +107,108 @@ class AmazonMapFactory implements MapFactory {
                 .build();
     }
 
-    @Override
-    public @NonNull CameraPosition.Builder newCameraPositionBuilder() {
+    @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder() {
         return new AmazonCameraPosition.Builder();
     }
 
-    @Override
-    public @NonNull CameraPosition.Builder newCameraPositionBuilder(
+    @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder(
             @NonNull CameraPosition camera) {
         return new AmazonCameraPosition.Builder(camera);
     }
 
-    @Override
-    public @NonNull Circle.Options newCircleOptions() {
+    @Override public @NonNull Circle.Options newCircleOptions() {
         return new AmazonCircle.Options();
     }
 
-    @Override
-    public @NonNull CustomCap newCustomCap(
+    @Override public @NonNull CustomCap newCustomCap(
             @NonNull BitmapDescriptor bitmapDescriptor,
             float refWidth) {
         return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
+    @Override public @NonNull CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
         return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull Dot newDot() {
+    @Override public @NonNull Dot newDot() {
         return AmazonPatternItem.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull Dash newDash(float length) {
+    @Override public @NonNull Dash newDash(float length) {
         return AmazonPatternItem.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull Gap newGap(float length) {
+    @Override public @NonNull Gap newGap(float length) {
         return AmazonPatternItem.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull GroundOverlay.Options newGroundOverlayOptions() {
+    @Override public @NonNull GroundOverlay.Options newGroundOverlayOptions() {
         return new AmazonGroundOverlay.Options();
     }
 
-    @Override
-    public @NonNull LatLng newLatLng(double latitude, double longitude) {
+    @Override public @NonNull LatLng newLatLng(double latitude, double longitude) {
         return new AmazonLatLng(latitude, longitude);
     }
 
-    @Override
-    public @NonNull LatLngBounds newLatLngBounds(
+    @Override public @NonNull LatLngBounds newLatLngBounds(
             @NonNull LatLng southwest,
             @NonNull LatLng northeast) {
         return new AmazonLatLngBounds(southwest, northeast);
     }
 
-    @Override
-    public @NonNull LatLngBounds.Builder newLatLngBoundsBuilder() {
+    @Override public @NonNull LatLngBounds.Builder newLatLngBoundsBuilder() {
         return new AmazonLatLngBounds.Builder();
     }
 
-    @Override
-    public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
+    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
         return AmazonMapClient.Style.Options.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull MapClient.Style.Options newMapStyleOptions(
+    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
             @NonNull Context context, @RawRes int resourceId) {
         return AmazonMapClient.Style.Options.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull Marker.Options newMarkerOptions() {
+    @Override public @NonNull Marker.Options newMarkerOptions() {
         return new AmazonMarker.Options();
     }
 
-    @Override
-    public @NonNull Polygon.Options newPolygonOptions() {
+    @Override public @NonNull Polygon.Options newPolygonOptions() {
         return new AmazonPolygon.Options();
     }
 
-    @Override
-    public @NonNull Polyline.Options newPolylineOptions() {
+    @Override public @NonNull Polyline.Options newPolylineOptions() {
         return new AmazonPolyline.Options();
     }
 
-    @Override
-    public @NonNull RoundCap newRoundCap() {
+    @Override public @NonNull RoundCap newRoundCap() {
         return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull SquareCap newSquareCap() {
+    @Override public @NonNull SquareCap newSquareCap() {
         return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public @NonNull TileOverlay.Options newTileOverlayOptions() {
+    @Override public @NonNull TileOverlay.Options newTileOverlayOptions() {
         return new AmazonTileOverlay.Options();
     }
 
-    @Override
-    public @NonNull Tile newTile(int width, int height, byte[] data) {
+    @Override public @NonNull Tile newTile(int width, int height, byte[] data) {
         return new AmazonTile(width, height, data);
     }
 
-    @Override
-    public @NonNull Tile noTile() {
+    @Override public @NonNull Tile noTile() {
         return AmazonTileProvider.NO_TILE;
     }
 
-    @Override
-    public @NonNull TileProvider newUrlTileProvider(
+    @Override public @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,
             @NonNull UrlTileProvider tileProvider) {
         return new AmazonUrlTileProvider(width, height, tileProvider);
     }
 
-    @Override
-    public @NonNull VisibleRegion newVisibleRegion(
+    @Override public @NonNull VisibleRegion newVisibleRegion(
             LatLng nearLeft,
             LatLng nearRight,
             LatLng farLeft,
@@ -216,8 +217,7 @@ class AmazonMapFactory implements MapFactory {
         return new AmazonVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
     }
 
-    @Override
-    public void getMapAsync(
+    @Override public void getMapAsync(
             @NonNull Fragment fragment,
             @NonNull final MapKit.OnMapReadyCallback callback) {
         ((com.amazon.geo.mapsv2.SupportMapFragment) fragment)
@@ -230,13 +230,13 @@ class AmazonMapFactory implements MapFactory {
     }
 
 
-    public static @Nullable MapFactory buildIfSupported(@NonNull Context context) {
+    public static @Nullable MapKitBackend buildIfSupported(@NonNull Context context) {
         final int result = AmazonMapsRuntimeUtil.isAmazonMapsRuntimeAvailable(context);
         if (result != ConnectionResult.SUCCESS) {
             return null;
         }
 
-        return new AmazonMapFactory();
+        return new AmazonMapsBackend();
     }
 
 }

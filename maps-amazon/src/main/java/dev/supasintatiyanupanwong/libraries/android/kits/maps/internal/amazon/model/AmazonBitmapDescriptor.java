@@ -16,18 +16,22 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.amazon.geo.mapsv2.model.BitmapDescriptorFactory;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 
-class AmazonBitmapDescriptor implements BitmapDescriptor {
+@RestrictTo(LIBRARY)
+public class AmazonBitmapDescriptor implements BitmapDescriptor {
 
-    static final Factory FACTORY = new Factory() {
+    public static final Factory FACTORY = new Factory() {
         @Override
         public @NonNull BitmapDescriptor defaultMarker() {
             return new AmazonBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());

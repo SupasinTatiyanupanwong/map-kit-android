@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.Objects;
 
@@ -26,7 +29,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverla
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
-class AmazonGroundOverlay implements GroundOverlay {
+@RestrictTo(LIBRARY)
+public class AmazonGroundOverlay implements GroundOverlay {
 
     private final com.amazon.geo.mapsv2.model.GroundOverlay mDelegate;
 
@@ -181,10 +185,10 @@ class AmazonGroundOverlay implements GroundOverlay {
     }
 
 
-    static class Options implements GroundOverlay.Options {
+    public static class Options implements GroundOverlay.Options {
         private final com.amazon.geo.mapsv2.model.GroundOverlayOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.amazon.geo.mapsv2.model.GroundOverlayOptions();
         }
 

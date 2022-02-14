@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 
-class AmazonCameraPosition implements CameraPosition {
+@RestrictTo(LIBRARY)
+public class AmazonCameraPosition implements CameraPosition {
 
     private final com.amazon.geo.mapsv2.model.CameraPosition mDelegate;
 
@@ -90,14 +94,14 @@ class AmazonCameraPosition implements CameraPosition {
     }
 
 
-    static class Builder implements CameraPosition.Builder {
+    public static class Builder implements CameraPosition.Builder {
         private final com.amazon.geo.mapsv2.model.CameraPosition.Builder mDelegate;
 
-        Builder() {
+        public Builder() {
             mDelegate = com.amazon.geo.mapsv2.model.CameraPosition.builder();
         }
 
-        Builder(CameraPosition camera) {
+        public Builder(CameraPosition camera) {
             mDelegate = com.amazon.geo.mapsv2.model.CameraPosition.builder(
                     AmazonCameraPosition.unwrap(camera));
         }

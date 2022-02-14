@@ -14,6 +14,6 @@
 # limitations under the License.
 #
 
--keep class dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleMapFactory {
+-keep class dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.GoogleMapsBackend {
     public static *** buildIfSupported(android.content.Context);
 }
