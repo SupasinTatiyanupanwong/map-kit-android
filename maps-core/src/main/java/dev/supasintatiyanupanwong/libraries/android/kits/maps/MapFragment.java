@@ -77,11 +77,7 @@ public class MapFragment extends Fragment {
     @Override
     public void onStart() {
         // FM enforced super.onStart() to be called if overridden, checking our view first.
-        if (!mOnCreateViewCalled) {
-            throw new IllegalStateException("MapFragment " + this
-                    + " did not call through to super.onCreateView()");
-        }
-
+        ensureViewCreated();
         super.onStart();
     }
 
@@ -124,9 +120,14 @@ public class MapFragment extends Fragment {
         getMapAsync(new OnMapAndViewReadyCallbackImpl(this, callback));
     }
 
-    /**
-     * @since 1.2.0
-     */
+
+    private void ensureViewCreated() {
+        if (!mOnCreateViewCalled) {
+            throw new IllegalStateException("MapFragment " + this
+                    + " did not call through to super.onCreateView()");
+        }
+    }
+
     private void getMapAsyncInternal(MapKit.OnMapReadyCallback callback) {
         Fragment fragment = getChildFragmentManager()
                 .findFragmentById(MapKit.getBackend().getMapFragmentIdRes());
