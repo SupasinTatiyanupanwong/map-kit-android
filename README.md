@@ -24,7 +24,7 @@ The library consists of 4 artifacts; `maps-core`, `maps-google`, `maps-amazon`, 
 
 | Google Maps SDK          | Amazon Maps SDK          | HUAWEI Map Kit           | Map Kit                      |
 |:------------------------ |:------------------------ |:------------------------ |:---------------------------- |
-| ``SupportMapFragment``   | ``SupportMapFragment``   | ``SupportMapFragment`  ` | ``MapFragment``              |
+| ``SupportMapFragment``   | ``SupportMapFragment``   | ``SupportMapFragment``   | ``MapFragment``              |
 | ``GoogleMap``            | ``AmazonMap``            | ``HuaweiMap``            | ``MapClient``                |
 | ``new LatLng()``         | ``new LatLng()``         | ``new LatLng()``         | ``MapKit.newLatLng()``       |
 | ``new *Options()``       | ``new *Options()``       | ``new *Options()``       | ``MapKit.new*Options()``     |
