@@ -90,6 +90,10 @@ public class MapFragment extends Fragment {
      */
     @UiThread
     public final void getMapAsync(final MapKit.OnMapReadyCallback callback) {
+        if (MapKit.getPlatform() == null) {
+            return;
+        }
+
         if (getView() != null) {
             getMapAsyncInternal(callback);
         } else {
