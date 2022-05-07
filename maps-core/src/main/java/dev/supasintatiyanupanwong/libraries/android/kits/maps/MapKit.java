@@ -330,6 +330,8 @@ public final class MapKit {
      * <p>Once an instance of this interface is set on a {@link MapFragment} object, the {@link
      * #onMapAndViewReady(MapClient)} method is triggered when the map has undergone layout and is
      * ready to be used and provides a non-null instance of {@link MapClient}.
+     *
+     * @since 2.0.0
      */
     public interface OnMapAndViewReadyCallback {
         /**

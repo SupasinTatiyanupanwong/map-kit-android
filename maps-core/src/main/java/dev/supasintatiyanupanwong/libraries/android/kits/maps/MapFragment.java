@@ -120,6 +120,7 @@ public class MapFragment extends Fragment {
      * and ready to be used.
      * @since 2.0.0
      */
+    @UiThread
     public final void getMapAsync(final MapKit.OnMapAndViewReadyCallback callback) {
         getMapAsync(new OnMapAndViewReadyCallbackImpl(this, callback));
     }

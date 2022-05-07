@@ -19,10 +19,7 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.mode
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
-
-import java.util.Objects;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;

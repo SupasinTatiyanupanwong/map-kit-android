@@ -24,7 +24,6 @@ import androidx.annotation.RestrictTo;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 
 @RestrictTo(LIBRARY)
 public class NopPatternItem implements Dash, Dot, Gap {

@@ -48,8 +48,7 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
     private static final LatLng NEWARK = MapKit.newLatLng(40.714086, -74.228697);
 
     private static final LatLng NEAR_NEWARK =
-            MapKit
-                    .newLatLng(NEWARK.getLatitude() - 0.001, NEWARK.getLongitude() - 0.025);
+            MapKit.newLatLng(NEWARK.getLatitude() - 0.001, NEWARK.getLongitude() - 0.025);
 
     private final List<BitmapDescriptor> mImages = new ArrayList<>();
 

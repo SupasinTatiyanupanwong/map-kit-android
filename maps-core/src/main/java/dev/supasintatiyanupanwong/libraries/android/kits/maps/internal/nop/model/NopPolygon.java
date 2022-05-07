@@ -22,17 +22,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.JointType;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
 
 @RestrictTo(LIBRARY)
 public class NopPolygon {

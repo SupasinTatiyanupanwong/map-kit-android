@@ -19,12 +19,10 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.mode
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @RestrictTo(LIBRARY)
 public class NopTileProvider implements TileProvider {

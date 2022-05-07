@@ -18,14 +18,11 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.mode
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
-import android.graphics.Bitmap;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
