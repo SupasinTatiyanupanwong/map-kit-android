@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
--keep class dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiMapFactory {
+-keep class dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.HuaweiMapsBackend {
     public static *** buildIfSupported(android.content.Context);
 }
 

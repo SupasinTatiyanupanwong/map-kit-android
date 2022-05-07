@@ -16,13 +16,17 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
-class HuaweiTileOverlay implements TileOverlay {
+@RestrictTo(LIBRARY)
+public class HuaweiTileOverlay implements TileOverlay {
 
     private final com.huawei.hms.maps.model.TileOverlay mDelegate;
 
@@ -115,10 +119,10 @@ class HuaweiTileOverlay implements TileOverlay {
     }
 
 
-    static class Options implements TileOverlay.Options {
+    public static class Options implements TileOverlay.Options {
         private final com.huawei.hms.maps.model.TileOverlayOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.huawei.hms.maps.model.TileOverlayOptions();
         }
 

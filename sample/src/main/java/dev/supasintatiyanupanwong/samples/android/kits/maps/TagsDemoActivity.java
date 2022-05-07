@@ -155,21 +155,15 @@ public class TagsDemoActivity extends AppCompatActivity implements
         sydneyGroundOverlay.setTag(new CustomTag("Sydney ground overlay"));
 
         // A marker at Hobart.
-        Marker hobartMarker = mMap.addMarker(
-                MapKit.newMarkerOptions().position(HOBART));
+        Marker hobartMarker = mMap.addMarker(MapKit.newMarkerOptions().position(HOBART));
         hobartMarker.setTag(new CustomTag("Hobart marker"));
 
         // A polygon centered at Darwin.
         Polygon darwinPolygon = mMap.addPolygon(MapKit.newPolygonOptions()
-                .add(
-                        MapKit
-                                .newLatLng(DARWIN.getLatitude() + 3, DARWIN.getLongitude() - 3),
-                        MapKit
-                                .newLatLng(DARWIN.getLatitude() + 3, DARWIN.getLongitude() + 3),
-                        MapKit
-                                .newLatLng(DARWIN.getLatitude() - 3, DARWIN.getLongitude() + 3),
-                        MapKit
-                                .newLatLng(DARWIN.getLatitude() - 3, DARWIN.getLongitude() - 3))
+                .add(MapKit.newLatLng(DARWIN.getLatitude() + 3, DARWIN.getLongitude() - 3),
+                        MapKit.newLatLng(DARWIN.getLatitude() + 3, DARWIN.getLongitude() + 3),
+                        MapKit.newLatLng(DARWIN.getLatitude() - 3, DARWIN.getLongitude() + 3),
+                        MapKit.newLatLng(DARWIN.getLatitude() - 3, DARWIN.getLongitude() - 3))
                 .fillColor(Color.argb(150, 34, 173, 24))
                 .strokeColor(Color.rgb(34, 173, 24))
                 .clickable(true));

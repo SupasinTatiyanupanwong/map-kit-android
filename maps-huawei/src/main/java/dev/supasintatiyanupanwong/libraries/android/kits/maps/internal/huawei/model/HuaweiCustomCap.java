@@ -16,13 +16,17 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap;
 
-class HuaweiCustomCap extends HuaweiCap implements CustomCap {
+@RestrictTo(LIBRARY)
+public class HuaweiCustomCap extends HuaweiCap implements CustomCap {
 
     private final com.huawei.hms.maps.model.CustomCap mDelegate;
 
@@ -32,12 +36,12 @@ class HuaweiCustomCap extends HuaweiCap implements CustomCap {
         mDelegate = delegate;
     }
 
-    HuaweiCustomCap(@NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
+    public HuaweiCustomCap(@NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
         this(new com.huawei.hms.maps.model.CustomCap(
                 HuaweiBitmapDescriptor.unwrap(bitmapDescriptor), refWidth));
     }
 
-    HuaweiCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
+    public HuaweiCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
         this(new com.huawei.hms.maps.model.CustomCap(
                 HuaweiBitmapDescriptor.unwrap(bitmapDescriptor)));
     }

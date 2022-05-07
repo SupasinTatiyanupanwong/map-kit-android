@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 
-class HuaweiCameraPosition implements CameraPosition {
+@RestrictTo(LIBRARY)
+public class HuaweiCameraPosition implements CameraPosition {
 
     private final com.huawei.hms.maps.model.CameraPosition mDelegate;
 
@@ -90,14 +94,14 @@ class HuaweiCameraPosition implements CameraPosition {
     }
 
 
-    static class Builder implements CameraPosition.Builder {
+    public static class Builder implements CameraPosition.Builder {
         private final com.huawei.hms.maps.model.CameraPosition.Builder mDelegate;
 
-        Builder() {
+        public Builder() {
             mDelegate = com.huawei.hms.maps.model.CameraPosition.builder();
         }
 
-        Builder(CameraPosition camera) {
+        public Builder(CameraPosition camera) {
             mDelegate = com.huawei.hms.maps.model.CameraPosition.builder(
                     HuaweiCameraPosition.unwrap(camera));
         }

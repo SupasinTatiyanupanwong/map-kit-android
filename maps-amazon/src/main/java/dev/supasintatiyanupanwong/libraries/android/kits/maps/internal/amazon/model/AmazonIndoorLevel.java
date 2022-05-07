@@ -16,15 +16,19 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorLevel;
 
-class AmazonIndoorLevel implements IndoorLevel {
+@RestrictTo(LIBRARY)
+public class AmazonIndoorLevel implements IndoorLevel {
 
     private final com.amazon.geo.mapsv2.model.IndoorLevel mDelegate;
 

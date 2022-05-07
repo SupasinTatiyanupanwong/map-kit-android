@@ -16,13 +16,17 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
-class GoogleTileOverlay implements TileOverlay {
+@RestrictTo(LIBRARY)
+public class GoogleTileOverlay implements TileOverlay {
 
     private final com.google.android.gms.maps.model.TileOverlay mDelegate;
 
@@ -115,10 +119,10 @@ class GoogleTileOverlay implements TileOverlay {
     }
 
 
-    static class Options implements TileOverlay.Options {
+    public static class Options implements TileOverlay.Options {
         private final com.google.android.gms.maps.model.TileOverlayOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.google.android.gms.maps.model.TileOverlayOptions();
         }
 

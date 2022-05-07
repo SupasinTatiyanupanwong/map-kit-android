@@ -16,10 +16,13 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Point;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.huawei.hms.maps.CameraUpdateFactory;
 
@@ -28,9 +31,10 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
-class HuaweiCameraUpdate implements CameraUpdate {
+@RestrictTo(LIBRARY)
+public class HuaweiCameraUpdate implements CameraUpdate {
 
-    static final Factory FACTORY = new Factory() {
+    public static final Factory FACTORY = new Factory() {
         @Override
         public @NonNull CameraUpdate zoomIn() {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomIn());

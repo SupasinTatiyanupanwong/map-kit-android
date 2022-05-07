@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 
-class HuaweiTile implements Tile {
+@RestrictTo(LIBRARY)
+public class HuaweiTile implements Tile {
 
     private final com.huawei.hms.maps.model.Tile mDelegate;
 
@@ -29,7 +33,7 @@ class HuaweiTile implements Tile {
         mDelegate = delegate;
     }
 
-    HuaweiTile(int width, int height, byte[] data) {
+    public HuaweiTile(int width, int height, byte[] data) {
         this(new com.huawei.hms.maps.model.Tile(width, height, data));
     }
 

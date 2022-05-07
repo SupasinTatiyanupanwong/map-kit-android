@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
-class HuaweiVisibleRegion implements VisibleRegion {
+@RestrictTo(LIBRARY)
+public class HuaweiVisibleRegion implements VisibleRegion {
 
     private final com.huawei.hms.maps.model.VisibleRegion mDelegate;
 
@@ -37,7 +41,7 @@ class HuaweiVisibleRegion implements VisibleRegion {
         mDelegate = delegate;
     }
 
-    HuaweiVisibleRegion(
+    public HuaweiVisibleRegion(
             LatLng nearLeft,
             LatLng nearRight,
             LatLng farLeft,

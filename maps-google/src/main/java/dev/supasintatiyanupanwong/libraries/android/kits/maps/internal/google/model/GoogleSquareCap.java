@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 
-class GoogleSquareCap extends GoogleCap implements SquareCap {
+@RestrictTo(LIBRARY)
+public class GoogleSquareCap extends GoogleCap implements SquareCap {
 
     private final com.google.android.gms.maps.model.SquareCap mDelegate;
 
@@ -29,7 +33,7 @@ class GoogleSquareCap extends GoogleCap implements SquareCap {
         mDelegate = delegate;
     }
 
-    GoogleSquareCap() {
+    public GoogleSquareCap() {
         this(new com.google.android.gms.maps.model.SquareCap());
     }
 

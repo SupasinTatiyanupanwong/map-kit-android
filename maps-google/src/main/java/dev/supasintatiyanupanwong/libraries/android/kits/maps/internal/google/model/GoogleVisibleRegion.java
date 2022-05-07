@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
-class GoogleVisibleRegion implements VisibleRegion {
+@RestrictTo(LIBRARY)
+public class GoogleVisibleRegion implements VisibleRegion {
 
     private final com.google.android.gms.maps.model.VisibleRegion mDelegate;
 
@@ -37,7 +41,7 @@ class GoogleVisibleRegion implements VisibleRegion {
         mDelegate = delegate;
     }
 
-    GoogleVisibleRegion(
+    public GoogleVisibleRegion(
             LatLng nearLeft,
             LatLng nearRight,
             LatLng farLeft,

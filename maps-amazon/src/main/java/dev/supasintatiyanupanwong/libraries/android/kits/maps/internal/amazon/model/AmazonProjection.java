@@ -16,16 +16,20 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Point;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Projection;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
-class AmazonProjection implements Projection {
+@RestrictTo(LIBRARY)
+public class AmazonProjection implements Projection {
 
     private final com.amazon.geo.mapsv2.Projection mDelegate;
 

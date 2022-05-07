@@ -70,18 +70,14 @@ public class MapFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         mOnCreateViewCalled = true;
-        return inflater.inflate(MapsPlatform.get().getFragmentLayoutId(), container, false);
+        return inflater.inflate(MapKit.getBackend().getMapFragmentLayoutRes(), container, false);
     }
 
     @CallSuper
     @Override
     public void onStart() {
         // FM enforced super.onStart() to be called if overridden, checking our view first.
-        if (!mOnCreateViewCalled) {
-            throw new IllegalStateException("MapFragment " + this
-                    + " did not call through to super.onCreateView()");
-        }
-
+        ensureViewCreated();
         super.onStart();
     }
 
@@ -94,6 +90,10 @@ public class MapFragment extends Fragment {
      */
     @UiThread
     public final void getMapAsync(final MapKit.OnMapReadyCallback callback) {
+        if (MapKit.getPlatform() == null) {
+            return;
+        }
+
         if (getView() != null) {
             getMapAsyncInternal(callback);
         } else {
@@ -120,22 +120,28 @@ public class MapFragment extends Fragment {
      * and ready to be used.
      * @since 2.0.0
      */
+    @UiThread
     public final void getMapAsync(final MapKit.OnMapAndViewReadyCallback callback) {
         getMapAsync(new OnMapAndViewReadyCallbackImpl(this, callback));
     }
 
-    /**
-     * @since 1.2.0
-     */
+
+    private void ensureViewCreated() {
+        if (!mOnCreateViewCalled) {
+            throw new IllegalStateException("MapFragment " + this
+                    + " did not call through to super.onCreateView()");
+        }
+    }
+
     private void getMapAsyncInternal(MapKit.OnMapReadyCallback callback) {
         Fragment fragment = getChildFragmentManager()
-                .findFragmentById(MapsPlatform.get().getFragmentDelegateId());
+                .findFragmentById(MapKit.getBackend().getMapFragmentIdRes());
 
         if (fragment == null) {
             throw new NullPointerException();
         }
 
-        MapsPlatform.get().getFactory().getMapAsync(fragment, callback);
+        MapKit.getBackend().getMapAsync(fragment, callback);
     }
 
 

@@ -16,13 +16,17 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
-class AmazonLatLngBounds implements LatLngBounds {
+@RestrictTo(LIBRARY)
+public class AmazonLatLngBounds implements LatLngBounds {
 
     private final com.amazon.geo.mapsv2.model.LatLngBounds mDelegate;
 
@@ -34,7 +38,7 @@ class AmazonLatLngBounds implements LatLngBounds {
         mDelegate = delegate;
     }
 
-    AmazonLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
+    public AmazonLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
         this(new com.amazon.geo.mapsv2.model.LatLngBounds(
                 AmazonLatLng.unwrap(southwest), AmazonLatLng.unwrap(northeast)));
     }
@@ -108,10 +112,10 @@ class AmazonLatLngBounds implements LatLngBounds {
     }
 
 
-    static class Builder implements LatLngBounds.Builder {
+    public static class Builder implements LatLngBounds.Builder {
         private final com.amazon.geo.mapsv2.model.LatLngBounds.Builder mDelegate;
 
-        Builder() {
+        public Builder() {
             mDelegate = com.amazon.geo.mapsv2.model.LatLngBounds.builder();
         }
 

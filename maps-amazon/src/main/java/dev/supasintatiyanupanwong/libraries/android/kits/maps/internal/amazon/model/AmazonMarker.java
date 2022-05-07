@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.Objects;
 
@@ -25,7 +28,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescri
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 
-class AmazonMarker implements Marker {
+@RestrictTo(LIBRARY)
+public class AmazonMarker implements Marker {
 
     private final com.amazon.geo.mapsv2.model.Marker mDelegate;
 
@@ -205,10 +209,10 @@ class AmazonMarker implements Marker {
     }
 
 
-    static class Options implements Marker.Options {
+    public static class Options implements Marker.Options {
         private final com.amazon.geo.mapsv2.model.MarkerOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.amazon.geo.mapsv2.model.MarkerOptions();
         }
 

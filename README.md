@@ -22,15 +22,15 @@ The library consists of 4 artifacts; `maps-core`, `maps-google`, `maps-amazon`, 
 
 ### Migrating from the existing APIs
 
-| Google Maps SDK for Android | Amazon Maps SDK        | HUAWEI Map Kit         | Map Kit                      |
-|:--------------------------- |:---------------------- |:---------------------- |:---------------------------- |
-| ``SupportMapFragment``      | ``SupportMapFragment`` | ``SupportMapFragment`` | ``MapFragment``              |
-| ``GoogleMap``               | ``AmazonMap``          | ``HuaweiMap``          | ``MapClient``                |
-| ``new LatLng()``            | ``new LatLng()``       | ``new LatLng()``       | ``MapKit.newLatLng()``       |
-| ``new *Options()``          | ``new *Options()``     | ``new *Options()``     | ``MapKit.new*Options()``     |
-| ``*.builder()``             | ``*.builder()``        | ``*.builder()``        | ``MapKit.new*Builder()``     |
-| ``*Factory.*()``            | ``*Factory.*()``       | ``*Factory.*()``       | ``MapKit.get*Factory().*()`` |
-| ``Tile.NO_TILE``            | ``Tile.NO_TILE``       | ``Tile.NO_TILE``       | ``MapKit.noTile()``          |
+| Google Maps SDK          | Amazon Maps SDK          | HUAWEI Map Kit           | Map Kit                      |
+|:------------------------ |:------------------------ |:------------------------ |:---------------------------- |
+| ``SupportMapFragment``   | ``SupportMapFragment``   | ``SupportMapFragment``   | ``MapFragment``              |
+| ``GoogleMap``            | ``AmazonMap``            | ``HuaweiMap``            | ``MapClient``                |
+| ``new LatLng()``         | ``new LatLng()``         | ``new LatLng()``         | ``MapKit.newLatLng()``       |
+| ``new *Options()``       | ``new *Options()``       | ``new *Options()``       | ``MapKit.new*Options()``     |
+| ``*.builder()``          | ``*.builder()``          | ``*.builder()``          | ``MapKit.new*Builder()``     |
+| ``*Factory.*()``         | ``*Factory.*()``         | ``*Factory.*()``         | ``MapKit.get*Factory().*()`` |
+| ``TileProvider.NO_TILE`` | ``TileProvider.NO_TILE`` | ``TileProvider.NO_TILE`` | ``MapKit.noTile()``          |
 
 ### Limitation
 

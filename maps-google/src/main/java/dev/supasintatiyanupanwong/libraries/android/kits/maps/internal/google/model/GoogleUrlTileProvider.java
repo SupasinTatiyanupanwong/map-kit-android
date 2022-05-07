@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.net.URL;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 
-class GoogleUrlTileProvider extends GoogleTileProvider implements UrlTileProvider {
+@RestrictTo(LIBRARY)
+public class GoogleUrlTileProvider extends GoogleTileProvider implements UrlTileProvider {
 
     private final com.google.android.gms.maps.model.UrlTileProvider mDelegate;
 
@@ -32,7 +36,10 @@ class GoogleUrlTileProvider extends GoogleTileProvider implements UrlTileProvide
         mDelegate = delegate;
     }
 
-    GoogleUrlTileProvider(int width, int height, @NonNull final UrlTileProvider tileProvider) {
+    public GoogleUrlTileProvider(
+            int width,
+            int height,
+            @NonNull final UrlTileProvider tileProvider) {
         this(new com.google.android.gms.maps.model.UrlTileProvider(width, height) {
             @Override
             public URL getTileUrl(int x, int y, int zoom) {

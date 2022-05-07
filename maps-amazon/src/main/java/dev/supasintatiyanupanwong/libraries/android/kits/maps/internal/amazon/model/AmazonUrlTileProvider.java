@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.net.URL;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 
-class AmazonUrlTileProvider extends AmazonTileProvider implements UrlTileProvider {
+@RestrictTo(LIBRARY)
+public class AmazonUrlTileProvider extends AmazonTileProvider implements UrlTileProvider {
 
     private final com.amazon.geo.mapsv2.model.UrlTileProvider mDelegate;
 
@@ -32,7 +36,7 @@ class AmazonUrlTileProvider extends AmazonTileProvider implements UrlTileProvide
         mDelegate = delegate;
     }
 
-    AmazonUrlTileProvider(int width, int height, @NonNull final UrlTileProvider tileProvider) {
+    public AmazonUrlTileProvider(int width, int height, @NonNull final UrlTileProvider tileProvider) {
         this(new com.amazon.geo.mapsv2.model.UrlTileProvider(width, height) {
             @Override
             public URL getTileUrl(int x, int y, int zoom) {

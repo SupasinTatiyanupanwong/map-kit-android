@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +32,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
 
-class AmazonPolyline implements Polyline {
+@RestrictTo(LIBRARY)
+public class AmazonPolyline implements Polyline {
 
     private final com.amazon.geo.mapsv2.model.Polyline mDelegate;
 
@@ -199,10 +203,10 @@ class AmazonPolyline implements Polyline {
     }
 
 
-    static class Options implements Polyline.Options {
+    public static class Options implements Polyline.Options {
         private final com.amazon.geo.mapsv2.model.PolylineOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.amazon.geo.mapsv2.model.PolylineOptions();
         }
 

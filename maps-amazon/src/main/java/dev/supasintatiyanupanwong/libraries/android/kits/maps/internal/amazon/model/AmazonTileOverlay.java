@@ -16,13 +16,17 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
-class AmazonTileOverlay implements TileOverlay {
+@RestrictTo(LIBRARY)
+public class AmazonTileOverlay implements TileOverlay {
 
     private final com.amazon.geo.mapsv2.model.TileOverlay mDelegate;
 
@@ -115,10 +119,10 @@ class AmazonTileOverlay implements TileOverlay {
     }
 
 
-    static class Options implements TileOverlay.Options {
+    public static class Options implements TileOverlay.Options {
         private final com.amazon.geo.mapsv2.model.TileOverlayOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.amazon.geo.mapsv2.model.TileOverlayOptions();
         }
 

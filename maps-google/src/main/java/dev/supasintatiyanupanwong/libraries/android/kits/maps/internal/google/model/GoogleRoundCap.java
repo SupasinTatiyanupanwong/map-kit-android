@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 
-class GoogleRoundCap extends GoogleCap implements RoundCap {
+@RestrictTo(LIBRARY)
+public class GoogleRoundCap extends GoogleCap implements RoundCap {
 
     private final com.google.android.gms.maps.model.RoundCap mDelegate;
 
@@ -29,7 +33,7 @@ class GoogleRoundCap extends GoogleCap implements RoundCap {
         mDelegate = delegate;
     }
 
-    GoogleRoundCap() {
+    public GoogleRoundCap() {
         this(new com.google.android.gms.maps.model.RoundCap());
     }
 

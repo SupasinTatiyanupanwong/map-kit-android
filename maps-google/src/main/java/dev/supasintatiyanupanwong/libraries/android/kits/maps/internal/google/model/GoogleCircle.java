@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.List;
 
@@ -25,7 +28,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 
-class GoogleCircle implements Circle {
+@RestrictTo(LIBRARY)
+public class GoogleCircle implements Circle {
 
     private final com.google.android.gms.maps.model.Circle mDelegate;
 
@@ -173,10 +177,10 @@ class GoogleCircle implements Circle {
     }
 
 
-    static class Options implements Circle.Options {
+    public static class Options implements Circle.Options {
         private final com.google.android.gms.maps.model.CircleOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.google.android.gms.maps.model.CircleOptions();
         }
 

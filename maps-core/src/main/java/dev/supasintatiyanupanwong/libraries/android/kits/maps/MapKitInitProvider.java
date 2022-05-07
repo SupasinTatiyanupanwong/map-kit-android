@@ -19,25 +19,50 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class MapKitInitProvider extends ContentProvider {
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-    @Override
-    public void attachInfo(@NonNull Context context, @NonNull ProviderInfo info) {
-        // super.attachInfo calls onCreate. Fail as early as possible.
-        MapsPlatform.init(context);
-        super.attachInfo(context, info);
-    }
+public final class MapKitInitProvider extends ContentProvider {
+
+    private static final Map<MapsPlatform, String> REGISTRY = Collections.unmodifiableMap(
+            new HashMap<MapsPlatform, String>() {{
+                put(MapsPlatform.AMAZON, ".internal.amazon.AmazonMapsBackend");
+                put(MapsPlatform.GOOGLE, ".internal.google.GoogleMapsBackend");
+                put(MapsPlatform.HUAWEI, ".internal.huawei.HuaweiMapsBackend");
+                put(null, ".internal.nop.NopMapsBackend");
+            }}
+    );
 
     @Override
     public boolean onCreate() {
-        return false;
+        final Context context = getContext().getApplicationContext();
+
+        MapsPlatform platform;
+        String className;
+        for (Map.Entry<MapsPlatform, String> entry : REGISTRY.entrySet()) {
+            platform = entry.getKey();
+            className = BuildConfig.LIBRARY_PACKAGE_NAME + entry.getValue();
+
+            try {
+                @Nullable MapKitBackend backend = (MapKitBackend) Class.forName(className)
+                        .getMethod("buildIfSupported", Context.class)
+                        .invoke(null, context);
+                if (backend != null) {
+                    MapKit.init(platform, backend);
+                    return true;
+                }
+            } catch (Exception ignored) {
+            }
+        }
+
+        throw new IllegalStateException("MapKit cannot be initialized");
     }
 
     @Override

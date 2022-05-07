@@ -16,6 +16,10 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -26,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.annotation.RequiresPermission;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
@@ -41,16 +46,14 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Projection;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-
 @SuppressWarnings("unused")
-class GoogleMapClient implements MapClient {
+@RestrictTo(LIBRARY)
+public class GoogleMapClient implements MapClient {
 
     private final com.google.android.gms.maps.GoogleMap mDelegate;
     private final UiSettings mSettings;
 
-    GoogleMapClient(@NonNull com.google.android.gms.maps.GoogleMap map) {
+    public GoogleMapClient(@NonNull com.google.android.gms.maps.GoogleMap map) {
         mDelegate = map;
         mSettings = new UiSettings(map.getUiSettings());
     }
@@ -616,15 +619,15 @@ class GoogleMapClient implements MapClient {
     }
 
 
-    static class Style implements MapClient.Style {
-        static class Options implements MapClient.Style.Options {
+    public static class Style implements MapClient.Style {
+        public static class Options implements MapClient.Style.Options {
             private final com.google.android.gms.maps.model.MapStyleOptions mDelegate;
 
-            Options(String json) {
+            public Options(String json) {
                 mDelegate = new com.google.android.gms.maps.model.MapStyleOptions(json);
             }
 
-            Options(@NonNull Context context, @RawRes int resourceId) {
+            public Options(@NonNull Context context, @RawRes int resourceId) {
                 mDelegate = com.google.android.gms.maps.model.MapStyleOptions
                         .loadRawResourceStyle(context, resourceId);
             }

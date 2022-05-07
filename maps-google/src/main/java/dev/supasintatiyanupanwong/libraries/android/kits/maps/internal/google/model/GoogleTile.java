@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 
-class GoogleTile implements Tile {
+@RestrictTo(LIBRARY)
+public class GoogleTile implements Tile {
 
     private final com.google.android.gms.maps.model.Tile mDelegate;
 
@@ -29,7 +33,7 @@ class GoogleTile implements Tile {
         mDelegate = delegate;
     }
 
-    GoogleTile(int width, int height, byte[] data) {
+    public GoogleTile(int width, int height, byte[] data) {
         this(new com.google.android.gms.maps.model.Tile(width, height, data));
     }
 

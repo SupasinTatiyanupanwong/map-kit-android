@@ -24,6 +24,11 @@ android {
         minSdkVersion 19
         targetSdkVersion 30
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {

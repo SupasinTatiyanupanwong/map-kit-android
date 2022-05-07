@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
 
-class GoogleDash extends GooglePatternItem implements Dash {
+@RestrictTo(LIBRARY)
+public class GoogleDash extends GooglePatternItem implements Dash {
 
     private final com.google.android.gms.maps.model.Dash mDelegate;
 
@@ -29,7 +33,7 @@ class GoogleDash extends GooglePatternItem implements Dash {
         mDelegate = delegate;
     }
 
-    GoogleDash(float length) {
+    public GoogleDash(float length) {
         this(new com.google.android.gms.maps.model.Dash(length));
     }
 

@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 
-class GoogleMarker implements Marker {
+@RestrictTo(LIBRARY)
+public class GoogleMarker implements Marker {
 
     private final com.google.android.gms.maps.model.Marker mDelegate;
 
@@ -201,10 +205,10 @@ class GoogleMarker implements Marker {
     }
 
 
-    static class Options implements Marker.Options {
+    public static class Options implements Marker.Options {
         private final com.google.android.gms.maps.model.MarkerOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.google.android.gms.maps.model.MarkerOptions();
         }
 

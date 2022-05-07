@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +30,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 
-class GooglePolygon implements Polygon {
+@RestrictTo(LIBRARY)
+public class GooglePolygon implements Polygon {
 
     private final com.google.android.gms.maps.model.Polygon mDelegate;
 
@@ -203,10 +207,10 @@ class GooglePolygon implements Polygon {
     }
 
 
-    static class Options implements Polygon.Options {
+    public static class Options implements Polygon.Options {
         private final com.google.android.gms.maps.model.PolygonOptions mDelegate;
 
-        Options() {
+        public Options() {
             mDelegate = new com.google.android.gms.maps.model.PolygonOptions();
         }
 

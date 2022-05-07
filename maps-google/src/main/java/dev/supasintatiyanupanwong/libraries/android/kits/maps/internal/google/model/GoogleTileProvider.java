@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
-class GoogleTileProvider implements TileProvider {
-    static final Tile NO_TILE =
+@RestrictTo(LIBRARY)
+public class GoogleTileProvider implements TileProvider {
+    public static final Tile NO_TILE =
             GoogleTile.wrap(com.google.android.gms.maps.model.TileProvider.NO_TILE);
 
     private final com.google.android.gms.maps.model.TileProvider mDelegate;

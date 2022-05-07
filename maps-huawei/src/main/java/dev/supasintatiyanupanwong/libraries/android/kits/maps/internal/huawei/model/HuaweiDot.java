@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
 
-class HuaweiDot extends HuaweiPatternItem implements Dot {
+@RestrictTo(LIBRARY)
+public class HuaweiDot extends HuaweiPatternItem implements Dot {
 
     private final com.huawei.hms.maps.model.Dot mDelegate;
 
@@ -29,7 +33,7 @@ class HuaweiDot extends HuaweiPatternItem implements Dot {
         mDelegate = delegate;
     }
 
-    HuaweiDot() {
+    public HuaweiDot() {
         this(new com.huawei.hms.maps.model.Dot());
     }
 

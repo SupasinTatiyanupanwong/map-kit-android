@@ -16,18 +16,22 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 
-class GoogleBitmapDescriptor implements BitmapDescriptor {
+@RestrictTo(LIBRARY)
+public class GoogleBitmapDescriptor implements BitmapDescriptor {
 
-    static final BitmapDescriptor.Factory FACTORY = new BitmapDescriptor.Factory() {
+    public static final BitmapDescriptor.Factory FACTORY = new BitmapDescriptor.Factory() {
         @Override
         public @NonNull BitmapDescriptor defaultMarker() {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());

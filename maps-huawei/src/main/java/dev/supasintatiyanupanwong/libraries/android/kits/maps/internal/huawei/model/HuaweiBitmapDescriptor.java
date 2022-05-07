@@ -16,18 +16,22 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.huawei.hms.maps.model.BitmapDescriptorFactory;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 
-class HuaweiBitmapDescriptor implements BitmapDescriptor {
+@RestrictTo(LIBRARY)
+public class HuaweiBitmapDescriptor implements BitmapDescriptor {
 
-    static final Factory FACTORY = new Factory() {
+    public static final Factory FACTORY = new Factory() {
         @Override
         public @NonNull BitmapDescriptor defaultMarker() {
             return new HuaweiBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());

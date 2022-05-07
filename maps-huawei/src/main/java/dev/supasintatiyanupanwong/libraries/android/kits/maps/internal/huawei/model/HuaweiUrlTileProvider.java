@@ -16,14 +16,18 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.net.URL;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 
-class HuaweiUrlTileProvider extends HuaweiTileProvider implements UrlTileProvider {
+@RestrictTo(LIBRARY)
+public class HuaweiUrlTileProvider extends HuaweiTileProvider implements UrlTileProvider {
 
     private final com.huawei.hms.maps.model.UrlTileProvider mDelegate;
 
@@ -32,7 +36,10 @@ class HuaweiUrlTileProvider extends HuaweiTileProvider implements UrlTileProvide
         mDelegate = delegate;
     }
 
-    HuaweiUrlTileProvider(int width, int height, @NonNull final UrlTileProvider tileProvider) {
+    public HuaweiUrlTileProvider(
+            int width,
+            int height,
+            @NonNull final UrlTileProvider tileProvider) {
         this(new com.huawei.hms.maps.model.UrlTileProvider(width, height) {
             @Override
             public URL getTileUrl(int x, int y, int zoom) {

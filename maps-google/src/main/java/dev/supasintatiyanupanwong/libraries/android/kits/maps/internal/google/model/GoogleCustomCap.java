@@ -16,13 +16,17 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap;
 
-class GoogleCustomCap extends GoogleCap implements CustomCap {
+@RestrictTo(LIBRARY)
+public class GoogleCustomCap extends GoogleCap implements CustomCap {
 
     private final com.google.android.gms.maps.model.CustomCap mDelegate;
 
@@ -32,12 +36,12 @@ class GoogleCustomCap extends GoogleCap implements CustomCap {
         mDelegate = delegate;
     }
 
-    GoogleCustomCap(@NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
+    public GoogleCustomCap(@NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
         this(new com.google.android.gms.maps.model.CustomCap(
                 GoogleBitmapDescriptor.unwrap(bitmapDescriptor), refWidth));
     }
 
-    GoogleCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
+    public GoogleCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
         this(new com.google.android.gms.maps.model.CustomCap(
                 GoogleBitmapDescriptor.unwrap(bitmapDescriptor)));
     }

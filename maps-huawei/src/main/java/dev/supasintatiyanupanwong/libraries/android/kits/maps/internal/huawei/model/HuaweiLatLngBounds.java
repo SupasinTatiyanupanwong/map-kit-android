@@ -16,13 +16,17 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
-class HuaweiLatLngBounds implements LatLngBounds {
+@RestrictTo(LIBRARY)
+public class HuaweiLatLngBounds implements LatLngBounds {
 
     private final com.huawei.hms.maps.model.LatLngBounds mDelegate;
 
@@ -34,7 +38,7 @@ class HuaweiLatLngBounds implements LatLngBounds {
         mDelegate = delegate;
     }
 
-    HuaweiLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
+    public HuaweiLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
         this(new com.huawei.hms.maps.model.LatLngBounds(
                 HuaweiLatLng.unwrap(southwest), HuaweiLatLng.unwrap(northeast)));
     }
@@ -107,10 +111,10 @@ class HuaweiLatLngBounds implements LatLngBounds {
     }
 
 
-    static class Builder implements LatLngBounds.Builder {
+    public static class Builder implements LatLngBounds.Builder {
         private final com.huawei.hms.maps.model.LatLngBounds.Builder mDelegate;
 
-        Builder() {
+        public Builder() {
             mDelegate = com.huawei.hms.maps.model.LatLngBounds.builder();
         }
 

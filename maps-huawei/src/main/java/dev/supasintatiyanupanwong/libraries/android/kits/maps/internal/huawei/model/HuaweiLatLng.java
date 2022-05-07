@@ -16,8 +16,11 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,7 +28,8 @@ import java.util.List;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 
-class HuaweiLatLng implements LatLng {
+@RestrictTo(LIBRARY)
+public class HuaweiLatLng implements LatLng {
 
     private final com.huawei.hms.maps.model.LatLng mDelegate;
 
@@ -33,7 +37,7 @@ class HuaweiLatLng implements LatLng {
         mDelegate = delegate;
     }
 
-    HuaweiLatLng(double latitude, double longitude) {
+    public HuaweiLatLng(double latitude, double longitude) {
         this(new com.huawei.hms.maps.model.LatLng(latitude, longitude));
     }
 
