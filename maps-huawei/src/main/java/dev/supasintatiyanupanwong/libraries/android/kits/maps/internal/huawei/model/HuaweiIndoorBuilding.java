@@ -33,28 +33,23 @@ class HuaweiIndoorBuilding implements IndoorBuilding {
         mDelegate = delegate;
     }
 
-    @Override
-    public int getDefaultLevelIndex() {
+    @Override public int getDefaultLevelIndex() {
         return mDelegate.getDefaultLevelIndex();
     }
 
-    @Override
-    public int getActiveLevelIndex() {
+    @Override public int getActiveLevelIndex() {
         return mDelegate.getActiveLevelIndex();
     }
 
-    @Override
-    public List<IndoorLevel> getLevels() {
+    @Override public List<IndoorLevel> getLevels() {
         return HuaweiIndoorLevel.wrap(mDelegate.getLevels());
     }
 
-    @Override
-    public boolean isUnderground() {
+    @Override public boolean isUnderground() {
         return mDelegate.isUnderground();
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -67,13 +62,11 @@ class HuaweiIndoorBuilding implements IndoorBuilding {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

@@ -37,23 +37,19 @@ public class AmazonProjection implements Projection {
         mDelegate = delegate;
     }
 
-    @Override
-    public @Nullable LatLng fromScreenLocation(Point point) {
+    @Override public @Nullable LatLng fromScreenLocation(Point point) {
         return AmazonLatLng.wrap(mDelegate.fromScreenLocation(point));
     }
 
-    @Override
-    public @NonNull Point toScreenLocation(LatLng location) {
+    @Override public @NonNull Point toScreenLocation(LatLng location) {
         return mDelegate.toScreenLocation(AmazonLatLng.unwrap(location));
     }
 
-    @Override
-    public @NonNull VisibleRegion getVisibleRegion() {
+    @Override public @NonNull VisibleRegion getVisibleRegion() {
         return AmazonVisibleRegion.wrap(mDelegate.getVisibleRegion());
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -66,18 +62,16 @@ public class AmazonProjection implements Projection {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static Projection wrap(com.amazon.geo.mapsv2.Projection delegate) {
+    static @NonNull Projection wrap(@NonNull com.amazon.geo.mapsv2.Projection delegate) {
         return new AmazonProjection(delegate);
     }
 

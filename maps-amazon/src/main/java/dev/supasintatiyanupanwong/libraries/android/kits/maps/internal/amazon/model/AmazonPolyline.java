@@ -35,146 +35,119 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
 @RestrictTo(LIBRARY)
 public class AmazonPolyline implements Polyline {
 
-    private final com.amazon.geo.mapsv2.model.Polyline mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.Polyline mDelegate;
 
     private @Nullable Object mTag; // Providing tag support for Amazon's Polyline
 
-    private AmazonPolyline(com.amazon.geo.mapsv2.model.Polyline delegate) {
+    private AmazonPolyline(@NonNull com.amazon.geo.mapsv2.model.Polyline delegate) {
         mDelegate = delegate;
     }
 
-    @Override
-    public void remove() {
+    @Override public void remove() {
         mDelegate.remove();
     }
 
-    @Override
-    public String getId() {
+    @Override public String getId() {
         return mDelegate.getId();
     }
 
-    @Override
-    public void setPoints(List<LatLng> points) {
+    @Override public void setPoints(List<LatLng> points) {
         mDelegate.setPoints(AmazonLatLng.unwrap(points));
     }
 
-    @Override
-    public List<LatLng> getPoints() {
+    @Override public List<LatLng> getPoints() {
         return AmazonLatLng.wrap(mDelegate.getPoints());
     }
 
-    @Override
-    public void setWidth(float width) {
+    @Override public void setWidth(float width) {
         mDelegate.setWidth(width);
     }
 
-    @Override
-    public float getWidth() {
+    @Override public float getWidth() {
         return mDelegate.getWidth();
     }
 
-    @Override
-    public void setColor(int color) {
+    @Override public void setColor(int color) {
         mDelegate.setColor(color);
     }
 
-    @Override
-    public int getColor() {
+    @Override public int getColor() {
         return mDelegate.getColor();
     }
 
-    @Override
-    public void setStartCap(@NonNull Cap startCap) {
+    @Override public void setStartCap(@NonNull Cap startCap) {
         // Not supported, no-op.
     }
 
-    @Override
-    public @NonNull Cap getStartCap() {
+    @Override public @NonNull Cap getStartCap() {
         return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public void setEndCap(@NonNull Cap endCap) {
+    @Override public void setEndCap(@NonNull Cap endCap) {
         // Not supported, no-op.
     }
 
-    @Override
-    public @NonNull Cap getEndCap() {
+    @Override public @NonNull Cap getEndCap() {
         return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
-    @Override
-    public void setJointType(int jointType) {
+    @Override public void setJointType(int jointType) {
         // Not supported, no-op.
     }
 
-    @Override
-    public int getJointType() {
+    @Override public int getJointType() {
         return JointType.DEFAULT; // Not supported, fallback to default.
     }
 
-    @Override
-    public void setPattern(@Nullable List<PatternItem> pattern) {
+    @Override public void setPattern(@Nullable List<PatternItem> pattern) {
         // Not supported, no-op.
     }
 
-    @Override
-    public @Nullable List<PatternItem> getPattern() {
+    @Override public @Nullable List<PatternItem> getPattern() {
         return null; // Not supported.
     }
 
-    @Override
-    public void setZIndex(float zIndex) {
+    @Override public void setZIndex(float zIndex) {
         mDelegate.setZIndex(zIndex);
     }
 
-    @Override
-    public float getZIndex() {
+    @Override public float getZIndex() {
         return mDelegate.getZIndex();
     }
 
-    @Override
-    public void setVisible(boolean visible) {
+    @Override public void setVisible(boolean visible) {
         mDelegate.setVisible(visible);
     }
 
-    @Override
-    public boolean isVisible() {
+    @Override public boolean isVisible() {
         return mDelegate.isVisible();
     }
 
-    @Override
-    public void setGeodesic(boolean geodesic) {
+    @Override public void setGeodesic(boolean geodesic) {
         mDelegate.setGeodesic(geodesic);
     }
 
-    @Override
-    public boolean isGeodesic() {
+    @Override public boolean isGeodesic() {
         return mDelegate.isGeodesic();
     }
 
-    @Override
-    public void setClickable(boolean clickable) {
+    @Override public void setClickable(boolean clickable) {
         // Not supported, no-op.
     }
 
-    @Override
-    public boolean isClickable() {
+    @Override public boolean isClickable() {
         return false; // Not supported.
     }
 
-    @Override
-    public void setTag(@Nullable Object tag) {
+    @Override public void setTag(@Nullable Object tag) {
         mTag = tag;
     }
 
-    @Override
-    public @Nullable Object getTag() {
+    @Override public @Nullable Object getTag() {
         return mTag;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -187,19 +160,17 @@ public class AmazonPolyline implements Polyline {
         return mDelegate.equals(that.mDelegate) && Objects.equals(mTag, that.mTag);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static Polyline wrap(com.amazon.geo.mapsv2.model.Polyline delegate) {
-        return new AmazonPolyline(delegate);
+    static @Nullable Polyline wrap(@Nullable com.amazon.geo.mapsv2.model.Polyline delegate) {
+        return delegate == null ? null : new AmazonPolyline(delegate);
     }
 
 
@@ -210,142 +181,119 @@ public class AmazonPolyline implements Polyline {
             mDelegate = new com.amazon.geo.mapsv2.model.PolylineOptions();
         }
 
-        @Override
-        public @NonNull Polyline.Options add(LatLng point) {
+        @Override public @NonNull Polyline.Options add(LatLng point) {
             mDelegate.add(AmazonLatLng.unwrap(point));
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options add(LatLng... points) {
+        @Override public @NonNull Polyline.Options add(LatLng... points) {
             mDelegate.addAll(AmazonLatLng.unwrap(Arrays.asList(points)));
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options addAll(Iterable<LatLng> points) {
+        @Override public @NonNull Polyline.Options addAll(Iterable<LatLng> points) {
             mDelegate.addAll(AmazonLatLng.unwrap(points));
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options width(float width) {
+        @Override public @NonNull Polyline.Options width(float width) {
             mDelegate.width(width);
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options color(int color) {
+        @Override public @NonNull Polyline.Options color(int color) {
             mDelegate.color(color);
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options startCap(@NonNull Cap startCap) {
+        @Override public @NonNull Polyline.Options startCap(@NonNull Cap startCap) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options endCap(@NonNull Cap endCap) {
+        @Override public @NonNull Polyline.Options endCap(@NonNull Cap endCap) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options jointType(int jointType) {
+        @Override public @NonNull Polyline.Options jointType(int jointType) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options pattern(@Nullable List<PatternItem> pattern) {
+        @Override public @NonNull Polyline.Options pattern(@Nullable List<PatternItem> pattern) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options zIndex(float zIndex) {
+        @Override public @NonNull Polyline.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options visible(boolean visible) {
+        @Override public @NonNull Polyline.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options geodesic(boolean geodesic) {
+        @Override public @NonNull Polyline.Options geodesic(boolean geodesic) {
             mDelegate.geodesic(geodesic);
             return this;
         }
 
-        @Override
-        public @NonNull Polyline.Options clickable(boolean clickable) {
+        @Override public @NonNull Polyline.Options clickable(boolean clickable) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public List<LatLng> getPoints() {
+        @Override public List<LatLng> getPoints() {
             return AmazonLatLng.wrap(mDelegate.getPoints());
         }
 
-        @Override
-        public float getWidth() {
+        @Override public float getWidth() {
             return mDelegate.getWidth();
         }
 
-        @Override
-        public int getColor() {
+        @Override public int getColor() {
             return mDelegate.getColor();
         }
 
-        @Override
-        public @NonNull Cap getStartCap() {
+        @Override public @NonNull Cap getStartCap() {
             return AmazonCap.NULL; // Not supported, null object for API safe.
         }
 
-        @Override
-        public @NonNull Cap getEndCap() {
+        @Override public @NonNull Cap getEndCap() {
             return AmazonCap.NULL; // Not supported, null object for API safe.
         }
 
-        @Override
-        public int getJointType() {
+        @Override public int getJointType() {
             return JointType.DEFAULT; // Not supported, fallback to default.
         }
 
-        @Override
-        public @Nullable List<PatternItem> getPattern() {
+        @Override public @Nullable List<PatternItem> getPattern() {
             return null; // Not supported.
         }
 
-        @Override
-        public float getZIndex() {
+        @Override public float getZIndex() {
             return mDelegate.getZIndex();
         }
 
-        @Override
-        public boolean isVisible() {
+        @Override public boolean isVisible() {
             return mDelegate.isVisible();
         }
 
-        @Override
-        public boolean isGeodesic() {
+        @Override public boolean isGeodesic() {
             return mDelegate.isGeodesic();
         }
 
-        @Override
-        public boolean isClickable() {
+        @Override public boolean isClickable() {
             return false; // Not supported.
         }
 
 
-        static com.amazon.geo.mapsv2.model.PolylineOptions unwrap(Polyline.Options wrapped) {
-            return ((Options) wrapped).mDelegate;
+        static @Nullable com.amazon.geo.mapsv2.model.PolylineOptions unwrap(
+                @Nullable Polyline.Options wrapped) {
+            return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
 

@@ -41,18 +41,15 @@ public class HuaweiLatLng implements LatLng {
         this(new com.huawei.hms.maps.model.LatLng(latitude, longitude));
     }
 
-    @Override
-    public double getLatitude() {
+    @Override public double getLatitude() {
         return mDelegate.latitude;
     }
 
-    @Override
-    public double getLongitude() {
+    @Override public double getLongitude() {
         return mDelegate.longitude;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -65,13 +62,11 @@ public class HuaweiLatLng implements LatLng {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

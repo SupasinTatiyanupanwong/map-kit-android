@@ -39,20 +39,17 @@ public class AmazonTileProvider implements TileProvider {
 
     private AmazonTileProvider(final TileProvider tileProvider) {
         this(new com.amazon.geo.mapsv2.model.TileProvider() {
-            @Override
-            public com.amazon.geo.mapsv2.model.Tile getTile(int x, int y, int zoom) {
+            @Override public com.amazon.geo.mapsv2.model.Tile getTile(int x, int y, int zoom) {
                 return AmazonTile.unwrap(tileProvider.getTile(x, y, zoom));
             }
         });
     }
 
-    @Override
-    public Tile getTile(int x, int y, int zoom) {
+    @Override public Tile getTile(int x, int y, int zoom) {
         return AmazonTile.wrap(mDelegate.getTile(x, y, zoom));
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -65,13 +62,11 @@ public class AmazonTileProvider implements TileProvider {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

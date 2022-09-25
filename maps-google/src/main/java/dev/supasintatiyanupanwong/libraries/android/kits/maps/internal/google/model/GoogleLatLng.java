@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +32,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 @RestrictTo(LIBRARY)
 public class GoogleLatLng implements LatLng {
 
-    private final com.google.android.gms.maps.model.LatLng mDelegate;
+    private final @NonNull com.google.android.gms.maps.model.LatLng mDelegate;
 
     private GoogleLatLng(@NonNull com.google.android.gms.maps.model.LatLng delegate) {
         mDelegate = delegate;
@@ -41,18 +42,15 @@ public class GoogleLatLng implements LatLng {
         this(new com.google.android.gms.maps.model.LatLng(latitude, longitude));
     }
 
-    @Override
-    public double getLatitude() {
+    @Override public double getLatitude() {
         return mDelegate.latitude;
     }
 
-    @Override
-    public double getLongitude() {
+    @Override public double getLongitude() {
         return mDelegate.longitude;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -65,27 +63,30 @@ public class GoogleLatLng implements LatLng {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static LatLng wrap(com.google.android.gms.maps.model.LatLng delegate) {
-        return new GoogleLatLng(delegate);
+    static @Nullable LatLng wrap(@Nullable com.google.android.gms.maps.model.LatLng delegate) {
+        return delegate == null ? null : new GoogleLatLng(delegate);
     }
 
-    static List<LatLng> wrap(Iterable<com.google.android.gms.maps.model.LatLng> delegates) {
+    static @Nullable List<LatLng> wrap(
+            @Nullable Iterable<com.google.android.gms.maps.model.LatLng> delegates) {
         if (delegates == null) {
             return null;
         }
 
         Iterator<com.google.android.gms.maps.model.LatLng> iter = delegates.iterator();
+        if (!iter.hasNext()) {
+            return Collections.emptyList();
+        }
+
         List<LatLng> list = new ArrayList<>();
         while (iter.hasNext()) {
             list.add(wrap(iter.next()));
@@ -93,19 +94,28 @@ public class GoogleLatLng implements LatLng {
         return list;
     }
 
-    static com.google.android.gms.maps.model.LatLng unwrap(LatLng wrapped) {
-        return ((GoogleLatLng) wrapped).mDelegate;
+    static @Nullable com.google.android.gms.maps.model.LatLng unwrap(@Nullable LatLng wrapped) {
+        return wrapped == null ? null : ((GoogleLatLng) wrapped).mDelegate;
     }
 
-    static List<com.google.android.gms.maps.model.LatLng> unwrap(Iterable<LatLng> wrappeds) {
+    static @Nullable List<com.google.android.gms.maps.model.LatLng> unwrap(
+            @Nullable Iterable<LatLng> wrappeds) {
         if (wrappeds == null) {
             return null;
         }
 
         Iterator<LatLng> iter = wrappeds.iterator();
+        if (!iter.hasNext()) {
+            return Collections.emptyList();
+        }
+
         List<com.google.android.gms.maps.model.LatLng> list = new ArrayList<>();
         while (iter.hasNext()) {
-            list.add(unwrap(iter.next()));
+            final @Nullable com.google.android.gms.maps.model.LatLng unwrapped =
+                    unwrap(iter.next());
+            if (unwrapped != null) {
+                list.add(unwrapped);
+            }
         }
         return list;
     }

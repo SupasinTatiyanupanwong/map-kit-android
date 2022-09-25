@@ -52,8 +52,7 @@ public class TileOverlayDemoActivity extends AppCompatActivity implements
     private TileOverlay mMoonTiles;
     private SeekBar mTransparencyBar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tile_overlay_demo);
 
@@ -68,13 +67,11 @@ public class TileOverlayDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         map.setMapType(MapClient.MAP_TYPE_NONE);
 
         TileProvider tileProvider = MapKit.newUrlTileProvider(256, 256, new UrlTileProvider() {
-            @Override
-            public synchronized URL getTileUrl(int x, int y, int zoom) {
+            @Override public synchronized URL getTileUrl(int x, int y, int zoom) {
                 // The moon tile coordinate system is reversed.  This is not normal.
                 int reversedY = (1 << zoom) - y - 1;
                 String urlSpec =
@@ -98,14 +95,11 @@ public class TileOverlayDemoActivity extends AppCompatActivity implements
         mMoonTiles.setFadeIn(((CheckBox) v).isChecked());
     }
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {}
+    @Override public void onStopTrackingTouch(SeekBar seekBar) {}
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {}
+    @Override public void onStartTrackingTouch(SeekBar seekBar) {}
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (mMoonTiles != null) {
             mMoonTiles.setTransparency((float) progress / (float) TRANSPARENCY_MAX);
         }

@@ -32,26 +32,22 @@ class GooglePointOfInterest implements PointOfInterest {
         mDelegate = delegate;
     }
 
-    @Override
-    public @NonNull LatLng getLatLng() {
+    @Override public @NonNull LatLng getLatLng() {
         if (mLatLng == null) {
             mLatLng = GoogleLatLng.wrap(mDelegate.latLng);
         }
         return mLatLng;
     }
 
-    @Override
-    public String getPlaceId() {
+    @Override public String getPlaceId() {
         return mDelegate.placeId;
     }
 
-    @Override
-    public String getName() {
+    @Override public String getName() {
         return mDelegate.name;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -64,13 +60,11 @@ class GooglePointOfInterest implements PointOfInterest {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

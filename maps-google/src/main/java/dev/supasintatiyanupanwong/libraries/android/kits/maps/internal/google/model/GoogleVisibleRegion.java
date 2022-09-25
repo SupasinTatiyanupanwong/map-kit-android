@@ -55,48 +55,42 @@ public class GoogleVisibleRegion implements VisibleRegion {
                 GoogleLatLngBounds.unwrap(latLngBounds)));
     }
 
-    @Override
-    public @NonNull LatLng getNearLeft() {
+    @Override public @NonNull LatLng getNearLeft() {
         if (mNearLeft == null) {
             mNearLeft = GoogleLatLng.wrap(mDelegate.nearLeft);
         }
         return mNearLeft;
     }
 
-    @Override
-    public @NonNull LatLng getNearRight() {
+    @Override public @NonNull LatLng getNearRight() {
         if (mNearRight == null) {
             mNearRight = GoogleLatLng.wrap(mDelegate.nearRight);
         }
         return mNearRight;
     }
 
-    @Override
-    public @NonNull LatLng getFarLeft() {
+    @Override public @NonNull LatLng getFarLeft() {
         if (mFarLeft == null) {
             mFarLeft = GoogleLatLng.wrap(mDelegate.farLeft);
         }
         return mFarLeft;
     }
 
-    @Override
-    public @NonNull LatLng getFarRight() {
+    @Override public @NonNull LatLng getFarRight() {
         if (mFarRight == null) {
             mFarRight = GoogleLatLng.wrap(mDelegate.farRight);
         }
         return mFarRight;
     }
 
-    @Override
-    public @NonNull LatLngBounds getLatLngBounds() {
+    @Override public @NonNull LatLngBounds getLatLngBounds() {
         if (mLatLngBounds == null) {
             mLatLngBounds = GoogleLatLngBounds.wrap(mDelegate.latLngBounds);
         }
         return mLatLngBounds;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -109,13 +103,11 @@ public class GoogleVisibleRegion implements VisibleRegion {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

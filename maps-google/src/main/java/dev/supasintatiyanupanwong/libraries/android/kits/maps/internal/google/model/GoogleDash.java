@@ -37,13 +37,11 @@ public class GoogleDash extends GooglePatternItem implements Dash {
         this(new com.google.android.gms.maps.model.Dash(length));
     }
 
-    @Override
-    public float getLength() {
+    @Override public float getLength() {
         return mDelegate.length;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -56,13 +54,11 @@ public class GoogleDash extends GooglePatternItem implements Dash {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

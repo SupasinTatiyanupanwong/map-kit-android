@@ -32,38 +32,31 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescri
 public class HuaweiBitmapDescriptor implements BitmapDescriptor {
 
     public static final Factory FACTORY = new Factory() {
-        @Override
-        public @NonNull BitmapDescriptor defaultMarker() {
+        @Override public @NonNull BitmapDescriptor defaultMarker() {
             return new HuaweiBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());
         }
 
-        @Override
-        public @NonNull BitmapDescriptor defaultMarker(float hue) {
+        @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
             return new HuaweiBitmapDescriptor(BitmapDescriptorFactory.defaultMarker(hue));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromAsset(String assetName) {
+        @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
             return new HuaweiBitmapDescriptor(BitmapDescriptorFactory.fromAsset(assetName));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
+        @Override public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
             return new HuaweiBitmapDescriptor(BitmapDescriptorFactory.fromBitmap(image));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromFile(String fileName) {
+        @Override public @NonNull BitmapDescriptor fromFile(String fileName) {
             return new HuaweiBitmapDescriptor(BitmapDescriptorFactory.fromFile(fileName));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromPath(String absolutePath) {
+        @Override public @NonNull BitmapDescriptor fromPath(String absolutePath) {
             return new HuaweiBitmapDescriptor(BitmapDescriptorFactory.fromPath(absolutePath));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromResource(int resourceId) {
+        @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
             return new HuaweiBitmapDescriptor(BitmapDescriptorFactory.fromResource(resourceId));
         }
     };
@@ -75,8 +68,7 @@ public class HuaweiBitmapDescriptor implements BitmapDescriptor {
         mDelegate = delegate;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -89,13 +81,11 @@ public class HuaweiBitmapDescriptor implements BitmapDescriptor {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

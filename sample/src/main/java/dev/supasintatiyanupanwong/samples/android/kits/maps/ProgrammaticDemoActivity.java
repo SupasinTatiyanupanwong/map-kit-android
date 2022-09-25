@@ -35,8 +35,7 @@ public class ProgrammaticDemoActivity extends AppCompatActivity implements
 
     private static final String MAP_FRAGMENT_TAG = "map";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // It isn't possible to set a fragment's id programmatically so we set a tag instead and
@@ -58,8 +57,7 @@ public class ProgrammaticDemoActivity extends AppCompatActivity implements
         mapFragment.getMapAsync(this);
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         map.addMarker(MapKit.newMarkerOptions()
                 .position(MapKit.newLatLng(0, 0))
                 .title("Marker"));

@@ -37,13 +37,11 @@ public class HuaweiGap extends HuaweiPatternItem implements Gap {
         this(new com.huawei.hms.maps.model.Gap(length));
     }
 
-    @Override
-    public float getLength() {
+    @Override public float getLength() {
         return mDelegate.length;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -56,13 +54,11 @@ public class HuaweiGap extends HuaweiPatternItem implements Gap {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

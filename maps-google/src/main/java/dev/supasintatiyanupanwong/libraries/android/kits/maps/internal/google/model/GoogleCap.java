@@ -16,6 +16,9 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap;
@@ -24,7 +27,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 
 abstract class GoogleCap implements Cap {
 
-    static Cap wrap(com.google.android.gms.maps.model.Cap delegate) {
+    static @NonNull Cap wrap(@Nullable com.google.android.gms.maps.model.Cap delegate) {
         if (delegate instanceof com.google.android.gms.maps.model.ButtCap) {
             return GoogleButtCap.wrap((com.google.android.gms.maps.model.ButtCap) delegate);
 
@@ -38,10 +41,11 @@ abstract class GoogleCap implements Cap {
             return GoogleSquareCap.wrap((com.google.android.gms.maps.model.SquareCap) delegate);
         }
 
-        throw new UnsupportedOperationException("Unsupported cap type " + delegate.toString());
+        throw new UnsupportedOperationException(
+                "Unsupported cap type " + (delegate != null ? delegate.toString() : null));
     }
 
-    static com.google.android.gms.maps.model.Cap unwrap(Cap wrapped) {
+    static @Nullable com.google.android.gms.maps.model.Cap unwrap(@Nullable Cap wrapped) {
         if (wrapped instanceof ButtCap) {
             return GoogleButtCap.unwrap((ButtCap) wrapped);
 
@@ -55,7 +59,8 @@ abstract class GoogleCap implements Cap {
             return GoogleSquareCap.unwrap((SquareCap) wrapped);
         }
 
-        throw new UnsupportedOperationException("Unsupported cap type " + wrapped.toString());
+        throw new UnsupportedOperationException(
+                "Unsupported cap type " + (wrapped != null ? wrapped.toString() : null));
     }
 
 }

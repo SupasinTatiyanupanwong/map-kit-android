@@ -41,8 +41,7 @@ public class IndoorDemoActivity extends AppCompatActivity implements MapKit.OnMa
 
     private boolean mShowLevelPicker = true;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.indoor_demo);
 
@@ -53,8 +52,7 @@ public class IndoorDemoActivity extends AppCompatActivity implements MapKit.OnMa
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         mMap.moveCamera(MapKit.getCameraUpdateFactory()
                 .newLatLngZoom(MapKit.newLatLng(37.614631, -122.385153), 18));

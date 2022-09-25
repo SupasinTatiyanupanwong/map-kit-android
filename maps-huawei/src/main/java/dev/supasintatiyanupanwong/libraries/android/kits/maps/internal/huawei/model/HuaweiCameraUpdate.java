@@ -35,66 +35,60 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds
 public class HuaweiCameraUpdate implements CameraUpdate {
 
     public static final Factory FACTORY = new Factory() {
-        @Override
-        public @NonNull CameraUpdate zoomIn() {
+        @Override public @NonNull CameraUpdate zoomIn() {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomIn());
         }
 
-        @Override
-        public @NonNull CameraUpdate zoomOut() {
+        @Override public @NonNull CameraUpdate zoomOut() {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomOut());
         }
 
-        @Override
-        public @NonNull CameraUpdate scrollBy(float xPixel, float yPixel) {
+        @Override public @NonNull CameraUpdate scrollBy(float xPixel, float yPixel) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.scrollBy(xPixel, yPixel));
         }
 
-        @Override
-        public @NonNull CameraUpdate zoomTo(float zoom) {
+        @Override public @NonNull CameraUpdate zoomTo(float zoom) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomTo(zoom));
         }
 
-        @Override
-        public @NonNull CameraUpdate zoomBy(float amount) {
+        @Override public @NonNull CameraUpdate zoomBy(float amount) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.zoomBy(amount));
         }
 
-        @Override
-        public @NonNull CameraUpdate zoomBy(float amount, Point focus) {
-            return new HuaweiCameraUpdate(CameraUpdateFactory.zoomBy(amount, focus));
+        @Override public @NonNull CameraUpdate zoomBy(float amount, @NonNull Point focus) {
+            //noinspection ConstantConditions
+            if (focus == null) {
+                return new HuaweiCameraUpdate(CameraUpdateFactory.zoomBy(amount));
+            } else {
+                return new HuaweiCameraUpdate(CameraUpdateFactory.zoomBy(amount, focus));
+            }
         }
 
-        @Override
-        public @NonNull CameraUpdate newCameraPosition(CameraPosition cameraPosition) {
+        @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition cameraPosition) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newCameraPosition(
                     HuaweiCameraPosition.unwrap(cameraPosition)
             ));
         }
 
-        @Override
-        public @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng) {
+        @Override public @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newLatLng(
                     HuaweiLatLng.unwrap(latLng)
             ));
         }
 
-        @Override
-        public @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
+        @Override public @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newLatLngZoom(
                     HuaweiLatLng.unwrap(latLng), zoom
             ));
         }
 
-        @Override
-        public @NonNull CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding) {
+        @Override public @NonNull CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newLatLngBounds(
                     HuaweiLatLngBounds.unwrap(bounds), padding
             ));
         }
 
-        @Override
-        public @NonNull CameraUpdate newLatLngBounds(
+        @Override public @NonNull CameraUpdate newLatLngBounds(
                 @NonNull LatLngBounds bounds,
                 int width,
                 int height,
@@ -112,8 +106,7 @@ public class HuaweiCameraUpdate implements CameraUpdate {
         mDelegate = delegate;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -126,13 +119,11 @@ public class HuaweiCameraUpdate implements CameraUpdate {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

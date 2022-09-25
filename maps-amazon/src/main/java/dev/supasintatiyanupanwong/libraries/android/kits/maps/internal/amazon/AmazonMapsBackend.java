@@ -19,6 +19,7 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon;
 import android.content.Context;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.Keep;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -209,12 +210,12 @@ class AmazonMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull VisibleRegion newVisibleRegion(
-            LatLng nearLeft,
-            LatLng nearRight,
-            LatLng farLeft,
-            LatLng farRight,
-            LatLngBounds latLngBounds) {
-        return new AmazonVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
+            @NonNull LatLng nearLeft,
+            @NonNull LatLng nearRight,
+            @NonNull LatLng farLeft,
+            @NonNull LatLng farRight,
+            @NonNull LatLngBounds bounds) {
+        return new AmazonVisibleRegion(nearLeft, nearRight, farLeft, farRight, bounds);
     }
 
     @Override public void getMapAsync(
@@ -222,14 +223,15 @@ class AmazonMapsBackend implements MapKitBackend {
             @NonNull final MapKit.OnMapReadyCallback callback) {
         ((com.amazon.geo.mapsv2.SupportMapFragment) fragment)
                 .getMapAsync(new com.amazon.geo.mapsv2.OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(com.amazon.geo.mapsv2.AmazonMap googleMap) {
-                        callback.onMapReady(new AmazonMapClient(googleMap));
+                    @Override public void onMapReady(
+                            @NonNull com.amazon.geo.mapsv2.AmazonMap amazonMap) {
+                        callback.onMapReady(new AmazonMapClient(amazonMap));
                     }
                 });
     }
 
 
+    @Keep
     public static @Nullable MapKitBackend buildIfSupported(@NonNull Context context) {
         final int result = AmazonMapsRuntimeUtil.isAmazonMapsRuntimeAvailable(context);
         if (result != ConnectionResult.SUCCESS) {

@@ -21,6 +21,7 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -34,12 +35,11 @@ public class AmazonCap implements ButtCap, CustomCap, RoundCap, SquareCap {
 
     public static final @NonNull AmazonCap NULL = new AmazonCap();
 
-    private BitmapDescriptor mBitmapDescriptor;
+    private @Nullable BitmapDescriptor mBitmapDescriptor;
 
     private AmazonCap() {}
 
-    @Override
-    public @NonNull BitmapDescriptor getBitmapDescriptor() {
+    @Override public @NonNull BitmapDescriptor getBitmapDescriptor() {
         if (mBitmapDescriptor == null) {
             mBitmapDescriptor = AmazonBitmapDescriptor.FACTORY
                     .fromBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.ALPHA_8));
@@ -47,8 +47,7 @@ public class AmazonCap implements ButtCap, CustomCap, RoundCap, SquareCap {
         return mBitmapDescriptor; // Not supported, fallback to default.
     }
 
-    @Override
-    public float getRefWidth() {
+    @Override public float getRefWidth() {
         return 0f; // Not supported, fallback to default.
     }
 

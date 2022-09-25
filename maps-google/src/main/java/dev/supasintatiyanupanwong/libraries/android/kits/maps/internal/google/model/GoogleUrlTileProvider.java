@@ -41,20 +41,17 @@ public class GoogleUrlTileProvider extends GoogleTileProvider implements UrlTile
             int height,
             @NonNull final UrlTileProvider tileProvider) {
         this(new com.google.android.gms.maps.model.UrlTileProvider(width, height) {
-            @Override
-            public URL getTileUrl(int x, int y, int zoom) {
+            @Override public URL getTileUrl(int x, int y, int zoom) {
                 return tileProvider.getTileUrl(x, y, zoom);
             }
         });
     }
 
-    @Override
-    public URL getTileUrl(int x, int y, int zoom) {
+    @Override public URL getTileUrl(int x, int y, int zoom) {
         return mDelegate.getTileUrl(x, y, zoom);
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -67,13 +64,11 @@ public class GoogleUrlTileProvider extends GoogleTileProvider implements UrlTile
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

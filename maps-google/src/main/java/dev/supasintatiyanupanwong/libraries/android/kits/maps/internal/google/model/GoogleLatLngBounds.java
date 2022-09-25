@@ -43,42 +43,36 @@ public class GoogleLatLngBounds implements LatLngBounds {
                 GoogleLatLng.unwrap(southwest), GoogleLatLng.unwrap(northeast)));
     }
 
-    @Override
-    public @NonNull LatLng getSouthwest() {
+    @Override public @NonNull LatLng getSouthwest() {
         if (mSouthwest == null) {
             mSouthwest = GoogleLatLng.wrap(mDelegate.southwest);
         }
         return mSouthwest;
     }
 
-    @Override
-    public @NonNull LatLng getNortheast() {
+    @Override public @NonNull LatLng getNortheast() {
         if (mNortheast == null) {
             mNortheast = GoogleLatLng.wrap(mDelegate.northeast);
         }
         return mNortheast;
     }
 
-    @Override
-    public boolean contains(@NonNull LatLng point) {
+    @Override public boolean contains(@NonNull LatLng point) {
         return mDelegate.contains(GoogleLatLng.unwrap(point));
     }
 
-    @Override
-    public @NonNull LatLngBounds including(@NonNull LatLng point) {
+    @Override public @NonNull LatLngBounds including(@NonNull LatLng point) {
         return GoogleLatLngBounds.wrap(mDelegate.including(GoogleLatLng.unwrap(point)));
     }
 
-    @Override
-    public @NonNull LatLng getCenter() {
+    @Override public @NonNull LatLng getCenter() {
         if (mCenter == null) {
             mCenter = GoogleLatLng.wrap(mDelegate.getCenter());
         }
         return mCenter;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -91,13 +85,11 @@ public class GoogleLatLngBounds implements LatLngBounds {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -119,14 +111,12 @@ public class GoogleLatLngBounds implements LatLngBounds {
             mDelegate = com.google.android.gms.maps.model.LatLngBounds.builder();
         }
 
-        @Override
-        public @NonNull LatLngBounds.Builder include(@NonNull LatLng point) {
+        @Override public @NonNull LatLngBounds.Builder include(@NonNull LatLng point) {
             mDelegate.include(GoogleLatLng.unwrap(point));
             return this;
         }
 
-        @Override
-        public @NonNull LatLngBounds build() {
+        @Override public @NonNull LatLngBounds build() {
             return GoogleLatLngBounds.wrap(mDelegate.build());
         }
     }

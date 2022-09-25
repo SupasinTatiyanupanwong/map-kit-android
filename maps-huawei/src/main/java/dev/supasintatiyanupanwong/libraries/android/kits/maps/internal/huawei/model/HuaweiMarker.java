@@ -35,148 +35,119 @@ public class HuaweiMarker implements Marker {
         mDelegate = delegate;
     }
 
-    @Override
-    public void remove() {
+    @Override public void remove() {
         mDelegate.remove();
     }
 
-    @Override
-    public @NonNull String getId() {
+    @Override public @NonNull String getId() {
         return mDelegate.getId();
     }
 
-    @Override
-    public void setPosition(@NonNull LatLng latLng) {
+    @Override public void setPosition(@NonNull LatLng latLng) {
         mDelegate.setPosition(HuaweiLatLng.unwrap(latLng));
     }
 
-    @Override
-    public @NonNull LatLng getPosition() {
+    @Override public @NonNull LatLng getPosition() {
         return HuaweiLatLng.wrap(mDelegate.getPosition());
     }
 
-    @Override
-    public void setZIndex(float zIndex) {
+    @Override public void setZIndex(float zIndex) {
         mDelegate.setZIndex(zIndex);
     }
 
-    @Override
-    public float getZIndex() {
+    @Override public float getZIndex() {
         return mDelegate.getZIndex();
     }
 
-    @Override
-    public void setIcon(@Nullable BitmapDescriptor iconDescriptor) {
+    @Override public void setIcon(@Nullable BitmapDescriptor iconDescriptor) {
         mDelegate.setIcon(HuaweiBitmapDescriptor.unwrap(iconDescriptor));
     }
 
-    @Override
-    public void setAnchor(float anchorU, float anchorV) {
+    @Override public void setAnchor(float anchorU, float anchorV) {
         mDelegate.setMarkerAnchor(anchorU, anchorV);
     }
 
-    @Override
-    public void setInfoWindowAnchor(float anchorU, float anchorV) {
+    @Override public void setInfoWindowAnchor(float anchorU, float anchorV) {
         mDelegate.setInfoWindowAnchor(anchorU, anchorV);
     }
 
-    @Override
-    public void setTitle(@Nullable String title) {
+    @Override public void setTitle(@Nullable String title) {
         mDelegate.setTitle(title);
     }
 
-    @Override
-    public String getTitle() {
+    @Override public String getTitle() {
         return mDelegate.getTitle();
     }
 
-    @Override
-    public void setSnippet(@Nullable String snippet) {
+    @Override public void setSnippet(@Nullable String snippet) {
         mDelegate.setSnippet(snippet);
     }
 
-    @Override
-    public String getSnippet() {
+    @Override public String getSnippet() {
         return mDelegate.getSnippet();
     }
 
-    @Override
-    public void setDraggable(boolean draggable) {
+    @Override public void setDraggable(boolean draggable) {
         mDelegate.setDraggable(draggable);
     }
 
-    @Override
-    public boolean isDraggable() {
+    @Override public boolean isDraggable() {
         return mDelegate.isDraggable();
     }
 
-    @Override
-    public void showInfoWindow() {
+    @Override public void showInfoWindow() {
         mDelegate.showInfoWindow();
     }
 
-    @Override
-    public void hideInfoWindow() {
+    @Override public void hideInfoWindow() {
         mDelegate.hideInfoWindow();
     }
 
-    @Override
-    public boolean isInfoWindowShown() {
+    @Override public boolean isInfoWindowShown() {
         return mDelegate.isInfoWindowShown();
     }
 
-    @Override
-    public void setVisible(boolean visible) {
+    @Override public void setVisible(boolean visible) {
         mDelegate.setVisible(visible);
     }
 
-    @Override
-    public boolean isVisible() {
+    @Override public boolean isVisible() {
         return mDelegate.isVisible();
     }
 
-    @Override
-    public void setFlat(boolean flat) {
+    @Override public void setFlat(boolean flat) {
         mDelegate.setFlat(false);
     }
 
-    @Override
-    public boolean isFlat() {
+    @Override public boolean isFlat() {
         return mDelegate.isFlat();
     }
 
-    @Override
-    public void setRotation(float rotation) {
+    @Override public void setRotation(float rotation) {
         mDelegate.setRotation(rotation);
     }
 
-    @Override
-    public float getRotation() {
+    @Override public float getRotation() {
         return mDelegate.getRotation();
     }
 
-    @Override
-    public void setAlpha(float alpha) {
+    @Override public void setAlpha(float alpha) {
         mDelegate.setAlpha(alpha);
     }
 
-    @Override
-    public float getAlpha() {
+    @Override public float getAlpha() {
         return mDelegate.getAlpha();
     }
 
-    @Override
-    public void setTag(@Nullable Object tag) {
+    @Override public void setTag(@Nullable Object tag) {
         mDelegate.setTag(tag);
     }
 
-    @Override
-    public @Nullable Object getTag() {
+    @Override public @Nullable Object getTag() {
         return mDelegate.getTag();
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -189,13 +160,11 @@ public class HuaweiMarker implements Marker {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -212,145 +181,119 @@ public class HuaweiMarker implements Marker {
             mDelegate = new com.huawei.hms.maps.model.MarkerOptions();
         }
 
-        @Override
-        public @NonNull Marker.Options position(@NonNull LatLng latLng) {
+        @Override public @NonNull Marker.Options position(@NonNull LatLng latLng) {
             mDelegate.position(HuaweiLatLng.unwrap(latLng));
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options zIndex(float zIndex) {
+        @Override public @NonNull Marker.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options icon(@Nullable BitmapDescriptor iconDescriptor) {
+        @Override public @NonNull Marker.Options icon(@Nullable BitmapDescriptor iconDescriptor) {
             mDelegate.icon(HuaweiBitmapDescriptor.unwrap(iconDescriptor));
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options anchor(float anchorU, float anchorV) {
+        @Override public @NonNull Marker.Options anchor(float anchorU, float anchorV) {
             mDelegate.anchorMarker(anchorU, anchorV);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options infoWindowAnchor(float anchorU, float anchorV) {
+        @Override public @NonNull Marker.Options infoWindowAnchor(float anchorU, float anchorV) {
             mDelegate.infoWindowAnchor(anchorU, anchorV);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options title(@Nullable String title) {
+        @Override public @NonNull Marker.Options title(@Nullable String title) {
             mDelegate.title(title);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options snippet(@Nullable String snippet) {
+        @Override public @NonNull Marker.Options snippet(@Nullable String snippet) {
             mDelegate.snippet(snippet);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options draggable(boolean draggable) {
+        @Override public @NonNull Marker.Options draggable(boolean draggable) {
             mDelegate.draggable(draggable);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options visible(boolean visible) {
+        @Override public @NonNull Marker.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options flat(boolean flat) {
+        @Override public @NonNull Marker.Options flat(boolean flat) {
             mDelegate.flat(flat);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options rotation(float rotation) {
+        @Override public @NonNull Marker.Options rotation(float rotation) {
             mDelegate.rotation(rotation);
             return this;
         }
 
-        @Override
-        public @NonNull Marker.Options alpha(float alpha) {
+        @Override public @NonNull Marker.Options alpha(float alpha) {
             mDelegate.alpha(alpha);
             return this;
         }
 
-        @Override
-        public LatLng getPosition() {
+        @Override public LatLng getPosition() {
             return HuaweiLatLng.wrap(mDelegate.getPosition());
         }
 
-        @Override
-        public String getTitle() {
+        @Override public String getTitle() {
             return mDelegate.getTitle();
         }
 
-        @Override
-        public String getSnippet() {
+        @Override public String getSnippet() {
             return mDelegate.getSnippet();
         }
 
-        @Override
-        public @Nullable BitmapDescriptor getIcon() {
+        @Override public @Nullable BitmapDescriptor getIcon() {
             return HuaweiBitmapDescriptor.wrap(mDelegate.getIcon());
         }
 
-        @Override
-        public float getAnchorU() {
+        @Override public float getAnchorU() {
             return mDelegate.getMarkerAnchorU();
         }
 
-        @Override
-        public float getAnchorV() {
+        @Override public float getAnchorV() {
             return mDelegate.getMarkerAnchorV();
         }
 
-        @Override
-        public boolean isDraggable() {
+        @Override public boolean isDraggable() {
             return mDelegate.isDraggable();
         }
 
-        @Override
-        public boolean isVisible() {
+        @Override public boolean isVisible() {
             return mDelegate.isVisible();
         }
 
-        @Override
-        public boolean isFlat() {
+        @Override public boolean isFlat() {
             return mDelegate.isFlat();
         }
 
-        @Override
-        public float getRotation() {
+        @Override public float getRotation() {
             return mDelegate.getRotation();
         }
 
-        @Override
-        public float getInfoWindowAnchorU() {
+        @Override public float getInfoWindowAnchorU() {
             return mDelegate.getInfoWindowAnchorU();
         }
 
-        @Override
-        public float getInfoWindowAnchorV() {
+        @Override public float getInfoWindowAnchorV() {
             return mDelegate.getInfoWindowAnchorV();
         }
 
-        @Override
-        public float getAlpha() {
+        @Override public float getAlpha() {
             return mDelegate.getAlpha();
         }
 
-        @Override
-        public float getZIndex() {
+        @Override public float getZIndex() {
             return mDelegate.getZIndex();
         }
 

@@ -41,8 +41,7 @@ public class EventsDemoActivity extends AppCompatActivity implements
     private TextView mCameraTextView;
     private MapClient mMap;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.events_demo);
 
@@ -56,26 +55,22 @@ public class EventsDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
         mMap.setOnCameraIdleListener(this);
     }
 
-    @Override
-    public void onMapClick(@NonNull LatLng point) {
+    @Override public void onMapClick(@NonNull LatLng point) {
         mTapTextView.setText("tapped, point=" + point);
     }
 
-    @Override
-    public void onMapLongClick(@NonNull LatLng point) {
+    @Override public void onMapLongClick(@NonNull LatLng point) {
         mTapTextView.setText("long pressed, point=" + point);
     }
 
-    @Override
-    public void onCameraIdle() {
+    @Override public void onCameraIdle() {
         mCameraTextView.setText(mMap.getCameraPosition().toString());
     }
 

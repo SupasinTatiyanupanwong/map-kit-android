@@ -123,11 +123,11 @@ public interface MapKitBackend {
             @NonNull UrlTileProvider tileProvider);
 
     @NonNull VisibleRegion newVisibleRegion(
-            LatLng nearLeft,
-            LatLng nearRight,
-            LatLng farLeft,
-            LatLng farRight,
-            LatLngBounds latLngBounds);
+            @NonNull LatLng nearLeft,
+            @NonNull LatLng nearRight,
+            @NonNull LatLng farLeft,
+            @NonNull LatLng farRight,
+            @NonNull LatLngBounds bounds);
 
     @UiThread
     void getMapAsync(@NonNull Fragment fragment, @NonNull MapKit.OnMapReadyCallback callback);

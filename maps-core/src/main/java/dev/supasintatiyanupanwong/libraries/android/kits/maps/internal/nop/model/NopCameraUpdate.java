@@ -54,11 +54,11 @@ public class NopCameraUpdate implements CameraUpdate {
             return NopCameraUpdate.NULL; // Not supported, null object for API safe.
         }
 
-        @Override public @NonNull CameraUpdate zoomBy(float amount, Point focus) {
+        @Override public @NonNull CameraUpdate zoomBy(float amount, @NonNull Point focus) {
             return NopCameraUpdate.NULL; // Not supported, null object for API safe.
         }
 
-        @Override public @NonNull CameraUpdate newCameraPosition(CameraPosition cameraPosition) {
+        @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition cameraPosition) {
             return NopCameraUpdate.NULL; // Not supported, null object for API safe.
         }
 

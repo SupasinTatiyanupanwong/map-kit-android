@@ -270,14 +270,14 @@ public interface Polygon {
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull Options addAll(Iterable<LatLng> points);
+        @NonNull Options addAll(@NonNull Iterable<LatLng> points);
 
         /**
          * Adds a hole to the polygon being built.
          *
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull Options addHole(Iterable<LatLng> points);
+        @NonNull Options addHole(@NonNull Iterable<LatLng> points);
 
         /**
          * Specifies the polygon's stroke width, in display pixels. The default width is 10.
@@ -352,14 +352,14 @@ public interface Polygon {
          * @return The list of {@link LatLng}s specifying the vertices of the outline of the
          * polygon.
          */
-        List<LatLng> getPoints();
+        @NonNull List<LatLng> getPoints();
 
         /**
          * Gets the holes set for this {@link Options} object.
          *
          * @return The list of {@code List<LatLng>}s specifying the holes of the polygon.
          */
-        List<List<LatLng>> getHoles();
+        @NonNull List<List<LatLng>> getHoles();
 
         /**
          * Gets the stroke width set for this {@link Options} object.

@@ -41,7 +41,7 @@ public class NopCircle {
 
         private Options() {}
 
-        @Override public @NonNull Circle.Options center(LatLng center) {
+        @Override public @NonNull Circle.Options center(@NonNull LatLng center) {
             // Not supported, no-op.
             return this;
         }

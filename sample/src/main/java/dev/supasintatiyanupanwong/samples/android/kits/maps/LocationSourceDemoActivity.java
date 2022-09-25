@@ -53,18 +53,15 @@ public class LocationSourceDemoActivity extends AppCompatActivity implements
          */
         private boolean mPaused;
 
-        @Override
-        public void activate(@NonNull OnLocationChangedListener listener) {
+        @Override public void activate(@NonNull OnLocationChangedListener listener) {
             mListener = listener;
         }
 
-        @Override
-        public void deactivate() {
+        @Override public void deactivate() {
             mListener = null;
         }
 
-        @Override
-        public void onMapLongClick(@NonNull LatLng point) {
+        @Override public void onMapLongClick(@NonNull LatLng point) {
             if (mListener != null && !mPaused) {
                 Location location = new Location("LongPressLocationProvider");
                 location.setLatitude(point.getLatitude());
@@ -85,8 +82,7 @@ public class LocationSourceDemoActivity extends AppCompatActivity implements
 
     private LongPressLocationSource mLocationSource;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_demo);
 
@@ -99,20 +95,17 @@ public class LocationSourceDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
         mLocationSource.onResume();
     }
 
-    @Override
-    protected void onPause() {
+    @Override protected void onPause() {
         super.onPause();
         mLocationSource.onPause();
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         map.setLocationSource(mLocationSource);
         map.setOnMapLongClickListener(mLocationSource);
         map.setMyLocationEnabled(true);

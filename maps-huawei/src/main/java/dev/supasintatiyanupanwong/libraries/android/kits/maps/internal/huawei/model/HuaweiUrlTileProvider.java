@@ -39,22 +39,19 @@ public class HuaweiUrlTileProvider extends HuaweiTileProvider implements UrlTile
     public HuaweiUrlTileProvider(
             int width,
             int height,
-            @NonNull final UrlTileProvider tileProvider) {
+            final @NonNull UrlTileProvider tileProvider) {
         this(new com.huawei.hms.maps.model.UrlTileProvider(width, height) {
-            @Override
-            public URL getTileUrl(int x, int y, int zoom) {
+            @Override public URL getTileUrl(int x, int y, int zoom) {
                 return tileProvider.getTileUrl(x, y, zoom);
             }
         });
     }
 
-    @Override
-    public URL getTileUrl(int x, int y, int zoom) {
+    @Override public URL getTileUrl(int x, int y, int zoom) {
         return mDelegate.getTileUrl(x, y, zoom);
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -67,13 +64,11 @@ public class HuaweiUrlTileProvider extends HuaweiTileProvider implements UrlTile
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

@@ -27,9 +27,9 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 @RestrictTo(LIBRARY)
 public class GoogleButtCap extends GoogleCap implements ButtCap {
 
-    private final com.google.android.gms.maps.model.ButtCap mDelegate;
+    private final @NonNull com.google.android.gms.maps.model.ButtCap mDelegate;
 
-    private GoogleButtCap(com.google.android.gms.maps.model.ButtCap delegate) {
+    private GoogleButtCap(@NonNull com.google.android.gms.maps.model.ButtCap delegate) {
         mDelegate = delegate;
     }
 
@@ -37,8 +37,7 @@ public class GoogleButtCap extends GoogleCap implements ButtCap {
         this(new com.google.android.gms.maps.model.ButtCap());
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -51,23 +50,21 @@ public class GoogleButtCap extends GoogleCap implements ButtCap {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static ButtCap wrap(com.google.android.gms.maps.model.ButtCap delegate) {
-        return new GoogleButtCap(delegate);
+    static @Nullable ButtCap wrap(@Nullable com.google.android.gms.maps.model.ButtCap delegate) {
+        return delegate == null ? null : new GoogleButtCap(delegate);
     }
 
-    static com.google.android.gms.maps.model.ButtCap unwrap(ButtCap wrapped) {
-        return ((GoogleButtCap) wrapped).mDelegate;
+    static @Nullable com.google.android.gms.maps.model.ButtCap unwrap(@Nullable ButtCap wrapped) {
+        return wrapped == null ? null : ((GoogleButtCap) wrapped).mDelegate;
     }
 
 }

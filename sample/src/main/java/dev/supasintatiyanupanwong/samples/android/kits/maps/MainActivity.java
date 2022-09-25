@@ -54,8 +54,7 @@ public final class MainActivity extends AppCompatActivity implements
             super(context, R.layout.feature, R.id.title, demos);
         }
 
-        @Override
-        public @NonNull View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        @Override public @NonNull View getView(int position, View convertView, @NonNull ViewGroup parent) {
             FeatureView featureView;
             if (convertView instanceof FeatureView) {
                 featureView = (FeatureView) convertView;
@@ -77,8 +76,7 @@ public final class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         ListView list = findViewById(R.id.list);
@@ -90,8 +88,7 @@ public final class MainActivity extends AppCompatActivity implements
         list.setEmptyView(findViewById(R.id.empty));
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DemoDetails demo = (DemoDetails) parent.getAdapter().getItem(position);
         startActivity(new Intent(this, demo.getActivityClass()));
     }

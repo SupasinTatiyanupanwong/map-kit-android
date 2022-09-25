@@ -32,23 +32,19 @@ class HuaweiIndoorLevel implements IndoorLevel {
         mDelegate = delegate;
     }
 
-    @Override
-    public String getName() {
+    @Override public String getName() {
         return mDelegate.getName();
     }
 
-    @Override
-    public String getShortName() {
+    @Override public String getShortName() {
         return mDelegate.getShortName();
     }
 
-    @Override
-    public void activate() {
+    @Override public void activate() {
         mDelegate.activate();
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -61,13 +57,11 @@ class HuaweiIndoorLevel implements IndoorLevel {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

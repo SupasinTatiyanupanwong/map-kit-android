@@ -38,8 +38,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapFragment;
 public class MapInPagerDemoActivity extends AppCompatActivity {
 
     /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_in_pager_demo);
 
@@ -55,8 +54,7 @@ public class MapInPagerDemoActivity extends AppCompatActivity {
     /** A simple fragment that displays a TextView. */
     public static class TextFragment extends Fragment {
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+        @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
             return inflater.inflate(R.layout.text_fragment, container, false);
         }
     }
@@ -68,13 +66,11 @@ public class MapInPagerDemoActivity extends AppCompatActivity {
             super(fm);
         }
 
-        @Override
-        public int getCount() {
+        @Override public int getCount() {
             return 3;
         }
 
-        @Override
-        public @NonNull Fragment getItem(int position) {
+        @Override public @NonNull Fragment getItem(int position) {
             switch (position) {
                 case 0:
                 case 1:

@@ -32,8 +32,7 @@ public class AmazonPatternItem implements Dash, Dot, Gap {
 
     private AmazonPatternItem() {}
 
-    @Override
-    public float getLength() {
+    @Override public float getLength() {
         return 0f;
     }
 

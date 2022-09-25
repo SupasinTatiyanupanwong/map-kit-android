@@ -40,8 +40,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider
 public class TileCoordinateDemoActivity extends AppCompatActivity implements
         MapKit.OnMapReadyCallback {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tile_coordinate_demo);
 
@@ -52,8 +51,7 @@ public class TileCoordinateDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         TileProvider coordTileProvider = new CoordTileProvider(this.getApplicationContext());
         map.addTileOverlay(
                 MapKit.newTileOverlayOptions().tileProvider(coordTileProvider));
@@ -81,8 +79,7 @@ public class TileCoordinateDemoActivity extends AppCompatActivity implements
                     borderPaint);
         }
 
-        @Override
-        public Tile getTile(int x, int y, int zoom) {
+        @Override public Tile getTile(int x, int y, int zoom) {
             Bitmap coordTile = drawTileCoords(x, y, zoom);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             coordTile.compress(Bitmap.CompressFormat.PNG, 0, stream);

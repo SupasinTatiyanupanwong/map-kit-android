@@ -361,7 +361,7 @@ public interface GroundOverlay {
          * @return The location to place the anchor of the ground overlay. This will be
          * {@code null} if the position was set using {@link #positionFromBounds(LatLngBounds)}.
          */
-        LatLng getLocation();
+        @Nullable LatLng getLocation();
 
         /**
          * Gets the width set for this {@link Options} object.
@@ -383,7 +383,7 @@ public interface GroundOverlay {
          * @return The bounds of the ground overlay. This will be {@code null} if the position was
          * set using {@link #position(LatLng, float)} or {@link #position(LatLng, float, float)}
          */
-        LatLngBounds getBounds();
+        @Nullable LatLngBounds getBounds();
 
         /**
          * Gets the bearing set for this {@link Options} object.

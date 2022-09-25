@@ -23,7 +23,7 @@ The library consists of 4 artifacts; `maps-core`, `maps-google`, `maps-amazon`, 
 ### Migrating from the existing APIs
 
 | Google Maps SDK          | Amazon Maps SDK          | HUAWEI Map Kit           | Map Kit                      |
-|:------------------------ |:------------------------ |:------------------------ |:---------------------------- |
+|:-------------------------|:-------------------------|:-------------------------|:-----------------------------|
 | ``SupportMapFragment``   | ``SupportMapFragment``   | ``SupportMapFragment``   | ``MapFragment``              |
 | ``GoogleMap``            | ``AmazonMap``            | ``HuaweiMap``            | ``MapClient``                |
 | ``new LatLng()``         | ``new LatLng()``         | ``new LatLng()``         | ``MapKit.newLatLng()``       |
@@ -60,7 +60,7 @@ dependencies {
 
 If multiple integration artifacts are included in your final build, the implementation will be selected based on API availability upon application startup.
 
-However, it is recommended to separate builds between them as next:
+However, it is possible to separate builds between them as next:
 
 ```groovy
 android {

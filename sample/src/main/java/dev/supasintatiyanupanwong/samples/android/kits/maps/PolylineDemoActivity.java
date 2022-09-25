@@ -112,8 +112,7 @@ public class PolylineDemoActivity extends AppCompatActivity implements
             R.string.pattern_mixed,
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.polyline_demo);
 
@@ -166,8 +165,7 @@ public class PolylineDemoActivity extends AppCompatActivity implements
         return strings;
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
 
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.polyline_demo_description));
@@ -212,8 +210,7 @@ public class PolylineDemoActivity extends AppCompatActivity implements
 
         // Add a listener for polyline clicks that changes the clicked polyline's color.
         map.setOnPolylineClickListener(new MapClient.OnPolylineClickListener() {
-            @Override
-            public void onPolylineClick(@NonNull Polyline polyline) {
+            @Override public void onPolylineClick(@NonNull Polyline polyline) {
                 // Flip the values of the red, green and blue components of the polyline's color.
                 polyline.setColor(polyline.getColor() ^ 0x00ffffff);
             }
@@ -261,8 +258,7 @@ public class PolylineDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+    @Override public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch (parent.getId()) {
             case R.id.startCapSpinner:
                 mMutablePolyline.setStartCap(getSelectedCap(pos));
@@ -279,23 +275,19 @@ public class PolylineDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    @Override public void onNothingSelected(AdapterView<?> parent) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
+    @Override public void onStopTrackingTouch(SeekBar seekBar) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
+    @Override public void onStartTrackingTouch(SeekBar seekBar) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (mMutablePolyline == null) {
             return;
         }

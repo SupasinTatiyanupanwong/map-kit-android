@@ -43,8 +43,7 @@ public class SnapshotDemoActivity extends AppCompatActivity implements
 
     private CheckBox mWaitForMapLoadCheckBox;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.snapshot_demo);
         mWaitForMapLoadCheckBox = findViewById(R.id.wait_for_map_load);
@@ -56,8 +55,7 @@ public class SnapshotDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         mMap = map;
     }
 
@@ -76,8 +74,7 @@ public class SnapshotDemoActivity extends AppCompatActivity implements
         final ImageView snapshotHolder = findViewById(R.id.snapshot_holder);
 
         final MapClient.SnapshotReadyCallback callback = new MapClient.SnapshotReadyCallback() {
-            @Override
-            public void onSnapshotReady(Bitmap snapshot) {
+            @Override public void onSnapshotReady(Bitmap snapshot) {
                 // Callback is called from the main thread, so we can modify the ImageView safely.
                 snapshotHolder.setImageBitmap(snapshot);
             }
@@ -85,8 +82,7 @@ public class SnapshotDemoActivity extends AppCompatActivity implements
 
         if (mWaitForMapLoadCheckBox.isChecked()) {
             mMap.setOnMapLoadedCallback(new MapClient.OnMapLoadedCallback() {
-                @Override
-                public void onMapLoaded() {
+                @Override public void onMapLoaded() {
                     mMap.snapshot(callback);
                 }
             });

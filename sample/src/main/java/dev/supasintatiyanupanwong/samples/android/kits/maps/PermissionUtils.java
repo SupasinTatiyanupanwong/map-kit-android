@@ -91,8 +91,7 @@ abstract class PermissionUtils {
             return dialog;
         }
 
-        @Override
-        public @NonNull Dialog onCreateDialog(Bundle savedInstanceState) {
+        @Override public @NonNull Dialog onCreateDialog(Bundle savedInstanceState) {
             mFinishActivity = requireArguments().getBoolean(ARGUMENT_FINISH_ACTIVITY);
 
             return new AlertDialog.Builder(getActivity())
@@ -101,8 +100,7 @@ abstract class PermissionUtils {
                     .create();
         }
 
-        @Override
-        public void onDismiss(@NonNull DialogInterface dialog) {
+        @Override public void onDismiss(@NonNull DialogInterface dialog) {
             super.onDismiss(dialog);
             if (mFinishActivity) {
                 Toast.makeText(getActivity(), R.string.permission_required_toast,
@@ -149,8 +147,7 @@ abstract class PermissionUtils {
             return dialog;
         }
 
-        @Override
-        public @NonNull Dialog onCreateDialog(Bundle savedInstanceState) {
+        @Override public @NonNull Dialog onCreateDialog(Bundle savedInstanceState) {
             Bundle arguments = requireArguments();
             final int requestCode = arguments.getInt(ARGUMENT_PERMISSION_REQUEST_CODE);
             mFinishActivity = arguments.getBoolean(ARGUMENT_FINISH_ACTIVITY);
@@ -158,8 +155,7 @@ abstract class PermissionUtils {
             return new AlertDialog.Builder(getActivity())
                     .setMessage(R.string.permission_rationale_location)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        @Override public void onClick(DialogInterface dialog, int which) {
                             // After click on Ok, request the permission.
                             ActivityCompat.requestPermissions(requireActivity(),
                                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -172,8 +168,7 @@ abstract class PermissionUtils {
                     .create();
         }
 
-        @Override
-        public void onDismiss(@NonNull DialogInterface dialog) {
+        @Override public void onDismiss(@NonNull DialogInterface dialog) {
             super.onDismiss(dialog);
             if (mFinishActivity) {
                 Toast.makeText(getActivity(),

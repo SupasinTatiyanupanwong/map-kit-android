@@ -32,8 +32,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
 public class BasicMapDemoActivity extends AppCompatActivity implements
         MapKit.OnMapReadyCallback {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_demo);
 
@@ -48,8 +47,7 @@ public class BasicMapDemoActivity extends AppCompatActivity implements
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
      * we just add a marker near Africa.
      */
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         map.addMarker(
                 MapKit.newMarkerOptions()
                         .position(MapKit.newLatLng(0, 0))

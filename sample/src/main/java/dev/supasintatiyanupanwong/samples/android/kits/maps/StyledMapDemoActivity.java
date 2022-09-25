@@ -64,8 +64,7 @@ public class StyledMapDemoActivity extends AppCompatActivity implements
 
     private static final LatLng SYDNEY = MapKit.newLatLng(-33.8688, 151.2093);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mSelectedStyleId = savedInstanceState.getInt(SELECTED_STYLE);
@@ -79,28 +78,24 @@ public class StyledMapDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
+    @Override public void onSaveInstanceState(Bundle outState) {
         // Store the selected map style, so we can assign it when the activity resumes.
         outState.putInt(SELECTED_STYLE, mSelectedStyleId);
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         mMap.moveCamera(MapKit.getCameraUpdateFactory().newLatLngZoom(SYDNEY, 14));
         setSelectedStyle();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.styled_map, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_style_choose) {
             showStylesDialog();
         }
@@ -125,8 +120,7 @@ public class StyledMapDemoActivity extends AppCompatActivity implements
         builder.setTitle(getString(R.string.style_choose));
         builder.setItems(styleNames.toArray(new CharSequence[0]),
                 new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    @Override public void onClick(DialogInterface dialog, int which) {
                         mSelectedStyleId = mStyleIds[which];
                         String msg = getString(R.string.style_set_to, getString(mSelectedStyleId));
                         Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT).show();

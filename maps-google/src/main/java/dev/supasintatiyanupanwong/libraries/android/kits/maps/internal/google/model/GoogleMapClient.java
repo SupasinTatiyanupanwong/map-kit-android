@@ -58,136 +58,114 @@ public class GoogleMapClient implements MapClient {
         mSettings = new UiSettings(map.getUiSettings());
     }
 
-    @Override
-    public @NonNull CameraPosition getCameraPosition() {
+    @Override public @NonNull CameraPosition getCameraPosition() {
         return GoogleCameraPosition.wrap(mDelegate.getCameraPosition());
     }
 
-    @Override
-    public float getMaxZoomLevel() {
+    @Override public float getMaxZoomLevel() {
         return mDelegate.getMaxZoomLevel();
     }
 
-    @Override
-    public float getMinZoomLevel() {
+    @Override public float getMinZoomLevel() {
         return mDelegate.getMinZoomLevel();
     }
 
-    @Override
-    public void moveCamera(@NonNull CameraUpdate update) {
+    @Override public void moveCamera(@NonNull CameraUpdate update) {
         mDelegate.moveCamera(GoogleCameraUpdate.unwrap(update));
     }
 
-    @Override
-    public void animateCamera(@NonNull CameraUpdate update) {
+    @Override public void animateCamera(@NonNull CameraUpdate update) {
         mDelegate.animateCamera(GoogleCameraUpdate.unwrap(update));
     }
 
-    @Override
-    public void animateCamera(
-            @NonNull CameraUpdate update, @Nullable final CancelableCallback callback) {
+    @Override public void animateCamera(
+            @NonNull CameraUpdate update,
+            final @Nullable CancelableCallback callback) {
         mDelegate.animateCamera(
                 GoogleCameraUpdate.unwrap(update),
                 callback == null
                         ? null
                         : new com.google.android.gms.maps.GoogleMap.CancelableCallback() {
-                            @Override
-                            public void onFinish() {
+                            @Override public void onFinish() {
                                 callback.onFinish();
                             }
 
-                            @Override
-                            public void onCancel() {
+                            @Override public void onCancel() {
                                 callback.onCancel();
                             }
                         }
         );
     }
 
-    @Override
-    public void animateCamera(
+    @Override public void animateCamera(
             @NonNull CameraUpdate update,
             @IntRange(from = 0) int durationMs,
-            @Nullable final CancelableCallback callback) {
+            final @Nullable CancelableCallback callback) {
         mDelegate.animateCamera(
                 GoogleCameraUpdate.unwrap(update),
                 durationMs,
                 callback == null
                         ? null
                         : new com.google.android.gms.maps.GoogleMap.CancelableCallback() {
-                            @Override
-                            public void onFinish() {
+                            @Override public void onFinish() {
                                 callback.onFinish();
                             }
 
-                            @Override
-                            public void onCancel() {
+                            @Override public void onCancel() {
                                 callback.onCancel();
                             }
                         }
         );
     }
 
-    @Override
-    public void stopAnimation() {
+    @Override public void stopAnimation() {
         mDelegate.stopAnimation();
     }
 
-    @Override
-    public @NonNull Polyline addPolyline(Polyline.Options options) {
+    @Override public @NonNull Polyline addPolyline(@NonNull Polyline.Options options) {
         return GooglePolyline.wrap(mDelegate.addPolyline(GooglePolyline.Options.unwrap(options)));
     }
 
-    @Override
-    public @NonNull Polygon addPolygon(Polygon.Options options) {
+    @Override public @NonNull Polygon addPolygon(@NonNull Polygon.Options options) {
         return GooglePolygon.wrap(mDelegate.addPolygon(GooglePolygon.Options.unwrap(options)));
     }
 
-    @Override
-    public @NonNull Circle addCircle(Circle.Options options) {
+    @Override public @NonNull Circle addCircle(@NonNull Circle.Options options) {
         return GoogleCircle.wrap(mDelegate.addCircle(GoogleCircle.Options.unwrap(options)));
     }
 
-    @Override
-    public @NonNull Marker addMarker(Marker.Options options) {
+    @Override public @NonNull Marker addMarker(@NonNull Marker.Options options) {
         return GoogleMarker.wrap(mDelegate.addMarker(GoogleMarker.Options.unwrap(options)));
     }
 
-    @Override
-    public @NonNull GroundOverlay addGroundOverlay(GroundOverlay.Options options) {
+    @Override public @NonNull GroundOverlay addGroundOverlay(@NonNull GroundOverlay.Options options) {
         return GoogleGroundOverlay.wrap(
                 mDelegate.addGroundOverlay(GoogleGroundOverlay.Options.unwrap(options)));
     }
 
-    @Override
-    public @NonNull TileOverlay addTileOverlay(TileOverlay.Options options) {
+    @Override public @NonNull TileOverlay addTileOverlay(@NonNull TileOverlay.Options options) {
         return GoogleTileOverlay.wrap(
                 mDelegate.addTileOverlay(GoogleTileOverlay.Options.unwrap(options)));
     }
 
-    @Override
-    public void clear() {
+    @Override public void clear() {
         mDelegate.clear();
     }
 
-    @Override
-    public @Nullable IndoorBuilding getFocusedBuilding() {
+    @Override public @Nullable IndoorBuilding getFocusedBuilding() {
         return GoogleIndoorBuilding.wrap(mDelegate.getFocusedBuilding());
     }
 
-    @Override
-    public void setOnIndoorStateChangeListener(
-            @Nullable final OnIndoorStateChangeListener listener) {
+    @Override public void setOnIndoorStateChangeListener(
+            final @Nullable OnIndoorStateChangeListener listener) {
         mDelegate.setOnIndoorStateChangeListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnIndoorStateChangeListener() {
-                    @Override
-                    public void onIndoorBuildingFocused() {
+                    @Override public void onIndoorBuildingFocused() {
                         listener.onIndoorBuildingFocused();
                     }
 
-                    @Override
-                    public void onIndoorLevelActivated(
+                    @Override public void onIndoorLevelActivated(
                             com.google.android.gms.maps.model.IndoorBuilding indoorBuilding) {
                         listener.onIndoorLevelActivated(
                                 GoogleIndoorBuilding.wrap(mDelegate.getFocusedBuilding()));
@@ -196,226 +174,188 @@ public class GoogleMapClient implements MapClient {
         );
     }
 
-    @Override
-    public int getMapType() {
+    @Override public int getMapType() {
         return mDelegate.getMapType();
     }
 
-    @Override
-    public void setMapType(int type) {
+    @Override public void setMapType(int type) {
         mDelegate.setMapType(type);
     }
 
-    @Override
-    public boolean isTrafficEnabled() {
+    @Override public boolean isTrafficEnabled() {
         return mDelegate.isTrafficEnabled();
     }
 
-    @Override
-    public void setTrafficEnabled(boolean enabled) {
+    @Override public void setTrafficEnabled(boolean enabled) {
         mDelegate.setTrafficEnabled(enabled);
     }
 
-    @Override
-    public boolean isIndoorEnabled() {
+    @Override public boolean isIndoorEnabled() {
         return mDelegate.isIndoorEnabled();
     }
 
-    @Override
-    public boolean setIndoorEnabled(boolean enabled) {
+    @Override public boolean setIndoorEnabled(boolean enabled) {
         return mDelegate.setIndoorEnabled(enabled);
     }
 
-    @Override
-    public boolean isBuildingsEnabled() {
+    @Override public boolean isBuildingsEnabled() {
         return mDelegate.isBuildingsEnabled();
     }
 
-    @Override
-    public void setBuildingsEnabled(boolean enabled) {
+    @Override public void setBuildingsEnabled(boolean enabled) {
         mDelegate.setBuildingsEnabled(enabled);
     }
 
-    @Override
-    public boolean isMyLocationEnabled() {
+    @Override public boolean isMyLocationEnabled() {
         return mDelegate.isMyLocationEnabled();
     }
 
     @RequiresPermission(anyOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
-    @Override
-    public void setMyLocationEnabled(boolean enabled) {
+    @Override public void setMyLocationEnabled(boolean enabled) {
         mDelegate.setMyLocationEnabled(enabled);
     }
 
-    @Override
-    public void setLocationSource(@Nullable final LocationSource source) {
+    @Override public void setLocationSource(final @Nullable LocationSource source) {
         mDelegate.setLocationSource(source == null
                 ? null
                 : new com.google.android.gms.maps.LocationSource() {
-                    @Override
-                    public void activate(final OnLocationChangedListener listener) {
+                    @Override public void activate(final OnLocationChangedListener listener) {
                         source.activate(new LocationSource.OnLocationChangedListener() {
-                            @Override
-                            public void onLocationChanged(@NonNull Location location) {
+                            @Override public void onLocationChanged(@NonNull Location location) {
                                 listener.onLocationChanged(location);
                             }
                         });
                     }
 
-                    @Override
-                    public void deactivate() {
+                    @Override public void deactivate() {
                         source.deactivate();
                     }
                 });
     }
 
-    @Override
-    public @NonNull MapClient.UiSettings getUiSettings() {
+    @Override public @NonNull MapClient.UiSettings getUiSettings() {
         return mSettings;
     }
 
-    @Override
-    public @NonNull Projection getProjection() {
+    @Override public @NonNull Projection getProjection() {
         return GoogleProjection.wrap(mDelegate.getProjection());
     }
 
-    @Override
-    public void setOnCameraMoveStartedListener(
-            @Nullable final OnCameraMoveStartedListener listener) {
+    @Override public void setOnCameraMoveStartedListener(
+            final @Nullable OnCameraMoveStartedListener listener) {
         mDelegate.setOnCameraMoveStartedListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener() {
-                    @Override
-                    public void onCameraMoveStarted(int reason) {
+                    @Override public void onCameraMoveStarted(int reason) {
                         listener.onCameraMoveStarted(reason);
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnCameraMoveListener(@Nullable final OnCameraMoveListener listener) {
+    @Override public void setOnCameraMoveListener(final @Nullable OnCameraMoveListener listener) {
         mDelegate.setOnCameraMoveListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnCameraMoveListener() {
-                    @Override
-                    public void onCameraMove() {
+                    @Override public void onCameraMove() {
                         listener.onCameraMove();
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnCameraMoveCanceledListener(
-            @Nullable final OnCameraMoveCanceledListener listener) {
+    @Override public void setOnCameraMoveCanceledListener(
+            final @Nullable OnCameraMoveCanceledListener listener) {
         mDelegate.setOnCameraMoveCanceledListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnCameraMoveCanceledListener() {
-                    @Override
-                    public void onCameraMoveCanceled() {
+                    @Override public void onCameraMoveCanceled() {
                         listener.onCameraMoveCanceled();
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnCameraIdleListener(@Nullable final OnCameraIdleListener listener) {
+    @Override public void setOnCameraIdleListener(final @Nullable OnCameraIdleListener listener) {
         mDelegate.setOnCameraIdleListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnCameraIdleListener() {
-                    @Override
-                    public void onCameraIdle() {
+                    @Override public void onCameraIdle() {
                         listener.onCameraIdle();
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnMapClickListener(@Nullable final OnMapClickListener listener) {
+    @Override public void setOnMapClickListener(final @Nullable OnMapClickListener listener) {
         mDelegate.setOnMapClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(com.google.android.gms.maps.model.LatLng point) {
+                    @Override public void onMapClick(com.google.android.gms.maps.model.LatLng point) {
                         listener.onMapClick(GoogleLatLng.wrap(point));
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnMapLongClickListener(@Nullable final OnMapLongClickListener listener) {
+    @Override public void setOnMapLongClickListener(final @Nullable OnMapLongClickListener listener) {
         mDelegate.setOnMapLongClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnMapLongClickListener() {
-                    @Override
-                    public void onMapLongClick(com.google.android.gms.maps.model.LatLng point) {
+                    @Override public void onMapLongClick(com.google.android.gms.maps.model.LatLng point) {
                         listener.onMapLongClick(GoogleLatLng.wrap(point));
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnMarkerClickListener(@Nullable final OnMarkerClickListener listener) {
+    @Override public void setOnMarkerClickListener(final @Nullable OnMarkerClickListener listener) {
         mDelegate.setOnMarkerClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
+                    @Override public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
                         return listener.onMarkerClick(GoogleMarker.wrap(marker));
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnMarkerDragListener(@Nullable final OnMarkerDragListener listener) {
+    @Override public void setOnMarkerDragListener(final @Nullable OnMarkerDragListener listener) {
         mDelegate.setOnMarkerDragListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnMarkerDragListener() {
-                    @Override
-                    public void onMarkerDragStart(com.google.android.gms.maps.model.Marker marker) {
+                    @Override public void onMarkerDragStart(com.google.android.gms.maps.model.Marker marker) {
                         listener.onMarkerDragStart(GoogleMarker.wrap(marker));
                     }
 
-                    @Override
-                    public void onMarkerDrag(com.google.android.gms.maps.model.Marker marker) {
+                    @Override public void onMarkerDrag(com.google.android.gms.maps.model.Marker marker) {
                         listener.onMarkerDrag(GoogleMarker.wrap(marker));
                     }
 
-                    @Override
-                    public void onMarkerDragEnd(com.google.android.gms.maps.model.Marker marker) {
+                    @Override public void onMarkerDragEnd(com.google.android.gms.maps.model.Marker marker) {
                         listener.onMarkerDragEnd(GoogleMarker.wrap(marker));
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnInfoWindowClickListener(@Nullable final OnInfoWindowClickListener listener) {
+    @Override public void setOnInfoWindowClickListener(final @Nullable OnInfoWindowClickListener listener) {
         mDelegate.setOnInfoWindowClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(com.google.android.gms.maps.model.Marker marker) {
+                    @Override public void onInfoWindowClick(com.google.android.gms.maps.model.Marker marker) {
                         listener.onInfoWindowClick(GoogleMarker.wrap(marker));
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnInfoWindowLongClickListener(
-            @Nullable final OnInfoWindowLongClickListener listener) {
+    @Override public void setOnInfoWindowLongClickListener(
+            final @Nullable OnInfoWindowLongClickListener listener) {
         mDelegate.setOnInfoWindowLongClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnInfoWindowLongClickListener() {
-                    @Override
-                    public void onInfoWindowLongClick(
+                    @Override public void onInfoWindowLongClick(
                             com.google.android.gms.maps.model.Marker marker) {
                         listener.onInfoWindowLongClick(GoogleMarker.wrap(marker));
                     }
@@ -423,85 +363,72 @@ public class GoogleMapClient implements MapClient {
         );
     }
 
-    @Override
-    public void setOnInfoWindowCloseListener(@Nullable final OnInfoWindowCloseListener listener) {
+    @Override public void setOnInfoWindowCloseListener(final @Nullable OnInfoWindowCloseListener listener) {
         mDelegate.setOnInfoWindowCloseListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnInfoWindowCloseListener() {
-                    @Override
-                    public void onInfoWindowClose(com.google.android.gms.maps.model.Marker marker) {
+                    @Override public void onInfoWindowClose(com.google.android.gms.maps.model.Marker marker) {
                         listener.onInfoWindowClose(GoogleMarker.wrap(marker));
                     }
                 }
         );
     }
 
-    @Override
-    public void setInfoWindowAdapter(@Nullable final InfoWindowAdapter adapter) {
+    @Override public void setInfoWindowAdapter(final @Nullable InfoWindowAdapter adapter) {
         mDelegate.setInfoWindowAdapter(adapter == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.InfoWindowAdapter() {
-                    @Override
-                    public View getInfoWindow(com.google.android.gms.maps.model.Marker marker) {
+                    @Override public View getInfoWindow(com.google.android.gms.maps.model.Marker marker) {
                         return adapter.getInfoWindow(GoogleMarker.wrap(marker));
                     }
 
-                    @Override
-                    public View getInfoContents(com.google.android.gms.maps.model.Marker marker) {
+                    @Override public View getInfoContents(com.google.android.gms.maps.model.Marker marker) {
                         return adapter.getInfoContents(GoogleMarker.wrap(marker));
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnMyLocationButtonClickListener(
-            @Nullable final OnMyLocationButtonClickListener listener) {
+    @Override public void setOnMyLocationButtonClickListener(
+            final @Nullable OnMyLocationButtonClickListener listener) {
         mDelegate.setOnMyLocationButtonClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener() {
-                    @Override
-                    public boolean onMyLocationButtonClick() {
+                    @Override public boolean onMyLocationButtonClick() {
                         return listener.onMyLocationButtonClick();
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnMyLocationClickListener(@Nullable final OnMyLocationClickListener listener) {
+    @Override public void setOnMyLocationClickListener(final @Nullable OnMyLocationClickListener listener) {
         mDelegate.setOnMyLocationClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener() {
-                    @Override
-                    public void onMyLocationClick(@NonNull Location location) {
+                    @Override public void onMyLocationClick(@NonNull Location location) {
                         listener.onMyLocationClick(location);
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnMapLoadedCallback(@Nullable final OnMapLoadedCallback callback) {
+    @Override public void setOnMapLoadedCallback(final @Nullable OnMapLoadedCallback callback) {
         mDelegate.setOnMapLoadedCallback(callback == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnMapLoadedCallback() {
-                    @Override
-                    public void onMapLoaded() {
+                    @Override public void onMapLoaded() {
                         callback.onMapLoaded();
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnGroundOverlayClickListener(
-            @Nullable final OnGroundOverlayClickListener listener) {
+    @Override public void setOnGroundOverlayClickListener(
+            final @Nullable OnGroundOverlayClickListener listener) {
         mDelegate.setOnGroundOverlayClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnGroundOverlayClickListener() {
-                    @Override
-                    public void onGroundOverlayClick(
+                    @Override public void onGroundOverlayClick(
                             com.google.android.gms.maps.model.GroundOverlay groundOverlay) {
                         listener.onGroundOverlayClick(GoogleGroundOverlay.wrap(groundOverlay));
                     }
@@ -509,39 +436,33 @@ public class GoogleMapClient implements MapClient {
         );
     }
 
-    @Override
-    public void setOnCircleClickListener(@Nullable final OnCircleClickListener listener) {
+    @Override public void setOnCircleClickListener(final @Nullable OnCircleClickListener listener) {
         mDelegate.setOnCircleClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnCircleClickListener() {
-                    @Override
-                    public void onCircleClick(com.google.android.gms.maps.model.Circle circle) {
+                    @Override public void onCircleClick(com.google.android.gms.maps.model.Circle circle) {
                         listener.onCircleClick(GoogleCircle.wrap(circle));
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnPolygonClickListener(@Nullable final OnPolygonClickListener listener) {
+    @Override public void setOnPolygonClickListener(final @Nullable OnPolygonClickListener listener) {
         mDelegate.setOnPolygonClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnPolygonClickListener() {
-                    @Override
-                    public void onPolygonClick(com.google.android.gms.maps.model.Polygon polygon) {
+                    @Override public void onPolygonClick(com.google.android.gms.maps.model.Polygon polygon) {
                         listener.onPolygonClick(GooglePolygon.wrap(polygon));
                     }
                 }
         );
     }
 
-    @Override
-    public void setOnPolylineClickListener(@Nullable final OnPolylineClickListener listener) {
+    @Override public void setOnPolylineClickListener(final @Nullable OnPolylineClickListener listener) {
         mDelegate.setOnPolylineClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnPolylineClickListener() {
-                    @Override
-                    public void onPolylineClick(
+                    @Override public void onPolylineClick(
                             com.google.android.gms.maps.model.Polyline polyline) {
                         listener.onPolylineClick(GooglePolyline.wrap(polyline));
                     }
@@ -549,43 +470,35 @@ public class GoogleMapClient implements MapClient {
         );
     }
 
-    @Override
-    public void snapshot(@NonNull final SnapshotReadyCallback callback) {
+    @Override public void snapshot(@NonNull final SnapshotReadyCallback callback) {
         mDelegate.snapshot(new com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback() {
-            @Override
-            public void onSnapshotReady(Bitmap bitmap) {
+            @Override public void onSnapshotReady(Bitmap bitmap) {
                 callback.onSnapshotReady(bitmap);
             }
         });
     }
 
-    @Override
-    public void snapshot(@NonNull final SnapshotReadyCallback callback, @Nullable Bitmap bitmap) {
+    @Override public void snapshot(@NonNull final SnapshotReadyCallback callback, @Nullable Bitmap bitmap) {
         mDelegate.snapshot(new com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback() {
-            @Override
-            public void onSnapshotReady(Bitmap bitmap) {
+            @Override public void onSnapshotReady(Bitmap bitmap) {
                 callback.onSnapshotReady(bitmap);
             }
         }, bitmap);
     }
 
-    @Override
-    public void setPadding(int left, int top, int right, int bottom) {
+    @Override public void setPadding(int left, int top, int right, int bottom) {
         mDelegate.setPadding(left, top, right, bottom);
     }
 
-    @Override
-    public void setContentDescription(String description) {
+    @Override public void setContentDescription(String description) {
         mDelegate.setContentDescription(description);
     }
 
-    @Override
-    public void setOnPoiClickListener(@Nullable final OnPoiClickListener listener) {
+    @Override public void setOnPoiClickListener(final @Nullable OnPoiClickListener listener) {
         mDelegate.setOnPoiClickListener(listener == null
                 ? null
                 : new com.google.android.gms.maps.GoogleMap.OnPoiClickListener() {
-                    @Override
-                    public void onPoiClick(
+                    @Override public void onPoiClick(
                             com.google.android.gms.maps.model.PointOfInterest pointOfInterest) {
                         listener.onPoiClick(GooglePointOfInterest.wrap(pointOfInterest));
                     }
@@ -593,33 +506,30 @@ public class GoogleMapClient implements MapClient {
         );
     }
 
-    @Override
-    public boolean setMapStyle(@Nullable MapClient.Style.Options style) {
+    @Override public boolean setMapStyle(@Nullable MapClient.Style.Options style) {
         return mDelegate.setMapStyle(Style.Options.unwrap(style));
     }
 
-    @Override
-    public void setMinZoomPreference(float minZoomPreference) {
+    @Override public void setMinZoomPreference(float minZoomPreference) {
         mDelegate.setMinZoomPreference(minZoomPreference);
     }
 
-    @Override
-    public void setMaxZoomPreference(float maxZoomPreference) {
+    @Override public void setMaxZoomPreference(float maxZoomPreference) {
         mDelegate.setMaxZoomPreference(maxZoomPreference);
     }
 
-    @Override
-    public void resetMinMaxZoomPreference() {
+    @Override public void resetMinMaxZoomPreference() {
         mDelegate.resetMinMaxZoomPreference();
     }
 
-    @Override
-    public void setLatLngBoundsForCameraTarget(@Nullable LatLngBounds bounds) {
+    @Override public void setLatLngBoundsForCameraTarget(@Nullable LatLngBounds bounds) {
         mDelegate.setLatLngBoundsForCameraTarget(GoogleLatLngBounds.unwrap(bounds));
     }
 
 
     public static class Style implements MapClient.Style {
+        private Style() {}
+
         public static class Options implements MapClient.Style.Options {
             private final com.google.android.gms.maps.model.MapStyleOptions mDelegate;
 
@@ -632,8 +542,7 @@ public class GoogleMapClient implements MapClient {
                         .loadRawResourceStyle(context, resourceId);
             }
 
-            @Override
-            public boolean equals(@Nullable Object obj) {
+            @Override public boolean equals(@Nullable Object obj) {
                 if (this == obj) {
                     return true;
                 }
@@ -646,13 +555,11 @@ public class GoogleMapClient implements MapClient {
                 return mDelegate.equals(that.mDelegate);
             }
 
-            @Override
-            public int hashCode() {
+            @Override public int hashCode() {
                 return mDelegate.hashCode();
             }
 
-            @Override
-            public @NonNull String toString() {
+            @Override public @NonNull String toString() {
                 return mDelegate.toString();
             }
 
@@ -672,108 +579,87 @@ public class GoogleMapClient implements MapClient {
             mDelegate = delegate;
         }
 
-        @Override
-        public void setZoomControlsEnabled(boolean enabled) {
+        @Override public void setZoomControlsEnabled(boolean enabled) {
             mDelegate.setZoomControlsEnabled(enabled);
         }
 
-        @Override
-        public void setCompassEnabled(boolean enabled) {
+        @Override public void setCompassEnabled(boolean enabled) {
             mDelegate.setCompassEnabled(enabled);
         }
 
-        @Override
-        public void setMyLocationButtonEnabled(boolean enabled) {
+        @Override public void setMyLocationButtonEnabled(boolean enabled) {
             mDelegate.setMyLocationButtonEnabled(enabled);
         }
 
-        @Override
-        public void setIndoorLevelPickerEnabled(boolean enabled) {
+        @Override public void setIndoorLevelPickerEnabled(boolean enabled) {
             mDelegate.setIndoorLevelPickerEnabled(enabled);
         }
 
-        @Override
-        public void setScrollGesturesEnabled(boolean enabled) {
+        @Override public void setScrollGesturesEnabled(boolean enabled) {
             mDelegate.setScrollGesturesEnabled(enabled);
         }
 
-        @Override
-        public void setZoomGesturesEnabled(boolean enabled) {
+        @Override public void setZoomGesturesEnabled(boolean enabled) {
             mDelegate.setZoomGesturesEnabled(enabled);
         }
 
-        @Override
-        public void setTiltGesturesEnabled(boolean enabled) {
+        @Override public void setTiltGesturesEnabled(boolean enabled) {
             mDelegate.setTiltGesturesEnabled(enabled);
         }
 
-        @Override
-        public void setRotateGesturesEnabled(boolean enabled) {
+        @Override public void setRotateGesturesEnabled(boolean enabled) {
             mDelegate.setRotateGesturesEnabled(enabled);
         }
 
-        @Override
-        public void setScrollGesturesEnabledDuringRotateOrZoom(boolean enabled) {
+        @Override public void setScrollGesturesEnabledDuringRotateOrZoom(boolean enabled) {
             mDelegate.setScrollGesturesEnabledDuringRotateOrZoom(enabled);
         }
 
-        @Override
-        public void setAllGesturesEnabled(boolean enabled) {
+        @Override public void setAllGesturesEnabled(boolean enabled) {
             mDelegate.setAllGesturesEnabled(enabled);
         }
 
-        @Override
-        public void setMapToolbarEnabled(boolean enabled) {
+        @Override public void setMapToolbarEnabled(boolean enabled) {
             mDelegate.setMapToolbarEnabled(enabled);
         }
 
-        @Override
-        public boolean isZoomControlsEnabled() {
+        @Override public boolean isZoomControlsEnabled() {
             return mDelegate.isZoomControlsEnabled();
         }
 
-        @Override
-        public boolean isCompassEnabled() {
+        @Override public boolean isCompassEnabled() {
             return mDelegate.isCompassEnabled();
         }
 
-        @Override
-        public boolean isMyLocationButtonEnabled() {
+        @Override public boolean isMyLocationButtonEnabled() {
             return mDelegate.isMyLocationButtonEnabled();
         }
 
-        @Override
-        public boolean isIndoorLevelPickerEnabled() {
+        @Override public boolean isIndoorLevelPickerEnabled() {
             return mDelegate.isIndoorLevelPickerEnabled();
         }
 
-        @Override
-        public boolean isScrollGesturesEnabled() {
+        @Override public boolean isScrollGesturesEnabled() {
             return mDelegate.isScrollGesturesEnabled();
         }
 
-        @Override
-        public boolean isScrollGesturesEnabledDuringRotateOrZoom() {
+        @Override public boolean isScrollGesturesEnabledDuringRotateOrZoom() {
             return mDelegate.isScrollGesturesEnabledDuringRotateOrZoom();
         }
 
-        @Override
-        public boolean isZoomGesturesEnabled() {
+        @Override public boolean isZoomGesturesEnabled() {
             return mDelegate.isZoomGesturesEnabled();
         }
 
-        @Override
-        public boolean isTiltGesturesEnabled() {
+        @Override public boolean isTiltGesturesEnabled() {
             return mDelegate.isTiltGesturesEnabled();
         }
 
-        @Override
-        public boolean isRotateGesturesEnabled() {
+        @Override public boolean isRotateGesturesEnabled() {
             return mDelegate.isRotateGesturesEnabled();
         }
 
-        @Override
-        public boolean isMapToolbarEnabled() {
+        @Override public boolean isMapToolbarEnabled() {
             return mDelegate.isMapToolbarEnabled();
         }
     }

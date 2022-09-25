@@ -64,8 +64,7 @@ public class MapFragment extends Fragment {
     private boolean mOnCreateViewCalled = false;
 
     @CallSuper
-    @Override
-    public @NonNull View onCreateView(
+    @Override public @NonNull View onCreateView(
             @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
@@ -74,8 +73,7 @@ public class MapFragment extends Fragment {
     }
 
     @CallSuper
-    @Override
-    public void onStart() {
+    @Override public void onStart() {
         // FM enforced super.onStart() to be called if overridden, checking our view first.
         ensureViewCreated();
         super.onStart();
@@ -99,8 +97,7 @@ public class MapFragment extends Fragment {
         } else {
             requireFragmentManager().registerFragmentLifecycleCallbacks(
                     new FragmentManager.FragmentLifecycleCallbacks() {
-                        @Override
-                        public void onFragmentViewCreated(
+                        @Override public void onFragmentViewCreated(
                                 @NonNull FragmentManager fragmentManager,
                                 @NonNull Fragment fragment,
                                 @NonNull View view,
@@ -184,15 +181,13 @@ public class MapFragment extends Fragment {
             mMapFragment.getMapAsync(this);
         }
 
-        @Override
-        public final void onMapReady(@NonNull MapClient map) {
+        @Override public final void onMapReady(@NonNull MapClient map) {
             mMap = map;
             mIsMapReady = true;
             fireCallbackIfReady();
         }
 
-        @Override
-        public final void onGlobalLayout() {
+        @Override public final void onGlobalLayout() {
             // Remove our listener.
             mMapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             mIsViewReady = true;

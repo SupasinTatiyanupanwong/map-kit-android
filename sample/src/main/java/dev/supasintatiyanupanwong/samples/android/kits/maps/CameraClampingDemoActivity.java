@@ -80,8 +80,7 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
 
     private TextView mCameraTextView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.camera_clamping_demo);
@@ -97,14 +96,12 @@ public class CameraClampingDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         map.setOnCameraIdleListener(this);
     }
 
-    @Override
-    public void onCameraIdle() {
+    @Override public void onCameraIdle() {
         mCameraTextView.setText(mMap.getCameraPosition().toString());
     }
 

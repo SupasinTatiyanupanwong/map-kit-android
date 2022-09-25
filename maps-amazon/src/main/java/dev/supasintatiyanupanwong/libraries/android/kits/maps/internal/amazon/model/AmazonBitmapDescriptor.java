@@ -32,51 +32,44 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescri
 public class AmazonBitmapDescriptor implements BitmapDescriptor {
 
     public static final Factory FACTORY = new Factory() {
-        @Override
-        public @NonNull BitmapDescriptor defaultMarker() {
+        @Override public @NonNull BitmapDescriptor defaultMarker() {
             return new AmazonBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());
         }
 
-        @Override
-        public @NonNull BitmapDescriptor defaultMarker(float hue) {
+        @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
             return new AmazonBitmapDescriptor(BitmapDescriptorFactory.defaultMarker(hue));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromAsset(String assetName) {
+        @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
             return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromAsset(assetName));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
+        @Override public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
             return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromBitmap(image));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromFile(String fileName) {
+        @Override public @NonNull BitmapDescriptor fromFile(String fileName) {
             return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromFile(fileName));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromPath(String absolutePath) {
+        @Override public @NonNull BitmapDescriptor fromPath(String absolutePath) {
             return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromPath(absolutePath));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromResource(int resourceId) {
+        @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
             return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromResource(resourceId));
         }
     };
 
 
-    private final com.amazon.geo.mapsv2.model.BitmapDescriptor mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.BitmapDescriptor mDelegate;
 
-    private AmazonBitmapDescriptor(com.amazon.geo.mapsv2.model.BitmapDescriptor delegate) {
+    private AmazonBitmapDescriptor(
+            @NonNull com.amazon.geo.mapsv2.model.BitmapDescriptor delegate) {
         mDelegate = delegate;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -89,23 +82,23 @@ public class AmazonBitmapDescriptor implements BitmapDescriptor {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static BitmapDescriptor wrap(com.amazon.geo.mapsv2.model.BitmapDescriptor delegate) {
-        return new AmazonBitmapDescriptor(delegate);
+    static @Nullable BitmapDescriptor wrap(
+            @Nullable com.amazon.geo.mapsv2.model.BitmapDescriptor delegate) {
+        return delegate == null ? null : new AmazonBitmapDescriptor(delegate);
     }
 
-    static com.amazon.geo.mapsv2.model.BitmapDescriptor unwrap(BitmapDescriptor wrapped) {
-        return ((AmazonBitmapDescriptor) wrapped).mDelegate;
+    static @Nullable com.amazon.geo.mapsv2.model.BitmapDescriptor unwrap(
+            @Nullable BitmapDescriptor wrapped) {
+        return wrapped == null ? null : ((AmazonBitmapDescriptor) wrapped).mDelegate;
     }
 
 }

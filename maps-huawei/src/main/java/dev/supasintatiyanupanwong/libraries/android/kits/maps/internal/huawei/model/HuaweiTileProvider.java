@@ -39,20 +39,17 @@ public class HuaweiTileProvider implements TileProvider {
 
     private HuaweiTileProvider(final TileProvider tileProvider) {
         this(new com.huawei.hms.maps.model.TileProvider() {
-            @Override
-            public com.huawei.hms.maps.model.Tile getTile(int x, int y, int zoom) {
+            @Override public com.huawei.hms.maps.model.Tile getTile(int x, int y, int zoom) {
                 return HuaweiTile.unwrap(tileProvider.getTile(x, y, zoom));
             }
         });
     }
 
-    @Override
-    public Tile getTile(int x, int y, int zoom) {
+    @Override public Tile getTile(int x, int y, int zoom) {
         return HuaweiTile.wrap(mDelegate.getTile(x, y, zoom));
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -65,13 +62,11 @@ public class HuaweiTileProvider implements TileProvider {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

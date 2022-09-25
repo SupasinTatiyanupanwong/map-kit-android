@@ -36,123 +36,99 @@ public class HuaweiGroundOverlay implements GroundOverlay {
         mDelegate = delegate;
     }
 
-    @Override
-    public void remove() {
+    @Override public void remove() {
         mDelegate.remove();
     }
 
-    @Override
-    public String getId() {
+    @Override public String getId() {
         return mDelegate.getId();
     }
 
-    @Override
-    public void setPosition(LatLng latLng) {
+    @Override public void setPosition(LatLng latLng) {
         mDelegate.setPosition(HuaweiLatLng.unwrap(latLng));
     }
 
-    @Override
-    public LatLng getPosition() {
+    @Override public LatLng getPosition() {
         return HuaweiLatLng.wrap(mDelegate.getPosition());
     }
 
-    @Override
-    public void setImage(@NonNull BitmapDescriptor imageDescriptor) {
+    @Override public void setImage(@NonNull BitmapDescriptor imageDescriptor) {
         mDelegate.setImage(HuaweiBitmapDescriptor.unwrap(imageDescriptor));
     }
 
-    @Override
-    public float getWidth() {
+    @Override public float getWidth() {
         return mDelegate.getWidth();
     }
 
-    @Override
-    public float getHeight() {
+    @Override public float getHeight() {
         return mDelegate.getHeight();
     }
 
-    @Override
-    public void setDimensions(float width) {
+    @Override public void setDimensions(float width) {
         mDelegate.setDimensions(width);
     }
 
-    @Override
-    public void setDimensions(float width, float height) {
+    @Override public void setDimensions(float width, float height) {
         mDelegate.setDimensions(width, height);
     }
 
-    @Override
-    public LatLngBounds getBounds() {
+    @Override public LatLngBounds getBounds() {
         return HuaweiLatLngBounds.wrap(mDelegate.getBounds());
     }
 
-    @Override
-    public void setPositionFromBounds(LatLngBounds bounds) {
+    @Override public void setPositionFromBounds(LatLngBounds bounds) {
         mDelegate.setPositionFromBounds(HuaweiLatLngBounds.unwrap(bounds));
     }
 
-    @Override
-    public float getBearing() {
+    @Override public float getBearing() {
         return mDelegate.getBearing();
     }
 
-    @Override
-    public void setBearing(float bearing) {
+    @Override public void setBearing(float bearing) {
         mDelegate.setBearing(bearing);
     }
 
-    @Override
-    public float getZIndex() {
+    @Override public float getZIndex() {
         return mDelegate.getZIndex();
     }
 
-    @Override
-    public void setZIndex(float zIndex) {
+    @Override public void setZIndex(float zIndex) {
         mDelegate.setZIndex(zIndex);
     }
 
-    @Override
-    public void setVisible(boolean visible) {
+    @Override public void setVisible(boolean visible) {
         mDelegate.setVisible(visible);
     }
 
-    @Override
-    public boolean isVisible() {
+    @Override public boolean isVisible() {
         return mDelegate.isVisible();
     }
 
-    @Override
-    public void setClickable(boolean clickable) {
+    @Override public void setClickable(boolean clickable) {
         mDelegate.setClickable(clickable);
     }
 
-    @Override
-    public boolean isClickable() {
+    @Override public boolean isClickable() {
         return mDelegate.isClickable();
     }
 
-    @Override
-    public void setTransparency(float transparency) {
+    @Override public void setTransparency(float transparency) {
         mDelegate.setTransparency(transparency);
     }
 
-    @Override
-    public float getTransparency() {
+    @Override public float getTransparency() {
         return mDelegate.getTransparency();
     }
 
-    @Override
-    public void setTag(@Nullable Object tag) {
+    @Override public void setTag(@Nullable Object tag) {
         mDelegate.setTag(tag);
     }
 
-    @Override
-    public Object getTag() {
+    @Override public Object getTag() {
         return mDelegate.getTag();
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -165,13 +141,11 @@ public class HuaweiGroundOverlay implements GroundOverlay {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -188,26 +162,22 @@ public class HuaweiGroundOverlay implements GroundOverlay {
             mDelegate = new com.huawei.hms.maps.model.GroundOverlayOptions();
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options image(@NonNull BitmapDescriptor imageDescriptor) {
+        @Override public @NonNull GroundOverlay.Options image(@NonNull BitmapDescriptor imageDescriptor) {
             mDelegate.image(HuaweiBitmapDescriptor.unwrap(imageDescriptor));
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options anchor(float anchorU, float anchorV) {
+        @Override public @NonNull GroundOverlay.Options anchor(float anchorU, float anchorV) {
             mDelegate.anchor(anchorU, anchorV);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options position(@NonNull LatLng location, float width) {
+        @Override public @NonNull GroundOverlay.Options position(@NonNull LatLng location, float width) {
             mDelegate.position(HuaweiLatLng.unwrap(location), width);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options position(
+        @Override public @NonNull GroundOverlay.Options position(
                 @NonNull LatLng location,
                 float width,
                 float height) {
@@ -215,99 +185,81 @@ public class HuaweiGroundOverlay implements GroundOverlay {
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options positionFromBounds(LatLngBounds bounds) {
+        @Override public @NonNull GroundOverlay.Options positionFromBounds(LatLngBounds bounds) {
             mDelegate.positionFromBounds(HuaweiLatLngBounds.unwrap(bounds));
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options bearing(float bearing) {
+        @Override public @NonNull GroundOverlay.Options bearing(float bearing) {
             mDelegate.bearing(bearing);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options zIndex(float zIndex) {
+        @Override public @NonNull GroundOverlay.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options visible(boolean visible) {
+        @Override public @NonNull GroundOverlay.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options transparency(float transparency) {
+        @Override public @NonNull GroundOverlay.Options transparency(float transparency) {
             mDelegate.transparency(transparency);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options clickable(boolean clickable) {
+        @Override public @NonNull GroundOverlay.Options clickable(boolean clickable) {
             mDelegate.clickable(clickable);
             return this;
         }
 
-        @Override
-        public BitmapDescriptor getImage() {
+        @Override public BitmapDescriptor getImage() {
             return HuaweiBitmapDescriptor.wrap(mDelegate.getImage());
         }
 
-        @Override
-        public LatLng getLocation() {
+        @Override public LatLng getLocation() {
             return HuaweiLatLng.wrap(mDelegate.getLocation());
         }
 
-        @Override
-        public float getWidth() {
+        @Override public float getWidth() {
             return mDelegate.getWidth();
         }
 
-        @Override
-        public float getHeight() {
+        @Override public float getHeight() {
             return mDelegate.getHeight();
         }
 
-        @Override
-        public LatLngBounds getBounds() {
+        @Override public LatLngBounds getBounds() {
             return HuaweiLatLngBounds.wrap(mDelegate.getBounds());
         }
 
-        @Override
-        public float getBearing() {
+        @Override public float getBearing() {
             return mDelegate.getBearing();
         }
 
-        @Override
-        public float getZIndex() {
+        @Override public float getZIndex() {
             return mDelegate.getZIndex();
         }
 
-        @Override
-        public float getTransparency() {
+        @Override public float getTransparency() {
             return mDelegate.getTransparency();
         }
 
-        @Override
-        public float getAnchorU() {
+        @Override public float getAnchorU() {
             return mDelegate.getAnchorU();
         }
 
-        @Override
-        public float getAnchorV() {
+        @Override public float getAnchorV() {
             return mDelegate.getAnchorV();
         }
 
-        @Override
-        public boolean isVisible() {
+        @Override public boolean isVisible() {
             return mDelegate.isVisible();
         }
 
-        @Override
-        public boolean isClickable() {
+        @Override public boolean isClickable() {
             return mDelegate.isClickable();
         }
 

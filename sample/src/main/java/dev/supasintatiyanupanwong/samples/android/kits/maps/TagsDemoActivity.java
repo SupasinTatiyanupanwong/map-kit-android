@@ -68,8 +68,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
             mClickCount++;
         }
 
-        @Override
-        public @NonNull String toString() {
+        @Override public @NonNull String toString() {
             return "The " + mDescription + " has been clicked " + mClickCount + " times.";
         }
     }
@@ -78,8 +77,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
 
     private TextView mTagText;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tags_demo);
 
@@ -92,8 +90,7 @@ public class TagsDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapAndViewReady(@NonNull MapClient map) {
+    @Override public void onMapAndViewReady(@NonNull MapClient map) {
         mMap = map;
 
         MapClient.UiSettings uiSettings = mMap.getUiSettings();
@@ -187,18 +184,15 @@ public class TagsDemoActivity extends AppCompatActivity implements
         mTagText.setText(tag.toString());
     }
 
-    @Override
-    public void onCircleClick(@NonNull Circle circle) {
+    @Override public void onCircleClick(@NonNull Circle circle) {
         onClick((CustomTag) Objects.requireNonNull(circle.getTag()));
     }
 
-    @Override
-    public void onGroundOverlayClick(@NonNull GroundOverlay groundOverlay) {
+    @Override public void onGroundOverlayClick(@NonNull GroundOverlay groundOverlay) {
         onClick((CustomTag) groundOverlay.getTag());
     }
 
-    @Override
-    public boolean onMarkerClick(@NonNull final Marker marker) {
+    @Override public boolean onMarkerClick(@NonNull final Marker marker) {
         onClick((CustomTag) Objects.requireNonNull(marker.getTag()));
         // We return true to indicate that we have consumed the event and that we do not wish
         // for the default behavior to occur (which is for the camera to move such that the
@@ -206,13 +200,11 @@ public class TagsDemoActivity extends AppCompatActivity implements
         return true;
     }
 
-    @Override
-    public void onPolygonClick(@NonNull Polygon polygon) {
+    @Override public void onPolygonClick(@NonNull Polygon polygon) {
         onClick((CustomTag) Objects.requireNonNull(polygon.getTag()));
     }
 
-    @Override
-    public void onPolylineClick(@NonNull Polyline polyline) {
+    @Override public void onPolylineClick(@NonNull Polyline polyline) {
         onClick((CustomTag) Objects.requireNonNull(polyline.getTag()));
     }
 

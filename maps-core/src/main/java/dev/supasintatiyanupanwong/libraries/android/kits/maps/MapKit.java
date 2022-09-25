@@ -174,7 +174,8 @@ public final class MapKit {
      * @since 1.2.0
      */
     public static @NonNull LatLngBounds newLatLngBounds(
-            @NonNull LatLng southwest, @NonNull LatLng northeast) {
+            @NonNull LatLng southwest,
+            @NonNull LatLng northeast) {
         return getBackend().newLatLngBounds(southwest, northeast);
     }
 
@@ -196,7 +197,8 @@ public final class MapKit {
      * @since 1.2.0
      */
     public static @NonNull MapClient.Style.Options newMapStyleOptions(
-            @NonNull Context context, @RawRes int resourceId) {
+            @NonNull Context context,
+            @RawRes int resourceId) {
         return getBackend().newMapStyleOptions(context, resourceId);
     }
 
@@ -270,12 +272,12 @@ public final class MapKit {
      * @since 1.2.0
      */
     public static @NonNull VisibleRegion newVisibleRegion(
-            LatLng nearLeft,
-            LatLng nearRight,
-            LatLng farLeft,
-            LatLng farRight,
-            LatLngBounds latLngBounds) {
-        return getBackend().newVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
+            @NonNull LatLng nearLeft,
+            @NonNull LatLng nearRight,
+            @NonNull LatLng farLeft,
+            @NonNull LatLng farRight,
+            @NonNull LatLngBounds bounds) {
+        return getBackend().newVisibleRegion(nearLeft, nearRight, farLeft, farRight, bounds);
     }
 
 

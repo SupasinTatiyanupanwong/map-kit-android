@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +32,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 @RestrictTo(LIBRARY)
 public class AmazonLatLng implements LatLng {
 
-    private final com.amazon.geo.mapsv2.model.LatLng mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.LatLng mDelegate;
 
     private AmazonLatLng(@NonNull com.amazon.geo.mapsv2.model.LatLng delegate) {
         mDelegate = delegate;
@@ -41,18 +42,15 @@ public class AmazonLatLng implements LatLng {
         this(new com.amazon.geo.mapsv2.model.LatLng(latitude, longitude));
     }
 
-    @Override
-    public double getLatitude() {
+    @Override public double getLatitude() {
         return mDelegate.latitude;
     }
 
-    @Override
-    public double getLongitude() {
+    @Override public double getLongitude() {
         return mDelegate.longitude;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -65,47 +63,61 @@ public class AmazonLatLng implements LatLng {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static LatLng wrap(com.amazon.geo.mapsv2.model.LatLng delegate) {
-        return new AmazonLatLng(delegate);
+    static @Nullable LatLng wrap(@Nullable com.amazon.geo.mapsv2.model.LatLng delegate) {
+        return delegate == null ? null : new AmazonLatLng(delegate);
     }
 
-    static List<LatLng> wrap(Iterable<com.amazon.geo.mapsv2.model.LatLng> delegates) {
+    static @Nullable List<LatLng> wrap(
+            @Nullable Iterable<com.amazon.geo.mapsv2.model.LatLng> delegates) {
         if (delegates == null) {
             return null;
         }
 
         Iterator<com.amazon.geo.mapsv2.model.LatLng> iter = delegates.iterator();
+        if (!iter.hasNext()) {
+            return Collections.emptyList();
+        }
+
         List<LatLng> list = new ArrayList<>();
         while (iter.hasNext()) {
-            list.add(wrap(iter.next()));
+            final @Nullable LatLng wrapped = wrap(iter.next());
+            if (wrapped != null) {
+                list.add(wrapped);
+            }
         }
         return list;
     }
 
-    static com.amazon.geo.mapsv2.model.LatLng unwrap(LatLng wrapped) {
-        return ((AmazonLatLng) wrapped).mDelegate;
+    static @Nullable com.amazon.geo.mapsv2.model.LatLng unwrap(@Nullable LatLng wrapped) {
+        return wrapped == null ? null : ((AmazonLatLng) wrapped).mDelegate;
     }
 
-    static List<com.amazon.geo.mapsv2.model.LatLng> unwrap(Iterable<LatLng> wrappeds) {
+    static @Nullable List<com.amazon.geo.mapsv2.model.LatLng> unwrap(
+            @Nullable Iterable<LatLng> wrappeds) {
         if (wrappeds == null) {
             return null;
         }
 
         Iterator<LatLng> iter = wrappeds.iterator();
+        if (!iter.hasNext()) {
+            return Collections.emptyList();
+        }
+
         List<com.amazon.geo.mapsv2.model.LatLng> list = new ArrayList<>();
         while (iter.hasNext()) {
-            list.add(unwrap(iter.next()));
+            final @Nullable com.amazon.geo.mapsv2.model.LatLng unwrapped = unwrap(iter.next());
+            if (unwrapped != null) {
+                list.add(unwrapped);
+            }
         }
         return list;
     }

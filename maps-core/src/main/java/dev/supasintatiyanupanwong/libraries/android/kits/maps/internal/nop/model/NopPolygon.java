@@ -107,11 +107,11 @@ public class NopPolygon {
             return this;
         }
 
-        @Override public List<LatLng> getPoints() {
+        @NonNull @Override public List<LatLng> getPoints() {
             return Collections.emptyList(); // Not supported, fallback to default.
         }
 
-        @Override public List<List<LatLng>> getHoles() {
+        @NonNull @Override public List<List<LatLng>> getHoles() {
             return Collections.emptyList(); // Not supported, fallback to default.
         }
 

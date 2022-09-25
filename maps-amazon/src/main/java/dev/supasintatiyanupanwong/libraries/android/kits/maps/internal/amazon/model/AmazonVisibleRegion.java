@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import java.util.Objects;
+
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
@@ -29,74 +31,68 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegio
 @RestrictTo(LIBRARY)
 public class AmazonVisibleRegion implements VisibleRegion {
 
-    private final com.amazon.geo.mapsv2.model.VisibleRegion mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.VisibleRegion mDelegate;
 
-    private LatLng mNearLeft;
-    private LatLng mNearRight;
-    private LatLng mFarLeft;
-    private LatLng mFarRight;
-    private LatLngBounds mLatLngBounds;
+    private @Nullable LatLng mNearLeft;
+    private @Nullable LatLng mNearRight;
+    private @Nullable LatLng mFarLeft;
+    private @Nullable LatLng mFarRight;
+    private @Nullable LatLngBounds mBounds;
 
-    private AmazonVisibleRegion(com.amazon.geo.mapsv2.model.VisibleRegion delegate) {
+    private AmazonVisibleRegion(@NonNull com.amazon.geo.mapsv2.model.VisibleRegion delegate) {
         mDelegate = delegate;
     }
 
     public AmazonVisibleRegion(
-            LatLng nearLeft,
-            LatLng nearRight,
-            LatLng farLeft,
-            LatLng farRight,
-            LatLngBounds latLngBounds) {
+            @NonNull LatLng nearLeft,
+            @NonNull LatLng nearRight,
+            @NonNull LatLng farLeft,
+            @NonNull LatLng farRight,
+            @NonNull LatLngBounds bounds) {
         this(new com.amazon.geo.mapsv2.model.VisibleRegion(
-                AmazonLatLng.unwrap(nearLeft),
-                AmazonLatLng.unwrap(nearRight),
-                AmazonLatLng.unwrap(farLeft),
-                AmazonLatLng.unwrap(farRight),
-                AmazonLatLngBounds.unwrap(latLngBounds)));
+                Objects.requireNonNull(AmazonLatLng.unwrap(nearLeft), "nearLeft == null"),
+                Objects.requireNonNull(AmazonLatLng.unwrap(nearRight), "nearRight == null"),
+                Objects.requireNonNull(AmazonLatLng.unwrap(farLeft), "farLeft == null"),
+                Objects.requireNonNull(AmazonLatLng.unwrap(farRight), "farRight == null"),
+                Objects.requireNonNull(AmazonLatLngBounds.unwrap(bounds), "bounds == null")));
     }
 
-    @Override
-    public @NonNull LatLng getNearLeft() {
+    @Override public @NonNull LatLng getNearLeft() {
         if (mNearLeft == null) {
             mNearLeft = AmazonLatLng.wrap(mDelegate.nearLeft);
         }
         return mNearLeft;
     }
 
-    @Override
-    public @NonNull LatLng getNearRight() {
+    @Override public @NonNull LatLng getNearRight() {
         if (mNearRight == null) {
             mNearRight = AmazonLatLng.wrap(mDelegate.nearRight);
         }
         return mNearRight;
     }
 
-    @Override
-    public @NonNull LatLng getFarLeft() {
+    @Override public @NonNull LatLng getFarLeft() {
         if (mFarLeft == null) {
             mFarLeft = AmazonLatLng.wrap(mDelegate.farLeft);
         }
         return mFarLeft;
     }
 
-    @Override
-    public @NonNull LatLng getFarRight() {
+    @Override public @NonNull LatLng getFarRight() {
         if (mFarRight == null) {
             mFarRight = AmazonLatLng.wrap(mDelegate.farRight);
         }
         return mFarRight;
     }
 
-    @Override
-    public @NonNull LatLngBounds getLatLngBounds() {
-        if (mLatLngBounds == null) {
-            mLatLngBounds = AmazonLatLngBounds.wrap(mDelegate.latLngBounds);
+    @Override public @NonNull LatLngBounds getLatLngBounds() {
+        if (mBounds == null) {
+            mBounds = AmazonLatLngBounds.wrap(mDelegate.latLngBounds);
         }
-        return mLatLngBounds;
+        return mBounds;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -109,18 +105,17 @@ public class AmazonVisibleRegion implements VisibleRegion {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static VisibleRegion wrap(com.amazon.geo.mapsv2.model.VisibleRegion delegate) {
+    static @NonNull VisibleRegion wrap(
+            @NonNull com.amazon.geo.mapsv2.model.VisibleRegion delegate) {
         return new AmazonVisibleRegion(delegate);
     }
 

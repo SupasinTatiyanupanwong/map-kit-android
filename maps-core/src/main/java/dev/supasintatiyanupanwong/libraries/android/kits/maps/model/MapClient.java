@@ -175,25 +175,28 @@ public interface MapClient {
      * Adds a polyline to this map.
      *
      * @param options A polyline options object that defines how to render the Polyline.
-     * @return The {@link Polyline} object that is added to the map.
+     * @return The {@link Polyline} object that is added to the map. Might be {@code null} if
+     * there's an error adding the polyline.
      */
-    @NonNull Polyline addPolyline(Polyline.Options options);
+    @Nullable Polyline addPolyline(@NonNull Polyline.Options options);
 
     /**
      * Adds a polygon to this map.
      *
      * @param options A polygon options object that defines how to render the Polygon.
-     * @return The {@link Polygon} object that is added to the map.
+     * @return The {@link Polygon} object that is added to the map. Might be {@code null} if
+     * there's an error adding the polygon.
      */
-    @NonNull Polygon addPolygon(Polygon.Options options);
+    @Nullable Polygon addPolygon(@NonNull Polygon.Options options);
 
     /**
      * Add a circle to this map.
      *
      * @param options A circle options object that defines how to render the Circle.
-     * @return The {@link Circle} object that is added to the map.
+     * @return The {@link Circle} object that is added to the map. Might be {@code null} if
+     * there's an error adding the circle.
      */
-    @NonNull Circle addCircle(Circle.Options options);
+    @Nullable Circle addCircle(@NonNull Circle.Options options);
 
     /**
      * Adds a marker to this map.
@@ -204,18 +207,20 @@ public interface MapClient {
      * dragging the marker moves it.
      *
      * @param options A marker options object that defines how to render the marker.
-     * @return The {@link Marker} that was added to the map.
+     * @return The {@link Marker} that was added to the map. Might be {@code null} if there's an
+     * error adding the marker.
      */
-    @NonNull Marker addMarker(Marker.Options options);
+    @Nullable Marker addMarker(@NonNull Marker.Options options);
 
     /**
      * Adds an image to this map.
      *
      * @param options A ground-overlay options object that defines how to render the overlay.
      * Options must have an image (AnchoredBitmap) and position specified.
-     * @return The {@link GroundOverlay} that was added to the map.
+     * @return The {@link GroundOverlay} that was added to the map. Might be {@code null} if
+     * there's an error adding the overlay.
      */
-    @NonNull GroundOverlay addGroundOverlay(GroundOverlay.Options options);
+    @Nullable GroundOverlay addGroundOverlay(@NonNull GroundOverlay.Options options);
 
     /**
      * Adds a tile overlay to this map. See {@link TileOverlay} for more information.
@@ -226,9 +231,10 @@ public interface MapClient {
      * @param options A tile-overlay options object that defines how to render the overlay.
      * Options must have a {@link TileProvider} specified, otherwise an {@link
      * IllegalArgumentException} will be thrown.
-     * @return The {@link TileOverlay} that was added to the map.
+     * @return The {@link TileOverlay} that was added to the map. Might be {@code null} if there's
+     * an error adding the overlay.
      */
-    @NonNull TileOverlay addTileOverlay(TileOverlay.Options options);
+    @Nullable TileOverlay addTileOverlay(@NonNull TileOverlay.Options options);
 
     /**
      * Removes all markers, polylines, polygons, overlays, etc from the map.

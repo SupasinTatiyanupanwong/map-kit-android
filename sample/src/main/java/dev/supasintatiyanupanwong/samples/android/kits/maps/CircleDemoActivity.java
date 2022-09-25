@@ -171,8 +171,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
         return result[0];
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.circle_demo);
 
@@ -218,8 +217,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
         return strings;
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.map_circle_description));
 
@@ -249,8 +247,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
 
         // Set up the click listener for the circle.
         map.setOnCircleClickListener(new MapClient.OnCircleClickListener() {
-            @Override
-            public void onCircleClick(@NonNull Circle circle) {
+            @Override public void onCircleClick(@NonNull Circle circle) {
                 // Flip the red, green and blue components of the circle's stroke color.
                 circle.setStrokeColor(circle.getStrokeColor() ^ 0x00ffffff);
             }
@@ -276,8 +273,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+    @Override public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         if (parent.getId() == R.id.strokePatternSpinner) {
             for (DraggableCircle draggableCircle : mCircles) {
                 draggableCircle.setStrokePattern(getSelectedPattern(pos));
@@ -285,23 +281,19 @@ public class CircleDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    @Override public void onNothingSelected(AdapterView<?> parent) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
+    @Override public void onStopTrackingTouch(SeekBar seekBar) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
+    @Override public void onStartTrackingTouch(SeekBar seekBar) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (seekBar == mFillHueBar) {
             mFillColorArgb =
                     Color.HSVToColor(Color.alpha(mFillColorArgb), new float[]{progress, 1, 1});
@@ -321,18 +313,15 @@ public class CircleDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMarkerDragStart(@NonNull Marker marker) {
+    @Override public void onMarkerDragStart(@NonNull Marker marker) {
         onMarkerMoved(marker);
     }
 
-    @Override
-    public void onMarkerDragEnd(@NonNull Marker marker) {
+    @Override public void onMarkerDragEnd(@NonNull Marker marker) {
         onMarkerMoved(marker);
     }
 
-    @Override
-    public void onMarkerDrag(@NonNull Marker marker) {
+    @Override public void onMarkerDrag(@NonNull Marker marker) {
         onMarkerMoved(marker);
     }
 
@@ -344,8 +333,7 @@ public class CircleDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapLongClick(@NonNull LatLng point) {
+    @Override public void onMapLongClick(@NonNull LatLng point) {
         // We know the center, let's place the outline at a point 3/4 along the view.
         Fragment mapFragment =
                 Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.map));

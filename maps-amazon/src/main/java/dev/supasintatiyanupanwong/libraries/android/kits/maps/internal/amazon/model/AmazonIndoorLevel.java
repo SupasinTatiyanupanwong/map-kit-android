@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorLevel;
@@ -30,29 +31,25 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorLevel;
 @RestrictTo(LIBRARY)
 public class AmazonIndoorLevel implements IndoorLevel {
 
-    private final com.amazon.geo.mapsv2.model.IndoorLevel mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.IndoorLevel mDelegate;
 
     private AmazonIndoorLevel(@NonNull com.amazon.geo.mapsv2.model.IndoorLevel delegate) {
         mDelegate = delegate;
     }
 
-    @Override
-    public String getName() {
+    @Override public String getName() {
         return mDelegate.getName();
     }
 
-    @Override
-    public String getShortName() {
+    @Override public String getShortName() {
         return mDelegate.getShortName();
     }
 
-    @Override
-    public void activate() {
+    @Override public void activate() {
         mDelegate.activate();
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -65,25 +62,31 @@ public class AmazonIndoorLevel implements IndoorLevel {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static List<IndoorLevel> wrap(List<com.amazon.geo.mapsv2.model.IndoorLevel> delegates) {
+    static @Nullable List<IndoorLevel> wrap(
+            @Nullable List<com.amazon.geo.mapsv2.model.IndoorLevel> delegates) {
         if (delegates == null) {
             return null;
         }
 
+        if (delegates.isEmpty()) {
+            return Collections.emptyList();
+        }
+
         List<IndoorLevel> list = new ArrayList<>();
         for (int iter = 0, size = delegates.size(); iter < size; iter++) {
-            list.add(new AmazonIndoorLevel(delegates.get(iter)));
+            final com.amazon.geo.mapsv2.model.IndoorLevel delegate = delegates.get(iter);
+            if (delegate != null) {
+                list.add(new AmazonIndoorLevel(delegates.get(iter)));
+            }
         }
         return list;
     }

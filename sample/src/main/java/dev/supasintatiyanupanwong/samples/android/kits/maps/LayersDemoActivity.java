@@ -65,8 +65,7 @@ public class LayersDemoActivity extends AppCompatActivity implements
      */
     private boolean mShowPermissionDeniedDialog = false;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layers_demo);
 
@@ -89,8 +88,7 @@ public class LayersDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         mMap = map;
         updateMapType();
         updateTraffic();
@@ -151,8 +149,7 @@ public class LayersDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(
+    @Override public void onRequestPermissionsResult(
             int requestCode, @NonNull String[] permissions, @NonNull int[] results) {
         if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
             return;
@@ -167,8 +164,7 @@ public class LayersDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    protected void onResumeFragments() {
+    @Override protected void onResumeFragments() {
         super.onResumeFragments();
         if (mShowPermissionDeniedDialog) {
             PermissionUtils.PermissionDeniedDialog
@@ -205,8 +201,7 @@ public class LayersDemoActivity extends AppCompatActivity implements
         mMap.setIndoorEnabled(mIndoorCheckbox.isChecked());
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         updateMapType();
     }
 
@@ -235,8 +230,7 @@ public class LayersDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    @Override public void onNothingSelected(AdapterView<?> parent) {
         // Do nothing.
     }
 

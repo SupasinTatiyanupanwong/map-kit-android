@@ -57,8 +57,7 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements
      */
     private boolean mLocationPermissionDenied = false;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_settings_demo);
 
@@ -79,8 +78,7 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements
         return ((CheckBox) findViewById(id)).isChecked();
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         mUiSettings = mMap.getUiSettings();
@@ -212,8 +210,7 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+    @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
             @NonNull int[] grantResults) {
         if (requestCode == MY_LOCATION_PERMISSION_REQUEST_CODE) {
             // Enable the My Location button if the permission has been granted.
@@ -237,8 +234,7 @@ public class UiSettingsDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    protected void onResumeFragments() {
+    @Override protected void onResumeFragments() {
         super.onResumeFragments();
         if (mLocationPermissionDenied) {
             PermissionUtils.PermissionDeniedDialog

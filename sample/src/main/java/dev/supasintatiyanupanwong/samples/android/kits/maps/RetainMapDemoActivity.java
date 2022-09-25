@@ -33,8 +33,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
 public class RetainMapDemoActivity extends AppCompatActivity implements
         MapKit.OnMapReadyCallback {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_demo);
 
@@ -51,8 +50,7 @@ public class RetainMapDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         map.addMarker(MapKit.newMarkerOptions()
                 .position(MapKit.newLatLng(0, 0))
                 .title("Marker"));

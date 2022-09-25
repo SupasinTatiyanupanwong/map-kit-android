@@ -28,69 +28,57 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider
 @RestrictTo(LIBRARY)
 public class AmazonTileOverlay implements TileOverlay {
 
-    private final com.amazon.geo.mapsv2.model.TileOverlay mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.TileOverlay mDelegate;
 
-    private AmazonTileOverlay(com.amazon.geo.mapsv2.model.TileOverlay delegate) {
+    private AmazonTileOverlay(@NonNull com.amazon.geo.mapsv2.model.TileOverlay delegate) {
         mDelegate = delegate;
     }
 
-    @Override
-    public void remove() {
+    @Override public void remove() {
         mDelegate.remove();
     }
 
-    @Override
-    public void clearTileCache() {
+    @Override public void clearTileCache() {
         mDelegate.clearTileCache();
     }
 
-    @Override
-    public String getId() {
+    @Override public String getId() {
         return mDelegate.getId();
     }
 
-    @Override
-    public void setZIndex(float zIndex) {
+    @Override public void setZIndex(float zIndex) {
         mDelegate.setZIndex(zIndex);
     }
 
-    @Override
-    public float getZIndex() {
+    @Override public float getZIndex() {
         return mDelegate.getZIndex();
     }
 
-    @Override
-    public void setVisible(boolean visible) {
+    @Override public void setVisible(boolean visible) {
         mDelegate.setVisible(visible);
     }
 
-    @Override
-    public boolean isVisible() {
+    @Override public boolean isVisible() {
         return mDelegate.isVisible();
     }
 
-    @Override
-    public void setFadeIn(boolean fadeIn) {
+    @Override public void setFadeIn(boolean fadeIn) {
         mDelegate.setFadeIn(fadeIn);
     }
 
-    @Override
-    public boolean getFadeIn() {
+    @Override public boolean getFadeIn() {
         return mDelegate.getFadeIn();
     }
 
-    @Override
-    public void setTransparency(float transparency) {
+    @Override public void setTransparency(float transparency) {
         // Not supported, no-op.
     }
 
-    @Override
-    public float getTransparency() {
+    @Override public float getTransparency() {
         return 0; // Not supported, 0 is opaque.
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -103,19 +91,17 @@ public class AmazonTileOverlay implements TileOverlay {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static TileOverlay wrap(com.amazon.geo.mapsv2.model.TileOverlay delegate) {
-        return new AmazonTileOverlay(delegate);
+    static @Nullable TileOverlay wrap(@Nullable com.amazon.geo.mapsv2.model.TileOverlay delegate) {
+        return delegate == null ? null : new AmazonTileOverlay(delegate);
     }
 
 
@@ -126,65 +112,55 @@ public class AmazonTileOverlay implements TileOverlay {
             mDelegate = new com.amazon.geo.mapsv2.model.TileOverlayOptions();
         }
 
-        @Override
-        public @NonNull TileOverlay.Options tileProvider(TileProvider tileProvider) {
+        @Override public @NonNull TileOverlay.Options tileProvider(TileProvider tileProvider) {
             mDelegate.tileProvider(AmazonTileProvider.unwrap(tileProvider));
             return this;
         }
 
-        @Override
-        public @NonNull TileOverlay.Options zIndex(float zIndex) {
+        @Override public @NonNull TileOverlay.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @Override
-        public @NonNull TileOverlay.Options visible(boolean visible) {
+        @Override public @NonNull TileOverlay.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @Override
-        public @NonNull TileOverlay.Options fadeIn(boolean fadeIn) {
+        @Override public @NonNull TileOverlay.Options fadeIn(boolean fadeIn) {
             mDelegate.fadeIn(fadeIn);
             return this;
         }
 
-        @Override
-        public @NonNull TileOverlay.Options transparency(float transparency) {
+        @Override public @NonNull TileOverlay.Options transparency(float transparency) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public TileProvider getTileProvider() {
+        @Override public TileProvider getTileProvider() {
             return AmazonTileProvider.wrap(mDelegate.getTileProvider());
         }
 
-        @Override
-        public float getZIndex() {
+        @Override public float getZIndex() {
             return mDelegate.getZIndex();
         }
 
-        @Override
-        public boolean isVisible() {
+        @Override public boolean isVisible() {
             return mDelegate.isVisible();
         }
 
-        @Override
-        public boolean getFadeIn() {
+        @Override public boolean getFadeIn() {
             return mDelegate.getFadeIn();
         }
 
-        @Override
-        public float getTransparency() {
+        @Override public float getTransparency() {
             return 0; // Not supported, 0 is opaque.
         }
 
 
-        static com.amazon.geo.mapsv2.model.TileOverlayOptions unwrap(
-                TileOverlay.Options wrapped) {
-            return ((Options) wrapped).mDelegate;
+        static @Nullable com.amazon.geo.mapsv2.model.TileOverlayOptions unwrap(
+                @Nullable TileOverlay.Options wrapped) {
+            return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
 

@@ -38,20 +38,17 @@ public class GoogleTileProvider implements TileProvider {
 
     private GoogleTileProvider(final TileProvider tileProvider) {
         this(new com.google.android.gms.maps.model.TileProvider() {
-            @Override
-            public com.google.android.gms.maps.model.Tile getTile(int x, int y, int zoom) {
+            @Override public com.google.android.gms.maps.model.Tile getTile(int x, int y, int zoom) {
                 return GoogleTile.unwrap(tileProvider.getTile(x, y, zoom));
             }
         });
     }
 
-    @Override
-    public Tile getTile(int x, int y, int zoom) {
+    @Override public Tile getTile(int x, int y, int zoom) {
         return GoogleTile.wrap(mDelegate.getTile(x, y, zoom));
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -64,13 +61,11 @@ public class GoogleTileProvider implements TileProvider {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

@@ -37,23 +37,19 @@ public class GoogleTile implements Tile {
         this(new com.google.android.gms.maps.model.Tile(width, height, data));
     }
 
-    @Override
-    public int getWidth() {
+    @Override public int getWidth() {
         return mDelegate.width;
     }
 
-    @Override
-    public int getHeight() {
+    @Override public int getHeight() {
         return mDelegate.height;
     }
 
-    @Override
-    public @Nullable byte[] getData() {
+    @Override public @Nullable byte[] getData() {
         return mDelegate.data;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -66,13 +62,11 @@ public class GoogleTile implements Tile {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

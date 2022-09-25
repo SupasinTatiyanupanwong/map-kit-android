@@ -96,8 +96,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
             mContents = getLayoutInflater().inflate(R.layout.custom_info_contents, null);
         }
 
-        @Override
-        public View getInfoWindow(@NonNull Marker marker) {
+        @Override public View getInfoWindow(@NonNull Marker marker) {
             if (mOptions.getCheckedRadioButtonId() != R.id.custom_info_window) {
                 // This means that getInfoContents will be called.
                 return null;
@@ -106,8 +105,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
             return mWindow;
         }
 
-        @Override
-        public View getInfoContents(@NonNull Marker marker) {
+        @Override public View getInfoContents(@NonNull Marker marker) {
             if (mOptions.getCheckedRadioButtonId() != R.id.custom_info_contents) {
                 // This means that the default info contents will be used.
                 return null;
@@ -203,8 +201,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
 
     private final Random mRandom = new Random();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.marker_demo);
 
@@ -218,8 +215,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
 
         mOptions = findViewById(R.id.custom_info_window_options);
         mOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+            @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (mLastSelectedMarker != null && mLastSelectedMarker.isInfoWindowShown()) {
                     // Refresh the info window when the info window's content has changed.
                     mLastSelectedMarker.showInfoWindow();
@@ -234,8 +230,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapAndViewReady(@NonNull MapClient map) {
+    @Override public void onMapAndViewReady(@NonNull MapClient map) {
         mMap = map;
 
         // Hide the zoom controls as the button panel will cover it.
@@ -408,8 +403,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (!checkReady()) {
             return;
         }
@@ -419,13 +413,11 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
+    @Override public void onStartTrackingTouch(SeekBar seekBar) {
         // Do nothing.
     }
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
+    @Override public void onStopTrackingTouch(SeekBar seekBar) {
         // Do nothing.
     }
 
@@ -433,8 +425,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
     // Marker related listeners.
     //
 
-    @Override
-    public boolean onMarkerClick(@NonNull final Marker marker) {
+    @Override public boolean onMarkerClick(@NonNull final Marker marker) {
         if (marker.equals(mPerth)) {
             // This causes the marker at Perth to bounce into position when it is clicked.
             final Handler handler = new Handler();
@@ -444,8 +435,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
             final Interpolator interpolator = new BounceInterpolator();
 
             handler.post(new Runnable() {
-                @Override
-                public void run() {
+                @Override public void run() {
                     long elapsed = SystemClock.uptimeMillis() - start;
                     float t = Math.max(
                             1 - interpolator.getInterpolation((float) elapsed / duration), 0);
@@ -477,33 +467,27 @@ public class MarkerDemoActivity extends AppCompatActivity implements
         return false;
     }
 
-    @Override
-    public void onInfoWindowClick(@NonNull Marker marker) {
+    @Override public void onInfoWindowClick(@NonNull Marker marker) {
         Toast.makeText(this, "Click Info Window", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onInfoWindowClose(@NonNull Marker marker) {
+    @Override public void onInfoWindowClose(@NonNull Marker marker) {
         Toast.makeText(this, "Close Info Window", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onInfoWindowLongClick(@NonNull Marker marker) {
+    @Override public void onInfoWindowLongClick(@NonNull Marker marker) {
         Toast.makeText(this, "Info Window long click", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onMarkerDragStart(@NonNull Marker marker) {
+    @Override public void onMarkerDragStart(@NonNull Marker marker) {
         mTopText.setText("onMarkerDragStart");
     }
 
-    @Override
-    public void onMarkerDragEnd(@NonNull Marker marker) {
+    @Override public void onMarkerDragEnd(@NonNull Marker marker) {
         mTopText.setText("onMarkerDragEnd");
     }
 
-    @Override
-    public void onMarkerDrag(@NonNull Marker marker) {
+    @Override public void onMarkerDrag(@NonNull Marker marker) {
         mTopText.setText("onMarkerDrag.  Current Position: " + marker.getPosition());
     }
 

@@ -41,7 +41,7 @@ public interface Circle {
      *
      * @return This circle's id.
      */
-    String getId();
+    @NonNull String getId();
 
     /**
      * Sets the center using a {@link LatLng}.
@@ -50,7 +50,7 @@ public interface Circle {
      *
      * @param center The geographic center of the circle, specified as a {@link LatLng}.
      */
-    void setCenter(LatLng center);
+    void setCenter(@NonNull LatLng center);
 
     /**
      * Returns the center as a {@link LatLng}.
@@ -233,7 +233,7 @@ public interface Circle {
          * @param center The geographic center as a {@link LatLng}.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull Options center(LatLng center);
+        @NonNull Options center(@NonNull LatLng center);
 
         /**
          * Sets the radius in meters.

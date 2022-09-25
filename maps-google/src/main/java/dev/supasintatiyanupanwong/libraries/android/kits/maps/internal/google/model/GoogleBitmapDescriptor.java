@@ -32,51 +32,44 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescri
 public class GoogleBitmapDescriptor implements BitmapDescriptor {
 
     public static final BitmapDescriptor.Factory FACTORY = new BitmapDescriptor.Factory() {
-        @Override
-        public @NonNull BitmapDescriptor defaultMarker() {
+        @Override public @NonNull BitmapDescriptor defaultMarker() {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());
         }
 
-        @Override
-        public @NonNull BitmapDescriptor defaultMarker(float hue) {
+        @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.defaultMarker(hue));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromAsset(String assetName) {
+        @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromAsset(assetName));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
+        @Override public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromBitmap(image));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromFile(String fileName) {
+        @Override public @NonNull BitmapDescriptor fromFile(String fileName) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromFile(fileName));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromPath(String absolutePath) {
+        @Override public @NonNull BitmapDescriptor fromPath(String absolutePath) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromPath(absolutePath));
         }
 
-        @Override
-        public @NonNull BitmapDescriptor fromResource(int resourceId) {
+        @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
             return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromResource(resourceId));
         }
     };
 
 
-    private final com.google.android.gms.maps.model.BitmapDescriptor mDelegate;
+    private final @NonNull com.google.android.gms.maps.model.BitmapDescriptor mDelegate;
 
-    private GoogleBitmapDescriptor(com.google.android.gms.maps.model.BitmapDescriptor delegate) {
+    private GoogleBitmapDescriptor(
+            @NonNull com.google.android.gms.maps.model.BitmapDescriptor delegate) {
         mDelegate = delegate;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -89,23 +82,23 @@ public class GoogleBitmapDescriptor implements BitmapDescriptor {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static BitmapDescriptor wrap(com.google.android.gms.maps.model.BitmapDescriptor delegate) {
-        return new GoogleBitmapDescriptor(delegate);
+    static @Nullable BitmapDescriptor wrap(
+            @Nullable com.google.android.gms.maps.model.BitmapDescriptor delegate) {
+        return delegate == null ? null : new GoogleBitmapDescriptor(delegate);
     }
 
-    static com.google.android.gms.maps.model.BitmapDescriptor unwrap(BitmapDescriptor wrapped) {
-        return ((GoogleBitmapDescriptor) wrapped).mDelegate;
+    static @Nullable com.google.android.gms.maps.model.BitmapDescriptor unwrap(
+            @Nullable BitmapDescriptor wrapped) {
+        return wrapped == null ? null : ((GoogleBitmapDescriptor) wrapped).mDelegate;
     }
 
 }

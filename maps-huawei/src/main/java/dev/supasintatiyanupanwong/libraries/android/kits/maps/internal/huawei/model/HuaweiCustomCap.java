@@ -46,21 +46,18 @@ public class HuaweiCustomCap extends HuaweiCap implements CustomCap {
                 HuaweiBitmapDescriptor.unwrap(bitmapDescriptor)));
     }
 
-    @Override
-    public @NonNull BitmapDescriptor getBitmapDescriptor() {
+    @Override public @NonNull BitmapDescriptor getBitmapDescriptor() {
         if (mBitmapDescriptor == null) {
             mBitmapDescriptor = HuaweiBitmapDescriptor.wrap(mDelegate.bitmapDescriptor);
         }
         return mBitmapDescriptor;
     }
 
-    @Override
-    public float getRefWidth() {
+    @Override public float getRefWidth() {
         return mDelegate.refWidth;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -73,13 +70,11 @@ public class HuaweiCustomCap extends HuaweiCap implements CustomCap {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 

@@ -35,66 +35,63 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds
 public class GoogleCameraUpdate implements CameraUpdate {
 
     public static final CameraUpdate.Factory FACTORY = new CameraUpdate.Factory() {
-        @Override
-        public @NonNull CameraUpdate zoomIn() {
+        @Override public @NonNull CameraUpdate zoomIn() {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomIn());
         }
 
-        @Override
-        public @NonNull CameraUpdate zoomOut() {
+        @Override public @NonNull CameraUpdate zoomOut() {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomOut());
         }
 
-        @Override
-        public @NonNull CameraUpdate scrollBy(float xPixel, float yPixel) {
+        @Override public @NonNull CameraUpdate scrollBy(float xPixel, float yPixel) {
             return new GoogleCameraUpdate(CameraUpdateFactory.scrollBy(xPixel, yPixel));
         }
 
-        @Override
-        public @NonNull CameraUpdate zoomTo(float zoom) {
+        @Override public @NonNull CameraUpdate zoomTo(float zoom) {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomTo(zoom));
         }
 
-        @Override
-        public @NonNull CameraUpdate zoomBy(float amount) {
+        @Override public @NonNull CameraUpdate zoomBy(float amount) {
             return new GoogleCameraUpdate(CameraUpdateFactory.zoomBy(amount));
         }
 
-        @Override
-        public @NonNull CameraUpdate zoomBy(float amount, Point focus) {
-            return new GoogleCameraUpdate(CameraUpdateFactory.zoomBy(amount, focus));
+        @Override public @NonNull CameraUpdate zoomBy(float amount, @NonNull Point focus) {
+            //noinspection ConstantConditions
+            if (focus == null) {
+                return new GoogleCameraUpdate(CameraUpdateFactory.zoomBy(amount));
+            } else {
+                return new GoogleCameraUpdate(CameraUpdateFactory.zoomBy(amount, focus));
+            }
         }
 
-        @Override
-        public @NonNull CameraUpdate newCameraPosition(CameraPosition cameraPosition) {
+        @Override public @NonNull CameraUpdate newCameraPosition(
+                @NonNull CameraPosition cameraPosition) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newCameraPosition(
                     GoogleCameraPosition.unwrap(cameraPosition)
             ));
         }
 
-        @Override
-        public @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng) {
+        @Override public @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newLatLng(
                     GoogleLatLng.unwrap(latLng)
             ));
         }
 
-        @Override
-        public @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
+        @Override public @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newLatLngZoom(
                     GoogleLatLng.unwrap(latLng), zoom
             ));
         }
 
-        @Override
-        public @NonNull CameraUpdate newLatLngBounds(@NonNull LatLngBounds bounds, int padding) {
+        @Override public @NonNull CameraUpdate newLatLngBounds(
+                @NonNull LatLngBounds bounds,
+                int padding) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newLatLngBounds(
                     GoogleLatLngBounds.unwrap(bounds), padding
             ));
         }
 
-        @Override
-        public @NonNull CameraUpdate newLatLngBounds(
+        @Override public @NonNull CameraUpdate newLatLngBounds(
                 @NonNull LatLngBounds bounds,
                 int width,
                 int height,
@@ -106,14 +103,13 @@ public class GoogleCameraUpdate implements CameraUpdate {
     };
 
 
-    private final com.google.android.gms.maps.CameraUpdate mDelegate;
+    private final @NonNull com.google.android.gms.maps.CameraUpdate mDelegate;
 
-    private GoogleCameraUpdate(com.google.android.gms.maps.CameraUpdate delegate) {
+    private GoogleCameraUpdate(@NonNull com.google.android.gms.maps.CameraUpdate delegate) {
         mDelegate = delegate;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -126,19 +122,18 @@ public class GoogleCameraUpdate implements CameraUpdate {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static com.google.android.gms.maps.CameraUpdate unwrap(CameraUpdate wrapped) {
-        return ((GoogleCameraUpdate) wrapped).mDelegate;
+    static @Nullable com.google.android.gms.maps.CameraUpdate unwrap(
+            @Nullable CameraUpdate wrapped) {
+        return wrapped == null ? null : ((GoogleCameraUpdate) wrapped).mDelegate;
     }
 
 }

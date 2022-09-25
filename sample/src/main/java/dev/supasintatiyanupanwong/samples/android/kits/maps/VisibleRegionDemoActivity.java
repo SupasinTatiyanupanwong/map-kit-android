@@ -70,8 +70,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
 
     private int mCurrentBottom = 0;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.visible_region_demo);
         mMessageView = findViewById(R.id.message_text);
@@ -83,8 +82,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapAndViewReady(@NonNull MapClient map) {
+    @Override public void onMapAndViewReady(@NonNull MapClient map) {
         mMap = map;
 
         // Move to a place with indoor (SFO airport).
@@ -96,8 +94,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
                 .title("Sydney Opera House"));
         // Add a camera idle listener.
         mMap.setOnCameraIdleListener(new MapClient.OnCameraIdleListener() {
-            @Override
-            public void onCameraIdle() {
+            @Override public void onCameraIdle() {
                 mMessageView.setText("CameraChangeListener: " + mMap.getCameraPosition());
             }
         });
@@ -178,8 +175,7 @@ public class VisibleRegionDemoActivity extends AppCompatActivity implements
         mCurrentBottom = toBottom;
 
         handler.post(new Runnable() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 long elapsed = SystemClock.uptimeMillis() - start;
                 float t = interpolator.getInterpolation((float) elapsed / duration);
 

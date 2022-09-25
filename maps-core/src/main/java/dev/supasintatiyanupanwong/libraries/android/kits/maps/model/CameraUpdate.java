@@ -123,7 +123,7 @@ public interface CameraUpdate {
          * remain the same after the camera has moved.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull CameraUpdate zoomBy(float amount, Point focus);
+        @NonNull CameraUpdate zoomBy(float amount, @NonNull Point focus);
 
         /**
          * Returns a {@link CameraUpdate} that moves the camera to a specified
@@ -132,7 +132,7 @@ public interface CameraUpdate {
          *
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull CameraUpdate newCameraPosition(CameraPosition cameraPosition);
+        @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition cameraPosition);
 
         /**
          * Returns a {@link CameraUpdate} that moves the camera to a specified

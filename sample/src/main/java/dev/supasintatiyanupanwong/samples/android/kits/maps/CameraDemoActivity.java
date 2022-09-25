@@ -78,8 +78,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
     private Polyline.Options mCurrPolylineOptions;
     private boolean mIsCanceled = false;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_demo);
 
@@ -96,14 +95,12 @@ public class CameraDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
         updateEnabledState();
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         mMap = map;
 
         mMap.setOnCameraIdleListener(this);
@@ -156,15 +153,13 @@ public class CameraDemoActivity extends AppCompatActivity implements
         changeCamera(
                 MapKit.getCameraUpdateFactory().newCameraPosition(SYDNEY),
                 new MapClient.CancelableCallback() {
-                    @Override
-                    public void onFinish() {
+                    @Override public void onFinish() {
                         Toast.makeText(
                                 getBaseContext(), "Animation to Sydney complete", Toast.LENGTH_SHORT
                         ).show();
                     }
 
-                    @Override
-                    public void onCancel() {
+                    @Override public void onCancel() {
                         Toast.makeText(
                                 getBaseContext(), "Animation to Sydney canceled", Toast.LENGTH_SHORT
                         ).show();
@@ -341,8 +336,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onCameraMoveStarted(int reason) {
+    @Override public void onCameraMoveStarted(int reason) {
         if (!mIsCanceled) {
             mMap.clear();
         }
@@ -367,8 +361,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
         addCameraTargetToPath();
     }
 
-    @Override
-    public void onCameraMove() {
+    @Override public void onCameraMove() {
         // When the camera is moving, add its target to the current path we'll draw on the map.
         if (mCurrPolylineOptions != null) {
             addCameraTargetToPath();
@@ -376,8 +369,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
         Log.i(TAG, "onCameraMove");
     }
 
-    @Override
-    public void onCameraMoveCanceled() {
+    @Override public void onCameraMoveCanceled() {
         // When the camera stops moving, add its target to the current path, and draw it on the map.
         if (mCurrPolylineOptions != null) {
             addCameraTargetToPath();
@@ -388,8 +380,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
         Log.i(TAG, "onCameraMoveCancelled");
     }
 
-    @Override
-    public void onCameraIdle() {
+    @Override public void onCameraIdle() {
         if (mCurrPolylineOptions != null) {
             addCameraTargetToPath();
             mMap.addPolyline(mCurrPolylineOptions);

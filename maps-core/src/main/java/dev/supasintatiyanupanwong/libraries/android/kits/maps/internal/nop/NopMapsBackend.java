@@ -203,11 +203,11 @@ class NopMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull VisibleRegion newVisibleRegion(
-            LatLng nearLeft,
-            LatLng nearRight,
-            LatLng farLeft,
-            LatLng farRight,
-            LatLngBounds latLngBounds) {
+            @NonNull LatLng nearLeft,
+            @NonNull LatLng nearRight,
+            @NonNull LatLng farLeft,
+            @NonNull LatLng farRight,
+            @NonNull LatLngBounds bounds) {
         return NopVisibleRegion.NULL; // Not supported, null object for API safe.
     }
 

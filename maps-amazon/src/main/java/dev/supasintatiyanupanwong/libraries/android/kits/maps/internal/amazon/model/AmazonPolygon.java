@@ -43,28 +43,23 @@ public class AmazonPolygon implements Polygon {
         mDelegate = delegate;
     }
 
-    @Override
-    public void remove() {
+    @Override public void remove() {
         mDelegate.remove();
     }
 
-    @Override
-    public String getId() {
+    @Override public String getId() {
         return mDelegate.getId();
     }
 
-    @Override
-    public void setPoints(List<LatLng> points) {
+    @Override public void setPoints(List<LatLng> points) {
         mDelegate.setPoints(AmazonLatLng.unwrap(points));
     }
 
-    @Override
-    public List<LatLng> getPoints() {
+    @Override public List<LatLng> getPoints() {
         return AmazonLatLng.wrap(mDelegate.getPoints());
     }
 
-    @Override
-    public void setHoles(List<? extends List<LatLng>> holes) {
+    @Override public void setHoles(List<? extends List<LatLng>> holes) {
         List<List<com.amazon.geo.mapsv2.model.LatLng>> gHoles = new ArrayList<>();
         for (List<LatLng> hole : holes) {
             gHoles.add(AmazonLatLng.unwrap(hole));
@@ -72,8 +67,7 @@ public class AmazonPolygon implements Polygon {
         mDelegate.setHoles(gHoles);
     }
 
-    @Override
-    public List<List<LatLng>> getHoles() {
+    @Override public List<List<LatLng>> getHoles() {
         List<List<LatLng>> holes = new ArrayList<>();
         for (List<com.amazon.geo.mapsv2.model.LatLng> hole : mDelegate.getHoles()) {
             holes.add(AmazonLatLng.wrap(hole));
@@ -81,108 +75,87 @@ public class AmazonPolygon implements Polygon {
         return holes;
     }
 
-    @Override
-    public void setStrokeWidth(float width) {
+    @Override public void setStrokeWidth(float width) {
         mDelegate.setStrokeWidth(width);
     }
 
-    @Override
-    public float getStrokeWidth() {
+    @Override public float getStrokeWidth() {
         return mDelegate.getStrokeWidth();
     }
 
-    @Override
-    public void setStrokeColor(int color) {
+    @Override public void setStrokeColor(int color) {
         mDelegate.setStrokeColor(color);
     }
 
-    @Override
-    public int getStrokeColor() {
+    @Override public int getStrokeColor() {
         return mDelegate.getStrokeColor();
     }
 
-    @Override
-    public void setStrokeJointType(int jointType) {
+    @Override public void setStrokeJointType(int jointType) {
         // Not supported, no-op.
     }
 
-    @Override
-    public int getStrokeJointType() {
+    @Override public int getStrokeJointType() {
         return JointType.DEFAULT; // Not supported, fallback to default.
     }
 
-    @Override
-    public void setStrokePattern(@Nullable List<PatternItem> pattern) {
+    @Override public void setStrokePattern(@Nullable List<PatternItem> pattern) {
         // Not supported, no-op.
     }
 
-    @Override
-    public @Nullable List<PatternItem> getStrokePattern() {
+    @Override public @Nullable List<PatternItem> getStrokePattern() {
         return null; // Not supported.
     }
 
-    @Override
-    public void setFillColor(int color) {
+    @Override public void setFillColor(int color) {
         mDelegate.setFillColor(color);
     }
 
-    @Override
-    public int getFillColor() {
+    @Override public int getFillColor() {
         return mDelegate.getFillColor();
     }
 
-    @Override
-    public void setZIndex(float zIndex) {
+    @Override public void setZIndex(float zIndex) {
         mDelegate.setZIndex(zIndex);
     }
 
-    @Override
-    public float getZIndex() {
+    @Override public float getZIndex() {
         return mDelegate.getZIndex();
     }
 
-    @Override
-    public void setVisible(boolean visible) {
+    @Override public void setVisible(boolean visible) {
         mDelegate.setVisible(visible);
     }
 
-    @Override
-    public boolean isVisible() {
+    @Override public boolean isVisible() {
         return mDelegate.isVisible();
     }
 
-    @Override
-    public void setGeodesic(boolean geodesic) {
+    @Override public void setGeodesic(boolean geodesic) {
         mDelegate.setGeodesic(geodesic);
     }
 
-    @Override
-    public boolean isGeodesic() {
+    @Override public boolean isGeodesic() {
         return mDelegate.isGeodesic();
     }
 
-    @Override
-    public void setClickable(boolean clickable) {
+    @Override public void setClickable(boolean clickable) {
         // Not supported, no-op.
     }
 
-    @Override
-    public boolean isClickable() {
+    @Override public boolean isClickable() {
         return false; // Not supported.
     }
 
-    @Override
-    public void setTag(@Nullable Object tag) {
+    @Override public void setTag(@Nullable Object tag) {
         mTag = tag;
     }
 
-    @Override
-    public @Nullable Object getTag() {
+    @Override public @Nullable Object getTag() {
         return mTag;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -195,19 +168,17 @@ public class AmazonPolygon implements Polygon {
         return mDelegate.equals(that.mDelegate) && Objects.equals(mTag, that.mTag);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static Polygon wrap(com.amazon.geo.mapsv2.model.Polygon delegate) {
-        return new AmazonPolygon(delegate);
+    static @Nullable Polygon wrap(@Nullable com.amazon.geo.mapsv2.model.Polygon delegate) {
+        return delegate == null ? null : new AmazonPolygon(delegate);
     }
 
 
@@ -218,91 +189,79 @@ public class AmazonPolygon implements Polygon {
             mDelegate = new com.amazon.geo.mapsv2.model.PolygonOptions();
         }
 
-        @Override
-        public @NonNull Polygon.Options add(LatLng point) {
-            mDelegate.add(AmazonLatLng.unwrap(point));
+        @Override public @NonNull Polygon.Options add(@NonNull LatLng point) {
+            mDelegate.add(
+                    Objects.requireNonNull(AmazonLatLng.unwrap(point), "point == null"));
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options add(LatLng... points) {
-            mDelegate.addAll(AmazonLatLng.unwrap(Arrays.asList(points)));
+        @Override public @NonNull Polygon.Options add(LatLng... points) {
+            return addAll(Arrays.asList(points));
+        }
+
+        @Override public @NonNull Polygon.Options addAll(@NonNull Iterable<LatLng> points) {
+            mDelegate.addAll(
+                    Objects.requireNonNull(AmazonLatLng.unwrap(points), "points == null"));
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options addAll(Iterable<LatLng> points) {
-            mDelegate.addAll(AmazonLatLng.unwrap(points));
+        @Override public @NonNull Polygon.Options addHole(@NonNull Iterable<LatLng> points) {
+            mDelegate.addHole(
+                    Objects.requireNonNull(AmazonLatLng.unwrap(points), "points == null"));
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options addHole(Iterable<LatLng> points) {
-            mDelegate.addHole(AmazonLatLng.unwrap(points));
-            return this;
-        }
-
-        @Override
-        public @NonNull Polygon.Options strokeWidth(float width) {
+        @Override public @NonNull Polygon.Options strokeWidth(float width) {
             mDelegate.strokeWidth(width);
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options strokeColor(int color) {
+        @Override public @NonNull Polygon.Options strokeColor(int color) {
             mDelegate.strokeColor(color);
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options strokeJointType(int jointType) {
+        @Override public @NonNull Polygon.Options strokeJointType(int jointType) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options strokePattern(@Nullable List<PatternItem> pattern) {
+        @Override public @NonNull Polygon.Options strokePattern(
+                @Nullable List<PatternItem> pattern) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options fillColor(int color) {
+        @Override public @NonNull Polygon.Options fillColor(int color) {
             mDelegate.fillColor(color);
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options zIndex(float zIndex) {
+        @Override public @NonNull Polygon.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options visible(boolean visible) {
+        @Override public @NonNull Polygon.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options geodesic(boolean geodesic) {
+        @Override public @NonNull Polygon.Options geodesic(boolean geodesic) {
             mDelegate.geodesic(geodesic);
             return this;
         }
 
-        @Override
-        public @NonNull Polygon.Options clickable(boolean clickable) {
+        @Override public @NonNull Polygon.Options clickable(boolean clickable) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public List<LatLng> getPoints() {
-            return AmazonLatLng.wrap(mDelegate.getPoints());
+        @Override public @NonNull List<LatLng> getPoints() {
+            return Objects.requireNonNull(AmazonLatLng.wrap(mDelegate.getPoints()));
         }
 
-        @Override
-        public List<List<LatLng>> getHoles() {
+        @Override public @NonNull List<List<LatLng>> getHoles() {
             List<List<LatLng>> holes = new ArrayList<>();
             for (List<com.amazon.geo.mapsv2.model.LatLng> hole : mDelegate.getHoles()) {
                 holes.add(AmazonLatLng.wrap(hole));
@@ -310,54 +269,46 @@ public class AmazonPolygon implements Polygon {
             return holes;
         }
 
-        @Override
-        public float getStrokeWidth() {
+        @Override public float getStrokeWidth() {
             return mDelegate.getStrokeWidth();
         }
 
-        @Override
-        public int getStrokeColor() {
+        @Override public int getStrokeColor() {
             return mDelegate.getStrokeColor();
         }
 
-        @Override
-        public int getStrokeJointType() {
+        @Override public int getStrokeJointType() {
             return JointType.DEFAULT; // Not supported, fallback to default.
         }
 
-        @Override
-        public @Nullable List<PatternItem> getStrokePattern() {
+        @Override public @Nullable List<PatternItem> getStrokePattern() {
             return null; // Not supported.
         }
 
-        @Override
-        public int getFillColor() {
+        @Override public int getFillColor() {
             return mDelegate.getFillColor();
         }
 
-        @Override
-        public float getZIndex() {
+        @Override public float getZIndex() {
             return mDelegate.getZIndex();
         }
 
-        @Override
-        public boolean isVisible() {
+        @Override public boolean isVisible() {
             return mDelegate.isVisible();
         }
 
-        @Override
-        public boolean isGeodesic() {
+        @Override public boolean isGeodesic() {
             return mDelegate.isGeodesic();
         }
 
-        @Override
-        public boolean isClickable() {
-            return false; //  Not supported.
+        @Override public boolean isClickable() {
+            return false; // Not supported, fallback to default.
         }
 
 
-        static com.amazon.geo.mapsv2.model.PolygonOptions unwrap(Polygon.Options wrapped) {
-            return ((Options) wrapped).mDelegate;
+        static @Nullable com.amazon.geo.mapsv2.model.PolygonOptions unwrap(
+                @Nullable Polygon.Options wrapped) {
+            return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
 

@@ -32,131 +32,107 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds
 @RestrictTo(LIBRARY)
 public class AmazonGroundOverlay implements GroundOverlay {
 
-    private final com.amazon.geo.mapsv2.model.GroundOverlay mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.GroundOverlay mDelegate;
 
     private @Nullable Object mTag; // Providing tag support for Amazon's GroundOverlay
 
-    private AmazonGroundOverlay(com.amazon.geo.mapsv2.model.GroundOverlay delegate) {
+    private AmazonGroundOverlay(@NonNull com.amazon.geo.mapsv2.model.GroundOverlay delegate) {
         mDelegate = delegate;
     }
 
-    @Override
-    public void remove() {
+    @Override public void remove() {
         mDelegate.remove();
     }
 
-    @Override
-    public String getId() {
+    @Override public String getId() {
         return mDelegate.getId();
     }
 
-    @Override
-    public void setPosition(LatLng latLng) {
+    @Override public void setPosition(LatLng latLng) {
         mDelegate.setPosition(AmazonLatLng.unwrap(latLng));
     }
 
-    @Override
-    public LatLng getPosition() {
+    @Override public LatLng getPosition() {
         return AmazonLatLng.wrap(mDelegate.getPosition());
     }
 
-    @Override
-    public void setImage(@NonNull BitmapDescriptor imageDescriptor) {
+    @Override public void setImage(@NonNull BitmapDescriptor imageDescriptor) {
         mDelegate.setImage(AmazonBitmapDescriptor.unwrap(imageDescriptor));
     }
 
-    @Override
-    public float getWidth() {
+    @Override public float getWidth() {
         return mDelegate.getWidth();
     }
 
-    @Override
-    public float getHeight() {
+    @Override public float getHeight() {
         return mDelegate.getHeight();
     }
 
-    @Override
-    public void setDimensions(float width) {
+    @Override public void setDimensions(float width) {
         mDelegate.setDimensions(width);
     }
 
-    @Override
-    public void setDimensions(float width, float height) {
+    @Override public void setDimensions(float width, float height) {
         mDelegate.setDimensions(width, height);
     }
 
-    @Override
-    public LatLngBounds getBounds() {
+    @Override public LatLngBounds getBounds() {
         return AmazonLatLngBounds.wrap(mDelegate.getBounds());
     }
 
-    @Override
-    public void setPositionFromBounds(LatLngBounds bounds) {
+    @Override public void setPositionFromBounds(LatLngBounds bounds) {
         mDelegate.setPositionFromBounds(AmazonLatLngBounds.unwrap(bounds));
     }
 
-    @Override
-    public float getBearing() {
+    @Override public float getBearing() {
         return mDelegate.getBearing();
     }
 
-    @Override
-    public void setBearing(float bearing) {
+    @Override public void setBearing(float bearing) {
         mDelegate.setBearing(bearing);
     }
 
-    @Override
-    public float getZIndex() {
+    @Override public float getZIndex() {
         return mDelegate.getZIndex();
     }
 
-    @Override
-    public void setZIndex(float zIndex) {
+    @Override public void setZIndex(float zIndex) {
         mDelegate.setZIndex(zIndex);
     }
 
-    @Override
-    public void setVisible(boolean visible) {
+    @Override public void setVisible(boolean visible) {
         mDelegate.setVisible(visible);
     }
 
-    @Override
-    public boolean isVisible() {
+    @Override public boolean isVisible() {
         return mDelegate.isVisible();
     }
 
-    @Override
-    public void setClickable(boolean clickable) {
+    @Override public void setClickable(boolean clickable) {
         // Not supported, no-op.
     }
 
-    @Override
-    public boolean isClickable() {
+    @Override public boolean isClickable() {
         return false; // Not supported.
     }
 
-    @Override
-    public void setTransparency(float transparency) {
+    @Override public void setTransparency(float transparency) {
         mDelegate.setTransparency(transparency);
     }
 
-    @Override
-    public float getTransparency() {
+    @Override public float getTransparency() {
         return mDelegate.getTransparency();
     }
 
-    @Override
-    public void setTag(@Nullable Object tag) {
+    @Override public void setTag(@Nullable Object tag) {
         mTag = tag;
     }
 
-    @Override
-    public @Nullable Object getTag() {
+    @Override public @Nullable Object getTag() {
         return mTag;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -169,49 +145,47 @@ public class AmazonGroundOverlay implements GroundOverlay {
         return mDelegate.equals(that.mDelegate) && Objects.equals(mTag, that.mTag);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
 
-    static GroundOverlay wrap(com.amazon.geo.mapsv2.model.GroundOverlay delegate) {
-        return new AmazonGroundOverlay(delegate);
+    static @Nullable GroundOverlay wrap(
+            @Nullable com.amazon.geo.mapsv2.model.GroundOverlay delegate) {
+        return delegate == null ?  null : new AmazonGroundOverlay(delegate);
     }
 
 
     public static class Options implements GroundOverlay.Options {
-        private final com.amazon.geo.mapsv2.model.GroundOverlayOptions mDelegate;
+        private final @NonNull com.amazon.geo.mapsv2.model.GroundOverlayOptions mDelegate;
 
         public Options() {
             mDelegate = new com.amazon.geo.mapsv2.model.GroundOverlayOptions();
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options image(@NonNull BitmapDescriptor imageDescriptor) {
+        @Override public @NonNull GroundOverlay.Options image(
+                @NonNull BitmapDescriptor imageDescriptor) {
             mDelegate.image(AmazonBitmapDescriptor.unwrap(imageDescriptor));
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options anchor(float anchorU, float anchorV) {
+        @Override public @NonNull GroundOverlay.Options anchor(float anchorU, float anchorV) {
             mDelegate.anchor(anchorU, anchorV);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options position(@NonNull LatLng location, float width) {
+        @Override public @NonNull GroundOverlay.Options position(
+                @NonNull LatLng location,
+                float width) {
             mDelegate.position(AmazonLatLng.unwrap(location), width);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options position(
+        @Override public @NonNull GroundOverlay.Options position(
                 @NonNull LatLng location,
                 float width,
                 float height) {
@@ -219,106 +193,88 @@ public class AmazonGroundOverlay implements GroundOverlay {
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options positionFromBounds(LatLngBounds bounds) {
+        @Override public @NonNull GroundOverlay.Options positionFromBounds(LatLngBounds bounds) {
             mDelegate.positionFromBounds(AmazonLatLngBounds.unwrap(bounds));
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options bearing(float bearing) {
+        @Override public @NonNull GroundOverlay.Options bearing(float bearing) {
             mDelegate.bearing(bearing);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options zIndex(float zIndex) {
+        @Override public @NonNull GroundOverlay.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options visible(boolean visible) {
+        @Override public @NonNull GroundOverlay.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options transparency(float transparency) {
+        @Override public @NonNull GroundOverlay.Options transparency(float transparency) {
             mDelegate.transparency(transparency);
             return this;
         }
 
-        @Override
-        public @NonNull GroundOverlay.Options clickable(boolean clickable) {
+        @Override public @NonNull GroundOverlay.Options clickable(boolean clickable) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override
-        public BitmapDescriptor getImage() {
+        @Override public BitmapDescriptor getImage() {
             return AmazonBitmapDescriptor.wrap(mDelegate.getImage());
         }
 
-        @Override
-        public LatLng getLocation() {
+        @Override public @Nullable LatLng getLocation() {
             return AmazonLatLng.wrap(mDelegate.getLocation());
         }
 
-        @Override
-        public float getWidth() {
+        @Override public float getWidth() {
             return mDelegate.getWidth();
         }
 
-        @Override
-        public float getHeight() {
+        @Override public float getHeight() {
             return mDelegate.getHeight();
         }
 
-        @Override
-        public LatLngBounds getBounds() {
+        @Override public @Nullable LatLngBounds getBounds() {
             return AmazonLatLngBounds.wrap(mDelegate.getBounds());
         }
 
-        @Override
-        public float getBearing() {
+        @Override public float getBearing() {
             return mDelegate.getBearing();
         }
 
-        @Override
-        public float getZIndex() {
+        @Override public float getZIndex() {
             return mDelegate.getZIndex();
         }
 
-        @Override
-        public float getTransparency() {
+        @Override public float getTransparency() {
             return mDelegate.getTransparency();
         }
 
-        @Override
-        public float getAnchorU() {
+        @Override public float getAnchorU() {
             return mDelegate.getAnchorU();
         }
 
-        @Override
-        public float getAnchorV() {
+        @Override public float getAnchorV() {
             return mDelegate.getAnchorV();
         }
 
-        @Override
-        public boolean isVisible() {
+        @Override public boolean isVisible() {
             return mDelegate.isVisible();
         }
 
-        @Override
-        public boolean isClickable() {
+        @Override public boolean isClickable() {
             return false; // Not supported.
         }
 
 
-        static com.amazon.geo.mapsv2.model.GroundOverlayOptions unwrap(
-                GroundOverlay.Options wrapped) {
-            return ((Options) wrapped).mDelegate;
+        static @Nullable com.amazon.geo.mapsv2.model.GroundOverlayOptions unwrap(
+                @Nullable GroundOverlay.Options wrapped) {
+            return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
 

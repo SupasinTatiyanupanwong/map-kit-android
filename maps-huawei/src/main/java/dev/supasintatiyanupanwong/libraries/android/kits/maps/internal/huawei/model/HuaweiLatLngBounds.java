@@ -43,42 +43,36 @@ public class HuaweiLatLngBounds implements LatLngBounds {
                 HuaweiLatLng.unwrap(southwest), HuaweiLatLng.unwrap(northeast)));
     }
 
-    @Override
-    public @NonNull LatLng getSouthwest() {
+    @Override public @NonNull LatLng getSouthwest() {
         if (mSouthwest == null) {
             mSouthwest = HuaweiLatLng.wrap(mDelegate.southwest);
         }
         return mSouthwest;
     }
 
-    @Override
-    public @NonNull LatLng getNortheast() {
+    @Override public @NonNull LatLng getNortheast() {
         if (mNortheast == null) {
             mNortheast = HuaweiLatLng.wrap(mDelegate.northeast);
         }
         return mNortheast;
     }
 
-    @Override
-    public boolean contains(@NonNull LatLng point) {
+    @Override public boolean contains(@NonNull LatLng point) {
         return mDelegate.contains(HuaweiLatLng.unwrap(point));
     }
 
-    @Override
-    public @NonNull LatLngBounds including(@NonNull LatLng point) {
+    @Override public @NonNull LatLngBounds including(@NonNull LatLng point) {
         return HuaweiLatLngBounds.wrap(mDelegate.including(HuaweiLatLng.unwrap(point)));
     }
 
-    @Override
-    public @NonNull LatLng getCenter() {
+    @Override public @NonNull LatLng getCenter() {
         if (mCenter == null) {
             mCenter = HuaweiLatLng.wrap(mDelegate.getCenter());
         }
         return mCenter;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -91,13 +85,11 @@ public class HuaweiLatLngBounds implements LatLngBounds {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -118,14 +110,12 @@ public class HuaweiLatLngBounds implements LatLngBounds {
             mDelegate = com.huawei.hms.maps.model.LatLngBounds.builder();
         }
 
-        @Override
-        public @NonNull LatLngBounds.Builder include(@NonNull LatLng point) {
+        @Override public @NonNull LatLngBounds.Builder include(@NonNull LatLng point) {
             mDelegate.include(HuaweiLatLng.unwrap(point));
             return this;
         }
 
-        @Override
-        public @NonNull LatLngBounds build() {
+        @Override public @NonNull LatLngBounds build() {
             return HuaweiLatLngBounds.wrap(mDelegate.build());
         }
     }

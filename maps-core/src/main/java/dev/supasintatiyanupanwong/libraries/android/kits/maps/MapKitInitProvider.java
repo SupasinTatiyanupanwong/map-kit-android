@@ -40,8 +40,7 @@ public final class MapKitInitProvider extends ContentProvider {
             }}
     );
 
-    @Override
-    public boolean onCreate() {
+    @Override public boolean onCreate() {
         final Context context = getContext().getApplicationContext();
 
         MapsPlatform platform;
@@ -65,8 +64,7 @@ public final class MapKitInitProvider extends ContentProvider {
         throw new IllegalStateException("MapKit cannot be initialized");
     }
 
-    @Override
-    public @Nullable Cursor query(
+    @Override public @Nullable Cursor query(
             @NonNull Uri uri,
             @Nullable String[] projection,
             @Nullable String selection,
@@ -75,26 +73,22 @@ public final class MapKitInitProvider extends ContentProvider {
         return null;
     }
 
-    @Override
-    public @Nullable String getType(@NonNull Uri uri) {
+    @Override public @Nullable String getType(@NonNull Uri uri) {
         return null;
     }
 
-    @Override
-    public @Nullable Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+    @Override public @Nullable Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         return null;
     }
 
-    @Override
-    public int delete(
+    @Override public int delete(
             @NonNull Uri uri,
             @Nullable String selection,
             @Nullable String[] selectionArgs) {
         return 0;
     }
 
-    @Override
-    public int update(
+    @Override public int update(
             @NonNull Uri uri,
             @Nullable ContentValues values,
             @Nullable String selection,

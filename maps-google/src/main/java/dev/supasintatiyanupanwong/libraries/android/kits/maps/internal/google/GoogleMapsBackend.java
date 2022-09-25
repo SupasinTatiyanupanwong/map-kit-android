@@ -222,21 +222,21 @@ class GoogleMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull VisibleRegion newVisibleRegion(
-            LatLng nearLeft,
-            LatLng nearRight,
-            LatLng farLeft,
-            LatLng farRight,
-            LatLngBounds latLngBounds) {
-        return new GoogleVisibleRegion(nearLeft, nearRight, farLeft, farRight, latLngBounds);
+            @NonNull LatLng nearLeft,
+            @NonNull LatLng nearRight,
+            @NonNull LatLng farLeft,
+            @NonNull LatLng farRight,
+            @NonNull LatLngBounds bounds) {
+        return new GoogleVisibleRegion(nearLeft, nearRight, farLeft, farRight, bounds);
     }
 
     @Override public void getMapAsync(
             @NonNull Fragment fragment,
             @NonNull final MapKit.OnMapReadyCallback callback) {
-        ((com.google.android.gms.maps.SupportMapFragment) fragment)
-                .getMapAsync(new com.google.android.gms.maps.OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(com.google.android.gms.maps.GoogleMap googleMap) {
+        ((com.google.android.gms.maps.SupportMapFragment) fragment).getMapAsync(
+                new com.google.android.gms.maps.OnMapReadyCallback() {
+                    @Override public void onMapReady(
+                            @NonNull com.google.android.gms.maps.GoogleMap googleMap) {
                         callback.onMapReady(new GoogleMapClient(googleMap));
                     }
                 });

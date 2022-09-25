@@ -34,63 +34,51 @@ public class HuaweiTileOverlay implements TileOverlay {
         mDelegate = delegate;
     }
 
-    @Override
-    public void remove() {
+    @Override public void remove() {
         mDelegate.remove();
     }
 
-    @Override
-    public void clearTileCache() {
+    @Override public void clearTileCache() {
         mDelegate.clearTileCache();
     }
 
-    @Override
-    public String getId() {
+    @Override public String getId() {
         return mDelegate.getId();
     }
 
-    @Override
-    public void setZIndex(float zIndex) {
+    @Override public void setZIndex(float zIndex) {
         mDelegate.setZIndex(zIndex);
     }
 
-    @Override
-    public float getZIndex() {
+    @Override public float getZIndex() {
         return mDelegate.getZIndex();
     }
 
-    @Override
-    public void setVisible(boolean visible) {
+    @Override public void setVisible(boolean visible) {
         mDelegate.setVisible(visible);
     }
 
-    @Override
-    public boolean isVisible() {
+    @Override public boolean isVisible() {
         return mDelegate.isVisible();
     }
 
-    @Override
-    public void setFadeIn(boolean fadeIn) {
+    @Override public void setFadeIn(boolean fadeIn) {
         mDelegate.setFadeIn(fadeIn);
     }
 
-    @Override
-    public boolean getFadeIn() {
+    @Override public boolean getFadeIn() {
         return mDelegate.getFadeIn();
     }
 
-    @Override
-    public void setTransparency(float transparency) {
+    @Override public void setTransparency(float transparency) {
         mDelegate.setTransparency(transparency);
     }
 
-    @Override
-    public float getTransparency() {
+    @Override public float getTransparency() {
         return mDelegate.getTransparency();
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -103,13 +91,11 @@ public class HuaweiTileOverlay implements TileOverlay {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -126,58 +112,48 @@ public class HuaweiTileOverlay implements TileOverlay {
             mDelegate = new com.huawei.hms.maps.model.TileOverlayOptions();
         }
 
-        @Override
-        public @NonNull TileOverlay.Options tileProvider(TileProvider tileProvider) {
+        @Override public @NonNull TileOverlay.Options tileProvider(TileProvider tileProvider) {
             mDelegate.tileProvider(HuaweiTileProvider.unwrap(tileProvider));
             return this;
         }
 
-        @Override
-        public @NonNull TileOverlay.Options zIndex(float zIndex) {
+        @Override public @NonNull TileOverlay.Options zIndex(float zIndex) {
             mDelegate.zIndex(zIndex);
             return this;
         }
 
-        @Override
-        public @NonNull TileOverlay.Options visible(boolean visible) {
+        @Override public @NonNull TileOverlay.Options visible(boolean visible) {
             mDelegate.visible(visible);
             return this;
         }
 
-        @Override
-        public @NonNull TileOverlay.Options fadeIn(boolean fadeIn) {
+        @Override public @NonNull TileOverlay.Options fadeIn(boolean fadeIn) {
             mDelegate.fadeIn(fadeIn);
             return this;
         }
 
-        @Override
-        public @NonNull TileOverlay.Options transparency(float transparency) {
+        @Override public @NonNull TileOverlay.Options transparency(float transparency) {
             mDelegate.transparency(transparency);
             return this;
         }
 
-        @Override
-        public TileProvider getTileProvider() {
+        @Override public TileProvider getTileProvider() {
             return HuaweiTileProvider.wrap(mDelegate.getTileProvider());
         }
 
-        @Override
-        public float getZIndex() {
+        @Override public float getZIndex() {
             return mDelegate.getZIndex();
         }
 
-        @Override
-        public boolean isVisible() {
+        @Override public boolean isVisible() {
             return mDelegate.isVisible();
         }
 
-        @Override
-        public boolean getFadeIn() {
+        @Override public boolean getFadeIn() {
             return mDelegate.getFadeIn();
         }
 
-        @Override
-        public float getTransparency() {
+        @Override public float getTransparency() {
             return mDelegate.getTransparency();
         }
 

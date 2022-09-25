@@ -60,8 +60,7 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
 
     private int mCurrentEntry = 0;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ground_overlay_demo);
 
@@ -76,8 +75,7 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         // Register a listener to respond to clicks on GroundOverlays.
         map.setOnGroundOverlayClickListener(this);
 
@@ -113,14 +111,11 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
         map.setContentDescription("Map with ground overlay.");
     }
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {}
+    @Override public void onStopTrackingTouch(SeekBar seekBar) {}
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {}
+    @Override public void onStartTrackingTouch(SeekBar seekBar) {}
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (mGroundOverlay != null) {
             mGroundOverlay.setTransparency((float) progress / (float) TRANSPARENCY_MAX);
         }
@@ -134,8 +129,7 @@ public class GroundOverlayDemoActivity extends AppCompatActivity implements
     /**
      * Toggles the visibility between 100% and 50% when a {@link GroundOverlay} is clicked.
      */
-    @Override
-    public void onGroundOverlayClick(@NonNull GroundOverlay groundOverlay) {
+    @Override public void onGroundOverlayClick(@NonNull GroundOverlay groundOverlay) {
         // Toggle transparency value between 0.0f and 0.5f. Initial default value is 0.0f.
         mGroundOverlayRotated.setTransparency(0.5f - mGroundOverlayRotated.getTransparency());
     }

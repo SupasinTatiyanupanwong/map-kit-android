@@ -37,31 +37,26 @@ public class HuaweiCameraPosition implements CameraPosition {
         mDelegate = delegate;
     }
 
-    @Override
-    public @NonNull LatLng getTarget() {
+    @Override public @NonNull LatLng getTarget() {
         if (mTarget == null) {
             mTarget = HuaweiLatLng.wrap(mDelegate.target);
         }
         return mTarget;
     }
 
-    @Override
-    public float getZoom() {
+    @Override public float getZoom() {
         return mDelegate.zoom;
     }
 
-    @Override
-    public float getTilt() {
+    @Override public float getTilt() {
         return mDelegate.tilt;
     }
 
-    @Override
-    public float getBearing() {
+    @Override public float getBearing() {
         return mDelegate.bearing;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
+    @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -74,13 +69,11 @@ public class HuaweiCameraPosition implements CameraPosition {
         return mDelegate.equals(that.mDelegate);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return mDelegate.hashCode();
     }
 
-    @Override
-    public @NonNull String toString() {
+    @Override public @NonNull String toString() {
         return mDelegate.toString();
     }
 
@@ -106,32 +99,27 @@ public class HuaweiCameraPosition implements CameraPosition {
                     HuaweiCameraPosition.unwrap(camera));
         }
 
-        @Override
-        public @NonNull CameraPosition.Builder target(@NonNull LatLng location) {
+        @Override public @NonNull CameraPosition.Builder target(@NonNull LatLng location) {
             mDelegate.target(HuaweiLatLng.unwrap(location));
             return this;
         }
 
-        @Override
-        public @NonNull CameraPosition.Builder zoom(float zoom) {
+        @Override public @NonNull CameraPosition.Builder zoom(float zoom) {
             mDelegate.zoom(zoom);
             return this;
         }
 
-        @Override
-        public @NonNull CameraPosition.Builder tilt(@FloatRange(from = 0.0, to = 90.0) float tilt) {
+        @Override public @NonNull CameraPosition.Builder tilt(@FloatRange(from = 0.0, to = 90.0) float tilt) {
             mDelegate.tilt(tilt);
             return this;
         }
 
-        @Override
-        public @NonNull CameraPosition.Builder bearing(float bearing) {
+        @Override public @NonNull CameraPosition.Builder bearing(float bearing) {
             mDelegate.bearing(bearing);
             return this;
         }
 
-        @Override
-        public @NonNull CameraPosition build() {
+        @Override public @NonNull CameraPosition build() {
             return HuaweiCameraPosition.wrap(mDelegate.build());
         }
     }

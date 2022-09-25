@@ -91,8 +91,7 @@ public class PolygonDemoActivity extends AppCompatActivity implements
             R.string.pattern_mixed,
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.polygon_demo);
 
@@ -143,8 +142,7 @@ public class PolygonDemoActivity extends AppCompatActivity implements
         return strings;
     }
 
-    @Override
-    public void onMapReady(@NonNull MapClient map) {
+    @Override public void onMapReady(@NonNull MapClient map) {
         // Override the default content description on the view, for accessibility mode.
         map.setContentDescription(getString(R.string.polygon_demo_description));
 
@@ -183,8 +181,7 @@ public class PolygonDemoActivity extends AppCompatActivity implements
 
         // Add a listener for polygon clicks that changes the clicked polygon's stroke color.
         map.setOnPolygonClickListener(new MapClient.OnPolygonClickListener() {
-            @Override
-            public void onPolygonClick(@NonNull Polygon polygon) {
+            @Override public void onPolygonClick(@NonNull Polygon polygon) {
                 // Flip the red, green and blue components of the polygon's stroke color.
                 polygon.setStrokeColor(polygon.getStrokeColor() ^ 0x00ffffff);
             }
@@ -233,8 +230,7 @@ public class PolygonDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+    @Override public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch (parent.getId()) {
             case R.id.strokeJointTypeSpinner:
                 mMutablePolygon.setStrokeJointType(getSelectedJointType(pos));
@@ -245,23 +241,19 @@ public class PolygonDemoActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    @Override public void onNothingSelected(AdapterView<?> parent) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
+    @Override public void onStopTrackingTouch(SeekBar seekBar) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
+    @Override public void onStartTrackingTouch(SeekBar seekBar) {
         // Don't do anything here.
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (mMutablePolygon == null) {
             return;
         }
