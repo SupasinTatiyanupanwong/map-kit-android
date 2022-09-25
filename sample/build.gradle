@@ -31,13 +31,13 @@ apply plugin: 'com.android.application'
 android {
     namespace 'dev.supasintatiyanupanwong.samples.android.kits.maps'
 
-    compileSdkVersion 30
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId 'dev.supasintatiyanupanwong.samples.android.kits.maps'
 
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 33
     }
 
     flavorDimensions 'vendor'
