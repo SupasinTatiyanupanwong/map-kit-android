@@ -15,9 +15,7 @@
   ~ limitations under the License.
 -->
 
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.supasintatiyanupanwong.libraries.android.kits.maps">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature
         android:glEsVersion="0x00020000"

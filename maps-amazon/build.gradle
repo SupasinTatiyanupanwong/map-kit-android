@@ -24,6 +24,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.vanniktech.maven.publish'
 
 android {
+    namespace 'dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon'
+
     compileSdkVersion 30
 
     defaultConfig {

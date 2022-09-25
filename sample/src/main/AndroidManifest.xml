@@ -16,9 +16,7 @@
   ~ limitations under the License.
 -->
 
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.supasintatiyanupanwong.samples.android.kits.maps">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- EXTERNAL_STORAGE permissions are optional for Android 6.0 onwards. -->
     <uses-permission

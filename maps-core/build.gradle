@@ -18,6 +18,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.vanniktech.maven.publish'
 
 android {
+    namespace 'dev.supasintatiyanupanwong.libraries.android.kits.maps'
+
     compileSdkVersion 30
 
     defaultConfig {

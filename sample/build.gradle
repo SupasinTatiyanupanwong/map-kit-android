@@ -29,6 +29,8 @@ buildscript {
 apply plugin: 'com.android.application'
 
 android {
+    namespace 'dev.supasintatiyanupanwong.samples.android.kits.maps'
+
     compileSdkVersion 30
 
     defaultConfig {
