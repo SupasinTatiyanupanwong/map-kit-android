@@ -51,6 +51,9 @@ android {
 
             minSdkVersion 22 // The minimum supported API level is Fire OS 5 (API 22).
         }
+        bing {
+            applicationIdSuffix '.bing'
+        }
     }
 
     compileOptions {
@@ -63,6 +66,7 @@ dependencies {
     googleImplementation project(':maps-google')
     huaweiImplementation project(':maps-huawei')
     amazonImplementation project(':maps-amazon')
+    bingImplementation project(':maps-bing')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

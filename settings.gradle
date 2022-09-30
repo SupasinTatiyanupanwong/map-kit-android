@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':sample', ':maps-core', ':maps-google', ':maps-huawei', ':maps-amazon'
+include ':sample', ':maps-core', ':maps-google', ':maps-huawei', ':maps-amazon', ':maps-bing'
