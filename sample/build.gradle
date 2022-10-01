@@ -51,6 +51,11 @@ android {
 
             minSdkVersion 22 // The minimum supported API level is Fire OS 5 (API 22).
         }
+        mapbox {
+            applicationIdSuffix '.mapbox'
+
+            minSdkVersion 21 // The minimum supported API level for Mapbox Maps SDK
+        }
     }
 
     compileOptions {
@@ -63,6 +68,7 @@ dependencies {
     googleImplementation project(':maps-google')
     huaweiImplementation project(':maps-huawei')
     amazonImplementation project(':maps-amazon')
+    mapboxImplementation project(':maps-mapbox')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
