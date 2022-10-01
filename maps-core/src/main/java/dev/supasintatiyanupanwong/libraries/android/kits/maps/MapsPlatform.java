@@ -20,5 +20,5 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps;
  * @since 2.2.0
  */
 public enum MapsPlatform {
-    AMAZON, GOOGLE, HUAWEI
+    AMAZON, GOOGLE, HUAWEI, MAPBOX
 }

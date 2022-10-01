@@ -26,16 +26,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class MapKitInitProvider extends ContentProvider {
 
     private static final Map<MapsPlatform, String> REGISTRY = Collections.unmodifiableMap(
-            new HashMap<MapsPlatform, String>() {{
+            new LinkedHashMap<MapsPlatform, String>() {{
                 put(MapsPlatform.AMAZON, ".internal.amazon.AmazonMapsBackend");
                 put(MapsPlatform.GOOGLE, ".internal.google.GoogleMapsBackend");
                 put(MapsPlatform.HUAWEI, ".internal.huawei.HuaweiMapsBackend");
+                put(MapsPlatform.MAPBOX, ".internal.mapbox.MapboxMapsBackend");
                 put(null, ".internal.nop.NopMapsBackend");
             }}
     );
