@@ -1,0 +1,756 @@
+// Signature format: 4.0
+package dev.supasintatiyanupanwong.libraries.android.kits.maps {
+
+  public class MapFragment extends androidx.fragment.app.Fragment {
+    ctor public MapFragment();
+    method @UiThread public final void getMapAsync(dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit.OnMapReadyCallback!);
+    method public final void getMapAsync(dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit.OnMapAndViewReadyCallback!);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.MapFragment! newInstance();
+  }
+
+  public final class MapKit {
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor.Factory getBitmapDescriptorFactory();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate.Factory getCameraUpdateFactory();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap newButtCap();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition.Builder newCameraPositionBuilder();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition.Builder newCameraPositionBuilder(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition newCameraPositionFromLatLngZoom(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng, float);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options newCircleOptions();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap newCustomCap(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor, float);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap newCustomCap(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash newDash(float);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot newDot();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap newGap(float);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options newGroundOverlayOptions();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng newLatLng(double, double);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds newLatLngBounds(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds.Builder newLatLngBoundsBuilder();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.Style.Options newMapStyleOptions(String!);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.Style.Options newMapStyleOptions(android.content.Context, @RawRes int);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options newMarkerOptions();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options newPolygonOptions();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options newPolylineOptions();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap newRoundCap();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap newSquareCap();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile newTile(int, int, byte[]!);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay.Options newTileOverlayOptions();
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider newUrlTileProvider(int, int, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion newVisibleRegion(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds!);
+    method public static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile noTile();
+  }
+
+  public static interface MapKit.OnMapAndViewReadyCallback {
+    method @UiThread public void onMapAndViewReady(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient);
+  }
+
+  public static interface MapKit.OnMapReadyCallback {
+    method @UiThread public void onMapReady(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient);
+  }
+
+  public class MapKitInitProvider extends android.content.ContentProvider {
+    ctor public MapKitInitProvider();
+    method public int delete(android.net.Uri, String?, String![]?);
+    method public String? getType(android.net.Uri);
+    method public android.net.Uri? insert(android.net.Uri, android.content.ContentValues?);
+    method public boolean onCreate();
+    method public android.database.Cursor? query(android.net.Uri, String![]?, String?, String![]?, String?);
+    method public int update(android.net.Uri, android.content.ContentValues?, String?, String![]?);
+  }
+
+}
+
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.model {
+
+  public interface BitmapDescriptor {
+  }
+
+  public static interface BitmapDescriptor.Factory {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor defaultMarker();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor defaultMarker(@FloatRange(from=0, to=360, toInclusive=false) float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor fromAsset(String!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor fromBitmap(android.graphics.Bitmap!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor fromFile(String!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor fromPath(String!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor fromResource(int);
+    field public static final float HUE_AZURE = 210.0f;
+    field public static final float HUE_BLUE = 240.0f;
+    field public static final float HUE_CYAN = 180.0f;
+    field public static final float HUE_GREEN = 120.0f;
+    field public static final float HUE_MAGENTA = 300.0f;
+    field public static final float HUE_ORANGE = 30.0f;
+    field public static final float HUE_RED = 0.0f;
+    field public static final float HUE_ROSE = 330.0f;
+    field public static final float HUE_VIOLET = 270.0f;
+    field public static final float HUE_YELLOW = 60.0f;
+  }
+
+  public interface ButtCap extends dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap {
+  }
+
+  public interface CameraPosition {
+    method public float getBearing();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getTarget();
+    method public float getTilt();
+    method public float getZoom();
+  }
+
+  public static interface CameraPosition.Builder {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition.Builder bearing(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition build();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition.Builder target(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition.Builder tilt(@FloatRange(from=0.0, to=90.0) float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition.Builder zoom(float);
+  }
+
+  public interface CameraUpdate {
+  }
+
+  public static interface CameraUpdate.Factory {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate newCameraPosition(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate newLatLng(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate newLatLngBounds(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds, int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate newLatLngBounds(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds, int, int, int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate newLatLngZoom(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng, float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate scrollBy(float, float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate zoomBy(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate zoomBy(float, android.graphics.Point!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate zoomIn();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate zoomOut();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate zoomTo(float);
+  }
+
+  public interface Cap {
+  }
+
+  public interface Circle {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng! getCenter();
+    method public int getFillColor();
+    method public String! getId();
+    method public double getRadius();
+    method public int getStrokeColor();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>? getStrokePattern();
+    method public float getStrokeWidth();
+    method public Object? getTag();
+    method public float getZIndex();
+    method public boolean isClickable();
+    method public boolean isVisible();
+    method public void remove();
+    method public void setCenter(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!);
+    method public void setClickable(boolean);
+    method public void setFillColor(int);
+    method public void setRadius(double);
+    method public void setStrokeColor(int);
+    method public void setStrokePattern(java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>?);
+    method public void setStrokeWidth(float);
+    method public void setTag(Object?);
+    method public void setVisible(boolean);
+    method public void setZIndex(float);
+  }
+
+  public static interface Circle.Options {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options center(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options clickable(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options fillColor(int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng! getCenter();
+    method public int getFillColor();
+    method public double getRadius();
+    method public int getStrokeColor();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>? getStrokePattern();
+    method public float getStrokeWidth();
+    method public float getZIndex();
+    method public boolean isClickable();
+    method public boolean isVisible();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options radius(double);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options strokeColor(int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options strokePattern(java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>?);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options strokeWidth(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options visible(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options zIndex(float);
+  }
+
+  public interface CustomCap extends dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor getBitmapDescriptor();
+    method public float getRefWidth();
+  }
+
+  public interface Dash extends dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem {
+    method public float getLength();
+  }
+
+  public interface Dot extends dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem {
+  }
+
+  public interface Gap extends dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem {
+    method public float getLength();
+  }
+
+  @UiThread public interface GroundOverlay {
+    method public float getBearing();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds! getBounds();
+    method public float getHeight();
+    method public String! getId();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng! getPosition();
+    method public Object! getTag();
+    method public float getTransparency();
+    method public float getWidth();
+    method public float getZIndex();
+    method public boolean isClickable();
+    method public boolean isVisible();
+    method public void remove();
+    method public void setBearing(float);
+    method public void setClickable(boolean);
+    method public void setDimensions(float);
+    method public void setDimensions(float, float);
+    method public void setImage(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor);
+    method public void setPosition(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!);
+    method public void setPositionFromBounds(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds!);
+    method public void setTag(Object?);
+    method public void setTransparency(@FloatRange(from=0.0, to=1.0) float);
+    method public void setVisible(boolean);
+    method public void setZIndex(float);
+  }
+
+  public static interface GroundOverlay.Options {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options anchor(@FloatRange(from=0.0, to=1.0) float, @FloatRange(from=0.0, to=1.0) float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options bearing(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options clickable(boolean);
+    method public float getAnchorU();
+    method public float getAnchorV();
+    method public float getBearing();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds! getBounds();
+    method public float getHeight();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor! getImage();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng! getLocation();
+    method public float getTransparency();
+    method public float getWidth();
+    method public float getZIndex();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options image(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor);
+    method public boolean isClickable();
+    method public boolean isVisible();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options position(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng, float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options position(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng, float, float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options positionFromBounds(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options transparency(@FloatRange(from=0.0, to=1.0) float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options visible(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options zIndex(float);
+  }
+
+  public interface IndoorBuilding {
+    method public int getActiveLevelIndex();
+    method public int getDefaultLevelIndex();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorLevel!>! getLevels();
+    method public boolean isUnderground();
+  }
+
+  public interface IndoorLevel {
+    method public void activate();
+    method public String! getName();
+    method public String! getShortName();
+  }
+
+  public final class JointType {
+    field public static final int BEVEL = 1; // 0x1
+    field public static final int DEFAULT = 0; // 0x0
+    field public static final int ROUND = 2; // 0x2
+  }
+
+  public interface LatLng {
+    method public double getLatitude();
+    method public double getLongitude();
+  }
+
+  public interface LatLngBounds {
+    method public boolean contains(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getCenter();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getNortheast();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getSouthwest();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds including(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+  }
+
+  public static interface LatLngBounds.Builder {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds build();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds.Builder include(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+  }
+
+  public interface LocationSource {
+    method public void activate(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LocationSource.OnLocationChangedListener);
+    method public void deactivate();
+  }
+
+  public static interface LocationSource.OnLocationChangedListener {
+    method public void onLocationChanged(android.location.Location);
+  }
+
+  @UiThread public interface MapClient {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle addCircle(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay addGroundOverlay(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker addMarker(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon addPolygon(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline addPolyline(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay addTileOverlay(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay.Options!);
+    method public void animateCamera(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate);
+    method public void animateCamera(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.CancelableCallback?);
+    method public void animateCamera(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate, @IntRange(from=0) int, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.CancelableCallback?);
+    method public void clear();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition getCameraPosition();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorBuilding? getFocusedBuilding();
+    method public int getMapType();
+    method public float getMaxZoomLevel();
+    method public float getMinZoomLevel();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Projection getProjection();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.UiSettings getUiSettings();
+    method public boolean isBuildingsEnabled();
+    method public boolean isIndoorEnabled();
+    method public boolean isMyLocationEnabled();
+    method public boolean isTrafficEnabled();
+    method public void moveCamera(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate);
+    method public void resetMinMaxZoomPreference();
+    method public void setBuildingsEnabled(boolean);
+    method public void setContentDescription(String!);
+    method public boolean setIndoorEnabled(boolean);
+    method public void setInfoWindowAdapter(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.InfoWindowAdapter?);
+    method public void setLatLngBoundsForCameraTarget(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds?);
+    method public void setLocationSource(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LocationSource?);
+    method public boolean setMapStyle(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.Style.Options?);
+    method public void setMapType(int);
+    method public void setMaxZoomPreference(float);
+    method public void setMinZoomPreference(float);
+    method @RequiresPermission(anyOf={android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}) public void setMyLocationEnabled(boolean);
+    method public void setOnCameraIdleListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraIdleListener?);
+    method public void setOnCameraMoveCanceledListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraMoveCanceledListener?);
+    method public void setOnCameraMoveListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraMoveListener?);
+    method public void setOnCameraMoveStartedListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraMoveStartedListener?);
+    method public void setOnCircleClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCircleClickListener?);
+    method public void setOnGroundOverlayClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnGroundOverlayClickListener?);
+    method public void setOnIndoorStateChangeListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnIndoorStateChangeListener?);
+    method public void setOnInfoWindowClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnInfoWindowClickListener?);
+    method public void setOnInfoWindowCloseListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnInfoWindowCloseListener?);
+    method public void setOnInfoWindowLongClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnInfoWindowLongClickListener?);
+    method public void setOnMapClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnMapClickListener?);
+    method public void setOnMapLoadedCallback(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnMapLoadedCallback?);
+    method public void setOnMapLongClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnMapLongClickListener?);
+    method public void setOnMarkerClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnMarkerClickListener?);
+    method public void setOnMarkerDragListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnMarkerDragListener?);
+    method public void setOnMyLocationButtonClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnMyLocationButtonClickListener?);
+    method public void setOnMyLocationClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnMyLocationClickListener?);
+    method public void setOnPoiClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnPoiClickListener?);
+    method public void setOnPolygonClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnPolygonClickListener?);
+    method public void setOnPolylineClickListener(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnPolylineClickListener?);
+    method public void setPadding(int, int, int, int);
+    method public void setTrafficEnabled(boolean);
+    method public void snapshot(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.SnapshotReadyCallback);
+    method public void snapshot(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.SnapshotReadyCallback, android.graphics.Bitmap?);
+    method public void stopAnimation();
+    field public static final int MAP_TYPE_HYBRID = 4; // 0x4
+    field public static final int MAP_TYPE_NONE = 0; // 0x0
+    field public static final int MAP_TYPE_NORMAL = 1; // 0x1
+    field public static final int MAP_TYPE_SATELLITE = 2; // 0x2
+    field public static final int MAP_TYPE_TERRAIN = 3; // 0x3
+  }
+
+  public static interface MapClient.CancelableCallback {
+    method public void onCancel();
+    method public void onFinish();
+  }
+
+  public static interface MapClient.InfoWindowAdapter {
+    method public android.view.View? getInfoContents(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+    method public android.view.View? getInfoWindow(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+  }
+
+  public static interface MapClient.OnCameraIdleListener {
+    method @UiThread public void onCameraIdle();
+  }
+
+  public static interface MapClient.OnCameraMoveCanceledListener {
+    method @UiThread public void onCameraMoveCanceled();
+  }
+
+  public static interface MapClient.OnCameraMoveListener {
+    method @UiThread public void onCameraMove();
+  }
+
+  public static interface MapClient.OnCameraMoveStartedListener {
+    method @UiThread public void onCameraMoveStarted(int);
+    field public static final int REASON_API_ANIMATION = 2; // 0x2
+    field public static final int REASON_DEVELOPER_ANIMATION = 3; // 0x3
+    field public static final int REASON_GESTURE = 1; // 0x1
+  }
+
+  public static interface MapClient.OnCircleClickListener {
+    method @UiThread public void onCircleClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle);
+  }
+
+  public static interface MapClient.OnGroundOverlayClickListener {
+    method @UiThread public void onGroundOverlayClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay);
+  }
+
+  public static interface MapClient.OnIndoorStateChangeListener {
+    method @UiThread public void onIndoorBuildingFocused();
+    method @UiThread public void onIndoorLevelActivated(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorBuilding);
+  }
+
+  public static interface MapClient.OnInfoWindowClickListener {
+    method @UiThread public void onInfoWindowClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+  }
+
+  public static interface MapClient.OnInfoWindowCloseListener {
+    method @UiThread public void onInfoWindowClose(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+  }
+
+  public static interface MapClient.OnInfoWindowLongClickListener {
+    method @UiThread public void onInfoWindowLongClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+  }
+
+  public static interface MapClient.OnMapClickListener {
+    method @UiThread public void onMapClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+  }
+
+  public static interface MapClient.OnMapLoadedCallback {
+    method @UiThread public void onMapLoaded();
+  }
+
+  public static interface MapClient.OnMapLongClickListener {
+    method @UiThread public void onMapLongClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+  }
+
+  public static interface MapClient.OnMarkerClickListener {
+    method @UiThread public boolean onMarkerClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+  }
+
+  public static interface MapClient.OnMarkerDragListener {
+    method @UiThread public void onMarkerDrag(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+    method @UiThread public void onMarkerDragEnd(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+    method @UiThread public void onMarkerDragStart(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker);
+  }
+
+  public static interface MapClient.OnMyLocationButtonClickListener {
+    method @UiThread public boolean onMyLocationButtonClick();
+  }
+
+  public static interface MapClient.OnMyLocationClickListener {
+    method @UiThread public void onMyLocationClick(android.location.Location);
+  }
+
+  public static interface MapClient.OnPoiClickListener {
+    method @UiThread public void onPoiClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PointOfInterest);
+  }
+
+  public static interface MapClient.OnPolygonClickListener {
+    method @UiThread public void onPolygonClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon);
+  }
+
+  public static interface MapClient.OnPolylineClickListener {
+    method @UiThread public void onPolylineClick(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline);
+  }
+
+  public static interface MapClient.SnapshotReadyCallback {
+    method @UiThread public void onSnapshotReady(android.graphics.Bitmap?);
+  }
+
+  public static interface MapClient.Style {
+  }
+
+  public static interface MapClient.Style.Options {
+  }
+
+  public static interface MapClient.UiSettings {
+    method public boolean isCompassEnabled();
+    method public boolean isIndoorLevelPickerEnabled();
+    method public boolean isMapToolbarEnabled();
+    method public boolean isMyLocationButtonEnabled();
+    method public boolean isRotateGesturesEnabled();
+    method public boolean isScrollGesturesEnabled();
+    method public boolean isScrollGesturesEnabledDuringRotateOrZoom();
+    method public boolean isTiltGesturesEnabled();
+    method public boolean isZoomControlsEnabled();
+    method public boolean isZoomGesturesEnabled();
+    method public void setAllGesturesEnabled(boolean);
+    method public void setCompassEnabled(boolean);
+    method public void setIndoorLevelPickerEnabled(boolean);
+    method public void setMapToolbarEnabled(boolean);
+    method public void setMyLocationButtonEnabled(boolean);
+    method public void setRotateGesturesEnabled(boolean);
+    method public void setScrollGesturesEnabled(boolean);
+    method public void setScrollGesturesEnabledDuringRotateOrZoom(boolean);
+    method public void setTiltGesturesEnabled(boolean);
+    method public void setZoomControlsEnabled(boolean);
+    method public void setZoomGesturesEnabled(boolean);
+  }
+
+  @RestrictTo(androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP) public interface MapFactory {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor.Factory getBitmapDescriptorFactory();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate.Factory getCameraUpdateFactory();
+    method @UiThread public void getMapAsync(androidx.fragment.app.Fragment, dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit.OnMapReadyCallback);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap newButtCap();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition.Builder newCameraPositionBuilder();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition.Builder newCameraPositionBuilder(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition newCameraPositionFromLatLngZoom(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng, float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle.Options newCircleOptions();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap newCustomCap(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor, float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap newCustomCap(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash newDash(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot newDot();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap newGap(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay.Options newGroundOverlayOptions();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng newLatLng(double, double);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds newLatLngBounds(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds.Builder newLatLngBoundsBuilder();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.Style.Options newMapStyleOptions(String!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.Style.Options newMapStyleOptions(android.content.Context, @RawRes int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options newMarkerOptions();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options newPolygonOptions();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options newPolylineOptions();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap newRoundCap();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap newSquareCap();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile newTile(int, int, byte[]!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay.Options newTileOverlayOptions();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider newUrlTileProvider(int, int, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion newVisibleRegion(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!, dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile noTile();
+  }
+
+  public interface Marker {
+    method @FloatRange(from=0.0, to=1.0) public float getAlpha();
+    method public String getId();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getPosition();
+    method public float getRotation();
+    method public String! getSnippet();
+    method public Object? getTag();
+    method public String! getTitle();
+    method public float getZIndex();
+    method public void hideInfoWindow();
+    method public boolean isDraggable();
+    method public boolean isFlat();
+    method public boolean isInfoWindowShown();
+    method public boolean isVisible();
+    method public void remove();
+    method public void setAlpha(float);
+    method public void setAnchor(@FloatRange(from=0.0, to=1.0) float, @FloatRange(from=0.0, to=1.0) float);
+    method public void setDraggable(boolean);
+    method public void setFlat(boolean);
+    method public void setIcon(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor?);
+    method public void setInfoWindowAnchor(@FloatRange(from=0.0, to=1.0) float, @FloatRange(from=0.0, to=1.0) float);
+    method public void setPosition(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+    method public void setRotation(float);
+    method public void setSnippet(String?);
+    method public void setTag(Object?);
+    method public void setTitle(String?);
+    method public void setVisible(boolean);
+    method public void setZIndex(float);
+    method public void showInfoWindow();
+  }
+
+  public static interface Marker.Options {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options alpha(@FloatRange(from=0.0, to=1.0) float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options anchor(@FloatRange(from=0.0, to=1.0) float, @FloatRange(from=0.0, to=1.0) float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options draggable(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options flat(boolean);
+    method @FloatRange(from=0.0, to=1.0) public float getAlpha();
+    method @FloatRange(from=0.0, to=1.0) public float getAnchorU();
+    method @FloatRange(from=0.0, to=1.0) public float getAnchorV();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor? getIcon();
+    method @FloatRange(from=0.0, to=1.0) public float getInfoWindowAnchorU();
+    method @FloatRange(from=0.0, to=1.0) public float getInfoWindowAnchorV();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng! getPosition();
+    method public float getRotation();
+    method public String! getSnippet();
+    method public String! getTitle();
+    method public float getZIndex();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options icon(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor?);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options infoWindowAnchor(@FloatRange(from=0.0, to=1.0) float, @FloatRange(from=0.0, to=1.0) float);
+    method public boolean isDraggable();
+    method public boolean isFlat();
+    method public boolean isVisible();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options position(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options rotation(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options snippet(String?);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options title(String?);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options visible(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker.Options zIndex(float);
+  }
+
+  public interface PatternItem {
+  }
+
+  public interface PointOfInterest {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getLatLng();
+    method public String! getName();
+    method public String! getPlaceId();
+  }
+
+  @UiThread public interface Polygon {
+    method public int getFillColor();
+    method public java.util.List<java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>!>! getHoles();
+    method public String! getId();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>! getPoints();
+    method public int getStrokeColor();
+    method public int getStrokeJointType();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>? getStrokePattern();
+    method public float getStrokeWidth();
+    method public Object? getTag();
+    method public float getZIndex();
+    method public boolean isClickable();
+    method public boolean isGeodesic();
+    method public boolean isVisible();
+    method public void remove();
+    method public void setClickable(boolean);
+    method public void setFillColor(int);
+    method public void setGeodesic(boolean);
+    method public void setHoles(java.util.List<? extends java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>>!);
+    method public void setPoints(java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>!);
+    method public void setStrokeColor(int);
+    method public void setStrokeJointType(int);
+    method public void setStrokePattern(java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>?);
+    method public void setStrokeWidth(float);
+    method public void setTag(Object?);
+    method public void setVisible(boolean);
+    method public void setZIndex(float);
+  }
+
+  public static interface Polygon.Options {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options add(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options add(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!...);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options addAll(Iterable<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options addHole(Iterable<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options clickable(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options fillColor(int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options geodesic(boolean);
+    method public int getFillColor();
+    method public java.util.List<java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>!>! getHoles();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>! getPoints();
+    method public int getStrokeColor();
+    method public int getStrokeJointType();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>? getStrokePattern();
+    method public float getStrokeWidth();
+    method public float getZIndex();
+    method public boolean isClickable();
+    method public boolean isGeodesic();
+    method public boolean isVisible();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options strokeColor(int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options strokeJointType(int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options strokePattern(java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>?);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options strokeWidth(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options visible(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon.Options zIndex(float);
+  }
+
+  @UiThread public interface Polyline {
+    method public int getColor();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap getEndCap();
+    method public String! getId();
+    method public int getJointType();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>? getPattern();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>! getPoints();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap getStartCap();
+    method public Object? getTag();
+    method public float getWidth();
+    method public float getZIndex();
+    method public boolean isClickable();
+    method public boolean isGeodesic();
+    method public boolean isVisible();
+    method public void remove();
+    method public void setClickable(boolean);
+    method public void setColor(int);
+    method public void setEndCap(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap);
+    method public void setGeodesic(boolean);
+    method public void setJointType(int);
+    method public void setPattern(java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>?);
+    method public void setPoints(java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>!);
+    method public void setStartCap(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap);
+    method public void setTag(Object?);
+    method public void setVisible(boolean);
+    method public void setWidth(float);
+    method public void setZIndex(float);
+  }
+
+  public static interface Polyline.Options {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options add(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options add(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!...);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options addAll(Iterable<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options clickable(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options color(int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options endCap(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options geodesic(boolean);
+    method public int getColor();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap getEndCap();
+    method public int getJointType();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>? getPattern();
+    method public java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!>! getPoints();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap getStartCap();
+    method public float getWidth();
+    method public float getZIndex();
+    method public boolean isClickable();
+    method public boolean isGeodesic();
+    method public boolean isVisible();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options jointType(int);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options pattern(java.util.List<dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem!>?);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options startCap(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options visible(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options width(float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline.Options zIndex(float);
+  }
+
+  public interface Projection {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng? fromScreenLocation(android.graphics.Point!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion getVisibleRegion();
+    method public android.graphics.Point toScreenLocation(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng!);
+  }
+
+  public interface RoundCap extends dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap {
+  }
+
+  public interface SquareCap extends dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap {
+  }
+
+  public interface Tile {
+    method public byte[]? getData();
+    method public int getHeight();
+    method public int getWidth();
+  }
+
+  @UiThread public interface TileOverlay {
+    method public void clearTileCache();
+    method public boolean getFadeIn();
+    method public String! getId();
+    method public float getTransparency();
+    method public float getZIndex();
+    method public boolean isVisible();
+    method public void remove();
+    method public void setFadeIn(boolean);
+    method public void setTransparency(@FloatRange(from=0.0, to=1.0) float);
+    method public void setVisible(boolean);
+    method public void setZIndex(float);
+  }
+
+  public static interface TileOverlay.Options {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay.Options fadeIn(boolean);
+    method public boolean getFadeIn();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider! getTileProvider();
+    method public float getTransparency();
+    method public float getZIndex();
+    method public boolean isVisible();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay.Options tileProvider(dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider!);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay.Options transparency(@FloatRange(from=0.0, to=1.0) float);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay.Options visible(boolean);
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay.Options zIndex(float);
+  }
+
+  public interface TileProvider {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile! getTile(int, int, int);
+  }
+
+  public interface UrlTileProvider {
+    method public java.net.URL! getTileUrl(int, int, int);
+  }
+
+  public interface VisibleRegion {
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getFarLeft();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getFarRight();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds getLatLngBounds();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getNearLeft();
+    method public dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng getNearRight();
+  }
+
+}
+
