@@ -25,36 +25,25 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 public final class MapKitInitProvider extends ContentProvider {
 
-    private static final Map<MapsPlatform, String> REGISTRY = Collections.unmodifiableMap(
-            new HashMap<MapsPlatform, String>() {{
-                put(MapsPlatform.AMAZON, ".internal.amazon.AmazonMapsBackend");
-                put(MapsPlatform.GOOGLE, ".internal.google.GoogleMapsBackend");
-                put(MapsPlatform.HUAWEI, ".internal.huawei.HuaweiMapsBackend");
-                put(null, ".internal.nop.NopMapsBackend");
-            }}
-    );
+    private static final @NonNull String[] IMPL_FULLY_QUALIFIED_CLASS_NAMES = new String[] {
+            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.amazon.AmazonMapsBackend",
+            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.google.GoogleMapsBackend",
+            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.huawei.HuaweiMapsBackend",
+            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.nop.NopMapsBackend"
+    };
 
     @Override public boolean onCreate() {
         final Context context = getContext().getApplicationContext();
 
-        MapsPlatform platform;
-        String className;
-        for (Map.Entry<MapsPlatform, String> entry : REGISTRY.entrySet()) {
-            platform = entry.getKey();
-            className = BuildConfig.LIBRARY_PACKAGE_NAME + entry.getValue();
-
+        for (String className : IMPL_FULLY_QUALIFIED_CLASS_NAMES) {
             try {
-                @Nullable MapKitBackend backend = (MapKitBackend) Class.forName(className)
+                final @Nullable MapKitBackend backend = (MapKitBackend) Class.forName(className)
                         .getMethod("buildIfSupported", Context.class)
                         .invoke(null, context);
                 if (backend != null) {
-                    MapKit.init(platform, backend);
+                    MapKit.setBackend(backend);
                     return true;
                 }
             } catch (Exception ignored) {

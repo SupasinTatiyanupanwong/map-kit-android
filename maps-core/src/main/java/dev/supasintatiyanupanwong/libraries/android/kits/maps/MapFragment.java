@@ -88,24 +88,23 @@ public class MapFragment extends Fragment {
      */
     @UiThread
     public final void getMapAsync(final MapKit.OnMapReadyCallback callback) {
-        if (MapKit.getPlatform() == null) {
-            return;
-        }
-
-        if (getView() != null) {
-            getMapAsyncInternal(callback);
-        } else {
-            requireFragmentManager().registerFragmentLifecycleCallbacks(
-                    new FragmentManager.FragmentLifecycleCallbacks() {
-                        @Override public void onFragmentViewCreated(
-                                @NonNull FragmentManager fragmentManager,
-                                @NonNull Fragment fragment,
-                                @NonNull View view,
-                                @Nullable Bundle savedInstanceState) {
-                            fragmentManager.unregisterFragmentLifecycleCallbacks(this);
-                            getMapAsyncInternal(callback);
-                        }
-                    }, false);
+        if (MapKit.isMapsOperational()) {
+            if (getView() != null) {
+                getMapAsyncInternal(callback);
+            } else {
+                requireFragmentManager().registerFragmentLifecycleCallbacks(
+                        new FragmentManager.FragmentLifecycleCallbacks() {
+                            @Override
+                            public void onFragmentViewCreated(
+                                    @NonNull FragmentManager fragmentManager,
+                                    @NonNull Fragment fragment,
+                                    @NonNull View view,
+                                    @Nullable Bundle savedInstanceState) {
+                                fragmentManager.unregisterFragmentLifecycleCallbacks(this);
+                                getMapAsyncInternal(callback);
+                            }
+                        }, false);
+            }
         }
     }
 
