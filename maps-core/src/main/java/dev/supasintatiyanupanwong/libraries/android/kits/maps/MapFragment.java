@@ -62,6 +62,7 @@ public class MapFragment extends Fragment {
 
     // Used to verify that subclasses call through to super.onCreateView().
     private boolean mOnCreateViewCalled = false;
+    private View mView = null;
 
     @CallSuper
     @Override public @NonNull View onCreateView(
@@ -69,14 +70,22 @@ public class MapFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         mOnCreateViewCalled = true;
-        return inflater.inflate(MapKit.getBackend().getMapFragmentLayoutRes(), container, false);
+        mView = inflater.inflate(MapKit.getBackend().getMapFragmentLayoutRes(), container, false);
+        return mView;
     }
 
     @CallSuper
     @Override public void onStart() {
         // FM enforced super.onStart() to be called if overridden, checking our view first.
-        ensureViewCreated();
+        ensureViewCreatedThroughSuper();
         super.onStart();
+    }
+
+    @CallSuper
+    @Override public void onDestroyView() {
+        mOnCreateViewCalled = false;
+        mView = null;
+        super.onDestroyView();
     }
 
     /**
@@ -88,24 +97,23 @@ public class MapFragment extends Fragment {
      */
     @UiThread
     public final void getMapAsync(final MapKit.OnMapReadyCallback callback) {
-        if (MapKit.getPlatform() == null) {
-            return;
-        }
-
-        if (getView() != null) {
-            getMapAsyncInternal(callback);
-        } else {
-            requireFragmentManager().registerFragmentLifecycleCallbacks(
-                    new FragmentManager.FragmentLifecycleCallbacks() {
-                        @Override public void onFragmentViewCreated(
-                                @NonNull FragmentManager fragmentManager,
-                                @NonNull Fragment fragment,
-                                @NonNull View view,
-                                @Nullable Bundle savedInstanceState) {
-                            fragmentManager.unregisterFragmentLifecycleCallbacks(this);
-                            getMapAsyncInternal(callback);
-                        }
-                    }, false);
+        if (MapKit.isMapsOperational()) {
+            if (getView() != null) {
+                getMapAsyncInternal(callback);
+            } else {
+                requireFragmentManager().registerFragmentLifecycleCallbacks(
+                        new FragmentManager.FragmentLifecycleCallbacks() {
+                            @Override
+                            public void onFragmentViewCreated(
+                                    @NonNull FragmentManager fragmentManager,
+                                    @NonNull Fragment fragment,
+                                    @NonNull View view,
+                                    @Nullable Bundle savedInstanceState) {
+                                fragmentManager.unregisterFragmentLifecycleCallbacks(this);
+                                getMapAsyncInternal(callback);
+                            }
+                        }, false);
+            }
         }
     }
 
@@ -123,8 +131,8 @@ public class MapFragment extends Fragment {
     }
 
 
-    private void ensureViewCreated() {
-        if (!mOnCreateViewCalled) {
+    private void ensureViewCreatedThroughSuper() {
+        if (!mOnCreateViewCalled || getView() != mView) {
             throw new IllegalStateException("MapFragment " + this
                     + " did not call through to super.onCreateView()");
         }

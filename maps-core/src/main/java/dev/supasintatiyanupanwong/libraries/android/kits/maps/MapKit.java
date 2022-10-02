@@ -19,7 +19,6 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.annotation.UiThread;
 
@@ -54,7 +53,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegio
  */
 public final class MapKit {
 
-    private static MapsPlatform sPlatform;
     private static MapKitBackend sBackend;
 
     private MapKit() {} // No instances!
@@ -63,8 +61,8 @@ public final class MapKit {
     /**
      * @since 2.2.0
      */
-    public static @Nullable MapsPlatform getPlatform() {
-        return sPlatform;
+    public static boolean isMapsOperational() {
+        return getBackend().getMapFragmentIdRes() != 0;
     }
 
 
@@ -281,13 +279,12 @@ public final class MapKit {
     }
 
 
-    static void init(@Nullable MapsPlatform platform, @NonNull MapKitBackend backend) {
-        sPlatform = platform;
-        sBackend = backend;
-    }
-
     static @NonNull MapKitBackend getBackend() {
         return sBackend;
+    }
+
+    static void setBackend(@NonNull MapKitBackend backend) {
+        sBackend = backend;
     }
 
 
