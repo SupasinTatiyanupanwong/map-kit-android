@@ -172,7 +172,7 @@ public class TomTomCircle implements Circle {
     public static class Options implements Circle.Options {
         private LatLng mCenter;
         private double mRadius = 0f;
-        private float mStrokeWidth = 0f;
+        private float mStrokeWidth = 10f;
         private @ColorInt int mStrokeColor = Color.TRANSPARENT;
         private @ColorInt int mFillColor = Color.BLUE;
         private boolean mClickable = false;
@@ -217,6 +217,7 @@ public class TomTomCircle implements Circle {
         }
 
         @Override public @NonNull Circle.Options visible(boolean visible) {
+            // No-op on TomTom Map
             return this;
         }
 
