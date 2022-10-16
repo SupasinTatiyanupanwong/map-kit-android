@@ -46,7 +46,7 @@ public final class MapKitInitProvider extends ContentProvider {
                         .getMethod("buildIfSupported", Context.class)
                         .invoke(null, context);
                 if (backend != null) {
-                    MapKit.setBackend(backend);
+                    MapKit.init(context, backend);
                     return true;
                 }
             } catch (Exception ignored) {

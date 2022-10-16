@@ -19,16 +19,23 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.m
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
+import androidx.core.content.ContextCompat;
 
 import com.tomtom.sdk.maps.display.image.ImageFactory;
 
 import java.io.File;
 
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 
@@ -37,11 +44,11 @@ public class TomTomBitmapDescriptor implements BitmapDescriptor {
 
     public static final Factory FACTORY = new Factory() {
         @Override public @NonNull BitmapDescriptor defaultMarker() {
-            return wrap(ImageFactory.INSTANCE.fromResource(R.drawable.ic_location_pin_filled_24dp));
+            return fromBitmap(getBitmapFromResourceId(R.drawable.ic_location_pin_filled_24dp));
         }
 
         @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
-            return wrap(ImageFactory.INSTANCE.fromResource(R.drawable.ic_location_pin_filled_24dp));
+            return fromBitmap(getBitmapFromResourceId(R.drawable.ic_location_pin_filled_24dp));
         }
 
         @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
@@ -62,6 +69,30 @@ public class TomTomBitmapDescriptor implements BitmapDescriptor {
 
         @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
             return wrap(ImageFactory.INSTANCE.fromResource(resourceId));
+        }
+
+
+        private @NonNull Bitmap getBitmapFromResourceId(@DrawableRes int resourceId) {
+            Drawable drawable = ContextCompat.getDrawable(MapKit.getContext(), resourceId);
+            if (drawable instanceof BitmapDrawable) {
+                return ((BitmapDrawable) drawable).getBitmap();
+            } else if (drawable instanceof VectorDrawable) {
+                return getBitmap((VectorDrawable) drawable);
+            } else {
+                throw new IllegalArgumentException("unsupported drawable type");
+            }
+        }
+
+        private @NonNull Bitmap getBitmap(@NonNull VectorDrawable drawable) {
+            Bitmap bitmap = Bitmap.createBitmap(
+                    drawable.getIntrinsicWidth(),
+                    drawable.getIntrinsicHeight(),
+                    Bitmap.Config.ARGB_8888
+            );
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            return bitmap;
         }
     };
 
