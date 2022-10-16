@@ -57,7 +57,12 @@ public class GoogleBitmapDescriptor implements BitmapDescriptor {
         }
 
         @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
-            return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromResource(resourceId));
+            try {
+                return fromBitmap(BitmapDescriptor.fromResource(resourceId));
+            } catch (Exception ignored) {
+                // Fallback to default if we can't handle it
+                return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromResource(resourceId));
+            }
         }
     };
 
