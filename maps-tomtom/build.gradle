@@ -45,6 +45,11 @@ dependencies {
     api project(':maps-core')
 
     implementation 'com.tomtom.sdk:maps-display:0.3.678'
+
+    // Required by com.tomtom.sdk.maps.display.ui.zoom.DefaultZoomControlsView
+    // Assuming that ConstraintLayout APIs is very stable and clients will use compatible version
+    // Keeping version 1.0.0 to avoid version conflicts
+    implementation 'androidx.constraintlayout:constraintlayout:1.0.0'
 }
 
 tasks.withType(Javadoc).all { enabled = false }

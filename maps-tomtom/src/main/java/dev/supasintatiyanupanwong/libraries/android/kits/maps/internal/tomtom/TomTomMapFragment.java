@@ -28,7 +28,7 @@ import androidx.fragment.app.Fragment;
 import com.tomtom.sdk.maps.display.MapOptions;
 import com.tomtom.sdk.maps.display.ui.MapView;
 
-public final class TomtomMapFragment extends Fragment {
+public final class TomTomMapFragment extends Fragment {
 
     @Override public @NonNull View onCreateView(
             @NonNull LayoutInflater inflater,

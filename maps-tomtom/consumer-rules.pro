@@ -14,6 +14,6 @@
 # limitations under the License.
 #
 
--keep class dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.TomtomMapsBackend {
+-keep class dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.TomTomMapsBackend {
     public static *** buildIfSupported(android.content.Context);
 }

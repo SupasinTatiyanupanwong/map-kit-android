@@ -22,27 +22,35 @@ import androidx.annotation.IdRes;
 import androidx.annotation.Keep;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.tomtom.sdk.maps.display.TomTomMap;
+import com.tomtom.sdk.maps.display.ui.MapView;
+import com.tomtom.sdk.maps.display.ui.OnMapReadyCallback;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopBitmapDescriptor;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopCameraPosition;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopCameraUpdate;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopCap;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopCircle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopGroundOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopLatLng;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopMapClient;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopMarker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopPatternItem;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopPolygon;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopPolyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopVisibleRegion;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomBitmapDescriptor;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomButtCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomCameraPosition;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomCameraUpdate;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomCircle;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomLatLng;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomLatLngBounds;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomMarker;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomPolygon;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomPolyline;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomRoundCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomSquareCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
@@ -68,9 +76,9 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
-class TomtomMapsBackend implements MapKitBackend {
+class TomTomMapsBackend implements MapKitBackend {
 
-    private TomtomMapsBackend() {}
+    private TomTomMapsBackend() {}
 
     @Override public @LayoutRes int getMapFragmentLayoutRes() {
         return R.layout.kits_maps_internal_tomtom_map_view;
@@ -82,44 +90,50 @@ class TomtomMapsBackend implements MapKitBackend {
 
 
     @Override public @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory() {
-        return NopBitmapDescriptor.FACTORY;
+        return TomTomBitmapDescriptor.FACTORY;
     }
 
     @Override public @NonNull ButtCap newButtCap() {
-        return NopCap.NULL; // Not supported, null object for API safe.
+        return TomTomButtCap.INSTANCE;
     }
 
     @Override public @NonNull CameraUpdate.Factory getCameraUpdateFactory() {
-        return NopCameraUpdate.FACTORY;
+        return TomTomCameraUpdate.FACTORY;
     }
 
     @Override public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
             @NonNull LatLng target,
-            float zoom) {
-        return NopCameraPosition.NULL; // Not supported, null object for API safe.
+            float zoom
+    ) {
+        return newCameraPositionBuilder()
+                .target(target)
+                .zoom(zoom)
+                .build();
     }
 
     @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder() {
-        return NopCameraPosition.Builder.NULL; // Not supported, null object for API safe.
+        return new TomTomCameraPosition.Builder();
     }
 
     @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder(
-            @NonNull CameraPosition camera) {
-        return NopCameraPosition.Builder.NULL; // Not supported, null object for API safe.
+            @NonNull CameraPosition camera
+    ) {
+        return new TomTomCameraPosition.Builder(camera);
     }
 
     @Override public @NonNull Circle.Options newCircleOptions() {
-        return NopCircle.Options.NULL; // Not supported, null object for API safe.
+        return new TomTomCircle.Options();
     }
 
     @Override public @NonNull CustomCap newCustomCap(
             @NonNull BitmapDescriptor bitmapDescriptor,
-            float refWidth) {
-        return NopCap.NULL; // Not supported, null object for API safe.
+            float refWidth
+    ) {
+        return TomTomButtCap.INSTANCE;
     }
 
     @Override public @NonNull CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
-        return NopCap.NULL; // Not supported, null object for API safe.
+        return TomTomButtCap.INSTANCE;
     }
 
     @Override public @NonNull Dot newDot() {
@@ -139,47 +153,49 @@ class TomtomMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull LatLng newLatLng(double latitude, double longitude) {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return new TomTomLatLng(latitude, longitude);
     }
 
     @Override public @NonNull LatLngBounds newLatLngBounds(
             @NonNull LatLng southwest,
-            @NonNull LatLng northeast) {
-        return NopLatLngBounds.NULL; // Not supported, null object for API safe.
+            @NonNull LatLng northeast
+    ) {
+        return new TomTomLatLngBounds(southwest, northeast);
     }
 
     @Override public @NonNull LatLngBounds.Builder newLatLngBoundsBuilder() {
-        return NopLatLngBounds.Builder.NULL; // Not supported, null object for API safe.
+        return new TomTomLatLngBounds.Builder();
     }
 
     @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
-        return NopMapClient.Style.Options.NULL; // Not supported, null object for API safe.
+        return NopMapClient.Style.Options.NULL; // TODO
     }
 
     @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
             @NonNull Context context,
-            int resourceId) {
-        return NopMapClient.Style.Options.NULL; // Not supported, null object for API safe.
+            int resourceId
+    ) {
+        return NopMapClient.Style.Options.NULL; // TODO
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {
-        return NopMarker.Options.NULL; // Not supported, null object for API safe.
+        return new TomTomMarker.Options();
     }
 
     @Override public @NonNull Polygon.Options newPolygonOptions() {
-        return NopPolygon.Options.NULL; // Not supported, null object for API safe.
+        return new TomTomPolygon.Options();
     }
 
     @Override public @NonNull Polyline.Options newPolylineOptions() {
-        return NopPolyline.Options.NULL; // Not supported, null object for API safe.
+        return new TomTomPolyline.Options();
     }
 
     @Override public @NonNull RoundCap newRoundCap() {
-        return NopCap.NULL; // Not supported, null object for API safe.
+        return TomTomRoundCap.INSTANCE;
     }
 
     @Override public @NonNull SquareCap newSquareCap() {
-        return NopCap.NULL; // Not supported, null object for API safe.
+        return TomTomSquareCap.INSTANCE;
     }
 
     @Override public @NonNull TileOverlay.Options newTileOverlayOptions() {
@@ -207,19 +223,31 @@ class TomtomMapsBackend implements MapKitBackend {
             @NonNull LatLng farLeft,
             @NonNull LatLng farRight,
             @NonNull LatLngBounds bounds) {
-        return NopVisibleRegion.NULL; // Not supported, null object for API safe.
+        return new TomTomVisibleRegion(nearLeft, nearRight, farLeft, farRight, bounds);
     }
 
     @Override public void getMapAsync(
             @NonNull Fragment fragment,
-            @NonNull MapKit.OnMapReadyCallback callback) {
-        // Not supported, no-op.
+            @NonNull MapKit.OnMapReadyCallback callback
+    ) {
+        final @NonNull MapView mapView = ((MapView) fragment.requireView());
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override public void onMapReady(@NonNull TomTomMap map) {
+                callback.onMapReady(new TomTomMapClient(mapView, map));
+            }
+        });
     }
 
 
     @Keep
-    public static @NonNull MapKitBackend buildIfSupported(@NonNull Context context) {
-        return new TomtomMapsBackend();
+    public static @Nullable MapKitBackend buildIfSupported(@NonNull Context context) {
+        try {
+            Class.forName("com.tomtom.sdk.maps.display.TomTomMap");
+
+            return new TomTomMapsBackend();
+        } catch (ClassNotFoundException ignored) {
+            return null;
+        }
     }
 
 }
