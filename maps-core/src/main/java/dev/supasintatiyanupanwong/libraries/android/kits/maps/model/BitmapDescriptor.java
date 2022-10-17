@@ -16,11 +16,22 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+import androidx.core.content.ContextCompat;
+
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 
 /**
  * Defines a Bitmap image. For a marker, this class can be used to set the image of the marker
@@ -110,6 +121,27 @@ public interface BitmapDescriptor {
          * @return The {@link BitmapDescriptor} from a given Bitmap image.
          */
         @NonNull BitmapDescriptor fromBitmap(Bitmap image);
+    }
+
+
+    @RestrictTo(LIBRARY_GROUP)
+    static @NonNull Bitmap fromResource(@DrawableRes int resourceId) {
+        @Nullable Drawable drawable = ContextCompat.getDrawable(MapKit.getContext(), resourceId);
+
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        } else {
+            //noinspection ConstantConditions - Let it fail
+            Bitmap bitmap = Bitmap.createBitmap(
+                    drawable.getIntrinsicWidth(),
+                    drawable.getIntrinsicHeight(),
+                    Bitmap.Config.ARGB_8888
+            );
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            return bitmap;
+        }
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Supasin Tatiyanupanwong
+ * Copyright 2022 Supasin Tatiyanupanwong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,25 @@
  * limitations under the License.
  */
 
-buildscript {
+rootProject.allprojects {
     repositories {
-        maven { url 'https://plugins.gradle.org/m2/' }
-    }
-    dependencies {
-        classpath 'me.tylerbwong.gradle.metalava:plugin:0.3.1'
+        maven { url 'https://repositories.tomtom.com/artifactory/maven' }
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.vanniktech.maven.publish'
-apply plugin: "me.tylerbwong.gradle.metalava"
 
 android {
-    namespace 'dev.supasintatiyanupanwong.libraries.android.kits.maps'
+    namespace 'dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom'
 
     compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21 // The minimum supported API level for TomTom Maps SDK
         targetSdkVersion 33
+
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     compileOptions {
@@ -43,14 +41,15 @@ android {
     }
 }
 
-metalava {
-    filename.set("api/api.txt")
-}
-
 dependencies {
-    api 'androidx.annotation:annotation:1.2.0'
+    api project(':maps-core')
 
-    // Assuming that Fragment APIs is very stable and clients will use compatible version
-    // Keeping version 1.0.0 to avoid Java 8 requirement and version conflicts
-    api 'androidx.fragment:fragment:1.0.0'
+    implementation 'com.tomtom.sdk:maps-display:0.3.678'
+
+    // Required by com.tomtom.sdk.maps.display.ui.zoom.DefaultZoomControlsView
+    // Assuming that ConstraintLayout APIs is very stable and clients will use compatible version
+    // Keeping version 1.0.0 to avoid version conflicts
+    implementation 'androidx.constraintlayout:constraintlayout:1.0.0'
 }
+
+tasks.withType(Javadoc).all { enabled = false }

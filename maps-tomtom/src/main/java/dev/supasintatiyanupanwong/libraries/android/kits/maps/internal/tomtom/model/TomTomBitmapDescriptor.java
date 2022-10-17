@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Supasin Tatiyanupanwong
+ * Copyright 2022 Supasin Tatiyanupanwong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,46 +14,54 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.tomtom.sdk.maps.display.image.ImageFactory;
 
+import java.io.File;
+
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 
 @RestrictTo(LIBRARY)
-public class GoogleBitmapDescriptor implements BitmapDescriptor {
+public class TomTomBitmapDescriptor implements BitmapDescriptor {
 
-    public static final BitmapDescriptor.Factory FACTORY = new BitmapDescriptor.Factory() {
+    public static final Factory FACTORY = new Factory() {
         @Override public @NonNull BitmapDescriptor defaultMarker() {
-            return new GoogleBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());
+            return fromBitmap(
+                    BitmapDescriptor.fromResource(R.drawable.ic_location_pin_filled_24dp)
+            );
         }
 
         @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
-            return new GoogleBitmapDescriptor(BitmapDescriptorFactory.defaultMarker(hue));
+            return fromBitmap(
+                    BitmapDescriptor.fromResource(R.drawable.ic_location_pin_filled_24dp)
+            );
         }
 
         @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
-            return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromAsset(assetName));
+            return wrap(ImageFactory.INSTANCE.fromAssets(assetName));
         }
 
         @Override public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
-            return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromBitmap(image));
+            return wrap(ImageFactory.INSTANCE.fromBitmap(image));
         }
 
         @Override public @NonNull BitmapDescriptor fromFile(String fileName) {
-            return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromFile(fileName));
+            return wrap(ImageFactory.INSTANCE.fromUri(Uri.fromFile(new File(fileName))));
         }
 
         @Override public @NonNull BitmapDescriptor fromPath(String absolutePath) {
-            return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromPath(absolutePath));
+            return wrap(ImageFactory.INSTANCE.fromUri(Uri.fromFile(new File(absolutePath))));
         }
 
         @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
@@ -61,16 +69,15 @@ public class GoogleBitmapDescriptor implements BitmapDescriptor {
                 return fromBitmap(BitmapDescriptor.fromResource(resourceId));
             } catch (Exception ignored) {
                 // Fallback to default if we can't handle it
-                return new GoogleBitmapDescriptor(BitmapDescriptorFactory.fromResource(resourceId));
+                return wrap(ImageFactory.INSTANCE.fromResource(resourceId));
             }
         }
     };
 
 
-    private final @NonNull com.google.android.gms.maps.model.BitmapDescriptor mDelegate;
+    private final com.tomtom.sdk.maps.display.image.Image mDelegate;
 
-    private GoogleBitmapDescriptor(
-            @NonNull com.google.android.gms.maps.model.BitmapDescriptor delegate) {
+    private TomTomBitmapDescriptor(com.tomtom.sdk.maps.display.image.Image delegate) {
         mDelegate = delegate;
     }
 
@@ -82,7 +89,7 @@ public class GoogleBitmapDescriptor implements BitmapDescriptor {
             return false;
         }
 
-        GoogleBitmapDescriptor that = (GoogleBitmapDescriptor) obj;
+        TomTomBitmapDescriptor that = (TomTomBitmapDescriptor) obj;
 
         return mDelegate.equals(that.mDelegate);
     }
@@ -96,14 +103,18 @@ public class GoogleBitmapDescriptor implements BitmapDescriptor {
     }
 
 
-    static @Nullable BitmapDescriptor wrap(
-            @Nullable com.google.android.gms.maps.model.BitmapDescriptor delegate) {
-        return delegate == null ? null : new GoogleBitmapDescriptor(delegate);
+    static BitmapDescriptor wrap(com.tomtom.sdk.maps.display.image.Image delegate) {
+        return new TomTomBitmapDescriptor(delegate);
     }
 
-    static @Nullable com.google.android.gms.maps.model.BitmapDescriptor unwrap(
-            @Nullable BitmapDescriptor wrapped) {
-        return wrapped == null ? null : ((GoogleBitmapDescriptor) wrapped).mDelegate;
+    static @NonNull com.tomtom.sdk.maps.display.image.Image unwrap(
+            @Nullable BitmapDescriptor wrapped
+    ) {
+        if (wrapped == null) {
+            return ((TomTomBitmapDescriptor) FACTORY.defaultMarker()).mDelegate;
+        } else {
+            return ((TomTomBitmapDescriptor) wrapped).mDelegate;
+        }
     }
 
 }
