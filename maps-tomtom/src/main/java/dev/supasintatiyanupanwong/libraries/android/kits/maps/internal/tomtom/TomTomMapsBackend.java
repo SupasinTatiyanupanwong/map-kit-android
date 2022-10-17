@@ -31,12 +31,12 @@ import com.tomtom.sdk.maps.display.ui.OnMapReadyCallback;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopGroundOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopMapClient;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopPatternItem;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTile;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTileProvider;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilGroundOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPatternItem;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTile;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTileOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model.TomTomCameraPosition;
@@ -137,19 +137,19 @@ class TomTomMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull Dot newDot() {
-        return NopPatternItem.NULL; // Not supported, null object for API safe.
+        return NilPatternItem.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Dash newDash(float length) {
-        return NopPatternItem.NULL; // Not supported, null object for API safe.
+        return NilPatternItem.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Gap newGap(float length) {
-        return NopPatternItem.NULL; // Not supported, null object for API safe.
+        return NilPatternItem.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull GroundOverlay.Options newGroundOverlayOptions() {
-        return NopGroundOverlay.Options.NULL; // Not supported, null object for API safe.
+        return NilGroundOverlay.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLng newLatLng(double latitude, double longitude) {
@@ -168,14 +168,14 @@ class TomTomMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
-        return NopMapClient.Style.Options.NULL; // TODO
+        return NilMapClient.Style.Options.INSTANCE; // TODO
     }
 
     @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
             @NonNull Context context,
             int resourceId
     ) {
-        return NopMapClient.Style.Options.NULL; // TODO
+        return NilMapClient.Style.Options.INSTANCE; // TODO
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {
@@ -199,22 +199,22 @@ class TomTomMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull TileOverlay.Options newTileOverlayOptions() {
-        return NopTileOverlay.Options.NULL; // Not supported, null object for API safe.
+        return NilTileOverlay.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Tile newTile(int width, int height, byte[] data) {
-        return NopTile.NULL; // Not supported, null object for API safe.
+        return NilTile.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Tile noTile() {
-        return NopTile.NULL; // Not supported, null object for API safe.
+        return NilTile.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,
             @NonNull UrlTileProvider tileProvider) {
-        return NopTileProvider.NULL; // Not supported, null object for API safe.
+        return NilTileProvider.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull VisibleRegion newVisibleRegion(

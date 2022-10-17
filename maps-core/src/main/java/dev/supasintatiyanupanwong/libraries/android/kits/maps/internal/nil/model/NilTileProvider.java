@@ -14,28 +14,25 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
 @RestrictTo(LIBRARY)
-public class NopMapClient {
+public class NilTileProvider implements TileProvider {
 
-    private NopMapClient() {}
+    public static final @NonNull TileProvider INSTANCE = new NilTileProvider();
 
-    public static class Style implements MapClient.Style {
-        private Style() {}
+    private NilTileProvider() {}
 
-        public static class Options implements MapClient.Style.Options {
-            public static final @NonNull Options NULL = new Options();
-
-            private Options() {}
-        }
+    @Override public Tile getTile(int x, int y, int zoom) {
+        return NilTile.INSTANCE; // Not supported, null object for API safe.
     }
 
 }

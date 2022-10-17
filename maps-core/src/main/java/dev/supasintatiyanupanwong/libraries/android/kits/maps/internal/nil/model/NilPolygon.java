@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -25,114 +25,114 @@ import androidx.annotation.RestrictTo;
 import java.util.Collections;
 import java.util.List;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.JointType;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 
 @RestrictTo(LIBRARY)
-public class NopPolyline {
+public class NilPolygon {
 
-    private NopPolyline() {}
+    private NilPolygon() {}
 
 
-    public static class Options implements Polyline.Options {
-        public static final @NonNull Polyline.Options NULL = new Options();
+    public static class Options implements Polygon.Options {
+        public static final @NonNull Polygon.Options INSTANCE = new NilPolygon.Options();
 
         private Options() {}
 
-        @Override public @NonNull Polyline.Options add(LatLng point) {
+        @Override public @NonNull Polygon.Options add(LatLng point) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options add(LatLng... points) {
+        @Override public @NonNull Polygon.Options add(LatLng... points) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options addAll(Iterable<LatLng> points) {
+        @Override public @NonNull Polygon.Options addAll(Iterable<LatLng> points) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options width(float width) {
+        @Override public @NonNull Polygon.Options addHole(Iterable<LatLng> points) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options color(int color) {
+        @Override public @NonNull Polygon.Options strokeWidth(float width) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options startCap(@NonNull Cap startCap) {
+        @Override public @NonNull Polygon.Options strokeColor(int color) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options endCap(@NonNull Cap endCap) {
+        @Override public @NonNull Polygon.Options strokeJointType(int jointType) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options jointType(int jointType) {
+        @Override public @NonNull Polygon.Options strokePattern(
+                @Nullable List<PatternItem> pattern) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options pattern(@Nullable List<PatternItem> pattern) {
+        @Override public @NonNull Polygon.Options fillColor(int color) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options zIndex(float zIndex) {
+        @Override public @NonNull Polygon.Options zIndex(float zIndex) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options visible(boolean visible) {
+        @Override public @NonNull Polygon.Options visible(boolean visible) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options geodesic(boolean geodesic) {
+        @Override public @NonNull Polygon.Options geodesic(boolean geodesic) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polyline.Options clickable(boolean clickable) {
+        @Override public @NonNull Polygon.Options clickable(boolean clickable) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public List<LatLng> getPoints() {
+        @NonNull @Override public List<LatLng> getPoints() {
             return Collections.emptyList(); // Not supported, fallback to default.
         }
 
-        @Override public float getWidth() {
+        @NonNull @Override public List<List<LatLng>> getHoles() {
+            return Collections.emptyList(); // Not supported, fallback to default.
+        }
+
+        @Override public float getStrokeWidth() {
             return 0f; // Not supported, fallback to default.
         }
 
-        @Override public int getColor() {
+        @Override public int getStrokeColor() {
             return 0; // Not supported, fallback to default.
         }
 
-        @Override public @NonNull Cap getStartCap() {
-            return NopCap.NULL; // Not supported, null object for API safe.
-        }
-
-        @Override public @NonNull Cap getEndCap() {
-            return NopCap.NULL; // Not supported, null object for API safe.
-        }
-
-        @Override public int getJointType() {
+        @Override public int getStrokeJointType() {
             return JointType.DEFAULT; // Not supported, fallback to default.
         }
 
-        @Override public @Nullable List<PatternItem> getPattern() {
+        @Override public @Nullable List<PatternItem> getStrokePattern() {
             return null; // Not supported, fallback to default.
+        }
+
+        @Override public int getFillColor() {
+            return 0; // Not supported, fallback to default.
         }
 
         @Override public float getZIndex() {

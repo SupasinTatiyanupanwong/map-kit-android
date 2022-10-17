@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
-
-import java.util.UUID;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
@@ -30,106 +27,13 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
 @RestrictTo(LIBRARY)
-public class NopGroundOverlay implements GroundOverlay {
-    public static final @NonNull GroundOverlay NULL = new NopGroundOverlay();
+public class NilGroundOverlay {
 
-    private NopGroundOverlay() {}
-
-    @Override public void remove() {
-        // Not supported, no-op.
-    }
-
-    @Override public @NonNull String getId() {
-        return new UUID(0L, 0L).toString();
-    }
-
-    @Override public void setPosition(LatLng latLng) {
-        // Not supported, no-op.
-    }
-
-    @Override public @NonNull LatLng getPosition() {
-        return NopLatLng.NULL;
-    }
-
-    @Override public void setImage(@NonNull BitmapDescriptor imageDescriptor) {
-        // Not supported, no-op.
-    }
-
-    @Override public float getWidth() {
-        return Float.NaN;
-    }
-
-    @Override public float getHeight() {
-        return Float.NaN;
-    }
-
-    @Override public void setDimensions(float width) {
-        // Not supported, no-op.
-    }
-
-    @Override public void setDimensions(float width, float height) {
-        // Not supported, no-op.
-    }
-
-    @Override public @NonNull LatLngBounds getBounds() {
-        return NopLatLngBounds.NULL;
-    }
-
-    @Override public void setPositionFromBounds(LatLngBounds bounds) {
-        // Not supported, no-op.
-    }
-
-    @Override public float getBearing() {
-        return Float.NaN;
-    }
-
-    @Override public void setBearing(float bearing) {
-        // Not supported, no-op.
-    }
-
-    @Override public float getZIndex() {
-        return Float.NaN;
-    }
-
-    @Override public void setZIndex(float zIndex) {
-        // Not supported, no-op.
-    }
-
-    @Override public void setVisible(boolean visible) {
-        // Not supported, no-op.
-    }
-
-    @Override public boolean isVisible() {
-        return false;
-    }
-
-    @Override public void setClickable(boolean clickable) {
-        // Not supported, no-op.
-    }
-
-    @Override public boolean isClickable() {
-        return false; // Not supported.
-    }
-
-    @Override public void setTransparency(float transparency) {
-        // Not supported, no-op.
-    }
-
-    @Override public float getTransparency() {
-        return Float.NaN;
-    }
-
-    @Override public void setTag(@Nullable Object tag) {
-        // Not supported, no-op.
-    }
-
-    @Override public @Nullable Object getTag() {
-        return null;
-    }
+    private NilGroundOverlay() {}
 
 
     public static class Options implements GroundOverlay.Options {
-        public static final @NonNull GroundOverlay.Options NULL = new Options();
+        public static final @NonNull GroundOverlay.Options INSTANCE = new Options();
 
         private Options() {}
 
@@ -189,11 +93,11 @@ public class NopGroundOverlay implements GroundOverlay {
         }
 
         @Override public BitmapDescriptor getImage() {
-            return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public LatLng getLocation() {
-            return NopLatLng.NULL; // Not supported, null object for API safe.
+            return NilLatLng.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public float getWidth() {
@@ -205,7 +109,7 @@ public class NopGroundOverlay implements GroundOverlay {
         }
 
         @Override public LatLngBounds getBounds() {
-            return NopLatLngBounds.NULL; // Not supported, null object for API safe.
+            return NilLatLngBounds.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public float getBearing() {

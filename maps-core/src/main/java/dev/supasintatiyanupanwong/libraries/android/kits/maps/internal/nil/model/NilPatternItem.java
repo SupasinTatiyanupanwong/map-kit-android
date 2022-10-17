@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 
 @RestrictTo(LIBRARY)
-public class NopTileProvider implements TileProvider {
+public class NilPatternItem implements Dash, Dot, Gap {
 
-    public static final @NonNull TileProvider NULL = new NopTileProvider();
+    public static final @NonNull
+    NilPatternItem INSTANCE = new NilPatternItem();
 
-    private NopTileProvider() {}
+    private NilPatternItem() {}
 
-    @Override public Tile getTile(int x, int y, int zoom) {
-        return NopTile.NULL; // Not supported, null object for API safe.
+    @Override public float getLength() {
+        return 0f; // Not supported, fallback to default.
     }
 
 }

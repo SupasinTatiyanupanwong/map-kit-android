@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -26,30 +26,30 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @RestrictTo(LIBRARY)
-public class NopVisibleRegion implements VisibleRegion {
+public class NilVisibleRegion implements VisibleRegion {
 
-    public static final @NonNull VisibleRegion NULL = new NopVisibleRegion();
+    public static final @NonNull VisibleRegion INSTANCE = new NilVisibleRegion();
 
-    private NopVisibleRegion() {}
+    private NilVisibleRegion() {}
 
     @Override public @NonNull LatLng getNearLeft() {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLng getNearRight() {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLng getFarLeft() {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLng getFarRight() {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLngBounds getLatLngBounds() {
-        return NopLatLngBounds.NULL; // Not supported, null object for API safe.
+        return NilLatLngBounds.INSTANCE; // Not supported, null object for API safe.
     }
 
 }

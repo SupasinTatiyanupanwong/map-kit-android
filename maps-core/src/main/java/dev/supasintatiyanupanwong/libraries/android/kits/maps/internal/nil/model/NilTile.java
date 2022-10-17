@@ -14,26 +14,33 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 
 @RestrictTo(LIBRARY)
-public class NopLatLng implements LatLng {
+public class NilTile implements Tile {
 
-    public static final @NonNull LatLng NULL = new NopLatLng();
+    public static final @NonNull Tile INSTANCE = new NilTile();
 
-    @Override public double getLatitude() {
+    private NilTile() {}
+
+    @Override public int getWidth() {
         return 0; // Not supported, fallback to default.
     }
 
-    @Override public double getLongitude() {
+    @Override public int getHeight() {
         return 0; // Not supported, fallback to default.
+    }
+
+    @Override public @Nullable byte[] getData() {
+        return null; // Not supported, fallback to default.
     }
 
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -27,13 +27,13 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 
 @RestrictTo(LIBRARY)
-public class NopMarker {
+public class NilMarker {
 
-    private NopMarker() {}
+    private NilMarker() {}
 
 
     public static class Options implements Marker.Options {
-        public static final @NonNull Marker.Options NULL = new Options();
+        public static final @NonNull Marker.Options INSTANCE = new Options();
 
         private Options() {}
 
@@ -98,7 +98,7 @@ public class NopMarker {
         }
 
         @Override public LatLng getPosition() {
-            return NopLatLng.NULL; // Not supported, null object for API safe.
+            return NilLatLng.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public String getTitle() {

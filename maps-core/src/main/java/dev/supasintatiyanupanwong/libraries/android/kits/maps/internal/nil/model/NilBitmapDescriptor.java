@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -26,41 +26,41 @@ import androidx.annotation.RestrictTo;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 
 @RestrictTo(LIBRARY)
-public class NopBitmapDescriptor implements BitmapDescriptor {
+public class NilBitmapDescriptor implements BitmapDescriptor {
 
-    static final @NonNull BitmapDescriptor NULL = new NopBitmapDescriptor();
+    static final @NonNull BitmapDescriptor INSTANCE = new NilBitmapDescriptor();
 
     public static final @NonNull Factory FACTORY = new Factory() {
         @Override public @NonNull BitmapDescriptor defaultMarker() {
-            return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
-            return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
-            return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
-            return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull BitmapDescriptor fromFile(String fileName) {
-            return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull BitmapDescriptor fromPath(String absolutePath) {
-            return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
-            return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
     };
 
 
-    private NopBitmapDescriptor() {}
+    private NilBitmapDescriptor() {}
 
 }

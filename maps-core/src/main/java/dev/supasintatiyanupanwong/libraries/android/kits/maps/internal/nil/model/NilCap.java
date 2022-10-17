@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -28,14 +28,15 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 
 @RestrictTo(LIBRARY)
-public class NopCap implements ButtCap, CustomCap, RoundCap, SquareCap {
+public class NilCap implements ButtCap, CustomCap, RoundCap, SquareCap {
 
-    public static final @NonNull NopCap NULL = new NopCap();
+    public static final @NonNull
+    NilCap INSTANCE = new NilCap();
 
-    private NopCap() {}
+    private NilCap() {}
 
     @Override public @NonNull BitmapDescriptor getBitmapDescriptor() {
-        return NopBitmapDescriptor.NULL; // Not supported, null object for API safe.
+        return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public float getRefWidth() {

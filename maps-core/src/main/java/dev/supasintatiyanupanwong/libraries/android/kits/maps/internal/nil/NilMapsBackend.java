@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil;
 
 import android.content.Context;
 
@@ -27,23 +27,23 @@ import androidx.fragment.app.Fragment;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.R;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopBitmapDescriptor;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopCameraPosition;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopCameraUpdate;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopCap;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopCircle;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopGroundOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopLatLng;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopLatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopMapClient;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopMarker;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopPatternItem;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopPolygon;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopPolyline;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTile;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopVisibleRegion;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCircle;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilGroundOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilLatLng;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilLatLngBounds;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMarker;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPatternItem;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPolygon;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPolyline;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTile;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTileOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTileProvider;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
@@ -69,12 +69,12 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
-class NopMapsBackend implements MapKitBackend {
+class NilMapsBackend implements MapKitBackend {
 
-    private NopMapsBackend() {}
+    private NilMapsBackend() {}
 
     @Override public @LayoutRes int getMapFragmentLayoutRes() {
-        return R.layout.kits_maps_internal_nop_map_view;
+        return R.layout.kits_maps_internal_nil_map_view;
     }
 
     @Override public @IdRes int getMapFragmentIdRes() {
@@ -83,123 +83,130 @@ class NopMapsBackend implements MapKitBackend {
 
 
     @Override public @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory() {
-        return NopBitmapDescriptor.FACTORY;
+        return NilBitmapDescriptor.FACTORY;
     }
 
     @Override public @NonNull ButtCap newButtCap() {
-        return NopCap.NULL; // Not supported, null object for API safe.
+        return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull CameraUpdate.Factory getCameraUpdateFactory() {
-        return NopCameraUpdate.FACTORY;
+        return NilCameraUpdate.FACTORY;
     }
 
     @Override public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
             @NonNull LatLng target,
-            float zoom) {
-        return NopCameraPosition.NULL; // Not supported, null object for API safe.
+            float zoom
+    ) {
+        return NilCameraPosition.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder() {
-        return NopCameraPosition.Builder.NULL; // Not supported, null object for API safe.
+        return NilCameraPosition.Builder.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder(
-            @NonNull CameraPosition camera) {
-        return NopCameraPosition.Builder.NULL; // Not supported, null object for API safe.
+            @NonNull CameraPosition camera
+    ) {
+        return NilCameraPosition.Builder.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Circle.Options newCircleOptions() {
-        return NopCircle.Options.NULL; // Not supported, null object for API safe.
+        return NilCircle.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull CustomCap newCustomCap(
             @NonNull BitmapDescriptor bitmapDescriptor,
-            float refWidth) {
-        return NopCap.NULL; // Not supported, null object for API safe.
+            float refWidth
+    ) {
+        return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
-    @Override public @NonNull CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
-        return NopCap.NULL; // Not supported, null object for API safe.
+    @Override public @NonNull CustomCap newCustomCap(
+            @NonNull BitmapDescriptor bitmapDescriptor
+    ) {
+        return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Dot newDot() {
-        return NopPatternItem.NULL; // Not supported, null object for API safe.
+        return NilPatternItem.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Dash newDash(float length) {
-        return NopPatternItem.NULL; // Not supported, null object for API safe.
+        return NilPatternItem.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Gap newGap(float length) {
-        return NopPatternItem.NULL; // Not supported, null object for API safe.
+        return NilPatternItem.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull GroundOverlay.Options newGroundOverlayOptions() {
-        return NopGroundOverlay.Options.NULL; // Not supported, null object for API safe.
+        return NilGroundOverlay.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLng newLatLng(double latitude, double longitude) {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLngBounds newLatLngBounds(
             @NonNull LatLng southwest,
-            @NonNull LatLng northeast) {
-        return NopLatLngBounds.NULL; // Not supported, null object for API safe.
+            @NonNull LatLng northeast
+    ) {
+        return NilLatLngBounds.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLngBounds.Builder newLatLngBoundsBuilder() {
-        return NopLatLngBounds.Builder.NULL; // Not supported, null object for API safe.
+        return NilLatLngBounds.Builder.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
-        return NopMapClient.Style.Options.NULL; // Not supported, null object for API safe.
+        return NilMapClient.Style.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
             @NonNull Context context,
-            int resourceId) {
-        return NopMapClient.Style.Options.NULL; // Not supported, null object for API safe.
+            int resourceId
+    ) {
+        return NilMapClient.Style.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {
-        return NopMarker.Options.NULL; // Not supported, null object for API safe.
+        return NilMarker.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Polygon.Options newPolygonOptions() {
-        return NopPolygon.Options.NULL; // Not supported, null object for API safe.
+        return NilPolygon.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Polyline.Options newPolylineOptions() {
-        return NopPolyline.Options.NULL; // Not supported, null object for API safe.
+        return NilPolyline.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull RoundCap newRoundCap() {
-        return NopCap.NULL; // Not supported, null object for API safe.
+        return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull SquareCap newSquareCap() {
-        return NopCap.NULL; // Not supported, null object for API safe.
+        return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull TileOverlay.Options newTileOverlayOptions() {
-        return NopTileOverlay.Options.NULL; // Not supported, null object for API safe.
+        return NilTileOverlay.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Tile newTile(int width, int height, byte[] data) {
-        return NopTile.NULL; // Not supported, null object for API safe.
+        return NilTile.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Tile noTile() {
-        return NopTile.NULL; // Not supported, null object for API safe.
+        return NilTile.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,
             @NonNull UrlTileProvider tileProvider) {
-        return NopTileProvider.NULL; // Not supported, null object for API safe.
+        return NilTileProvider.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull VisibleRegion newVisibleRegion(
@@ -207,20 +214,22 @@ class NopMapsBackend implements MapKitBackend {
             @NonNull LatLng nearRight,
             @NonNull LatLng farLeft,
             @NonNull LatLng farRight,
-            @NonNull LatLngBounds bounds) {
-        return NopVisibleRegion.NULL; // Not supported, null object for API safe.
+            @NonNull LatLngBounds bounds
+    ) {
+        return NilVisibleRegion.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public void getMapAsync(
             @NonNull Fragment fragment,
-            @NonNull MapKit.OnMapReadyCallback callback) {
+            @NonNull MapKit.OnMapReadyCallback callback
+    ) {
         // Not supported, no-op.
     }
 
 
     @Keep
     public static @NonNull MapKitBackend buildIfSupported(@NonNull Context context) {
-        return new NopMapsBackend();
+        return new NilMapsBackend();
     }
 
 }

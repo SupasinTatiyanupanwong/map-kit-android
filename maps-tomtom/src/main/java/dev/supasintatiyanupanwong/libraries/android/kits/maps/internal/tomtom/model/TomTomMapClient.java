@@ -49,8 +49,6 @@ import com.tomtom.sdk.maps.display.ui.MapView;
 import com.tomtom.sdk.maps.display.ui.zoom.DefaultZoomControlsView;
 import com.tomtom.sdk.maps.display.ui.zoom.ZoomControlsView;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopGroundOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model.NopTileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
@@ -333,11 +331,11 @@ public class TomTomMapClient implements MapClient {
     @Override public @Nullable GroundOverlay addGroundOverlay(
             @NonNull GroundOverlay.Options options
     ) {
-        return NopGroundOverlay.NULL;
+        return null;
     }
 
     @Override public @Nullable TileOverlay addTileOverlay(@NonNull TileOverlay.Options options) {
-        return NopTileOverlay.NULL;
+        return null;
     }
 
     @Override public void clear() {

@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
 
 @RestrictTo(LIBRARY)
-public class NopPatternItem implements Dash, Dot, Gap {
+public class NilMapClient {
 
-    public static final @NonNull NopPatternItem NULL = new NopPatternItem();
+    private NilMapClient() {}
 
-    private NopPatternItem() {}
+    public static class Style implements MapClient.Style {
+        private Style() {}
 
-    @Override public float getLength() {
-        return 0f; // Not supported, fallback to default.
+        public static class Options implements MapClient.Style.Options {
+            public static final @NonNull Options INSTANCE = new Options();
+
+            private Options() {}
+        }
     }
 
 }

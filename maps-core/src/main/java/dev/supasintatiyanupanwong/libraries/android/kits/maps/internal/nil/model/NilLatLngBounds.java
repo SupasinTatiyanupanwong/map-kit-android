@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -25,18 +25,18 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
 @RestrictTo(LIBRARY)
-public class NopLatLngBounds implements LatLngBounds {
+public class NilLatLngBounds implements LatLngBounds {
 
-    public static final @NonNull LatLngBounds NULL = new NopLatLngBounds();
+    public static final @NonNull LatLngBounds INSTANCE = new NilLatLngBounds();
 
-    private NopLatLngBounds() {}
+    private NilLatLngBounds() {}
 
     @Override public @NonNull LatLng getSouthwest() {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLng getNortheast() {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public boolean contains(@NonNull LatLng point) {
@@ -44,16 +44,16 @@ public class NopLatLngBounds implements LatLngBounds {
     }
 
     @Override public @NonNull LatLngBounds including(@NonNull LatLng point) {
-        return NopLatLngBounds.NULL; // Not supported, null object for API safe.
+        return NilLatLngBounds.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull LatLng getCenter() {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
 
     public static class Builder implements LatLngBounds.Builder {
-        public static final @NonNull LatLngBounds.Builder NULL = new Builder();
+        public static final @NonNull LatLngBounds.Builder INSTANCE = new Builder();
 
         private Builder() {}
 
@@ -63,7 +63,7 @@ public class NopLatLngBounds implements LatLngBounds {
         }
 
         @Override public @NonNull LatLngBounds build() {
-            return NopLatLngBounds.NULL; // Not supported, null object for API safe.
+            return NilLatLngBounds.INSTANCE; // Not supported, null object for API safe.
         }
     }
 

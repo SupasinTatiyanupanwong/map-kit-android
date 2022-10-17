@@ -34,7 +34,7 @@ public final class MapKitInitProvider extends ContentProvider {
             BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.google.GoogleMapsBackend",
             BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.huawei.HuaweiMapsBackend",
 
-            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.nop.NopMapsBackend"
+            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.nil.NilMapsBackend"
     };
 
     @Override public boolean onCreate() {

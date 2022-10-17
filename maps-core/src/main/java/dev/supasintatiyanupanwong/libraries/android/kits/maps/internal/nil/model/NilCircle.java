@@ -14,105 +14,85 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
+
+import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
-import java.util.Collections;
 import java.util.List;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.JointType;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 
 @RestrictTo(LIBRARY)
-public class NopPolygon {
+public class NilCircle {
 
-    private NopPolygon() {}
+    private NilCircle() {}
 
 
-    public static class Options implements Polygon.Options {
-        public static final @NonNull Polygon.Options NULL = new NopPolygon.Options();
+    public static class Options implements Circle.Options {
+        public static final @NonNull Circle.Options INSTANCE = new NilCircle.Options();
 
         private Options() {}
 
-        @Override public @NonNull Polygon.Options add(LatLng point) {
+        @Override public @NonNull Circle.Options center(@NonNull LatLng center) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options add(LatLng... points) {
+        @Override public @NonNull Circle.Options radius(double radius) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options addAll(Iterable<LatLng> points) {
+        @Override public @NonNull Circle.Options strokeWidth(float width) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options addHole(Iterable<LatLng> points) {
+        @Override public @NonNull Circle.Options strokeColor(int color) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options strokeWidth(float width) {
-            // Not supported, no-op.
-            return this;
-        }
-
-        @Override public @NonNull Polygon.Options strokeColor(int color) {
-            // Not supported, no-op.
-            return this;
-        }
-
-        @Override public @NonNull Polygon.Options strokeJointType(int jointType) {
-            // Not supported, no-op.
-            return this;
-        }
-
-        @Override public @NonNull Polygon.Options strokePattern(
+        @Override public @NonNull Circle.Options strokePattern(
                 @Nullable List<PatternItem> pattern) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options fillColor(int color) {
+        @Override public @NonNull Circle.Options fillColor(int color) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options zIndex(float zIndex) {
+        @Override public @NonNull Circle.Options zIndex(float zIndex) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options visible(boolean visible) {
+        @Override public @NonNull Circle.Options visible(boolean visible) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options geodesic(boolean geodesic) {
+        @Override public @NonNull Circle.Options clickable(boolean clickable) {
             // Not supported, no-op.
             return this;
         }
 
-        @Override public @NonNull Polygon.Options clickable(boolean clickable) {
-            // Not supported, no-op.
-            return this;
+        @Override public @NonNull LatLng getCenter() {
+            return NilLatLng.INSTANCE; // Not supported, null object for API safe.
         }
 
-        @NonNull @Override public List<LatLng> getPoints() {
-            return Collections.emptyList(); // Not supported, fallback to default.
-        }
-
-        @NonNull @Override public List<List<LatLng>> getHoles() {
-            return Collections.emptyList(); // Not supported, fallback to default.
+        @Override public double getRadius() {
+            return 0; // Not supported, fallback to default.
         }
 
         @Override public float getStrokeWidth() {
@@ -120,11 +100,7 @@ public class NopPolygon {
         }
 
         @Override public int getStrokeColor() {
-            return 0; // Not supported, fallback to default.
-        }
-
-        @Override public int getStrokeJointType() {
-            return JointType.DEFAULT; // Not supported, fallback to default.
+            return Color.TRANSPARENT; // Not supported, fallback to default.
         }
 
         @Override public @Nullable List<PatternItem> getStrokePattern() {
@@ -132,7 +108,7 @@ public class NopPolygon {
         }
 
         @Override public int getFillColor() {
-            return 0; // Not supported, fallback to default.
+            return Color.TRANSPARENT; // Not supported, fallback to default.
         }
 
         @Override public float getZIndex() {
@@ -140,10 +116,6 @@ public class NopPolygon {
         }
 
         @Override public boolean isVisible() {
-            return false; // Not supported, fallback to default.
-        }
-
-        @Override public boolean isGeodesic() {
             return false; // Not supported, fallback to default.
         }
 

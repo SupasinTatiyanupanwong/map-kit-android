@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -26,14 +26,14 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPositi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 
 @RestrictTo(LIBRARY)
-public class NopCameraPosition implements CameraPosition {
+public class NilCameraPosition implements CameraPosition {
 
-    public static final @NonNull CameraPosition NULL = new NopCameraPosition();
+    public static final @NonNull CameraPosition INSTANCE = new NilCameraPosition();
 
-    private NopCameraPosition() {}
+    private NilCameraPosition() {}
 
     @Override public @NonNull LatLng getTarget() {
-        return NopLatLng.NULL; // Not supported, null object for API safe.
+        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public float getZoom() {
@@ -50,7 +50,7 @@ public class NopCameraPosition implements CameraPosition {
 
 
     public static class Builder implements CameraPosition.Builder {
-        public static final @NonNull CameraPosition.Builder NULL = new NopCameraPosition.Builder();
+        public static final @NonNull CameraPosition.Builder INSTANCE = new NilCameraPosition.Builder();
 
         private Builder() {}
 
@@ -76,7 +76,7 @@ public class NopCameraPosition implements CameraPosition {
         }
 
         @Override public @NonNull CameraPosition build() {
-            return NopCameraPosition.NULL; // Not supported, null object for API safe.
+            return NilCameraPosition.INSTANCE; // Not supported, null object for API safe.
         }
     }
 

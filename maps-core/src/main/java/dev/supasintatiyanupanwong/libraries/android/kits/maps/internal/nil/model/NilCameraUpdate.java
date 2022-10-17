@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -29,51 +29,51 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 
 @RestrictTo(LIBRARY)
-public class NopCameraUpdate implements CameraUpdate {
+public class NilCameraUpdate implements CameraUpdate {
 
-    static final @NonNull CameraUpdate NULL = new NopCameraUpdate();
+    static final @NonNull CameraUpdate INSTANCE = new NilCameraUpdate();
 
     public static final @NonNull Factory FACTORY = new Factory() {
         @Override public @NonNull CameraUpdate zoomIn() {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate zoomOut() {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate scrollBy(float xPixel, float yPixel) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate zoomTo(float zoom) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate zoomBy(float amount) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate zoomBy(float amount, @NonNull Point focus) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition cameraPosition) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate newLatLngBounds(
                 @NonNull LatLngBounds bounds,
                 int padding) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull CameraUpdate newLatLngBounds(
@@ -81,11 +81,11 @@ public class NopCameraUpdate implements CameraUpdate {
                 int width,
                 int height,
                 int padding) {
-            return NopCameraUpdate.NULL; // Not supported, null object for API safe.
+            return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
     };
 
 
-    private NopCameraUpdate() {}
+    private NilCameraUpdate() {}
 
 }

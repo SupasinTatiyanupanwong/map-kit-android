@@ -14,72 +14,24 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nop.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
-import java.util.UUID;
-
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
 @RestrictTo(LIBRARY)
-public class NopTileOverlay implements TileOverlay {
-    public static final @NonNull TileOverlay NULL = new NopTileOverlay();
+public class NilTileOverlay {
 
-    private NopTileOverlay() {}
-
-    @Override public void remove() {
-        // Not supported, no-op.
-    }
-
-    @Override public void clearTileCache() {
-        // Not supported, no-op.
-    }
-
-    @Override public @NonNull String getId() {
-        return new UUID(0L, 0L).toString();
-    }
-
-    @Override public void setZIndex(float zIndex) {
-        // Not supported, no-op.
-    }
-
-    @Override public float getZIndex() {
-        return 0;
-    }
-
-    @Override public void setVisible(boolean visible) {
-        // Not supported, no-op.
-    }
-
-    @Override public boolean isVisible() {
-        return false;
-    }
-
-    @Override public void setFadeIn(boolean fadeIn) {
-        // Not supported, no-op.
-    }
-
-    @Override public boolean getFadeIn() {
-        return false;
-    }
-
-    @Override public void setTransparency(float transparency) {
-        // Not supported, no-op.
-    }
-
-    @Override public float getTransparency() {
-        return 0;
-    }
+    private NilTileOverlay() {}
 
 
     public static class Options implements TileOverlay.Options {
-        public static final @NonNull TileOverlay.Options NULL = new Options();
+        public static final @NonNull TileOverlay.Options INSTANCE = new Options();
 
         private Options() {}
 
@@ -109,7 +61,7 @@ public class NopTileOverlay implements TileOverlay {
         }
 
         @Override public TileProvider getTileProvider() {
-            return NopTileProvider.NULL; // Not supported, null object for API safe.
+            return NilTileProvider.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public float getZIndex() {
