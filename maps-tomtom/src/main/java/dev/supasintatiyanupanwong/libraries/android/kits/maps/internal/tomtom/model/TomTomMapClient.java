@@ -305,38 +305,38 @@ public class TomTomMapClient implements MapClient {
         // No-op on TomTom Map
     }
 
-    @Override public @NonNull Polyline addPolyline(@NonNull Polyline.Options options) {
+    @Override public @Nullable Polyline addPolyline(@NonNull Polyline.Options options) {
         return TomTomPolyline.wrap(
                 mMap.addPolyline(TomTomPolyline.Options.unwrap(options)),
                 options.isClickable()
         );
     }
 
-    @Override public @NonNull Polygon addPolygon(@NonNull Polygon.Options options) {
+    @Override public @Nullable Polygon addPolygon(@NonNull Polygon.Options options) {
         return TomTomPolygon.wrap(
                 mMap.addPolygon(TomTomPolygon.Options.unwrap(options)),
                 options.isClickable()
         );
     }
 
-    @Override public @NonNull Circle addCircle(@NonNull Circle.Options options) {
+    @Override public @Nullable Circle addCircle(@NonNull Circle.Options options) {
         return TomTomCircle.wrap(
                 mMap.addCircle(TomTomCircle.Options.unwrap(options)),
                 options.isClickable()
         );
     }
 
-    @Override public @NonNull Marker addMarker(@NonNull Marker.Options options) {
+    @Override public @Nullable Marker addMarker(@NonNull Marker.Options options) {
         return TomTomMarker.wrap(mMap.addMarker(TomTomMarker.Options.unwrap(options)));
     }
 
-    @Override public @NonNull GroundOverlay addGroundOverlay(
+    @Override public @Nullable GroundOverlay addGroundOverlay(
             @NonNull GroundOverlay.Options options
     ) {
         return NopGroundOverlay.NULL;
     }
 
-    @Override public @NonNull TileOverlay addTileOverlay(@NonNull TileOverlay.Options options) {
+    @Override public @Nullable TileOverlay addTileOverlay(@NonNull TileOverlay.Options options) {
         return NopTileOverlay.NULL;
     }
 
