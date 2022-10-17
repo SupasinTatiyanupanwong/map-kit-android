@@ -37,10 +37,10 @@ final class TomTomColor {
 
     static @NonNull com.tomtom.sdk.maps.display.common.Color unwrap(@ColorInt int wrapped) {
         return new com.tomtom.sdk.maps.display.common.Color(
-                Color.red(wrapped),
-                Color.green(wrapped),
-                Color.blue(wrapped),
-                Color.alpha(wrapped)
+                (Color.red(wrapped) & 255) / 255.0f,
+                (Color.green(wrapped) & 255) / 255.0f,
+                (Color.blue(wrapped) & 255) / 255.0f,
+                (Color.alpha(wrapped) & 255) / 255.0f
         );
     }
 
