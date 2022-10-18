@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Keep;
@@ -31,9 +32,11 @@ import androidx.fragment.app.Fragment;
 import com.here.sdk.core.engine.SDKNativeEngine;
 import com.here.sdk.core.engine.SDKOptions;
 import com.here.sdk.core.errors.InstantiationErrorException;
+import com.here.sdk.mapviewlite.MapViewLite;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereMapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
@@ -231,7 +234,10 @@ class HereMapsBackend implements MapKitBackend {
             @NonNull Fragment fragment,
             @NonNull MapKit.OnMapReadyCallback callback
     ) {
-        // Not supported, no-op.
+        final @Nullable View view = fragment.getView();
+        if (view != null) {
+            callback.onMapReady(new HereMapClient((MapViewLite) view));
+        }
     }
 
 
