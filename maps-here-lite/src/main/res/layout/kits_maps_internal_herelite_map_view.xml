@@ -15,19 +15,11 @@
   ~ limitations under the License.
 -->
 
-<FrameLayout
+<fragment
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/kits_maps_internal_map_fragment"
+    android:name="dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.HereMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:keep="@layout/kits_maps_internal_nil_map_view">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Maps is not operational"
-        tools:ignore="HardcodedText" />
-
-</FrameLayout>
+    tools:keep="@layout/kits_maps_internal_here_map_view" />

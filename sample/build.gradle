@@ -56,6 +56,11 @@ android {
 
             minSdkVersion 21 // The minimum supported API level for TomTom Maps SDK
         }
+        herelite {
+            applicationIdSuffix '.herelite'
+
+            minSdkVersion 21 // The minimum supported API level for HERE SDK
+        }
     }
 
     compileOptions {
@@ -69,6 +74,8 @@ dependencies {
     huaweiImplementation project(':maps-huawei')
     amazonImplementation project(':maps-amazon')
     tomtomImplementation project(':maps-tomtom')
+    hereliteImplementation project(':maps-here-lite')
+    hereliteImplementation files('src/herelite/libs/heresdk-lite-android-4.12.8.0.10008.aar')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

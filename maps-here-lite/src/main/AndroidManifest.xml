@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2022 Supasin Tatiyanupanwong
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,19 +14,4 @@
   ~ limitations under the License.
 -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/kits_maps_internal_map_fragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:keep="@layout/kits_maps_internal_nil_map_view">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Maps is not operational"
-        tools:ignore="HardcodedText" />
-
-</FrameLayout>
+<manifest />
