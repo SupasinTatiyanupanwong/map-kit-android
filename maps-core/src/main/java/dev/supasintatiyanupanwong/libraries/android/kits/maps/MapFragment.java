@@ -108,11 +108,14 @@ public class MapFragment extends Fragment {
                                     @NonNull FragmentManager fragmentManager,
                                     @NonNull Fragment fragment,
                                     @NonNull View view,
-                                    @Nullable Bundle savedInstanceState) {
+                                    @Nullable Bundle savedInstanceState
+                            ) {
                                 fragmentManager.unregisterFragmentLifecycleCallbacks(this);
                                 getMapAsyncInternal(callback);
                             }
-                        }, false);
+                        },
+                        false
+                );
             }
         }
     }
@@ -127,14 +130,38 @@ public class MapFragment extends Fragment {
      */
     @UiThread
     public final void getMapAsync(final MapKit.OnMapAndViewReadyCallback callback) {
-        getMapAsync(new OnMapAndViewReadyCallbackImpl(this, callback));
+        if (MapKit.isMapsOperational()) {
+            final @Nullable View view = getView();
+            if (view != null) {
+                getMapAsyncInternal(new OnMapAndViewReadyCallbackImpl(view, callback));
+            } else {
+                requireFragmentManager().registerFragmentLifecycleCallbacks(
+                        new FragmentManager.FragmentLifecycleCallbacks() {
+                            @Override
+                            public void onFragmentViewCreated(
+                                    @NonNull FragmentManager fragmentManager,
+                                    @NonNull Fragment fragment,
+                                    @NonNull View view,
+                                    @Nullable Bundle savedInstanceState
+                            ) {
+                                fragmentManager.unregisterFragmentLifecycleCallbacks(this);
+                                getMapAsyncInternal(
+                                        new OnMapAndViewReadyCallbackImpl(view, callback)
+                                );
+                            }
+                        },
+                        false
+                );
+            }
+        }
     }
 
 
     private void ensureViewCreatedThroughSuper() {
         if (!mOnCreateViewCalled || getView() != mView) {
-            throw new IllegalStateException("MapFragment " + this
-                    + " did not call through to super.onCreateView()");
+            throw new IllegalStateException(
+                    "MapFragment " + this + " did not call through to super.onCreateView()"
+            );
         }
     }
 
@@ -153,22 +180,21 @@ public class MapFragment extends Fragment {
     private static class OnMapAndViewReadyCallbackImpl implements
             ViewTreeObserver.OnGlobalLayoutListener,
             MapKit.OnMapReadyCallback {
-        private final MapFragment mMapFragment;
-        private final View mMapView;
+        private final View mView;
         private final MapKit.OnMapAndViewReadyCallback mDelegate;
 
-        private boolean mIsViewReady;
-        private boolean mIsMapReady;
+        private boolean mViewReady;
+        private boolean mMapReady;
         private MapClient mMap;
 
         public OnMapAndViewReadyCallbackImpl(
-                @NonNull MapFragment mapFragment,
-                @NonNull MapKit.OnMapAndViewReadyCallback delegate) {
-            mMapFragment = mapFragment;
-            mMapView = mapFragment.getView();
+                @NonNull View view,
+                @NonNull MapKit.OnMapAndViewReadyCallback delegate
+        ) {
+            mView = view;
             mDelegate = delegate;
-            mIsViewReady = false;
-            mIsMapReady = false;
+            mViewReady = false;
+            mMapReady = false;
             mMap = null;
 
             registerListeners();
@@ -177,33 +203,30 @@ public class MapFragment extends Fragment {
 
         private void registerListeners() {
             // View layout.
-            if ((mMapView.getWidth() != 0) && (mMapView.getHeight() != 0)) {
+            if ((mView.getWidth() != 0) && (mView.getHeight() != 0)) {
                 // View has already completed layout.
-                mIsViewReady = true;
+                mViewReady = true;
             } else {
                 // Map has not undergone layout, register a View observer.
-                mMapView.getViewTreeObserver().addOnGlobalLayoutListener(this);
+                mView.getViewTreeObserver().addOnGlobalLayoutListener(this);
             }
-
-            // Note if the MapClient is already ready it will still fire the callback later.
-            mMapFragment.getMapAsync(this);
         }
 
         @Override public final void onMapReady(@NonNull MapClient map) {
             mMap = map;
-            mIsMapReady = true;
+            mMapReady = true;
             fireCallbackIfReady();
         }
 
         @Override public final void onGlobalLayout() {
             // Remove our listener.
-            mMapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            mIsViewReady = true;
+            mView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            mViewReady = true;
             fireCallbackIfReady();
         }
 
         private void fireCallbackIfReady() {
-            if (mIsViewReady && mIsMapReady) {
+            if (mViewReady && mMapReady) {
                 mDelegate.onMapAndViewReady(mMap);
             }
         }
