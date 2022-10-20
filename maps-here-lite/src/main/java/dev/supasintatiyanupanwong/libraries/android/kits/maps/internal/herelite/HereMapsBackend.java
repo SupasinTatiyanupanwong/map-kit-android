@@ -36,6 +36,7 @@ import com.here.sdk.mapviewlite.MapViewLite;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereMapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
@@ -155,7 +156,7 @@ class HereMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull LatLng newLatLng(double latitude, double longitude) {
-        return NilLatLng.INSTANCE; // Not supported, null object for API safe.
+        return new HereLatLng(latitude, longitude);
     }
 
     @Override public @NonNull LatLngBounds newLatLngBounds(
