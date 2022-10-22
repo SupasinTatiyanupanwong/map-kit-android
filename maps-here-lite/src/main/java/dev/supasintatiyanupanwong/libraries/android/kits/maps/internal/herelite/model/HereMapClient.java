@@ -335,7 +335,7 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public void setLatLngBoundsForCameraTarget(@Nullable LatLngBounds bounds) {
-
+        mMapView.getCamera().getLimits().setTargetArea(HereLatLngBounds.unwrap(bounds));
     }
 
 }
