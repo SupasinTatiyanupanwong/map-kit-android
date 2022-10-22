@@ -38,6 +38,8 @@ android {
 dependencies {
     api project(':maps-core')
 
+    implementation 'org.jetbrains:annotations:23.0.0'
+
     compileOnly files('libs/heresdk-lite-android-4.12.8.0.10008.aar')
 }
 
