@@ -39,6 +39,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
@@ -227,7 +228,7 @@ class HereMapsBackend implements MapKitBackend {
             @NonNull LatLng farRight,
             @NonNull LatLngBounds bounds
     ) {
-        return NilVisibleRegion.INSTANCE; // Not supported, null object for API safe.
+        return new HereVisibleRegion(bounds);
     }
 
     @Override public void getMapAsync(
