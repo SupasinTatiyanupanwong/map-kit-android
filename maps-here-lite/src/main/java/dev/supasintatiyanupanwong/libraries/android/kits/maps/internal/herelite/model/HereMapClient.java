@@ -18,6 +18,9 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
+import static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION;
+import static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraMoveStartedListener.REASON_GESTURE;
+
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
@@ -53,11 +56,54 @@ public class HereMapClient implements MapClient {
 
     private boolean mTrafficEnabled = false;
 
-    private int mType = MapClient.MAP_TYPE_NORMAL;
+    private int mType = MAP_TYPE_NORMAL;
+
+    private @Nullable OnCameraMoveStartedListener mCameraMoveStartedListener;
+    private @Nullable OnCameraMoveListener mCameraMoveListener;
+    private @Nullable OnCameraMoveCanceledListener mCameraMoveCanceledListener;
+    private @Nullable OnCameraIdleListener mCameraIdleListener;
 
     public HereMapClient(@NonNull MapViewLite mapView) {
         mMapView = mapView;
         mSettings = new UiSettings(mapView);
+
+        mapView.getCamera().addObserver(update -> {
+            final @Nullable OnCameraMoveListener cameraMoveListener = mCameraMoveListener;
+            if (cameraMoveListener != null) {
+                cameraMoveListener.onCameraMove();
+            }
+        });
+
+        mapView.getGestures().setPanListener((state, origin, translation, velocity) -> {
+            switch (state) {
+                case BEGIN:
+                    final @Nullable OnCameraMoveStartedListener cameraMoveStartedListener =
+                            mCameraMoveStartedListener;
+                    if (cameraMoveStartedListener != null) {
+                        cameraMoveStartedListener.onCameraMoveStarted(REASON_GESTURE);
+                    }
+                    break;
+                case UPDATE:
+                    final @Nullable OnCameraMoveListener cameraMoveListener = mCameraMoveListener;
+                    if (cameraMoveListener != null) {
+                        cameraMoveListener.onCameraMove();
+                    }
+                    break;
+                case END:
+                    final @Nullable OnCameraMoveCanceledListener cameraMoveCanceledListener =
+                            mCameraMoveCanceledListener;
+                    if (cameraMoveCanceledListener != null) {
+                        cameraMoveCanceledListener.onCameraMoveCanceled();
+                    }
+                    break;
+                case CANCEL:
+                    final @Nullable OnCameraIdleListener cameraIdleListener = mCameraIdleListener;
+                    if (cameraIdleListener != null) {
+                        cameraIdleListener.onCameraIdle();
+                    }
+                    break;
+            }
+        });
     }
 
     @Override public @NonNull CameraPosition getCameraPosition() {
@@ -73,7 +119,18 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public void moveCamera(@NonNull CameraUpdate update) {
-        HereCameraUpdate.handle(mMapView.getCamera(), update);
+        final @Nullable OnCameraMoveStartedListener cameraMoveStartedListener =
+                mCameraMoveStartedListener;
+        if (cameraMoveStartedListener != null) {
+            cameraMoveStartedListener.onCameraMoveStarted(REASON_DEVELOPER_ANIMATION);
+        }
+
+        if (HereCameraUpdate.handle(mMapView.getCamera(), update)) {
+            final @Nullable OnCameraIdleListener cameraIdleListener = mCameraIdleListener;
+            if (cameraIdleListener != null) {
+                cameraIdleListener.onCameraIdle();
+            }
+        }
     }
 
     @Override public void animateCamera(@NonNull CameraUpdate update) {
@@ -201,26 +258,27 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public void setOnCameraMoveStartedListener(
-            final @Nullable OnCameraMoveStartedListener listener) {
-
+            final @Nullable OnCameraMoveStartedListener listener
+    ) {
+        mCameraMoveStartedListener = listener;
     }
 
     @Override public void setOnCameraMoveListener(
             final @Nullable OnCameraMoveListener listener
     ) {
-
+        mCameraMoveListener = listener;
     }
 
     @Override public void setOnCameraMoveCanceledListener(
             final @Nullable OnCameraMoveCanceledListener listener
     ) {
-
+        mCameraMoveCanceledListener = listener;
     }
 
     @Override public void setOnCameraIdleListener(
             final @Nullable OnCameraIdleListener listener
     ) {
-
+        mCameraIdleListener = listener;
     }
 
     @Override public void setOnMapClickListener(
