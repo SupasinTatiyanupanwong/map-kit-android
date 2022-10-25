@@ -63,18 +63,18 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public void moveCamera(@NonNull CameraUpdate update) {
-
+        HereCameraUpdate.handle(mMapView.getCamera(), update);
     }
 
     @Override public void animateCamera(@NonNull CameraUpdate update) {
-
+        moveCamera(update);
     }
 
     @Override public void animateCamera(
             @NonNull CameraUpdate update,
             final @Nullable CancelableCallback callback
     ) {
-
+        moveCamera(update);
     }
 
     @Override public void animateCamera(
@@ -82,7 +82,7 @@ public class HereMapClient implements MapClient {
             int durationMs,
             final @Nullable CancelableCallback callback
     ) {
-
+        moveCamera(update);
     }
 
     @Override public void stopAnimation() {

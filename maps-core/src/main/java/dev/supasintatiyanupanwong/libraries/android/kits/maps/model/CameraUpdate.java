@@ -18,13 +18,16 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
 import android.graphics.Point;
 
+import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
+
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapFragment;
 
 /**
  * Defines a camera move. An object of this type can be used to modify a map's camera by calling
  * {@link MapClient#animateCamera(CameraUpdate) animateCamera(CameraUpdate)}, {@link
  * MapClient#animateCamera(CameraUpdate, MapClient.CancelableCallback) animateCamera(CameraUpdate,
- * MapClient.CancelableCallback)} or {@link MapClient#moveCamera(CameraUpdate) moveCamera(
+ * MapClient.CancelableCallback)}, or {@link MapClient#moveCamera(CameraUpdate) moveCamera(
  * CameraUpdate)}.
  *
  * <p>To obtain a {@link CameraUpdate} use the factory class {@link CameraUpdate.Factory}.
@@ -37,9 +40,16 @@ public interface CameraUpdate {
      * A class containing methods for creating {@link CameraUpdate} objects that change a map's
      * camera. To modify the map's camera, call {@link MapClient#animateCamera(CameraUpdate)
      * animateCamera(CameraUpdate)}, {@link MapClient#animateCamera(CameraUpdate,
-     * MapClient.CancelableCallback) animateCamera(CameraUpdate, MapClient.CancelableCallback)}
-     * or {@link MapClient#moveCamera(CameraUpdate) moveCamera(CameraUpdate)},using a {@link
+     * MapClient.CancelableCallback) animateCamera(CameraUpdate, MapClient.CancelableCallback)},
+     * or {@link MapClient#moveCamera(CameraUpdate) moveCamera(CameraUpdate)}, using a {@link
      * CameraUpdate} object created with this class.
+     * <p>
+     * Prior to using any methods from this class, you must ensured that this class is initialized
+     * by waiting for a {@link MapClient} to become available from a {@link MapFragment} that you
+     * have added to your application. You can obtain the {@link MapClient} instance by calling
+     * {@link MapFragment#getMapAsync getMapAsync()} and waiting for the callback.
+     *
+     * @since 1.0.0
      */
     interface Factory {
         /**
@@ -154,7 +164,10 @@ public interface CameraUpdate {
          * in. Not all areas have tiles at the largest zoom levels.
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom);
+        @NonNull CameraUpdate newLatLngZoom(
+                @NonNull LatLng latLng,
+                @FloatRange(from = 2.0, to = 21.0) float zoom
+        );
 
         /**
          * Returns a {@link CameraUpdate} that transforms the camera such that the specified
