@@ -54,7 +54,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
