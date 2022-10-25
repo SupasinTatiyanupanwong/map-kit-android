@@ -46,6 +46,8 @@ public class HereMapClient implements MapClient {
 
     private final @NonNull MapViewLite mMapView;
 
+    private int mType = MapClient.MAP_TYPE_NORMAL;
+
     public HereMapClient(@NonNull MapViewLite mapView) {
         mMapView = mapView;
     }
@@ -132,11 +134,12 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public int getMapType() {
-        return 0;
+        return mType;
     }
 
     @Override public void setMapType(int type) {
-
+        mType = type;
+        mMapView.getMapScene().loadScene(HereMapType.unwrap(type), null);
     }
 
     @Override public boolean isTrafficEnabled() {
@@ -322,6 +325,13 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public boolean setMapStyle(@Nullable Style.Options style) {
+        if (style == null) {
+            setMapType(mType);
+            return true;
+        }
+
+        // TODO load custom style here
+
         return false;
     }
 
