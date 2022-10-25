@@ -164,7 +164,7 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public @NonNull Projection getProjection() {
-        return null;
+        return HereProjection.wrap(mMapView.getCamera());
     }
 
     @Override public void setOnCameraMoveStartedListener(
