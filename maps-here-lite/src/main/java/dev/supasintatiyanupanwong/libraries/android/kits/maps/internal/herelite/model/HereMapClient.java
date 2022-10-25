@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import com.here.sdk.gestures.GestureType;
 import com.here.sdk.mapviewlite.CameraLimits;
 import com.here.sdk.mapviewlite.LayerState;
 import com.here.sdk.mapviewlite.MapLayer;
@@ -48,6 +49,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 public class HereMapClient implements MapClient {
 
     private final @NonNull MapViewLite mMapView;
+    private final @NonNull UiSettings mSettings;
 
     private boolean mTrafficEnabled = false;
 
@@ -55,6 +57,7 @@ public class HereMapClient implements MapClient {
 
     public HereMapClient(@NonNull MapViewLite mapView) {
         mMapView = mapView;
+        mSettings = new UiSettings(mapView);
     }
 
     @Override public @NonNull CameraPosition getCameraPosition() {
@@ -190,7 +193,7 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public @NonNull UiSettings getUiSettings() {
-        return null;
+        return mSettings;
     }
 
     @Override public @NonNull Projection getProjection() {
@@ -373,6 +376,132 @@ public class HereMapClient implements MapClient {
 
     @Override public void setLatLngBoundsForCameraTarget(@Nullable LatLngBounds bounds) {
         mMapView.getCamera().getLimits().setTargetArea(HereLatLngBounds.unwrap(bounds));
+    }
+
+
+    static class UiSettings implements MapClient.UiSettings {
+        private final @NonNull MapViewLite mMapView;
+
+        private boolean mScrollGesturesEnabled = true;
+        private boolean mZoomGesturesEnabled = true;
+        private boolean mTiltGesturesEnabled = true;
+        private boolean mRotateGesturesEnabled = true;
+
+        public UiSettings(@NonNull MapViewLite mapView) {
+            mMapView = mapView;
+        }
+
+        @Override public void setZoomControlsEnabled(boolean enabled) {
+            // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public void setCompassEnabled(boolean enabled) {
+            // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public void setMyLocationButtonEnabled(boolean enabled) {
+            // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public void setIndoorLevelPickerEnabled(boolean enabled) {
+            // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public void setScrollGesturesEnabled(boolean enabled) {
+            mScrollGesturesEnabled = enabled;
+            if (enabled) {
+                mMapView.getGestures().enableDefaultAction(GestureType.PAN);
+            } else {
+                mMapView.getGestures().disableDefaultAction(GestureType.PAN);
+            }
+        }
+
+        @Override public void setZoomGesturesEnabled(boolean enabled) {
+            mZoomGesturesEnabled = enabled;
+            mRotateGesturesEnabled = enabled;
+            if (enabled) {
+                mMapView.getGestures().enableDefaultAction(GestureType.DOUBLE_TAP);
+                mMapView.getGestures().enableDefaultAction(GestureType.TWO_FINGER_TAP);
+            } else {
+                mMapView.getGestures().disableDefaultAction(GestureType.DOUBLE_TAP);
+                mMapView.getGestures().disableDefaultAction(GestureType.TWO_FINGER_TAP);
+                mMapView.getGestures().disableDefaultAction(GestureType.PINCH_ROTATE);
+            }
+        }
+
+        @Override public void setTiltGesturesEnabled(boolean enabled) {
+            mTiltGesturesEnabled = enabled;
+            if (enabled) {
+                mMapView.getGestures().enableDefaultAction(GestureType.TWO_FINGER_PAN);
+            } else {
+                mMapView.getGestures().disableDefaultAction(GestureType.TWO_FINGER_PAN);
+            }
+        }
+
+        @Override public void setRotateGesturesEnabled(boolean enabled) {
+            mRotateGesturesEnabled = enabled;
+            if (enabled) {
+                mMapView.getGestures().enableDefaultAction(GestureType.PINCH_ROTATE);
+            } else {
+                mMapView.getGestures().disableDefaultAction(GestureType.PINCH_ROTATE);
+            }
+        }
+
+        @Override public void setScrollGesturesEnabledDuringRotateOrZoom(boolean enabled) {
+            // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public void setAllGesturesEnabled(boolean enabled) {
+            setScrollGesturesEnabled(enabled);
+            setZoomGesturesEnabled(enabled);
+            setTiltGesturesEnabled(enabled);
+            setRotateGesturesEnabled(enabled);
+            setScrollGesturesEnabledDuringRotateOrZoom(enabled);
+        }
+
+        @Override public void setMapToolbarEnabled(boolean enabled) {
+            // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public boolean isZoomControlsEnabled() {
+            return false; // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public boolean isCompassEnabled() {
+            return false; // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public boolean isMyLocationButtonEnabled() {
+            return false; // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public boolean isIndoorLevelPickerEnabled() {
+            return false; // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public boolean isScrollGesturesEnabled() {
+            return mScrollGesturesEnabled;
+        }
+
+        @Override public boolean isScrollGesturesEnabledDuringRotateOrZoom() {
+            return false; // No-op on HERE Maps (Lite Edition)
+        }
+
+        @Override public boolean isZoomGesturesEnabled() {
+            return mZoomGesturesEnabled;
+        }
+
+        @Override public boolean isTiltGesturesEnabled() {
+            return mTiltGesturesEnabled;
+        }
+
+        @Override public boolean isRotateGesturesEnabled() {
+            return mRotateGesturesEnabled;
+        }
+
+        @Override public boolean isMapToolbarEnabled() {
+            return false; // No-op on HERE Maps (Lite Edition)
+        }
     }
 
 }
