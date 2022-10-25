@@ -35,7 +35,7 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public @NonNull CameraPosition getCameraPosition() {
-        return null;
+        return HereCameraPosition.wrap(mMapView.getCamera());
     }
 
     @Override public float getMaxZoomLevel() {
