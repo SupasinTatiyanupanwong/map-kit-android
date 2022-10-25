@@ -25,6 +25,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import com.here.sdk.mapviewlite.CameraLimits;
+import com.here.sdk.mapviewlite.LayerState;
+import com.here.sdk.mapviewlite.MapLayer;
+import com.here.sdk.mapviewlite.MapScene;
 import com.here.sdk.mapviewlite.MapViewLite;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
@@ -45,6 +48,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 public class HereMapClient implements MapClient {
 
     private final @NonNull MapViewLite mMapView;
+
+    private boolean mTrafficEnabled = false;
 
     private int mType = MapClient.MAP_TYPE_NORMAL;
 
@@ -143,11 +148,17 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public boolean isTrafficEnabled() {
-        return false;
+        return mTrafficEnabled;
     }
 
     @Override public void setTrafficEnabled(boolean enabled) {
-
+        mTrafficEnabled = enabled;
+        try {
+            final @NonNull LayerState state = enabled ? LayerState.ENABLED : LayerState.DISABLED;
+            mMapView.getMapScene().setLayerState(MapLayer.TRAFFIC_FLOW, state);
+            mMapView.getMapScene().setLayerState(MapLayer.TRAFFIC_INCIDENTS, state);
+        } catch (MapScene.MapSceneException ignored) {
+        }
     }
 
     @Override public boolean isIndoorEnabled() {
