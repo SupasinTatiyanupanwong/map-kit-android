@@ -90,16 +90,16 @@ public class HereMapClient implements MapClient {
                     }
                     break;
                 case END:
+                    final @Nullable OnCameraIdleListener cameraIdleListener = mCameraIdleListener;
+                    if (cameraIdleListener != null) {
+                        cameraIdleListener.onCameraIdle();
+                    }
+                    break;
+                case CANCEL:
                     final @Nullable OnCameraMoveCanceledListener cameraMoveCanceledListener =
                             mCameraMoveCanceledListener;
                     if (cameraMoveCanceledListener != null) {
                         cameraMoveCanceledListener.onCameraMoveCanceled();
-                    }
-                    break;
-                case CANCEL:
-                    final @Nullable OnCameraIdleListener cameraIdleListener = mCameraIdleListener;
-                    if (cameraIdleListener != null) {
-                        cameraIdleListener.onCameraIdle();
                     }
                     break;
             }
