@@ -153,7 +153,7 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public void stopAnimation() {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public @Nullable Polyline addPolyline(final @NonNull Polyline.Options options) {
@@ -189,13 +189,13 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public @Nullable IndoorBuilding getFocusedBuilding() {
-        return null;
+        return null; // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public void setOnIndoorStateChangeListener(
             final @Nullable OnIndoorStateChangeListener listener
     ) {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public int getMapType() {
@@ -222,31 +222,31 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public boolean isIndoorEnabled() {
-        return false;
+        return false; // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public boolean setIndoorEnabled(boolean enabled) {
-        return false;
+        return false; // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public boolean isBuildingsEnabled() {
-        return false;
+        return false; // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public void setBuildingsEnabled(boolean enabled) {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public boolean isMyLocationEnabled() {
-        return false;
+        return false; // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public void setMyLocationEnabled(boolean enabled) {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public void setLocationSource(@Nullable LocationSource source) {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public @NonNull UiSettings getUiSettings() {
@@ -332,13 +332,13 @@ public class HereMapClient implements MapClient {
     @Override public void setOnMyLocationButtonClickListener(
             final @Nullable OnMyLocationButtonClickListener listener
     ) {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public void setOnMyLocationClickListener(
             final @Nullable OnMyLocationClickListener listener
     ) {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public void setOnMapLoadedCallback(
@@ -385,7 +385,7 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public void setPadding(int left, int top, int right, int bottom) {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public void setContentDescription(String description) {
@@ -429,7 +429,6 @@ public class HereMapClient implements MapClient {
             mMapView.getCamera().getLimits().setMaxZoomLevel(CameraLimits.MAX_ZOOM_LEVEL);
         } catch (CameraLimits.CameraLimitsException ignored) {
         }
-
     }
 
     @Override public void setLatLngBoundsForCameraTarget(@Nullable LatLngBounds bounds) {
