@@ -479,6 +479,7 @@ public class HereMapClient implements MapClient {
             if (enabled) {
                 mMapView.getGestures().enableDefaultAction(GestureType.DOUBLE_TAP);
                 mMapView.getGestures().enableDefaultAction(GestureType.TWO_FINGER_TAP);
+                mMapView.getGestures().enableDefaultAction(GestureType.PINCH_ROTATE);
             } else {
                 mMapView.getGestures().disableDefaultAction(GestureType.DOUBLE_TAP);
                 mMapView.getGestures().disableDefaultAction(GestureType.TWO_FINGER_TAP);
