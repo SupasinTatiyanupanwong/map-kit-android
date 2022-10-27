@@ -47,20 +47,29 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 public class HereCircle implements Circle {
 
     private final @NonNull com.here.sdk.mapviewlite.MapCircle mDelegate;
+    private final @NonNull com.here.sdk.mapviewlite.MapCircleStyle mStyle;
     private final @NonNull Function<MapCircle, Void> mRemover;
 
     private final @NonNull String mId;
-    private final @NonNull com.here.sdk.mapviewlite.MapCircleStyle mStyle;
 
     private @NonNull com.here.sdk.core.GeoCircle mGeoCircle;
 
     private @Nullable Object mTag;
 
-    HereCircle(
-            @NonNull com.here.sdk.core.GeoCircle circle,
-            @NonNull com.here.sdk.mapviewlite.MapCircleStyle style,
-            @NonNull Function<MapCircle, Void> remover
-    ) {
+    HereCircle(@NonNull Circle.Options options, @NonNull Function<MapCircle, Void> remover) {
+        final @NonNull GeoCircle circle = new GeoCircle(
+                HereLatLng.unwrap(options.getCenter()),
+                options.getRadius()
+        );
+        mGeoCircle = circle;
+
+        final @NonNull MapCircleStyle style = new MapCircleStyle();
+        style.setFillColor(options.getFillColor(), PixelFormat.ARGB_8888);
+        style.setStrokeColor(options.getStrokeColor(), PixelFormat.ARGB_8888);
+        style.setStrokeWidthInPixels(options.getStrokeWidth());
+        style.setDrawOrder((long) options.getZIndex());
+        mStyle = style;
+
         mDelegate = new MapCircle(circle, style);
         mRemover = remover;
 
@@ -73,9 +82,6 @@ public class HereCircle implements Circle {
             id = UUID.randomUUID().toString();
         }
         mId = id;
-
-        mGeoCircle = circle;
-        mStyle = style;
     }
 
     @Override public void remove() {
@@ -138,7 +144,7 @@ public class HereCircle implements Circle {
     }
 
     @Override public void setStrokePattern(@Nullable List<PatternItem> pattern) {
-
+        // No-op on HERE Maps (Lite Edition)
     }
 
     @Override public @Nullable List<PatternItem> getStrokePattern() {

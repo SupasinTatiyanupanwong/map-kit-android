@@ -388,21 +388,21 @@ public interface Marker {
          *
          * @return A {@link LatLng} object specifying the marker's current position.
          */
-        LatLng getPosition();
+        @Nullable LatLng getPosition();
 
         /**
          * Gets the title set for this {@link Marker.Options object}.
          *
          * @return A string containing the marker's title.
          */
-        String getTitle();
+        @Nullable String getTitle();
 
         /**
          * Gets the snippet set for this {@link Marker.Options object}.
          *
          * @return A string containing the marker's snippet.
          */
-        String getSnippet();
+        @Nullable String getSnippet();
 
         /**
          * Gets the custom icon descriptor set for this {@link Marker.Options} object.

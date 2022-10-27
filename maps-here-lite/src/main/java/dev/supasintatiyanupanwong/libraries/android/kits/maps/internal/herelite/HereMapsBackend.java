@@ -43,11 +43,11 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereMarker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilGroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMapClient;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMarker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPatternItem;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPolygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPolyline;
@@ -184,7 +184,7 @@ class HereMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {
-        return NilMarker.Options.INSTANCE; // Not supported, null object for API safe.
+        return new HereMarker.Options();
     }
 
     @Override public @NonNull Polygon.Options newPolygonOptions() {

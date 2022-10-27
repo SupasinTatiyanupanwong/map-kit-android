@@ -28,13 +28,17 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 import androidx.arch.core.util.Function;
 
+import com.here.sdk.core.Anchor2D;
 import com.here.sdk.core.GeoCircle;
+import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.gestures.GestureType;
 import com.here.sdk.mapviewlite.CameraLimits;
 import com.here.sdk.mapviewlite.LayerState;
 import com.here.sdk.mapviewlite.MapCircle;
 import com.here.sdk.mapviewlite.MapCircleStyle;
 import com.here.sdk.mapviewlite.MapLayer;
+import com.here.sdk.mapviewlite.MapMarker;
+import com.here.sdk.mapviewlite.MapMarkerImageStyle;
 import com.here.sdk.mapviewlite.MapScene;
 import com.here.sdk.mapviewlite.MapViewLite;
 import com.here.sdk.mapviewlite.PixelFormat;
@@ -62,8 +66,17 @@ public class HereMapClient implements MapClient {
     private final @NonNull Function<MapCircle, Void> mCircleRemovalHandler =
             new Function<MapCircle, Void>() {
                 @Override
-                public Void apply(MapCircle input) {
-                    mMapView.getMapScene().removeMapCircle(input);
+                public Void apply(MapCircle circle) {
+                    mMapView.getMapScene().removeMapCircle(circle);
+                    return null;
+                }
+            };
+
+    private final @NonNull Function<MapMarker, Void> mMarkerRemovalHandler =
+            new Function<MapMarker, Void>() {
+                @Override
+                public Void apply(MapMarker marker) {
+                    mMapView.getMapScene().removeMapMarker(marker);
                     return null;
                 }
             };
@@ -179,19 +192,8 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public @Nullable Circle addCircle(final @NonNull Circle.Options options) {
-        final @NonNull GeoCircle geo = new GeoCircle(
-                HereLatLng.unwrap(options.getCenter()),
-                options.getRadius()
-        );
-
-        final @NonNull MapCircleStyle style = new MapCircleStyle();
-        style.setFillColor(options.getFillColor(), PixelFormat.ARGB_8888);
-        style.setStrokeColor(options.getStrokeColor(), PixelFormat.ARGB_8888);
-        style.setStrokeWidthInPixels(options.getStrokeWidth());
-        style.setDrawOrder((long) options.getZIndex());
-
         try {
-            final @NonNull HereCircle circle = new HereCircle(geo, style, mCircleRemovalHandler);
+            final @NonNull HereCircle circle = new HereCircle(options, mCircleRemovalHandler);
             mMapView.getMapScene().addMapCircle(HereCircle.unwrap(circle));
             return circle;
         } catch (Exception ex) {
@@ -200,7 +202,13 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public @Nullable Marker addMarker(final @NonNull Marker.Options options) {
-        return null;
+        try {
+            final @NonNull HereMarker marker = new HereMarker(options, mMarkerRemovalHandler);
+            mMapView.getMapScene().addMapMarker(HereMarker.unwrap(marker));
+            return marker;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @Override public @Nullable GroundOverlay addGroundOverlay(
