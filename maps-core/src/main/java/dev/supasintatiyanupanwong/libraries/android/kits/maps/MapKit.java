@@ -284,7 +284,7 @@ public final class MapKit {
 
 
     @RestrictTo(LIBRARY_GROUP)
-    public static @NonNull Context getContext() {
+    public static @NonNull Context getApplicationContext() {
         return sApplicationContext;
     }
 
@@ -293,7 +293,7 @@ public final class MapKit {
     }
 
     static void init(@NonNull Context context, @NonNull MapKitBackend backend) {
-        sApplicationContext = context;
+        sApplicationContext = context.getApplicationContext();
         sBackend = backend;
     }
 
