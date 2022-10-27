@@ -26,13 +26,18 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
+import androidx.arch.core.util.Function;
 
+import com.here.sdk.core.GeoCircle;
 import com.here.sdk.gestures.GestureType;
 import com.here.sdk.mapviewlite.CameraLimits;
 import com.here.sdk.mapviewlite.LayerState;
+import com.here.sdk.mapviewlite.MapCircle;
+import com.here.sdk.mapviewlite.MapCircleStyle;
 import com.here.sdk.mapviewlite.MapLayer;
 import com.here.sdk.mapviewlite.MapScene;
 import com.here.sdk.mapviewlite.MapViewLite;
+import com.here.sdk.mapviewlite.PixelFormat;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
@@ -53,6 +58,15 @@ public class HereMapClient implements MapClient {
 
     private final @NonNull MapViewLite mMapView;
     private final @NonNull UiSettings mSettings;
+
+    private final @NonNull Function<MapCircle, Void> mCircleRemovalHandler =
+            new Function<MapCircle, Void>() {
+                @Override
+                public Void apply(MapCircle input) {
+                    mMapView.getMapScene().removeMapCircle(input);
+                    return null;
+                }
+            };
 
     private boolean mTrafficEnabled = false;
 
@@ -165,7 +179,24 @@ public class HereMapClient implements MapClient {
     }
 
     @Override public @Nullable Circle addCircle(final @NonNull Circle.Options options) {
-        return null;
+        final @NonNull GeoCircle geo = new GeoCircle(
+                HereLatLng.unwrap(options.getCenter()),
+                options.getRadius()
+        );
+
+        final @NonNull MapCircleStyle style = new MapCircleStyle();
+        style.setFillColor(options.getFillColor(), PixelFormat.ARGB_8888);
+        style.setStrokeColor(options.getStrokeColor(), PixelFormat.ARGB_8888);
+        style.setStrokeWidthInPixels(options.getStrokeWidth());
+        style.setDrawOrder((long) options.getZIndex());
+
+        try {
+            final @NonNull HereCircle circle = new HereCircle(geo, style, mCircleRemovalHandler);
+            mMapView.getMapScene().addMapCircle(HereCircle.unwrap(circle));
+            return circle;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @Override public @Nullable Marker addMarker(final @NonNull Marker.Options options) {

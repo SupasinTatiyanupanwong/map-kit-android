@@ -38,13 +38,13 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereCameraUpdate;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereCircle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereMapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.herelite.model.HereVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCircle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilGroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMarker;
@@ -125,7 +125,7 @@ class HereMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull Circle.Options newCircleOptions() {
-        return NilCircle.Options.INSTANCE; // Not supported, null object for API safe.
+        return new HereCircle.Options();
     }
 
     @Override public @NonNull CustomCap newCustomCap(
