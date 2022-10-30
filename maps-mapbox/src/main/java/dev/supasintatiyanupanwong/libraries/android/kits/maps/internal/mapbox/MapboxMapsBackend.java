@@ -27,13 +27,13 @@ import androidx.fragment.app.Fragment;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLng;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCircle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilGroundOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMarker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPatternItem;
@@ -149,11 +149,11 @@ class MapboxMapsBackend implements MapKitBackend {
             @NonNull LatLng southwest,
             @NonNull LatLng northeast
     ) {
-        return NilLatLngBounds.INSTANCE; // Not supported, null object for API safe.
+        return new MapboxLatLngBounds(southwest, northeast);
     }
 
     @Override public @NonNull LatLngBounds.Builder newLatLngBoundsBuilder() {
-        return NilLatLngBounds.Builder.INSTANCE; // Not supported, null object for API safe.
+        return new MapboxLatLngBounds.Builder();
     }
 
     @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
