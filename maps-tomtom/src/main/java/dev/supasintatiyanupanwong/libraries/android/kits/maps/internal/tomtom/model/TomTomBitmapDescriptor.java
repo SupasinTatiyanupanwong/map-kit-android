@@ -21,13 +21,18 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import com.tomtom.sdk.maps.display.image.ImageFactory;
 
+import org.jetbrains.annotations.Contract;
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -37,40 +42,71 @@ public class TomTomBitmapDescriptor implements BitmapDescriptor {
 
     public static final Factory FACTORY = new Factory() {
         @Override public @NonNull BitmapDescriptor defaultMarker() {
+            //noinspection ConstantConditions
             return fromBitmap(
-                    BitmapDescriptor.fromResource(R.drawable.ic_location_pin_filled_24dp)
+                    BitmapDescriptor.fromResourceInternal(R.drawable.ic_location_pin_filled_24dp)
             );
         }
 
         @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
+            //noinspection ConstantConditions
             return fromBitmap(
-                    BitmapDescriptor.fromResource(R.drawable.ic_location_pin_filled_24dp)
+                    BitmapDescriptor.fromResourceInternal(
+                            R.drawable.ic_location_pin_filled_24dp,
+                            hue
+                    )
             );
         }
 
-        @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
-            return wrap(ImageFactory.INSTANCE.fromAssets(assetName));
-        }
-
-        @Override public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
-            return wrap(ImageFactory.INSTANCE.fromBitmap(image));
-        }
-
-        @Override public @NonNull BitmapDescriptor fromFile(String fileName) {
-            return wrap(ImageFactory.INSTANCE.fromUri(Uri.fromFile(new File(fileName))));
-        }
-
-        @Override public @NonNull BitmapDescriptor fromPath(String absolutePath) {
-            return wrap(ImageFactory.INSTANCE.fromUri(Uri.fromFile(new File(absolutePath))));
-        }
-
-        @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
-            try {
-                return fromBitmap(BitmapDescriptor.fromResource(resourceId));
-            } catch (Exception ignored) {
-                // Fallback to default if we can't handle it
-                return wrap(ImageFactory.INSTANCE.fromResource(resourceId));
+        @Override public @Nullable BitmapDescriptor fromAsset(@NonNull String assetName) {
+            //noinspection ConstantConditions
+            if (assetName == null) {
+                return null;
             }
+
+            try {
+                return wrap(ImageFactory.INSTANCE.fromAssets(assetName));
+            } catch (Exception ignored) {
+                return null;
+            }
+        }
+
+        @Override public @Nullable BitmapDescriptor fromBitmap(@Nullable Bitmap image) {
+            return image == null ? null : wrap(ImageFactory.INSTANCE.fromBitmap(image));
+        }
+
+        @Override public @Nullable BitmapDescriptor fromFile(@NonNull String fileName) {
+            //noinspection ConstantConditions
+            if (fileName == null) {
+                return null;
+            }
+
+            try {
+                return wrap(ImageFactory.INSTANCE.fromUri(Uri.fromFile(new File(fileName))));
+            } catch (Exception ignored) {
+                return null;
+            }
+        }
+
+        @Override public @Nullable BitmapDescriptor fromPath(@NonNull String absolutePath) {
+            //noinspection ConstantConditions
+            if (absolutePath == null) {
+                return null;
+            }
+
+            try {
+                return wrap(ImageFactory.INSTANCE.fromUri(Uri.fromFile(new File(absolutePath))));
+            } catch (Exception ignored) {
+                return null;
+            }
+        }
+
+        @Override public @Nullable BitmapDescriptor fromResource(@DrawableRes int resourceId) {
+            if (resourceId == 0) {
+                return null;
+            }
+
+            return fromBitmap(BitmapDescriptor.fromResourceInternal(resourceId));
         }
     };
 
@@ -103,18 +139,18 @@ public class TomTomBitmapDescriptor implements BitmapDescriptor {
     }
 
 
-    static BitmapDescriptor wrap(com.tomtom.sdk.maps.display.image.Image delegate) {
-        return new TomTomBitmapDescriptor(delegate);
+    @Contract("null -> null; !null -> !null")
+    static @Nullable BitmapDescriptor wrap(
+            @Nullable com.tomtom.sdk.maps.display.image.Image delegate
+    ) {
+        return delegate == null ? null : new TomTomBitmapDescriptor(delegate);
     }
 
-    static @NonNull com.tomtom.sdk.maps.display.image.Image unwrap(
+    @Contract("null -> null; !null -> !null")
+    static @Nullable com.tomtom.sdk.maps.display.image.Image unwrap(
             @Nullable BitmapDescriptor wrapped
     ) {
-        if (wrapped == null) {
-            return ((TomTomBitmapDescriptor) FACTORY.defaultMarker()).mDelegate;
-        } else {
-            return ((TomTomBitmapDescriptor) wrapped).mDelegate;
-        }
+        return wrapped == null ? null : ((TomTomBitmapDescriptor) wrapped).mDelegate;
     }
 
 }

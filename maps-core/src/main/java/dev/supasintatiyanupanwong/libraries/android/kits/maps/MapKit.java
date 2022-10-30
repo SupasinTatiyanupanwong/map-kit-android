@@ -284,7 +284,7 @@ public final class MapKit {
 
 
     @RestrictTo(LIBRARY_GROUP)
-    public static @NonNull Context getContext() {
+    public static @NonNull Context getApplicationContext() {
         return sApplicationContext;
     }
 

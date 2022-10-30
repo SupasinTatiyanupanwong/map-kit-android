@@ -24,6 +24,8 @@ import androidx.annotation.RestrictTo;
 
 import com.tomtom.sdk.maps.display.marker.MarkerOptions;
 
+import java.util.Objects;
+
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
@@ -62,7 +64,13 @@ public class TomTomMarker implements Marker {
     }
 
     @Override public void setIcon(@Nullable BitmapDescriptor iconDescriptor) {
-        mDelegate.setPinImage(TomTomBitmapDescriptor.unwrap(iconDescriptor));
+        mDelegate.setPinImage(
+                TomTomBitmapDescriptor.unwrap(
+                        iconDescriptor == null
+                                ? TomTomBitmapDescriptor.FACTORY.defaultMarker()
+                                : iconDescriptor
+                )
+        );
     }
 
     @Override public void setAnchor(float anchorU, float anchorV) {
@@ -305,8 +313,12 @@ public class TomTomMarker implements Marker {
                 @NonNull Marker.Options wrapped
         ) {
             return new MarkerOptions(
-                    TomTomLatLng.unwrap(wrapped.getPosition()),
-                    TomTomBitmapDescriptor.unwrap(wrapped.getIcon()),
+                    Objects.requireNonNull(TomTomLatLng.unwrap(wrapped.getPosition())),
+                    TomTomBitmapDescriptor.unwrap(
+                            wrapped.getIcon() == null
+                                    ? TomTomBitmapDescriptor.FACTORY.defaultMarker()
+                                    : wrapped.getIcon()
+                    ),
                     null,
                     null,
                     null,
