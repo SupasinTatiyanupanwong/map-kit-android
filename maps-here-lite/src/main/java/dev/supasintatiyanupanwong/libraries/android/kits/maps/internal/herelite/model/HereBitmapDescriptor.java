@@ -44,12 +44,19 @@ public class HereBitmapDescriptor implements BitmapDescriptor {
     public static final Factory FACTORY = new Factory() {
         @Override public @NonNull BitmapDescriptor defaultMarker() {
             //noinspection ConstantConditions
-            return fromBitmap(BitmapDescriptor.fromResource(R.drawable.ic_location_pin_filled_24dp));
+            return fromBitmap(
+                    BitmapDescriptor.fromResourceInternal(R.drawable.ic_location_pin_filled_24dp)
+            );
         }
 
         @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
             //noinspection ConstantConditions
-            return fromBitmap(BitmapDescriptor.fromResource(R.drawable.ic_location_pin_filled_24dp));
+            return fromBitmap(
+                    BitmapDescriptor.fromResourceInternal(
+                            R.drawable.ic_location_pin_filled_24dp,
+                            hue
+                    )
+            );
         }
 
         @Override public @Nullable BitmapDescriptor fromAsset(@NonNull String assetName) {
@@ -101,7 +108,7 @@ public class HereBitmapDescriptor implements BitmapDescriptor {
                 return null;
             }
 
-            return fromBitmap(BitmapDescriptor.fromResource(resourceId));
+            return fromBitmap(BitmapDescriptor.fromResourceInternal(resourceId));
         }
     };
 

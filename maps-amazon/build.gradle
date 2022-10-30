@@ -14,12 +14,6 @@
  * limitations under the License.
  */
 
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'com.vanniktech.maven.publish'
 
@@ -44,7 +38,9 @@ android {
 dependencies {
     api project(':maps-core')
 
-    compileOnly(name:'amazon-maps-api-v2', ext:'aar')
+    implementation 'org.jetbrains:annotations:23.0.0'
+
+    compileOnly files('libs/amazon-maps-api-v2.aar')
 }
 
 tasks.withType(Javadoc).all { enabled = false }

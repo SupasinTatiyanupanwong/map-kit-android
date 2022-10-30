@@ -20,11 +20,14 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import com.amazon.geo.mapsv2.model.BitmapDescriptorFactory;
+
+import org.jetbrains.annotations.Contract;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 
@@ -33,35 +36,65 @@ public class AmazonBitmapDescriptor implements BitmapDescriptor {
 
     public static final Factory FACTORY = new Factory() {
         @Override public @NonNull BitmapDescriptor defaultMarker() {
-            return new AmazonBitmapDescriptor(BitmapDescriptorFactory.defaultMarker());
+            return wrap(BitmapDescriptorFactory.defaultMarker());
         }
 
         @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
-            return new AmazonBitmapDescriptor(BitmapDescriptorFactory.defaultMarker(hue));
+            return wrap(BitmapDescriptorFactory.defaultMarker(hue));
         }
 
-        @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
-            return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromAsset(assetName));
-        }
+        @Override public @Nullable BitmapDescriptor fromAsset(@NonNull String assetName) {
+            //noinspection ConstantConditions
+            if (assetName == null) {
+                return null;
+            }
 
-        @Override public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
-            return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromBitmap(image));
-        }
-
-        @Override public @NonNull BitmapDescriptor fromFile(String fileName) {
-            return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromFile(fileName));
-        }
-
-        @Override public @NonNull BitmapDescriptor fromPath(String absolutePath) {
-            return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromPath(absolutePath));
-        }
-
-        @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
             try {
-                return fromBitmap(BitmapDescriptor.fromResource(resourceId));
+                return wrap(BitmapDescriptorFactory.fromAsset(assetName));
             } catch (Exception ignored) {
-                // Fallback to default if we can't handle it
-                return new AmazonBitmapDescriptor(BitmapDescriptorFactory.fromResource(resourceId));
+                return null;
+            }
+        }
+
+        @Override public @Nullable BitmapDescriptor fromBitmap(@Nullable Bitmap image) {
+            return image == null ? null : wrap(BitmapDescriptorFactory.fromBitmap(image));
+        }
+
+        @Override public @Nullable BitmapDescriptor fromFile(@NonNull String fileName) {
+            //noinspection ConstantConditions
+            if (fileName == null) {
+                return null;
+            }
+
+            try {
+                return wrap(BitmapDescriptorFactory.fromFile(fileName));
+            } catch (Exception ignored) {
+                return null;
+            }
+        }
+
+        @Override public @Nullable BitmapDescriptor fromPath(@NonNull String absolutePath) {
+            //noinspection ConstantConditions
+            if (absolutePath == null) {
+                return null;
+            }
+
+            try {
+                return wrap(BitmapDescriptorFactory.fromPath(absolutePath));
+            } catch (Exception ignored) {
+                return null;
+            }
+        }
+
+        @Override public @Nullable BitmapDescriptor fromResource(@DrawableRes int resourceId) {
+            if (resourceId == 0) {
+                return null;
+            }
+
+            try {
+                return fromBitmap(BitmapDescriptor.fromResourceInternal(resourceId));
+            } catch (Exception ignored) {
+                return null;
             }
         }
     };
@@ -96,11 +129,13 @@ public class AmazonBitmapDescriptor implements BitmapDescriptor {
     }
 
 
+    @Contract("null -> null; !null -> !null")
     static @Nullable BitmapDescriptor wrap(
             @Nullable com.amazon.geo.mapsv2.model.BitmapDescriptor delegate) {
         return delegate == null ? null : new AmazonBitmapDescriptor(delegate);
     }
 
+    @Contract("null -> null; !null -> !null")
     static @Nullable com.amazon.geo.mapsv2.model.BitmapDescriptor unwrap(
             @Nullable BitmapDescriptor wrapped) {
         return wrapped == null ? null : ((AmazonBitmapDescriptor) wrapped).mDelegate;

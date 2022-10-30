@@ -18,9 +18,11 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -30,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 
@@ -126,8 +129,17 @@ public interface BitmapDescriptor {
     }
 
 
+    @SuppressLint("Range")
     @RestrictTo(LIBRARY_GROUP)
-    static @Nullable Bitmap fromResource(@DrawableRes int resourceId) {
+    static @Nullable Bitmap fromResourceInternal(@DrawableRes int resourceId) {
+        return fromResourceInternal(resourceId, -1);
+    }
+
+    @RestrictTo(LIBRARY_GROUP)
+    static @Nullable Bitmap fromResourceInternal(
+            @DrawableRes int resourceId,
+            @FloatRange(from = 0, to = 360, toInclusive = false) float hue
+    ) {
         if (resourceId == 0) {
             return null;
         }
@@ -136,6 +148,10 @@ public interface BitmapDescriptor {
                 ContextCompat.getDrawable(MapKit.getApplicationContext(), resourceId);
         if (drawable == null) {
             return null;
+        }
+
+        if (hue != -1) {
+            DrawableCompat.setTint(drawable.mutate(), Color.HSVToColor(new float[] { hue, 1, 1 }));
         }
 
         if (drawable instanceof BitmapDrawable) {

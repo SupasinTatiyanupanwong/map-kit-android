@@ -20,7 +20,9 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -39,24 +41,24 @@ public class NilBitmapDescriptor implements BitmapDescriptor {
             return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
         }
 
-        @Override public @NonNull BitmapDescriptor fromAsset(String assetName) {
-            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
+        @Override public @Nullable BitmapDescriptor fromAsset(@NonNull String assetName) {
+            return null;
         }
 
-        @Override public @NonNull BitmapDescriptor fromBitmap(Bitmap image) {
-            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
+        @Override public @Nullable BitmapDescriptor fromBitmap(@Nullable Bitmap image) {
+            return null;
         }
 
-        @Override public @NonNull BitmapDescriptor fromFile(String fileName) {
-            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
+        @Override public @Nullable BitmapDescriptor fromFile(@NonNull String fileName) {
+            return null;
         }
 
-        @Override public @NonNull BitmapDescriptor fromPath(String absolutePath) {
-            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
+        @Override public @Nullable BitmapDescriptor fromPath(@NonNull String absolutePath) {
+            return null;
         }
 
-        @Override public @NonNull BitmapDescriptor fromResource(int resourceId) {
-            return NilBitmapDescriptor.INSTANCE; // Not supported, null object for API safe.
+        @Override public @Nullable BitmapDescriptor fromResource(@DrawableRes int resourceId) {
+            return null;
         }
     };
 
