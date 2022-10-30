@@ -16,10 +16,13 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
+import androidx.annotation.RestrictTo;
 import androidx.annotation.UiThread;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -53,6 +56,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegio
  */
 public final class MapKit {
 
+    private static Context sApplicationContext;
     private static MapKitBackend sBackend;
 
     private MapKit() {} // No instances!
@@ -279,11 +283,17 @@ public final class MapKit {
     }
 
 
+    @RestrictTo(LIBRARY_GROUP)
+    public static @NonNull Context getApplicationContext() {
+        return sApplicationContext;
+    }
+
     static @NonNull MapKitBackend getBackend() {
         return sBackend;
     }
 
-    static void setBackend(@NonNull MapKitBackend backend) {
+    static void init(@NonNull Context context, @NonNull MapKitBackend backend) {
+        sApplicationContext = context;
         sBackend = backend;
     }
 

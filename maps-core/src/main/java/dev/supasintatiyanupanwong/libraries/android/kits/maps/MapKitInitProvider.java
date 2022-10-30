@@ -29,10 +29,13 @@ import androidx.annotation.Nullable;
 public final class MapKitInitProvider extends ContentProvider {
 
     private static final @NonNull String[] IMPL_FULLY_QUALIFIED_CLASS_NAMES = new String[] {
+            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.tomtom.TomTomMapsBackend",
+
             BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.amazon.AmazonMapsBackend",
             BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.google.GoogleMapsBackend",
             BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.huawei.HuaweiMapsBackend",
-            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.nop.NopMapsBackend"
+
+            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.nil.NilMapsBackend"
     };
 
     @Override public boolean onCreate() {
@@ -44,7 +47,7 @@ public final class MapKitInitProvider extends ContentProvider {
                         .getMethod("buildIfSupported", Context.class)
                         .invoke(null, context);
                 if (backend != null) {
-                    MapKit.setBackend(backend);
+                    MapKit.init(context, backend);
                     return true;
                 }
             } catch (Exception ignored) {

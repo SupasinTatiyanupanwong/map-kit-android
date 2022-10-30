@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil;
 
 import android.content.Context;
 
@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
@@ -68,16 +69,16 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
-class MapboxMapsBackend implements MapKitBackend {
+class NilMapsBackend implements MapKitBackend {
 
-    private MapboxMapsBackend() {}
+    private NilMapsBackend() {}
 
     @Override public @LayoutRes int getMapFragmentLayoutRes() {
-        return R.layout.kits_maps_internal_mapbox_map_view;
+        return R.layout.kits_maps_internal_nil_map_view;
     }
 
     @Override public @IdRes int getMapFragmentIdRes() {
-        return R.id.kits_maps_internal_map_fragment;
+        return 0;
     }
 
 
@@ -121,7 +122,9 @@ class MapboxMapsBackend implements MapKitBackend {
         return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
-    @Override public @NonNull CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
+    @Override public @NonNull CustomCap newCustomCap(
+            @NonNull BitmapDescriptor bitmapDescriptor
+    ) {
         return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
@@ -202,8 +205,7 @@ class MapboxMapsBackend implements MapKitBackend {
     @Override public @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,
-            @NonNull UrlTileProvider tileProvider
-    ) {
+            @NonNull UrlTileProvider tileProvider) {
         return NilTileProvider.INSTANCE; // Not supported, null object for API safe.
     }
 
@@ -227,7 +229,7 @@ class MapboxMapsBackend implements MapKitBackend {
 
     @Keep
     public static @NonNull MapKitBackend buildIfSupported(@NonNull Context context) {
-        return new MapboxMapsBackend();
+        return new NilMapsBackend();
     }
 
 }

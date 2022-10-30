@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Supasin Tatiyanupanwong
+ * Copyright 2022 Supasin Tatiyanupanwong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,31 +14,48 @@
  * limitations under the License.
  */
 
-package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model;
+package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
-import com.huawei.hms.maps.model.BitmapDescriptorFactory;
+import com.tomtom.sdk.maps.display.image.ImageFactory;
 
+import org.jetbrains.annotations.Contract;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 
 @RestrictTo(LIBRARY)
-public class HuaweiBitmapDescriptor implements BitmapDescriptor {
+public class TomTomBitmapDescriptor implements BitmapDescriptor {
 
     public static final Factory FACTORY = new Factory() {
         @Override public @NonNull BitmapDescriptor defaultMarker() {
-            return wrap(BitmapDescriptorFactory.defaultMarker());
+            //noinspection ConstantConditions
+            return fromBitmap(
+                    BitmapDescriptor.fromResourceInternal(R.drawable.ic_location_pin_filled_24dp)
+            );
         }
 
         @Override public @NonNull BitmapDescriptor defaultMarker(float hue) {
-            return wrap(BitmapDescriptorFactory.defaultMarker(hue));
+            //noinspection ConstantConditions
+            return fromBitmap(
+                    BitmapDescriptor.fromResourceInternal(
+                            R.drawable.ic_location_pin_filled_24dp,
+                            hue
+                    )
+            );
         }
 
         @Override public @Nullable BitmapDescriptor fromAsset(@NonNull String assetName) {
@@ -48,14 +65,14 @@ public class HuaweiBitmapDescriptor implements BitmapDescriptor {
             }
 
             try {
-                return wrap(BitmapDescriptorFactory.fromAsset(assetName));
+                return wrap(ImageFactory.INSTANCE.fromAssets(assetName));
             } catch (Exception ignored) {
                 return null;
             }
         }
 
         @Override public @Nullable BitmapDescriptor fromBitmap(@Nullable Bitmap image) {
-            return image == null ? null : wrap(BitmapDescriptorFactory.fromBitmap(image));
+            return image == null ? null : wrap(ImageFactory.INSTANCE.fromBitmap(image));
         }
 
         @Override public @Nullable BitmapDescriptor fromFile(@NonNull String fileName) {
@@ -65,7 +82,7 @@ public class HuaweiBitmapDescriptor implements BitmapDescriptor {
             }
 
             try {
-                return wrap(BitmapDescriptorFactory.fromFile(fileName));
+                return wrap(ImageFactory.INSTANCE.fromUri(Uri.fromFile(new File(fileName))));
             } catch (Exception ignored) {
                 return null;
             }
@@ -78,7 +95,7 @@ public class HuaweiBitmapDescriptor implements BitmapDescriptor {
             }
 
             try {
-                return wrap(BitmapDescriptorFactory.fromPath(absolutePath));
+                return wrap(ImageFactory.INSTANCE.fromUri(Uri.fromFile(new File(absolutePath))));
             } catch (Exception ignored) {
                 return null;
             }
@@ -89,18 +106,14 @@ public class HuaweiBitmapDescriptor implements BitmapDescriptor {
                 return null;
             }
 
-            try {
-                return fromBitmap(BitmapDescriptor.fromResourceInternal(resourceId));
-            } catch (Exception ignored) {
-                return null;
-            }
+            return fromBitmap(BitmapDescriptor.fromResourceInternal(resourceId));
         }
     };
 
 
-    private final com.huawei.hms.maps.model.BitmapDescriptor mDelegate;
+    private final com.tomtom.sdk.maps.display.image.Image mDelegate;
 
-    private HuaweiBitmapDescriptor(com.huawei.hms.maps.model.BitmapDescriptor delegate) {
+    private TomTomBitmapDescriptor(com.tomtom.sdk.maps.display.image.Image delegate) {
         mDelegate = delegate;
     }
 
@@ -112,7 +125,7 @@ public class HuaweiBitmapDescriptor implements BitmapDescriptor {
             return false;
         }
 
-        HuaweiBitmapDescriptor that = (HuaweiBitmapDescriptor) obj;
+        TomTomBitmapDescriptor that = (TomTomBitmapDescriptor) obj;
 
         return mDelegate.equals(that.mDelegate);
     }
@@ -126,12 +139,18 @@ public class HuaweiBitmapDescriptor implements BitmapDescriptor {
     }
 
 
-    static BitmapDescriptor wrap(com.huawei.hms.maps.model.BitmapDescriptor delegate) {
-        return new HuaweiBitmapDescriptor(delegate);
+    @Contract("null -> null; !null -> !null")
+    static @Nullable BitmapDescriptor wrap(
+            @Nullable com.tomtom.sdk.maps.display.image.Image delegate
+    ) {
+        return delegate == null ? null : new TomTomBitmapDescriptor(delegate);
     }
 
-    static com.huawei.hms.maps.model.BitmapDescriptor unwrap(BitmapDescriptor wrapped) {
-        return ((HuaweiBitmapDescriptor) wrapped).mDelegate;
+    @Contract("null -> null; !null -> !null")
+    static @Nullable com.tomtom.sdk.maps.display.image.Image unwrap(
+            @Nullable BitmapDescriptor wrapped
+    ) {
+        return wrapped == null ? null : ((TomTomBitmapDescriptor) wrapped).mDelegate;
     }
 
 }
