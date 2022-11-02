@@ -66,20 +66,20 @@ public interface BitmapDescriptor {
          * Creates a {@link BitmapDescriptor} using the resource ID of a Bitmap image.
          *
          * @param resourceId The resource ID of a Bitmap image.
-         * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
-         * to load.
+         * @return The {@link BitmapDescriptor} that was loaded from the asset or {@code null}
+         * if failed to load.
          */
-        @NonNull BitmapDescriptor fromResource(int resourceId);
+        @Nullable BitmapDescriptor fromResource(@DrawableRes int resourceId);
 
         /**
          * Creates a {@link BitmapDescriptor} using the name of a Bitmap image in the assets
          * directory.
          *
          * @param assetName The name of a Bitmap image in the assets directory.
-         * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
-         * to load.
+         * @return The {@link BitmapDescriptor} that was loaded from the asset or {@code null}
+         * if failed to load.
          */
-        @NonNull BitmapDescriptor fromAsset(String assetName);
+        @Nullable BitmapDescriptor fromAsset(@NonNull String assetName);
 
         /**
          * Creates a {@link BitmapDescriptor} using the name of a Bitmap image file located in the
@@ -87,19 +87,19 @@ public interface BitmapDescriptor {
          * openFileInput(String)}.
          *
          * @param fileName The name of the Bitmap image file.
-         * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
-         * to load.
+         * @return The {@link BitmapDescriptor} that was loaded from the asset or {@code null}
+         * if failed to load.
          */
-        @NonNull BitmapDescriptor fromFile(String fileName);
+        @Nullable BitmapDescriptor fromFile(@NonNull String fileName);
 
         /**
          * Creates a {@link BitmapDescriptor} from the absolute file path of a Bitmap image.
          *
          * @param absolutePath The absolute file path of a Bitmap image.
-         * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
-         * to load.
+         * @return The {@link BitmapDescriptor} that was loaded from the absolute path or
+         * {@code null} if failed to load.
          */
-        @NonNull BitmapDescriptor fromPath(String absolutePath);
+        @Nullable BitmapDescriptor fromPath(@NonNull String absolutePath);
 
         /**
          * Creates a {@link BitmapDescriptor} that refers to the default marker image.
@@ -109,7 +109,9 @@ public interface BitmapDescriptor {
         @NonNull BitmapDescriptor defaultMarker();
 
         /**
-         * Creates a {@link BitmapDescriptor} that refers to the default marker image.
+         * Creates a {@link BitmapDescriptor} that refers to a colorization of the default marker
+         * image. For convenience, there is a predefined set of hue values. See example {@link
+         * #HUE_YELLOW}.
          *
          * @param hue The hue of the marker. Value must be greater or equal to 0 and less than 360.
          * @return The {@link BitmapDescriptor} that refers to the default marker image.
@@ -123,7 +125,7 @@ public interface BitmapDescriptor {
          * @param image The bitmap image.
          * @return The {@link BitmapDescriptor} from a given Bitmap image.
          */
-        @NonNull BitmapDescriptor fromBitmap(Bitmap image);
+        @Nullable BitmapDescriptor fromBitmap(@Nullable Bitmap image);
     }
 
 
