@@ -56,7 +56,7 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:23.0.0'
 
-    implementation 'com.mapbox.maps:android:10.8.1'
+    implementation 'com.mapbox.maps:android:10.12.0'
 }
 
 tasks.withType(Javadoc).all { enabled = false }
