@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 public final class MapKitInitProvider extends ContentProvider {
 
     private static final @NonNull String[] IMPL_FULLY_QUALIFIED_CLASS_NAMES = new String[] {
+            BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.mapbox.MapboxMapsBackend",
             BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.tomtom.TomTomMapsBackend",
 
             BuildConfig.LIBRARY_PACKAGE_NAME + ".internal.amazon.AmazonMapsBackend",
