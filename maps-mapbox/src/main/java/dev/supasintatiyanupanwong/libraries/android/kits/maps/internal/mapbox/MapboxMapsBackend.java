@@ -28,9 +28,9 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxBitmapDescriptorFactory;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxCameraPosition;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxCameraUpdateFactory;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCircle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilGroundOverlay;
@@ -90,7 +90,7 @@ class MapboxMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull CameraUpdate.Factory getCameraUpdateFactory() {
-        return NilCameraUpdate.FACTORY;
+        return MapboxCameraUpdateFactory.INSTANCE;
     }
 
     @Override public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
