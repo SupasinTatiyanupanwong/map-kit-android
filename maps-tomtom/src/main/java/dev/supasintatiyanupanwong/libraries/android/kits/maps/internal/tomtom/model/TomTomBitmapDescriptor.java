@@ -31,8 +31,6 @@ import com.tomtom.sdk.maps.display.image.ImageFactory;
 import org.jetbrains.annotations.Contract;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -44,7 +42,9 @@ public class TomTomBitmapDescriptor implements BitmapDescriptor {
         @Override public @NonNull BitmapDescriptor defaultMarker() {
             //noinspection ConstantConditions
             return fromBitmap(
-                    BitmapDescriptor.fromResourceInternal(R.drawable.ic_location_pin_filled_24dp)
+                    BitmapDescriptor.fromResourceInternal(
+                            R.drawable.mapkit_internal_tomtom_ic_location_pin_filled_24dp
+                    )
             );
         }
 
@@ -52,7 +52,7 @@ public class TomTomBitmapDescriptor implements BitmapDescriptor {
             //noinspection ConstantConditions
             return fromBitmap(
                     BitmapDescriptor.fromResourceInternal(
-                            R.drawable.ic_location_pin_filled_24dp,
+                            R.drawable.mapkit_internal_tomtom_ic_location_pin_filled_24dp,
                             hue
                     )
             );

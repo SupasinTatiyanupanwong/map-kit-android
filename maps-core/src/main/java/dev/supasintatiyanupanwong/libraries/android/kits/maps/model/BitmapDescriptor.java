@@ -18,7 +18,6 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -129,10 +128,9 @@ public interface BitmapDescriptor {
     }
 
 
-    @SuppressLint("Range")
     @RestrictTo(LIBRARY_GROUP)
     static @Nullable Bitmap fromResourceInternal(@DrawableRes int resourceId) {
-        return fromResourceInternal(resourceId, -1);
+        return fromResourceInternal(resourceId, 0);
     }
 
     @RestrictTo(LIBRARY_GROUP)

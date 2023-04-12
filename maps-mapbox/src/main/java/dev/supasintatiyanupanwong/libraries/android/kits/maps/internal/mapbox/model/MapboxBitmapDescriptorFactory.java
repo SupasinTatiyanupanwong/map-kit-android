@@ -44,7 +44,7 @@ public class MapboxBitmapDescriptorFactory implements BitmapDescriptor.Factory {
         //noinspection ConstantConditions
         return fromBitmap(
                 BitmapDescriptor.fromResourceInternal(
-                        R.drawable.mapkit_mapbox_ic_location_pin_filled_24dp
+                        R.drawable.mapkit_internal_mapbox_ic_location_pin_filled_24dp
                 )
         );
     }
@@ -53,7 +53,7 @@ public class MapboxBitmapDescriptorFactory implements BitmapDescriptor.Factory {
         //noinspection ConstantConditions
         return fromBitmap(
                 BitmapDescriptor.fromResourceInternal(
-                        R.drawable.mapkit_mapbox_ic_location_pin_filled_24dp,
+                        R.drawable.mapkit_internal_mapbox_ic_location_pin_filled_24dp,
                         hue
                 )
         );

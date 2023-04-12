@@ -40,7 +40,9 @@ public class TomTomButtCap extends TomTomCap implements ButtCap, CustomCap {
 
     @Override public @NonNull BitmapDescriptor getBitmapDescriptor() {
         if (mBitmapDescriptor == null) {
-            mBitmapDescriptor = TomTomBitmapDescriptor.FACTORY.fromResource(R.drawable.empty);
+            mBitmapDescriptor = TomTomBitmapDescriptor.FACTORY.fromResource(
+                    R.drawable.mapkit_internal_tomtom_empty
+            );
         }
         return mBitmapDescriptor;
     }
