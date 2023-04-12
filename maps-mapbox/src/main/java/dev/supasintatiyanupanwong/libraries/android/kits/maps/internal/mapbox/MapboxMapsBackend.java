@@ -27,9 +27,9 @@ import androidx.fragment.app.Fragment;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxBitmapDescriptorFactory;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCircle;
@@ -97,17 +97,20 @@ class MapboxMapsBackend implements MapKitBackend {
             @NonNull LatLng target,
             float zoom
     ) {
-        return NilCameraPosition.INSTANCE; // Not supported, null object for API safe.
+        return newCameraPositionBuilder()
+                .target(target)
+                .zoom(zoom)
+                .build();
     }
 
     @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder() {
-        return NilCameraPosition.Builder.INSTANCE; // Not supported, null object for API safe.
+        return new MapboxCameraPosition.Builder();
     }
 
     @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder(
             @NonNull CameraPosition camera
     ) {
-        return NilCameraPosition.Builder.INSTANCE; // Not supported, null object for API safe.
+        return new MapboxCameraPosition.Builder(camera);
     }
 
     @Override public @NonNull Circle.Options newCircleOptions() {
