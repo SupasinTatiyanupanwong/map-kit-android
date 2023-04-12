@@ -26,9 +26,9 @@ import androidx.fragment.app.Fragment;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxBitmapDescriptorFactory;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
@@ -82,7 +82,7 @@ class MapboxMapsBackend implements MapKitBackend {
 
 
     @Override public @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory() {
-        return NilBitmapDescriptor.FACTORY;
+        return MapboxBitmapDescriptorFactory.INSTANCE;
     }
 
     @Override public @NonNull ButtCap newButtCap() {
