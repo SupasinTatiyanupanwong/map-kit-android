@@ -32,7 +32,8 @@ public final class MapboxMapFragment extends Fragment {
     @Override public @NonNull View onCreateView(
             @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+            @Nullable Bundle savedInstanceState
+    ) {
         return new MapView(requireContext());
     }
 
