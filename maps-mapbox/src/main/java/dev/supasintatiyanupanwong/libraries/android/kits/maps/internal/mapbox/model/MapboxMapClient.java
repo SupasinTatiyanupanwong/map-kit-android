@@ -27,6 +27,8 @@ import androidx.annotation.RestrictTo;
 
 import com.mapbox.maps.CameraBoundsOptions;
 import com.mapbox.maps.CoordinateBounds;
+import com.mapbox.maps.EdgeInsets;
+import com.mapbox.maps.ExtensionUtils;
 import com.mapbox.maps.MapView;
 import com.mapbox.maps.MapboxMap;
 import com.mapbox.maps.plugin.Plugin;
@@ -434,7 +436,12 @@ public class MapboxMapClient implements MapClient {
     }
 
     @Override public void setPadding(int left, int top, int right, int bottom) {
-
+        mMap.setCamera(
+                ExtensionUtils.toCameraOptions(mMap.getCameraState())
+                        .toBuilder()
+                        .padding(new EdgeInsets(top, left, bottom, right))
+                        .build()
+        );
     }
 
     @Override public void setContentDescription(String description) {
