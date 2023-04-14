@@ -40,6 +40,8 @@ import com.mapbox.maps.plugin.annotation.AnnotationConfig;
 import com.mapbox.maps.plugin.annotation.AnnotationPlugin;
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManagerKt;
+import com.mapbox.maps.plugin.annotation.generated.OnPointAnnotationClickListener;
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotation;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
 import com.mapbox.maps.plugin.annotation.generated.PolygonAnnotationManager;
@@ -84,6 +86,13 @@ public class MapboxMapClient implements MapClient {
     private final @NonNull PolygonAnnotationManager mPolygonAnnotationManager;
     private final @NonNull CircleAnnotationManager mCircleAnnotationManager;
     private final @NonNull PointAnnotationManager mPointAnnotationManager;
+    private final @NonNull Function<PointAnnotation, Void> mPointAnnotation$remove$Impl =
+            new Function<PointAnnotation, Void>() {
+                @Override public Void apply(@NonNull PointAnnotation annotation) {
+                    mPointAnnotationManager.delete(annotation);
+                    return null;
+                }
+            };
 
     private final @NonNull Function<Point, LatLng> mProjection$fromScreenLocation$Impl =
             new Function<Point, LatLng>() {
@@ -119,6 +128,8 @@ public class MapboxMapClient implements MapClient {
             mMapClickListener;
     private @Nullable com.mapbox.maps.plugin.gestures.OnMapLongClickListener
             mMapLongClickListener;
+
+    private @Nullable OnPointAnnotationClickListener mPointAnnotationClickListener;
 
     public MapboxMapClient(@NonNull MapView view) {
         mMapView = view;
@@ -256,10 +267,7 @@ public class MapboxMapClient implements MapClient {
     }
 
     @Override public @Nullable Marker addMarker(final @NonNull Marker.Options options) {
-//        mPointAnnotationManager.
-//        mPointAnnotationManager.create(
-//                new PointAnnotationOptions().
-//        );
+        mPointAnnotationManager.create(MapboxMarkerOptions.unwrap(options));
         return null;
     }
 
@@ -408,7 +416,27 @@ public class MapboxMapClient implements MapClient {
     @Override public void setOnMarkerClickListener(
             final @Nullable OnMarkerClickListener listener
     ) {
-
+        if (listener == null) {
+            final @Nullable OnPointAnnotationClickListener previous =
+                    mPointAnnotationClickListener;
+            if (previous != null) {
+                mPointAnnotationManager.removeClickListener(previous);
+            }
+        } else {
+            mPointAnnotationClickListener = annotation -> {
+                final @Nullable Double opacityOrNull = annotation.getIconOpacity();
+                final float opacity = opacityOrNull == null ? 1f : opacityOrNull.floatValue();
+                return listener.onMarkerClick(
+                        MapboxMarker.wrap(
+                                annotation,
+                                mPointAnnotation$remove$Impl,
+                                opacity,
+                                opacity != 0
+                        )
+                );
+            };
+            mPointAnnotationManager.addClickListener(mPointAnnotationClickListener);
+        }
     }
 
     @Override public void setOnMarkerDragListener(

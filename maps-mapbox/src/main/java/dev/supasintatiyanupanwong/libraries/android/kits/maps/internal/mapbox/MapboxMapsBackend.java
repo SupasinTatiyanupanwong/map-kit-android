@@ -36,6 +36,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model.MapboxMarkerOptions;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCircle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilGroundOverlay;
@@ -176,7 +177,7 @@ class MapboxMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {
-        return NilMarker.Options.INSTANCE; // Not supported, null object for API safe.
+        return new MapboxMarkerOptions();
     }
 
     @Override public @NonNull Polygon.Options newPolygonOptions() {
