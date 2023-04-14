@@ -85,6 +85,8 @@ public class MapboxMapClient implements MapClient {
 
     private @Nullable com.mapbox.maps.plugin.gestures.OnMapClickListener
             mMapClickListener;
+    private @Nullable com.mapbox.maps.plugin.gestures.OnMapLongClickListener
+            mMapLongClickListener;
 
     public MapboxMapClient(@NonNull MapView view) {
         mMapView = view;
@@ -356,7 +358,19 @@ public class MapboxMapClient implements MapClient {
     @Override public void setOnMapLongClickListener(
             final @Nullable OnMapLongClickListener listener
     ) {
-
+        if (listener == null) {
+            final @Nullable com.mapbox.maps.plugin.gestures.OnMapLongClickListener previous =
+                    mMapLongClickListener;
+            if (previous != null) {
+                mGesturesPlugin.removeOnMapLongClickListener(previous);
+            }
+        } else {
+            mMapLongClickListener = point -> {
+                listener.onMapLongClick(MapboxLatLng.wrap(point));
+                return true;
+            };
+            mGesturesPlugin.addOnMapLongClickListener(mMapLongClickListener);
+        }
     }
 
     @Override public void setOnMarkerClickListener(
