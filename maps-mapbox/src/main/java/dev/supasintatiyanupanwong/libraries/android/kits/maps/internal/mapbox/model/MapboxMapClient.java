@@ -20,10 +20,12 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import android.animation.Animator;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
+import androidx.arch.core.util.Function;
 
 import com.mapbox.maps.CameraBoundsOptions;
 import com.mapbox.maps.CoordinateBounds;
@@ -56,6 +58,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorBuilding;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LocationSource;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
@@ -64,6 +67,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Projection;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @RestrictTo(LIBRARY)
 public class MapboxMapClient implements MapClient {
@@ -80,6 +84,34 @@ public class MapboxMapClient implements MapClient {
     private final @NonNull PolygonAnnotationManager mPolygonAnnotationManager;
     private final @NonNull CircleAnnotationManager mCircleAnnotationManager;
     private final @NonNull PointAnnotationManager mPointAnnotationManager;
+
+    private final @NonNull Function<Point, LatLng> mProjection$fromScreenLocation$Impl =
+            new Function<Point, LatLng>() {
+                @Override public @NonNull LatLng apply(@NonNull Point point) {
+                    return MapboxLatLng.wrap(mMap.coordinateForPixel(MapboxPoint.unwrap(point)));
+                }
+            };
+    private final @NonNull Function<LatLng, Point> mProjection$toScreenLocation$Impl =
+            new Function<LatLng, Point>() {
+                @Override public @NonNull Point apply(@NonNull LatLng location) {
+                    return MapboxPoint.wrap(mMap.pixelForCoordinate(MapboxLatLng.unwrap(location)));
+                }
+            };
+    private final @NonNull Function<Void, VisibleRegion> mProjection$getVisibleRegion$Impl =
+            new Function<Void, VisibleRegion>() {
+                @Override public @NonNull VisibleRegion apply(@Nullable Void ignored) {
+                    return MapboxVisibleRegion.wrap(
+                            mMap.coordinateBoundsForCamera(
+                                    ExtensionUtils.toCameraOptions(mMap.getCameraState())
+                            )
+                    );
+                }
+            };
+    private final @NonNull Projection mProjection = new MapboxProjection(
+            mProjection$fromScreenLocation$Impl,
+            mProjection$toScreenLocation$Impl,
+            mProjection$getVisibleRegion$Impl
+    );
 
     private int mType = MAP_TYPE_NORMAL;
 
@@ -310,7 +342,7 @@ public class MapboxMapClient implements MapClient {
     }
 
     @Override public @NonNull Projection getProjection() {
-        return null;
+        return mProjection;
     }
 
     @Override public void setOnCameraMoveStartedListener(
