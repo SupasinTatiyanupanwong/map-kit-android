@@ -53,7 +53,9 @@ import com.mapbox.maps.plugin.gestures.GesturesPlugin;
 import com.mapbox.maps.plugin.scalebar.ScaleBarPlugin;
 
 import java.util.Collections;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
@@ -70,6 +72,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Projection;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 
 @RestrictTo(LIBRARY)
 public class MapboxMapClient implements MapClient {
@@ -85,11 +89,28 @@ public class MapboxMapClient implements MapClient {
     private final @NonNull PolylineAnnotationManager mPolylineAnnotationManager;
     private final @NonNull PolygonAnnotationManager mPolygonAnnotationManager;
     private final @NonNull CircleAnnotationManager mCircleAnnotationManager;
+
+    private final @NonNull Map<Long, Object> mPointTags = new ConcurrentHashMap<>();
     private final @NonNull PointAnnotationManager mPointAnnotationManager;
-    private final @NonNull Function<PointAnnotation, Void> mPointAnnotation$remove$Impl =
-            new Function<PointAnnotation, Void>() {
-                @Override public Void apply(@NonNull PointAnnotation annotation) {
+    private final @NonNull Function1<PointAnnotation, Void> mPointAnnotation$remove$Impl =
+            new Function1<PointAnnotation, Void>() {
+                @Override public Void invoke(@NonNull PointAnnotation annotation) {
                     mPointAnnotationManager.delete(annotation);
+                    return null;
+                }
+            };
+    private final @NonNull Function2<PointAnnotation, Object, Void> mPointAnnotation$setTag$Impl =
+            (annotation, tag) -> {
+                if (annotation != null) {
+                    mPointTags.put(annotation.getId(), tag);
+                }
+                return null;
+            };
+    private final @NonNull Function1<PointAnnotation, Object> mPointAnnotation$getTag$Impl =
+            annotation -> {
+                if (annotation != null) {
+                    return mPointTags.get(annotation.getId());
+                } else {
                     return null;
                 }
             };
@@ -430,6 +451,8 @@ public class MapboxMapClient implements MapClient {
                         MapboxMarker.wrap(
                                 annotation,
                                 mPointAnnotation$remove$Impl,
+                                mPointAnnotation$setTag$Impl,
+                                mPointAnnotation$getTag$Impl,
                                 opacity,
                                 opacity != 0
                         )

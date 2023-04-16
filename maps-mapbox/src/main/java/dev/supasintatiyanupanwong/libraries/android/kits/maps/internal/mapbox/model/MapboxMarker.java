@@ -21,35 +21,42 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
-import androidx.arch.core.util.Function;
 
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotation;
+
+import org.jetbrains.annotations.Contract;
 
 import java.util.Arrays;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 
 @RestrictTo(LIBRARY)
 public class MapboxMarker implements Marker {
 
     private final @NonNull PointAnnotation mDelegate;
-    private final @NonNull Function<PointAnnotation, Void> mRemoveFunction;
+    private final @NonNull Function1<PointAnnotation, Void> mRemoveFunction;
+    private final @NonNull Function2<PointAnnotation, Object, Void> mSetTagFunction;
+    private final @NonNull Function1<PointAnnotation, Object> mGetTagFunction;
 
     private float mAlpha;
     private boolean mVisible;
 
-    private @Nullable Object mTag;
-
     private MapboxMarker(
             @NonNull PointAnnotation delegate,
-            @NonNull Function<PointAnnotation, Void> removeFunction,
+            @NonNull Function1<PointAnnotation, Void> removeFunction,
+            @NonNull Function2<PointAnnotation, Object, Void> setTagFunction,
+            @NonNull Function1<PointAnnotation, Object> getTagFunction,
             float alpha,
             boolean isVisible
     ) {
         mDelegate = delegate;
         mRemoveFunction = removeFunction;
+        mSetTagFunction = setTagFunction;
+        mGetTagFunction = getTagFunction;
 
         mAlpha = alpha;
         mVisible = isVisible;
@@ -57,8 +64,8 @@ public class MapboxMarker implements Marker {
     }
 
     @Override public void remove() {
-        mRemoveFunction.apply(mDelegate);
-        mTag = null;
+        mRemoveFunction.invoke(mDelegate);
+        mSetTagFunction.invoke(mDelegate, null);
     }
 
     @Override public @NonNull String getId() {
@@ -66,11 +73,11 @@ public class MapboxMarker implements Marker {
     }
 
     @Override public void setPosition(@NonNull LatLng latLng) {
-        mDelegate.setPoint(MapboxLatLng.unwrap(latLng));
+        mDelegate.setGeometry(MapboxLatLng.unwrap(latLng));
     }
 
     @Override public @NonNull LatLng getPosition() {
-        return MapboxLatLng.wrap(mDelegate.getPoint());
+        return MapboxLatLng.wrap(mDelegate.getGeometry());
     }
 
     @Override public void setZIndex(float zIndex) {
@@ -172,12 +179,13 @@ public class MapboxMarker implements Marker {
     }
 
     @Override public void setTag(@Nullable Object tag) {
-        mTag = tag;
+        mSetTagFunction.invoke(mDelegate, tag);
     }
 
     @Override public @Nullable Object getTag() {
-        return mTag;
+        return mGetTagFunction.invoke(mDelegate);
     }
+
 
     @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
@@ -206,13 +214,24 @@ public class MapboxMarker implements Marker {
     }
 
 
-    static @NonNull Marker wrap(
-            @NonNull PointAnnotation delegate,
-            @NonNull Function<PointAnnotation, Void> removeFunction,
+    @Contract("null, _, _, _, _, _ -> null; !null, _, _, _, _, _ -> !null")
+    static @Nullable Marker wrap(
+            @Nullable PointAnnotation delegate,
+            @NonNull Function1<PointAnnotation, Void> removeFunction,
+            @NonNull Function2<PointAnnotation, Object, Void> setTagFunction,
+            @NonNull Function1<PointAnnotation, Object> getTagFunction,
             float alpha,
             boolean isVisible
     ) {
-        return new MapboxMarker(delegate, removeFunction, alpha, isVisible);
+        return delegate == null ? null :
+                new MapboxMarker(
+                        delegate,
+                        removeFunction,
+                        setTagFunction,
+                        getTagFunction,
+                        alpha,
+                        isVisible
+                );
     }
 
 }
