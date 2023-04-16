@@ -38,8 +38,10 @@ import com.mapbox.maps.plugin.animation.CameraAnimationsPlugin;
 import com.mapbox.maps.plugin.animation.MapAnimationOptions;
 import com.mapbox.maps.plugin.annotation.AnnotationConfig;
 import com.mapbox.maps.plugin.annotation.AnnotationPlugin;
+import com.mapbox.maps.plugin.annotation.generated.CircleAnnotation;
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManagerKt;
+import com.mapbox.maps.plugin.annotation.generated.OnCircleAnnotationClickListener;
 import com.mapbox.maps.plugin.annotation.generated.OnPointAnnotationClickListener;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotation;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
@@ -87,8 +89,33 @@ public class MapboxMapClient implements MapClient {
     private final @NonNull GesturesPlugin mGesturesPlugin;
 
     private final @NonNull PolylineAnnotationManager mPolylineAnnotationManager;
+
     private final @NonNull PolygonAnnotationManager mPolygonAnnotationManager;
+
+    private final @NonNull Map<Long, Object> mCircleTags = new ConcurrentHashMap<>();
     private final @NonNull CircleAnnotationManager mCircleAnnotationManager;
+    private final @NonNull Function1<CircleAnnotation, Void> mCircleAnnotation$remove$Impl =
+            new Function1<CircleAnnotation, Void>() {
+                @Override public Void invoke(@NonNull CircleAnnotation annotation) {
+                    mCircleAnnotationManager.delete(annotation);
+                    return null;
+                }
+            };
+    private final @NonNull Function2<CircleAnnotation, Object, Void> mCircleAnnotation$setTag$Impl =
+            (annotation, tag) -> {
+                if (annotation != null) {
+                    mCircleTags.put(annotation.getId(), tag);
+                }
+                return null;
+            };
+    private final @NonNull Function1<CircleAnnotation, Object> mCircleAnnotation$getTag$Impl =
+            annotation -> {
+                if (annotation != null) {
+                    return mCircleTags.get(annotation.getId());
+                } else {
+                    return null;
+                }
+            };
 
     private final @NonNull Map<Long, Object> mPointTags = new ConcurrentHashMap<>();
     private final @NonNull PointAnnotationManager mPointAnnotationManager;
@@ -151,6 +178,7 @@ public class MapboxMapClient implements MapClient {
             mMapLongClickListener;
 
     private @Nullable OnPointAnnotationClickListener mPointAnnotationClickListener;
+    private @Nullable OnCircleAnnotationClickListener mCircleAnnotationClickListener;
 
     public MapboxMapClient(@NonNull MapView view) {
         mMapView = view;
@@ -284,12 +312,23 @@ public class MapboxMapClient implements MapClient {
     }
 
     @Override public @Nullable Circle addCircle(final @NonNull Circle.Options options) {
-        return null;
+        return MapboxCircle.wrap(
+                mCircleAnnotationManager.create(MapboxCircleOptions.unwrap(options)),
+                mCircleAnnotation$remove$Impl,
+                mCircleAnnotation$setTag$Impl,
+                mCircleAnnotation$getTag$Impl
+        );
     }
 
     @Override public @Nullable Marker addMarker(final @NonNull Marker.Options options) {
-        mPointAnnotationManager.create(MapboxMarkerOptions.unwrap(options));
-        return null;
+        return MapboxMarker.wrap(
+                mPointAnnotationManager.create(MapboxMarkerOptions.unwrap(options)),
+                mPointAnnotation$remove$Impl,
+                mPointAnnotation$setTag$Impl,
+                mPointAnnotation$getTag$Impl,
+                options.getAlpha(),
+                options.isVisible()
+        );
     }
 
     @Override public @Nullable GroundOverlay addGroundOverlay(
@@ -519,7 +558,26 @@ public class MapboxMapClient implements MapClient {
     @Override public void setOnCircleClickListener(
             final @Nullable OnCircleClickListener listener
     ) {
-
+        if (listener == null) {
+            final @Nullable OnCircleAnnotationClickListener previous =
+                    mCircleAnnotationClickListener;
+            if (previous != null) {
+                mCircleAnnotationManager.removeClickListener(previous);
+            }
+        } else {
+            mCircleAnnotationClickListener = annotation -> {
+                listener.onCircleClick(
+                        MapboxCircle.wrap(
+                                annotation,
+                                mCircleAnnotation$remove$Impl,
+                                mCircleAnnotation$setTag$Impl,
+                                mCircleAnnotation$getTag$Impl
+                        )
+                );
+                return true;
+            };
+            mCircleAnnotationManager.addClickListener(mCircleAnnotationClickListener);
+        }
     }
 
     @Override public void setOnPolygonClickListener(
