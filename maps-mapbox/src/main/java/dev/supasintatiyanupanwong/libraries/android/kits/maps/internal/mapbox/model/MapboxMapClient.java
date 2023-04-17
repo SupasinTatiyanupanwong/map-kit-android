@@ -177,6 +177,9 @@ public class MapboxMapClient implements MapClient {
     private @Nullable com.mapbox.maps.plugin.gestures.OnMapLongClickListener
             mMapLongClickListener;
 
+    private @Nullable com.mapbox.maps.plugin.delegates.listeners.OnMapLoadedListener
+            mMapLoadedListener;
+
     private @Nullable OnPointAnnotationClickListener mPointAnnotationClickListener;
     private @Nullable OnCircleAnnotationClickListener mCircleAnnotationClickListener;
 
@@ -546,7 +549,16 @@ public class MapboxMapClient implements MapClient {
     @Override public void setOnMapLoadedCallback(
             final @Nullable OnMapLoadedCallback callback
     ) {
-
+        if (callback == null) {
+            final @Nullable com.mapbox.maps.plugin.delegates.listeners.OnMapLoadedListener
+                    previous = mMapLoadedListener;
+            if (previous != null) {
+                mMap.removeOnMapLoadedListener(previous);
+            }
+        } else {
+            mMapLoadedListener = ignored -> callback.onMapLoaded();
+            mMap.addOnMapLoadedListener(mMapLoadedListener);
+        }
     }
 
     @Override public void setOnGroundOverlayClickListener(
