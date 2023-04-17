@@ -20,7 +20,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.JsonObject;
 import com.mapbox.maps.extension.style.utils.ColorUtils;
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationOptions;
 
@@ -34,12 +33,7 @@ public class MapboxCircleOptions implements Circle.Options {
 
     private final @NonNull CircleAnnotationOptions mDelegate = new CircleAnnotationOptions();
 
-    private final @NonNull JsonObject mData = new JsonObject();
-
-    private MapboxCircleOptions() {
-        mData.addProperty("mapkit-clickable", false);
-        mDelegate.withData(mData);
-    }
+    private boolean mClickable;
 
     @Override public @NonNull Circle.Options center(@NonNull LatLng center) {
         //noinspection ConstantValue
@@ -85,7 +79,7 @@ public class MapboxCircleOptions implements Circle.Options {
     }
 
     @Override public @NonNull Circle.Options clickable(boolean clickable) {
-        mData.addProperty("mapkit-clickable", clickable);
+        mClickable = clickable;
         return this;
     }
 
@@ -126,7 +120,7 @@ public class MapboxCircleOptions implements Circle.Options {
     }
 
     @Override public boolean isClickable() {
-        return mData.getAsJsonPrimitive("mapkit-clickable").getAsBoolean();
+        return mClickable;
     }
 
 

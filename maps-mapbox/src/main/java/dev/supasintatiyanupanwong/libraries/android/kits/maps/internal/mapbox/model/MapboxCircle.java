@@ -23,8 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotation;
 
 import org.jetbrains.annotations.Contract;
@@ -34,32 +32,24 @@ import java.util.List;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
-import kotlin.jvm.functions.Function1;
-import kotlin.jvm.functions.Function2;
 
 @RestrictTo(LIBRARY)
 public class MapboxCircle implements Circle {
 
     private final @NonNull CircleAnnotation mDelegate;
-    private final @NonNull Function1<CircleAnnotation, Void> mRemoveFunction;
-    private final @NonNull Function2<CircleAnnotation, Object, Void> mSetTagFunction;
-    private final @NonNull Function1<CircleAnnotation, Object> mGetTagFunction;
+    private final @NonNull MapboxCircleExtensions mExtensions;
 
     private MapboxCircle(
             @NonNull CircleAnnotation delegate,
-            @NonNull Function1<CircleAnnotation, Void> removeFunction,
-            @NonNull Function2<CircleAnnotation, Object, Void> setTagFunction,
-            @NonNull Function1<CircleAnnotation, Object> getTagFunction
+            @NonNull MapboxCircleExtensions extensions
     ) {
         mDelegate = delegate;
-        mRemoveFunction = removeFunction;
-        mSetTagFunction = setTagFunction;
-        mGetTagFunction = getTagFunction;
+        mExtensions = extensions;
     }
 
     @Override public void remove() {
-        mRemoveFunction.invoke(mDelegate);
-        mSetTagFunction.invoke(mDelegate, null);
+        mExtensions.remove(mDelegate);
+        mExtensions.setTag(mDelegate, null);
     }
 
     @Override public @NonNull String getId() {
@@ -68,6 +58,7 @@ public class MapboxCircle implements Circle {
 
     @Override public void setCenter(@NonNull LatLng center) {
         mDelegate.setGeometry(MapboxLatLng.unwrap(center));
+        mExtensions.invalidate(mDelegate);
     }
 
     @Override public @NonNull LatLng getCenter() {
@@ -76,6 +67,7 @@ public class MapboxCircle implements Circle {
 
     @Override public void setRadius(double radius) {
         mDelegate.setCircleRadius(radius);
+        mExtensions.invalidate(mDelegate);
     }
 
     @Override public double getRadius() {
@@ -85,6 +77,7 @@ public class MapboxCircle implements Circle {
 
     @Override public void setStrokeWidth(float width) {
         mDelegate.setCircleStrokeWidth((double) width);
+        mExtensions.invalidate(mDelegate);
     }
 
     @Override public float getStrokeWidth() {
@@ -94,6 +87,7 @@ public class MapboxCircle implements Circle {
 
     @Override public void setStrokeColor(@ColorInt int color) {
         mDelegate.setCircleStrokeColorInt(color);
+        mExtensions.invalidate(mDelegate);
     }
 
     @Override public @ColorInt int getStrokeColor() {
@@ -111,6 +105,7 @@ public class MapboxCircle implements Circle {
 
     @Override public void setFillColor(@ColorInt int color) {
         mDelegate.setCircleColorInt(color);
+        mExtensions.invalidate(mDelegate);
     }
 
     @Override public @ColorInt int getFillColor() {
@@ -120,6 +115,7 @@ public class MapboxCircle implements Circle {
 
     @Override public void setZIndex(float zIndex) {
         mDelegate.setCircleSortKey((double) zIndex);
+        mExtensions.invalidate(mDelegate);
     }
 
     @Override public float getZIndex() {
@@ -130,6 +126,7 @@ public class MapboxCircle implements Circle {
     @Override public void setVisible(boolean visible) {
         mDelegate.setCircleOpacity(visible ? 1.0 : 0);
         mDelegate.setCircleStrokeOpacity(visible ? 1.0 : 0);
+        mExtensions.invalidate(mDelegate);
     }
 
     @Override public boolean isVisible() {
@@ -138,32 +135,19 @@ public class MapboxCircle implements Circle {
     }
 
     @Override public void setClickable(boolean clickable) {
-        final @Nullable JsonElement data = mDelegate.getData();
-        final @NonNull JsonObject json;
-        if (data instanceof JsonObject) {
-            json = (JsonObject) data;
-        } else {
-            json = new JsonObject();
-        }
-        json.addProperty("mapkit-clickable", clickable);
-        mDelegate.setData(json);
+        mExtensions.setClickable(mDelegate, clickable);
     }
 
     @Override public boolean isClickable() {
-        final @Nullable JsonElement data = mDelegate.getData();
-        if (data instanceof JsonObject) {
-            return ((JsonObject) data).getAsJsonPrimitive("mapkit-clickable").getAsBoolean();
-        } else {
-            return false;
-        }
+        return mExtensions.isClickable(mDelegate);
     }
 
     @Override public void setTag(@Nullable Object tag) {
-        mSetTagFunction.invoke(mDelegate, tag);
+        mExtensions.setTag(mDelegate, tag);
     }
 
     @Override public @Nullable Object getTag() {
-        return mGetTagFunction.invoke(mDelegate);
+        return mExtensions.getTag(mDelegate);
     }
 
 
@@ -189,20 +173,12 @@ public class MapboxCircle implements Circle {
     }
 
 
-    @Contract("null, _, _, _ -> null; !null, _, _, _ -> !null")
+    @Contract("null, _ -> null; !null, _ -> !null")
     static @Nullable Circle wrap(
             @Nullable CircleAnnotation delegate,
-            @NonNull Function1<CircleAnnotation, Void> removeFunction,
-            @NonNull Function2<CircleAnnotation, Object, Void> setTagFunction,
-            @NonNull Function1<CircleAnnotation, Object> getTagFunction
+            @NonNull MapboxCircleExtensions extensions
     ) {
-        return delegate == null ? null :
-                new MapboxCircle(
-                        delegate,
-                        removeFunction,
-                        setTagFunction,
-                        getTagFunction
-                );
+        return delegate == null ? null : new MapboxCircle(delegate, extensions);
     }
 
 }
