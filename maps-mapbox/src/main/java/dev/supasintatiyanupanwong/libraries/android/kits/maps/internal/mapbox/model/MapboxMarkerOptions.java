@@ -79,7 +79,115 @@ public class MapboxMarkerOptions implements Marker.Options {
     }
 
     @Override public @NonNull Marker.Options anchor(float anchorU, float anchorV) {
-        mDelegate.withIconOffset(Arrays.asList((double) anchorU, (double) anchorV));
+        // Fixed anchors
+        if (anchorU == 0.5f && anchorV == 0.5f) {
+            mDelegate.withIconAnchor(IconAnchor.CENTER);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        if (anchorU == 0f && anchorV == 0.5f) {
+            mDelegate.withIconAnchor(IconAnchor.LEFT);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        if (anchorU == 1f && anchorV == 0.5f) {
+            mDelegate.withIconAnchor(IconAnchor.RIGHT);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        if (anchorU == 0.5f && anchorV == 0f) {
+            mDelegate.withIconAnchor(IconAnchor.TOP);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        if (anchorU == 0.5f && anchorV == 1f) {
+            mDelegate.withIconAnchor(IconAnchor.BOTTOM);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        if (anchorU == 0f && anchorV == 0f) {
+            mDelegate.withIconAnchor(IconAnchor.TOP_LEFT);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        if (anchorU == 0f && anchorV == 1f) {
+            mDelegate.withIconAnchor(IconAnchor.BOTTOM_LEFT);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        if (anchorU == 1f && anchorV == 0f) {
+            mDelegate.withIconAnchor(IconAnchor.TOP_RIGHT);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        if (anchorU == 1f && anchorV == 1f) {
+            mDelegate.withIconAnchor(IconAnchor.BOTTOM_RIGHT);
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+            return this;
+        }
+
+        // Interpolated anchors. There will be some distortion, but it is somewhat acceptable.
+        // TODO calculate interpolation
+        final double interpolatedOffsetX;
+        final double interpolatedOffsetY;
+        if (anchorU > 0.75f) {
+            if (anchorV > 0.75f) {
+                mDelegate.withIconAnchor(IconAnchor.BOTTOM_RIGHT);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            } else if (anchorV < 0.25f) {
+                mDelegate.withIconAnchor(IconAnchor.TOP_RIGHT);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            } else {
+                mDelegate.withIconAnchor(IconAnchor.RIGHT);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            }
+        } else if (anchorU < 0.25f) {
+            if (anchorV > 0.75f) {
+                mDelegate.withIconAnchor(IconAnchor.BOTTOM_LEFT);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            } else if (anchorV < 0.25f) {
+                mDelegate.withIconAnchor(IconAnchor.TOP_LEFT);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            } else {
+                mDelegate.withIconAnchor(IconAnchor.LEFT);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            }
+        } else {
+            if (anchorV > 0.75f) {
+                mDelegate.withIconAnchor(IconAnchor.BOTTOM);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            } else if (anchorV < 0.25f) {
+                mDelegate.withIconAnchor(IconAnchor.TOP);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            } else {
+                mDelegate.withIconAnchor(IconAnchor.CENTER);
+                interpolatedOffsetX = 0;
+                interpolatedOffsetY = 0;
+            }
+        }
+
+        mDelegate.withIconOffset(
+                Arrays.asList(
+                        0.25f * mIconWidth * interpolatedOffsetX,
+                        0.25f * mIconHeight * interpolatedOffsetY
+                )
+        );
         return this;
     }
 
