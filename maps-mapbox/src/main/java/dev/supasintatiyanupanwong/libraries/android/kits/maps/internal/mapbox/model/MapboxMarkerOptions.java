@@ -16,30 +16,36 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.mapbox.model;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.mapbox.maps.extension.style.layers.properties.generated.IconAnchor;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
 
 import java.util.Arrays;
 
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 
 public class MapboxMarkerOptions implements Marker.Options {
 
-    private final @NonNull PointAnnotationOptions mDelegate;
+    private final @NonNull PointAnnotationOptions mDelegate = new PointAnnotationOptions();
+
+    private final float mDensity =
+            MapKit.getApplicationContext().getResources().getDisplayMetrics().density;
 
     private @Nullable BitmapDescriptor mIconDescriptorCache;
+    private float mIconWidth;
+    private float mIconHeight;
 
     private float mAlpha;
     private boolean mVisible;
 
     public MapboxMarkerOptions() {
-        mDelegate = new PointAnnotationOptions();
-
-        // Ensuring default values
         icon(null);
         anchor(0.5f, 0.8f);
         alpha(1);
@@ -61,13 +67,14 @@ public class MapboxMarkerOptions implements Marker.Options {
 
     @Override public @NonNull Marker.Options icon(@Nullable BitmapDescriptor iconDescriptor) {
         mIconDescriptorCache = iconDescriptor;
-        mDelegate.withIconImage(
-                MapboxBitmapDescriptor.unwrap(
-                        iconDescriptor == null
-                                ? MapboxBitmapDescriptorFactory.INSTANCE.defaultMarker()
-                                : iconDescriptor
-                )
+        final @NonNull Bitmap bitmap = MapboxBitmapDescriptor.unwrap(
+                iconDescriptor == null
+                        ? MapboxBitmapDescriptorFactory.INSTANCE.defaultMarker()
+                        : iconDescriptor
         );
+        mIconWidth = bitmap.getWidth() / mDensity;
+        mIconHeight = bitmap.getHeight() / mDensity;
+        mDelegate.withIconImage(bitmap);
         return this;
     }
 
