@@ -30,8 +30,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 @RestrictTo(LIBRARY)
 public class NilCap implements ButtCap, CustomCap, RoundCap, SquareCap {
 
-    public static final @NonNull
-    NilCap INSTANCE = new NilCap();
+    public static final @NonNull NilCap INSTANCE = new NilCap();
 
     private NilCap() {}
 

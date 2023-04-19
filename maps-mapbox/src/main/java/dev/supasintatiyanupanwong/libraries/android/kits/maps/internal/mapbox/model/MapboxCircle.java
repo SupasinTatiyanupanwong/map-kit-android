@@ -49,7 +49,6 @@ public class MapboxCircle implements Circle {
 
     @Override public void remove() {
         mExtensions.remove(mDelegate);
-        mExtensions.setTag(mDelegate, null);
     }
 
     @Override public @NonNull String getId() {

@@ -43,7 +43,8 @@ public class TomTomBitmapDescriptor implements BitmapDescriptor {
             //noinspection ConstantConditions
             return fromBitmap(
                     BitmapDescriptor.fromResourceInternal(
-                            R.drawable.mapkit_internal_tomtom_ic_location_pin_filled_24dp
+                            R.drawable.mapkit_internal_tomtom_ic_location_pin_filled_24dp,
+                            Factory.HUE_RED
                     )
             );
         }

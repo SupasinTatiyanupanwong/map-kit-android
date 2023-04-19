@@ -145,9 +145,9 @@ public class MapboxLatLngBounds implements LatLngBounds {
                 }
 
                 final LatLng northeastLatPoint = CollectionsKt
-                        .minByOrNull(mPoints, LatLng::getLatitude);
+                        .maxByOrNull(mPoints, LatLng::getLatitude);
                 final LatLng northeastLngPoint = CollectionsKt
-                        .minByOrNull(mPoints, LatLng::getLongitude);
+                        .maxByOrNull(mPoints, LatLng::getLongitude);
                 if (northeastLatPoint == null || northeastLngPoint == null) {
                     northeast = new MapboxLatLng(0, 0);
                 } else {

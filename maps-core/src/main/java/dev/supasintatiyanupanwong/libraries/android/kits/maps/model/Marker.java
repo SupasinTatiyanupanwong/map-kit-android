@@ -322,7 +322,8 @@ public interface Marker {
          */
         @NonNull Options anchor(
                 @FloatRange(from = 0.0, to = 1.0) float anchorU,
-                @FloatRange(from = 0.0, to = 1.0) float anchorV);
+                @FloatRange(from = 0.0, to = 1.0) float anchorV
+        );
 
         /**
          * Specifies the point in the marker image at which to anchor the info window when it is
@@ -335,7 +336,8 @@ public interface Marker {
          */
         @NonNull Options infoWindowAnchor(
                 @FloatRange(from = 0.0, to = 1.0) float anchorU,
-                @FloatRange(from = 0.0, to = 1.0) float anchorV);
+                @FloatRange(from = 0.0, to = 1.0) float anchorV
+        );
 
         /**
          * Sets the title for the marker.

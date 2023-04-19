@@ -22,6 +22,7 @@ class MapboxCircleExtensions {
 
     void remove(@NonNull CircleAnnotation annotation) {
         mManager.delete(annotation);
+        mTags.remove(annotation.getId());
     }
 
     void setVisible(@NonNull CircleAnnotation annotation, boolean visible) {

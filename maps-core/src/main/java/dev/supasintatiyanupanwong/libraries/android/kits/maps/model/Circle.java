@@ -18,6 +18,7 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
 import android.graphics.Color;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -57,7 +58,7 @@ public interface Circle {
      *
      * @return The geographic center as a {@link LatLng}.
      */
-    LatLng getCenter();
+    @NonNull LatLng getCenter();
 
     /**
      * Sets the radius in meters.
@@ -269,7 +270,7 @@ public interface Circle {
          * @param color Color in the {@link Color} format.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull Options strokeColor(int color);
+        @NonNull Options strokeColor(@ColorInt int color);
 
         /**
          * Sets a stroke pattern for the circle's outline. The default stroke pattern is solid,
@@ -291,7 +292,7 @@ public interface Circle {
          * @param color Color in the {@link Color} format.
          * @return This {@link Options} object for method chaining.
          */
-        @NonNull Options fillColor(int color);
+        @NonNull Options fillColor(@ColorInt int color);
 
         /**
          * Sets the zIndex.
@@ -350,7 +351,7 @@ public interface Circle {
          *
          * @return The color in the {@link Color} format.
          */
-        int getStrokeColor();
+        @ColorInt int getStrokeColor();
 
         /**
          * Returns the stroke pattern set in this {@link Options} object for the circle's outline.
@@ -364,7 +365,7 @@ public interface Circle {
          *
          * @return The color in the {@link Color} format.
          */
-        int getFillColor();
+        @ColorInt int getFillColor();
 
         /**
          * Returns the zIndex.
