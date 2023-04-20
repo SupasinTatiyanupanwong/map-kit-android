@@ -33,6 +33,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 
 public class MapboxMarkerOptions implements Marker.Options {
 
+    private static final boolean USE_OFFSET_INTERPOLATION_ANCHOR = false;
+
     private final @NonNull PointAnnotationOptions mDelegate = new PointAnnotationOptions();
 
     private final float mDensity =
@@ -47,7 +49,7 @@ public class MapboxMarkerOptions implements Marker.Options {
 
     public MapboxMarkerOptions() {
         icon(null);
-        anchor(0.5f, 0.8f);
+        anchor(0.5f, 0.5f);
         alpha(1);
         visible(true);
     }
@@ -79,115 +81,144 @@ public class MapboxMarkerOptions implements Marker.Options {
     }
 
     @Override public @NonNull Marker.Options anchor(float anchorU, float anchorV) {
-        // Fixed anchors
-        if (anchorU == 0.5f && anchorV == 0.5f) {
-            mDelegate.withIconAnchor(IconAnchor.CENTER);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        if (anchorU == 0f && anchorV == 0.5f) {
-            mDelegate.withIconAnchor(IconAnchor.LEFT);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        if (anchorU == 1f && anchorV == 0.5f) {
-            mDelegate.withIconAnchor(IconAnchor.RIGHT);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        if (anchorU == 0.5f && anchorV == 0f) {
-            mDelegate.withIconAnchor(IconAnchor.TOP);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        if (anchorU == 0.5f && anchorV == 1f) {
-            mDelegate.withIconAnchor(IconAnchor.BOTTOM);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        if (anchorU == 0f && anchorV == 0f) {
-            mDelegate.withIconAnchor(IconAnchor.TOP_LEFT);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        if (anchorU == 0f && anchorV == 1f) {
-            mDelegate.withIconAnchor(IconAnchor.BOTTOM_LEFT);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        if (anchorU == 1f && anchorV == 0f) {
-            mDelegate.withIconAnchor(IconAnchor.TOP_RIGHT);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        if (anchorU == 1f && anchorV == 1f) {
-            mDelegate.withIconAnchor(IconAnchor.BOTTOM_RIGHT);
-            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
-            return this;
-        }
-
-        // Interpolated anchors. There will be some distortion, but it is somewhat acceptable.
-        // TODO calculate interpolation
-        final double interpolatedOffsetX;
-        final double interpolatedOffsetY;
-        if (anchorU > 0.75f) {
-            if (anchorV > 0.75f) {
-                mDelegate.withIconAnchor(IconAnchor.BOTTOM_RIGHT);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
-            } else if (anchorV < 0.25f) {
-                mDelegate.withIconAnchor(IconAnchor.TOP_RIGHT);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
+        if (!USE_OFFSET_INTERPOLATION_ANCHOR) {
+            // Finding nearest possible anchor point
+            if (anchorU > 0.75f) {
+                if (anchorV > 0.75f) {
+                    mDelegate.withIconAnchor(IconAnchor.BOTTOM_RIGHT);
+                } else if (anchorV < 0.25f) {
+                    mDelegate.withIconAnchor(IconAnchor.TOP_RIGHT);
+                } else { // anchorV in [0.25f..0.75f]
+                    mDelegate.withIconAnchor(IconAnchor.RIGHT);
+                }
+            } else if (anchorU < 0.25f) {
+                if (anchorV > 0.75f) {
+                    mDelegate.withIconAnchor(IconAnchor.BOTTOM_LEFT);
+                } else if (anchorV < 0.25f) {
+                    mDelegate.withIconAnchor(IconAnchor.TOP_LEFT);
+                } else { // anchorV in [0.25f..0.75f]
+                    mDelegate.withIconAnchor(IconAnchor.LEFT);
+                }
             } else {
-                mDelegate.withIconAnchor(IconAnchor.RIGHT);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
+                if (anchorV > 0.75f) {
+                    mDelegate.withIconAnchor(IconAnchor.BOTTOM);
+                } else if (anchorV < 0.25f) {
+                    mDelegate.withIconAnchor(IconAnchor.TOP);
+                } else { // anchorV in [0.25f..0.75f]
+                    mDelegate.withIconAnchor(IconAnchor.CENTER);
+                }
             }
-        } else if (anchorU < 0.25f) {
-            if (anchorV > 0.75f) {
-                mDelegate.withIconAnchor(IconAnchor.BOTTOM_LEFT);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
-            } else if (anchorV < 0.25f) {
-                mDelegate.withIconAnchor(IconAnchor.TOP_LEFT);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
-            } else {
-                mDelegate.withIconAnchor(IconAnchor.LEFT);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
-            }
+
+            // No offset interpolation offset
+            mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
         } else {
-            if (anchorV > 0.75f) {
-                mDelegate.withIconAnchor(IconAnchor.BOTTOM);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
-            } else if (anchorV < 0.25f) {
-                mDelegate.withIconAnchor(IconAnchor.TOP);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
-            } else {
+            // TODO needs fixes in interpolation logic
+            // Without offset
+            if (anchorU == 0.5f && anchorV == 0.5f) {
                 mDelegate.withIconAnchor(IconAnchor.CENTER);
-                interpolatedOffsetX = 0;
-                interpolatedOffsetY = 0;
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
             }
-        }
 
-        mDelegate.withIconOffset(
-                Arrays.asList(
-                        0.25f * mIconWidth * interpolatedOffsetX,
-                        0.25f * mIconHeight * interpolatedOffsetY
-                )
-        );
+            if (anchorU == 0f && anchorV == 0.5f) {
+                mDelegate.withIconAnchor(IconAnchor.LEFT);
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
+            }
+
+            if (anchorU == 1f && anchorV == 0.5f) {
+                mDelegate.withIconAnchor(IconAnchor.RIGHT);
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
+            }
+
+            if (anchorU == 0.5f && anchorV == 0f) {
+                mDelegate.withIconAnchor(IconAnchor.TOP);
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
+            }
+
+            if (anchorU == 0.5f && anchorV == 1f) {
+                mDelegate.withIconAnchor(IconAnchor.BOTTOM);
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
+            }
+
+            if (anchorU == 0f && anchorV == 0f) {
+                mDelegate.withIconAnchor(IconAnchor.TOP_LEFT);
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
+            }
+
+            if (anchorU == 0f && anchorV == 1f) {
+                mDelegate.withIconAnchor(IconAnchor.BOTTOM_LEFT);
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
+            }
+
+            if (anchorU == 1f && anchorV == 0f) {
+                mDelegate.withIconAnchor(IconAnchor.TOP_RIGHT);
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
+            }
+
+            if (anchorU == 1f && anchorV == 1f) {
+                mDelegate.withIconAnchor(IconAnchor.BOTTOM_RIGHT);
+                mDelegate.withIconOffset(Arrays.asList(0.0, 0.0));
+                return this;
+            }
+
+            // Interpolated offset. There will be some distortion, but it is somewhat acceptable.
+            final double interpolatedOffsetX;
+            final double interpolatedOffsetY;
+            if (anchorU > 0.75f) { // (-, ?)
+                interpolatedOffsetX = anchorU - 1;
+
+                if (anchorV > 0.75f) {
+                    mDelegate.withIconAnchor(IconAnchor.BOTTOM_RIGHT);
+                    interpolatedOffsetY = anchorV - 1;
+                } else if (anchorV < 0.25f) {
+                    mDelegate.withIconAnchor(IconAnchor.TOP_RIGHT);
+                    interpolatedOffsetY = 1 - anchorV;
+                } else { // anchorV in [0.25f..0.75f]
+                    mDelegate.withIconAnchor(IconAnchor.RIGHT);
+                    interpolatedOffsetY = anchorV - 0.5;
+                }
+            } else if (anchorU < 0.25f) { // (+, ?)
+                interpolatedOffsetX = 1 - anchorU;
+
+                if (anchorV > 0.75f) {
+                    mDelegate.withIconAnchor(IconAnchor.BOTTOM_LEFT);
+                    interpolatedOffsetY = anchorV - 1;
+                } else if (anchorV < 0.25f) {
+                    mDelegate.withIconAnchor(IconAnchor.TOP_LEFT);
+                    interpolatedOffsetY = 1 - anchorV;
+                } else { // anchorV in [0.25f..0.75f]
+                    mDelegate.withIconAnchor(IconAnchor.LEFT);
+                    interpolatedOffsetY = anchorV - 0.5;
+                }
+            } else { // anchorU in [0.25f..0.75f]
+                interpolatedOffsetX = anchorU - 0.5;
+
+                if (anchorV > 0.75f) {
+                    mDelegate.withIconAnchor(IconAnchor.BOTTOM);
+                    interpolatedOffsetY = anchorV - 1;
+                } else if (anchorV < 0.25f) {
+                    mDelegate.withIconAnchor(IconAnchor.TOP);
+                    interpolatedOffsetY = 1 - anchorV;
+                } else { // anchorV in [0.25f..0.75f]
+                    mDelegate.withIconAnchor(IconAnchor.CENTER);
+                    interpolatedOffsetY = anchorV - 0.5;
+                }
+            }
+
+            mDelegate.withIconOffset(
+                    Arrays.asList(
+                            0.25f * mIconWidth * interpolatedOffsetX,
+                            0.25f * mIconHeight * interpolatedOffsetY
+                    )
+            );
+        }
         return this;
     }
 
