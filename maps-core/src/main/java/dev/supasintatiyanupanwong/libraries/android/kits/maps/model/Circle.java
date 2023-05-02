@@ -18,6 +18,7 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
 import android.graphics.Color;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -57,7 +58,7 @@ public interface Circle {
      *
      * @return The geographic center as a {@link LatLng}.
      */
-    LatLng getCenter();
+    @NonNull LatLng getCenter();
 
     /**
      * Sets the radius in meters.
@@ -101,14 +102,14 @@ public interface Circle {
      *
      * @param color The stroke color in the {@link Color} format.
      */
-    void setStrokeColor(int color);
+    void setStrokeColor(@ColorInt int color);
 
     /**
      * Returns the stroke color.
      *
      * @return The color of the circle in ARGB format.
      */
-    int getStrokeColor();
+    @ColorInt int getStrokeColor();
 
     /**
      * Sets the stroke pattern of the circle's outline. The default stroke pattern is solid,
@@ -121,7 +122,7 @@ public interface Circle {
     /**
      * Returns the stroke pattern of this circle's outline.
      *
-     * @return The stroke pattern.
+     * @return The stroke pattern, or {@code null} if default solid stroke pattern is used.
      */
     @Nullable List<PatternItem> getStrokePattern();
 
@@ -133,14 +134,14 @@ public interface Circle {
      *
      * @param color The color in the {@link Color} format.
      */
-    void setFillColor(int color);
+    void setFillColor(@ColorInt int color);
 
     /**
      * Returns the fill color of this Circle.
      *
      * @return The fill color of the circle in ARGB format.
      */
-    int getFillColor();
+    @ColorInt int getFillColor();
 
     /**
      * Sets the zIndex.
@@ -199,8 +200,8 @@ public interface Circle {
 
     /**
      * Sets the tag for the circle.
-     *
-     * <p>You can use this property to associate an arbitrary {@code Object} with this circle.
+     * <p>
+     * You can use this property to associate an arbitrary {@code Object} with this circle.
      * For example, the {@code Object} can contain data about what the circle represents. This
      * is easier than storing a separate {@code Map<Circle, Object>}. As another example, you
      * can associate a {@code String} ID corresponding to the ID from a data set. It is your
@@ -226,7 +227,7 @@ public interface Circle {
         /**
          * Sets the center using a {@link LatLng}.
          *
-         * <p>The center must not be null.
+         * <p>The center must not be {@code null}.
          *
          * <p>This method is mandatory because there is no default center.
          *
@@ -264,7 +265,7 @@ public interface Circle {
          * <p>The stroke color is the color of this circle's outline, in the integer format
          * specified by Color. If TRANSPARENT is used then no outline is drawn.
          *
-         * <p>By default the stroke color is black (0xff000000).
+         * <p>By default the stroke color is black ({@code 0xff000000}).
          *
          * @param color Color in the {@link Color} format.
          * @return This {@link Options} object for method chaining.
@@ -286,7 +287,7 @@ public interface Circle {
          * <p>The fill color is the color inside the circle, in the integer format specified by
          * {@link Color}. If TRANSPARENT is used then no fill is drawn.
          *
-         * <p>By default the fill color is transparent (0x00000000).
+         * <p>By default the fill color is transparent ({@code 0x00000000}).
          *
          * @param color Color in the {@link Color} format.
          * @return This {@link Options} object for method chaining.

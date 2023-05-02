@@ -21,6 +21,7 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.annotation.RestrictTo;
 import androidx.annotation.UiThread;
@@ -96,7 +97,8 @@ public final class MapKit {
      */
     public static @NonNull CameraPosition newCameraPositionFromLatLngZoom(
             @NonNull LatLng target,
-            float zoom) {
+            float zoom
+    ) {
         return getBackend().newCameraPositionFromLatLngZoom(target, zoom);
     }
 
@@ -111,7 +113,8 @@ public final class MapKit {
      * @since 1.2.0
      */
     public static @NonNull CameraPosition.Builder newCameraPositionBuilder(
-            @NonNull CameraPosition camera) {
+            @NonNull CameraPosition camera
+    ) {
         return getBackend().newCameraPositionBuilder(camera);
     }
 
@@ -177,7 +180,8 @@ public final class MapKit {
      */
     public static @NonNull LatLngBounds newLatLngBounds(
             @NonNull LatLng southwest,
-            @NonNull LatLng northeast) {
+            @NonNull LatLng northeast
+    ) {
         return getBackend().newLatLngBounds(southwest, northeast);
     }
 
@@ -200,7 +204,8 @@ public final class MapKit {
      */
     public static @NonNull MapClient.Style.Options newMapStyleOptions(
             @NonNull Context context,
-            @RawRes int resourceId) {
+            @RawRes int resourceId
+    ) {
         return getBackend().newMapStyleOptions(context, resourceId);
     }
 
@@ -249,7 +254,7 @@ public final class MapKit {
     /**
      * @since 1.2.0
      */
-    public static @NonNull Tile newTile(int width, int height, byte[] data) {
+    public static @NonNull Tile newTile(int width, int height, @Nullable byte[] data) {
         return getBackend().newTile(width, height, data);
     }
 
@@ -266,7 +271,8 @@ public final class MapKit {
     public static @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,
-            @NonNull UrlTileProvider tileProvider) {
+            @NonNull UrlTileProvider tileProvider
+    ) {
         return getBackend().newUrlTileProvider(width, height, tileProvider);
     }
 
@@ -278,7 +284,8 @@ public final class MapKit {
             @NonNull LatLng nearRight,
             @NonNull LatLng farLeft,
             @NonNull LatLng farRight,
-            @NonNull LatLngBounds bounds) {
+            @NonNull LatLngBounds bounds
+    ) {
         return getBackend().newVisibleRegion(nearLeft, nearRight, farLeft, farRight, bounds);
     }
 
@@ -300,8 +307,8 @@ public final class MapKit {
 
     /**
      * Interface definition for a callback to be invoked when the map is ready to be used.
-     *
-     * <p>Once an instance of this interface is set on a {@link MapFragment} object, the {@link
+     * <p>
+     * Once an instance of this interface is set on a {@link MapFragment} object, the {@link
      * #onMapReady(MapClient)} method is triggered when the map is ready to be used and provides
      * a non-null instance of {@link MapClient}.
      *
@@ -310,14 +317,14 @@ public final class MapKit {
     public interface OnMapReadyCallback {
         /**
          * Called when the map is ready to be used.
-         *
-         * <p>Note that this does not guarantee that the map has undergone layout. Therefore, the
+         * <p>
+         * Note that this does not guarantee that the map has undergone layout. Therefore, the
          * map's size may not have been determined by the time the callback method is called. If
          * you need to know the dimensions or call a method in the API that needs to know the
          * dimensions, use {@link OnMapAndViewReadyCallback} instead which encapsulate the logic
          * of {@code OnMapReadyCallback} and {@code View.OnGlobalLayoutListener}.
-         *
-         * <p>As an example, if you want to update the map's camera using a {@link LatLngBounds}
+         * <p>
+         * As an example, if you want to update the map's camera using a {@link LatLngBounds}
          * without dimensions, there is a race condition that could trigger an {@link
          * IllegalStateException} if the map has not undergone layout.
          *
@@ -331,12 +338,12 @@ public final class MapKit {
     /**
      * Interface definition for a callback to be invoked when the map has undergone layout and
      * ready to be used.
-     *
-     * <p>Note that this is only necessary if a developer wishes to immediately invoke any method
+     * <p>
+     * Note that this is only necessary if a developer wishes to immediately invoke any method
      * on the {@link MapClient} that also requires the View to have finished layout (ie. anything
      * that needs to know the View's true size like snapshotting).
-     *
-     * <p>Once an instance of this interface is set on a {@link MapFragment} object, the {@link
+     * <p>
+     * Once an instance of this interface is set on a {@link MapFragment} object, the {@link
      * #onMapAndViewReady(MapClient)} method is triggered when the map has undergone layout and is
      * ready to be used and provides a non-null instance of {@link MapClient}.
      *

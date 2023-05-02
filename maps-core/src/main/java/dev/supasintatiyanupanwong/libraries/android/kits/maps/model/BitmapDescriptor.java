@@ -40,8 +40,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
  * Defines a Bitmap image. For a marker, this class can be used to set the image of the marker
  * icon. For a ground overlay, it can be used to set the image to place on the surface of the
  * earth.
- *
- * <p>To obtain a {@link BitmapDescriptor} use the factory class {@link BitmapDescriptor.Factory}.
+ * <p>
+ * To obtain a {@link BitmapDescriptor} use the factory class {@link BitmapDescriptor.Factory}.
  *
  * @since 1.0.0
  */
@@ -66,40 +66,51 @@ public interface BitmapDescriptor {
          * Creates a {@link BitmapDescriptor} using the resource ID of a Bitmap image.
          *
          * @param resourceId The resource ID of a Bitmap image.
-         * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
-         * to load.
+         * @return The {@link BitmapDescriptor} for the image with the given resource ID or
+         * {@code null} if failed to load.
          */
-        @NonNull BitmapDescriptor fromResource(int resourceId);
+        @Nullable BitmapDescriptor fromResource(@DrawableRes int resourceId);
 
         /**
          * Creates a {@link BitmapDescriptor} using the name of a Bitmap image in the assets
          * directory.
          *
          * @param assetName The name of a Bitmap image in the assets directory.
-         * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
-         * to load.
+         * @return The {@link BitmapDescriptor} that was loaded from the asset or {@code null}
+         * if failed to load.
          */
-        @NonNull BitmapDescriptor fromAsset(String assetName);
+        @Nullable BitmapDescriptor fromAsset(@NonNull String assetName);
 
         /**
-         * Creates a {@link BitmapDescriptor} using the name of a Bitmap image file located in the
-         * internal storage. In particular, this calls {@link Context#openFileInput(String)
+         * Creates a {@link BitmapDescriptor} using the name of a Bitmap image file located in
+         * the internal storage. In particular, this calls {@link Context#openFileInput(String)
          * openFileInput(String)}.
          *
          * @param fileName The name of the Bitmap image file.
-         * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
-         * to load.
+         * @return The {@link BitmapDescriptor} for the image in the app's internal storage or
+         * {@code null} if failed to load.
          */
-        @NonNull BitmapDescriptor fromFile(String fileName);
+        @Nullable BitmapDescriptor fromFile(@NonNull String fileName);
 
         /**
          * Creates a {@link BitmapDescriptor} from the absolute file path of a Bitmap image.
          *
          * @param absolutePath The absolute file path of a Bitmap image.
-         * @return The {@link BitmapDescriptor} that was loaded from the asset or null if failed
-         * to load.
+         * @return The {@link BitmapDescriptor} that was loaded from the absolute path or
+         * {@code null} if failed to load.
          */
-        @NonNull BitmapDescriptor fromPath(String absolutePath);
+        @Nullable BitmapDescriptor fromPath(@NonNull String absolutePath);
+
+        /**
+         * Creates a {@link BitmapDescriptor} that refers to a colorization of the default marker
+         * image.
+         *
+         * @param hue The hue of the marker. Value must be greater or equal to 0 and less than 360.
+         * @return The {@link BitmapDescriptor} for the colored default marker image.
+         */
+        @NonNull BitmapDescriptor defaultMarker(
+                @FloatRange(from = 0, to = 360, toInclusive = false) float hue
+        );
 
         /**
          * Creates a {@link BitmapDescriptor} that refers to the default marker image.
@@ -109,21 +120,12 @@ public interface BitmapDescriptor {
         @NonNull BitmapDescriptor defaultMarker();
 
         /**
-         * Creates a {@link BitmapDescriptor} that refers to the default marker image.
-         *
-         * @param hue The hue of the marker. Value must be greater or equal to 0 and less than 360.
-         * @return The {@link BitmapDescriptor} that refers to the default marker image.
-         */
-        @NonNull BitmapDescriptor defaultMarker(
-                @FloatRange(from = 0, to = 360, toInclusive = false) float hue);
-
-        /**
          * Creates a {@link BitmapDescriptor} from a given Bitmap image.
          *
-         * @param image The bitmap image.
+         * @param image The image referenced in the descriptor.
          * @return The {@link BitmapDescriptor} from a given Bitmap image.
          */
-        @NonNull BitmapDescriptor fromBitmap(Bitmap image);
+        @Nullable BitmapDescriptor fromBitmap(@NonNull Bitmap image);
     }
 
 
