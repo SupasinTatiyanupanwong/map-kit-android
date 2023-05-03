@@ -211,10 +211,6 @@ public class HuaweiMapsBackend implements MapKitBackend {
         return new HuaweiTile(width, height, data);
     }
 
-    @Override public @NonNull Tile noTile() {
-        return HuaweiTileProvider.NO_TILE;
-    }
-
     @Override public @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,

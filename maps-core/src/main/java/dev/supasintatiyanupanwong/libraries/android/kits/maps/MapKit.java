@@ -260,9 +260,11 @@ public final class MapKit {
 
     /**
      * @since 1.2.0
+     * @deprecated Use {@link TileProvider#NO_TILE} instead.
      */
+    @Deprecated
     public static @NonNull Tile noTile() {
-        return getBackend().noTile();
+        return TileProvider.NO_TILE;
     }
 
     /**

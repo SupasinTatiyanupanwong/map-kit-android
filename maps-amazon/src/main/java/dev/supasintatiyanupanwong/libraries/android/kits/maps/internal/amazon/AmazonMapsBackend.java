@@ -198,10 +198,6 @@ class AmazonMapsBackend implements MapKitBackend {
         return new AmazonTile(width, height, data);
     }
 
-    @Override public @NonNull Tile noTile() {
-        return AmazonTileProvider.NO_TILE;
-    }
-
     @Override public @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,

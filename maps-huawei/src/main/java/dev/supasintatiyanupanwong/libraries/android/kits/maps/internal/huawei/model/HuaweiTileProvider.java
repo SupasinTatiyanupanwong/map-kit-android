@@ -28,9 +28,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider
 @RestrictTo(LIBRARY)
 public class HuaweiTileProvider implements TileProvider {
 
-    public static final Tile NO_TILE =
-            HuaweiTile.wrap(com.huawei.hms.maps.model.TileProvider.NO_TILE);
-
     private final com.huawei.hms.maps.model.TileProvider mDelegate;
 
     HuaweiTileProvider(com.huawei.hms.maps.model.TileProvider delegate) {
@@ -48,6 +45,7 @@ public class HuaweiTileProvider implements TileProvider {
     @Override public Tile getTile(int x, int y, int zoom) {
         return HuaweiTile.wrap(mDelegate.getTile(x, y, zoom));
     }
+
 
     @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {

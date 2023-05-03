@@ -44,8 +44,6 @@ android {
 dependencies {
     api project(':maps-core')
 
-    implementation 'org.jetbrains:annotations:23.0.0'
-
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
 

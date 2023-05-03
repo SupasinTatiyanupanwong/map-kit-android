@@ -22,7 +22,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import org.jetbrains.annotations.Contract;
+
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
 @RestrictTo(LIBRARY)
 public class GoogleTile implements Tile {
@@ -49,6 +52,7 @@ public class GoogleTile implements Tile {
         return mDelegate.data;
     }
 
+
     @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
@@ -71,12 +75,26 @@ public class GoogleTile implements Tile {
     }
 
 
-    static Tile wrap(com.google.android.gms.maps.model.Tile delegate) {
-        return new GoogleTile(delegate);
+    @Contract("null -> null; !null -> !null")
+    static @Nullable Tile wrap(@Nullable com.google.android.gms.maps.model.Tile delegate) {
+        if (delegate == null) {
+            return null;
+        } else if (com.google.android.gms.maps.model.TileProvider.NO_TILE.equals(delegate)) {
+            return TileProvider.NO_TILE;
+        } else {
+            return new GoogleTile(delegate);
+        }
     }
 
-    static com.google.android.gms.maps.model.Tile unwrap(Tile wrapped) {
-        return ((GoogleTile) wrapped).mDelegate;
+    @Contract("null -> null; !null -> !null")
+    static @Nullable com.google.android.gms.maps.model.Tile unwrap(@Nullable Tile wrapped) {
+        if (wrapped == null) {
+            return null;
+        } else if (TileProvider.NO_TILE.equals(wrapped)) {
+            return com.google.android.gms.maps.model.TileProvider.NO_TILE;
+        } else {
+            return ((GoogleTile) wrapped).mDelegate;
+        }
     }
 
 }

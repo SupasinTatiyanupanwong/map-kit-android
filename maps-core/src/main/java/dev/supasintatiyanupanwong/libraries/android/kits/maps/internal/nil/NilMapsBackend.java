@@ -198,10 +198,6 @@ class NilMapsBackend implements MapKitBackend {
         return NilTile.INSTANCE; // Not supported, null object for API safe.
     }
 
-    @Override public @NonNull Tile noTile() {
-        return NilTile.INSTANCE; // Not supported, null object for API safe.
-    }
-
     @Override public @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,

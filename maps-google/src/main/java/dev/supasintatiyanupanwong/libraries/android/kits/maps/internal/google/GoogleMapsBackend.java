@@ -210,10 +210,6 @@ class GoogleMapsBackend implements MapKitBackend {
         return new GoogleTile(width, height, data);
     }
 
-    @Override public @NonNull Tile noTile() {
-        return GoogleTileProvider.NO_TILE;
-    }
-
     @Override public @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,

@@ -28,9 +28,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider
 @RestrictTo(LIBRARY)
 public class AmazonTileProvider implements TileProvider {
 
-    public static final Tile NO_TILE =
-            AmazonTile.wrap(com.amazon.geo.mapsv2.model.TileProvider.NO_TILE);
-
     private final com.amazon.geo.mapsv2.model.TileProvider mDelegate;
 
     AmazonTileProvider(com.amazon.geo.mapsv2.model.TileProvider delegate) {
@@ -48,6 +45,7 @@ public class AmazonTileProvider implements TileProvider {
     @Override public Tile getTile(int x, int y, int zoom) {
         return AmazonTile.wrap(mDelegate.getTile(x, y, zoom));
     }
+
 
     @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {

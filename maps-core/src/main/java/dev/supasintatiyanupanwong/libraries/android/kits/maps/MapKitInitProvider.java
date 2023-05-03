@@ -38,6 +38,7 @@ public final class MapKitInitProvider extends ContentProvider {
     };
 
     @Override public boolean onCreate() {
+        //noinspection DataFlowIssue
         final Context context = getContext().getApplicationContext();
 
         for (String className : IMPL_FULLY_QUALIFIED_CLASS_NAMES) {
@@ -61,7 +62,8 @@ public final class MapKitInitProvider extends ContentProvider {
             @Nullable String[] projection,
             @Nullable String selection,
             @Nullable String[] selectionArgs,
-            @Nullable String sortOrder) {
+            @Nullable String sortOrder
+    ) {
         return null;
     }
 
@@ -76,7 +78,8 @@ public final class MapKitInitProvider extends ContentProvider {
     @Override public int delete(
             @NonNull Uri uri,
             @Nullable String selection,
-            @Nullable String[] selectionArgs) {
+            @Nullable String[] selectionArgs
+    ) {
         return 0;
     }
 
@@ -84,7 +87,8 @@ public final class MapKitInitProvider extends ContentProvider {
             @NonNull Uri uri,
             @Nullable ContentValues values,
             @Nullable String selection,
-            @Nullable String[] selectionArgs) {
+            @Nullable String[] selectionArgs
+    ) {
         return 0;
     }
 

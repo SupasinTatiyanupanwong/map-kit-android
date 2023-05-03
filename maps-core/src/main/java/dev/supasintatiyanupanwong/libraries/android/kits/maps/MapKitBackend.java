@@ -116,7 +116,10 @@ public interface MapKitBackend {
 
     @NonNull Tile newTile(int width, int height, byte[] data);
 
-    @NonNull Tile noTile();
+    @Deprecated
+    default @NonNull Tile noTile() {
+        return TileProvider.NO_TILE;
+    }
 
     @NonNull TileProvider newUrlTileProvider(
             int width,
