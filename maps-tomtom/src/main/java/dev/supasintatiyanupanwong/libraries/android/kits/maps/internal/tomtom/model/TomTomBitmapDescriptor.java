@@ -31,8 +31,6 @@ import com.tomtom.sdk.maps.display.image.ImageFactory;
 import org.jetbrains.annotations.Contract;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;

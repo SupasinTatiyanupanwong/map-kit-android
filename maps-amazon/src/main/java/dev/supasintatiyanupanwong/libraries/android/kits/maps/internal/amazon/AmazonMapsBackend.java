@@ -46,7 +46,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPolyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;

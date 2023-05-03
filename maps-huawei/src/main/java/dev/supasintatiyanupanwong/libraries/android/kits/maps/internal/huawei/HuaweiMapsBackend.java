@@ -53,7 +53,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiSquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;

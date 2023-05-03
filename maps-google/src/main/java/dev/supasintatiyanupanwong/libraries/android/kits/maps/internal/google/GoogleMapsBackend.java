@@ -53,7 +53,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleSquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
