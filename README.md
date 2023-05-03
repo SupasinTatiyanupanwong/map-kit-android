@@ -51,7 +51,7 @@ dependencies {
     implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.2.0'
 
     // To use the Amazon Maps SDK via Map Kit
-    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.2.0'
+    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.2.0-alpha01'
 
     // To use the HUAWEI Map Kit via Map Kit
     implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.2.0'
@@ -75,7 +75,7 @@ android {
 
 dependencies {
     googleImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.2.0'
-    amazonImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.2.0'
+    amazonImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.2.0-alpha01'
     huaweiImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.2.0'
 }
 ```
