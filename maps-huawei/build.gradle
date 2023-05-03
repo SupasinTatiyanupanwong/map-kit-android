@@ -44,6 +44,8 @@ android {
 dependencies {
     api project(':maps-core')
 
+    implementation project(':maps-nil')
+
     implementation 'com.huawei.hms:maps:5.0.0.300'
 }
 

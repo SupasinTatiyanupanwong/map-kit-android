@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;

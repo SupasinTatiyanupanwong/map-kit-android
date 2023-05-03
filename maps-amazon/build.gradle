@@ -38,6 +38,8 @@ android {
 dependencies {
     api project(':maps-core')
 
+    implementation project(':maps-nil')
+
     compileOnly files('libs/amazon-maps-api-v2.aar')
 }
 
