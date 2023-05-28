@@ -16,16 +16,33 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
+import androidx.annotation.Nullable;
+
 /**
  * An interface for a class that provides the tile images for a {@link TileOverlay}.
  * For information about the tile coordinate system, see {@link TileOverlay}.
- *
- * <p>Calls to methods in this interface might be made from multiple threads so implementations
+ * <p>
+ * Calls to methods in this interface might be made from multiple threads so implementations
  * of this interface must be threadsafe.
  *
  * @since 1.0.0
  */
 public interface TileProvider {
+
+    Tile NO_TILE = new Tile() {
+        @Override public int getWidth() {
+            return 0;
+        }
+
+        @Override public int getHeight() {
+            return 0;
+        }
+
+        @Override public @Nullable byte[] getData() {
+            return null;
+        }
+    };
+
 
     /**
      * Returns the tile to be used for this tile coordinate.

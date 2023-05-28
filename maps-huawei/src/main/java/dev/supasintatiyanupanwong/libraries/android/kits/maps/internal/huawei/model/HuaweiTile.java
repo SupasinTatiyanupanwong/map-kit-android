@@ -22,7 +22,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import org.jetbrains.annotations.Contract;
+
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
 @RestrictTo(LIBRARY)
 public class HuaweiTile implements Tile {
@@ -49,6 +52,7 @@ public class HuaweiTile implements Tile {
         return mDelegate.data;
     }
 
+
     @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
@@ -71,12 +75,26 @@ public class HuaweiTile implements Tile {
     }
 
 
-    static Tile wrap(com.huawei.hms.maps.model.Tile delegate) {
-        return new HuaweiTile(delegate);
+    @Contract("null -> null; !null -> !null")
+    static @Nullable Tile wrap(@Nullable com.huawei.hms.maps.model.Tile delegate) {
+        if (delegate == null) {
+            return null;
+        } else if (com.huawei.hms.maps.model.TileProvider.NO_TILE.equals(delegate)) {
+            return TileProvider.NO_TILE;
+        } else {
+            return new HuaweiTile(delegate);
+        }
     }
 
-    static com.huawei.hms.maps.model.Tile unwrap(Tile wrapped) {
-        return ((HuaweiTile) wrapped).mDelegate;
+    @Contract("null -> null; !null -> !null")
+    static @Nullable com.huawei.hms.maps.model.Tile unwrap(@Nullable Tile wrapped) {
+        if (wrapped == null) {
+            return null;
+        } else if (TileProvider.NO_TILE.equals(wrapped)) {
+            return com.huawei.hms.maps.model.TileProvider.NO_TILE;
+        } else {
+            return ((HuaweiTile) wrapped).mDelegate;
+        }
     }
 
 }

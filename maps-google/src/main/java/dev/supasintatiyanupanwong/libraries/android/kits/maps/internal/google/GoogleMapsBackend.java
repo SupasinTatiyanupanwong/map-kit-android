@@ -53,7 +53,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleSquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -208,10 +207,6 @@ class GoogleMapsBackend implements MapKitBackend {
 
     @Override public @NonNull Tile newTile(int width, int height, byte[] data) {
         return new GoogleTile(width, height, data);
-    }
-
-    @Override public @NonNull Tile noTile() {
-        return GoogleTileProvider.NO_TILE;
     }
 
     @Override public @NonNull TileProvider newUrlTileProvider(

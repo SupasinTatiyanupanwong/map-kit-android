@@ -46,7 +46,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPolyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -196,10 +195,6 @@ class AmazonMapsBackend implements MapKitBackend {
 
     @Override public @NonNull Tile newTile(int width, int height, byte[] data) {
         return new AmazonTile(width, height, data);
-    }
-
-    @Override public @NonNull Tile noTile() {
-        return AmazonTileProvider.NO_TILE;
     }
 
     @Override public @NonNull TileProvider newUrlTileProvider(

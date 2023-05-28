@@ -18,10 +18,9 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/kits_maps_internal_map_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:keep="@layout/kits_maps_internal_nop_map_view">
+    tools:keep="@layout/kits_maps_internal_nil_map_view">
 
     <TextView
         android:layout_width="wrap_content"

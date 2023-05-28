@@ -27,8 +27,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider
 
 @RestrictTo(LIBRARY)
 public class GoogleTileProvider implements TileProvider {
-    public static final Tile NO_TILE =
-            GoogleTile.wrap(com.google.android.gms.maps.model.TileProvider.NO_TILE);
 
     private final com.google.android.gms.maps.model.TileProvider mDelegate;
 
@@ -47,6 +45,7 @@ public class GoogleTileProvider implements TileProvider {
     @Override public Tile getTile(int x, int y, int zoom) {
         return GoogleTile.wrap(mDelegate.getTile(x, y, zoom));
     }
+
 
     @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {

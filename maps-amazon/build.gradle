@@ -38,7 +38,7 @@ android {
 dependencies {
     api project(':maps-core')
 
-    implementation 'org.jetbrains:annotations:23.0.0'
+    implementation project(':maps-nil')
 
     compileOnly files('libs/amazon-maps-api-v2.aar')
 }

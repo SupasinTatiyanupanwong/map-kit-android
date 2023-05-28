@@ -22,7 +22,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import org.jetbrains.annotations.Contract;
+
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
 
 @RestrictTo(LIBRARY)
 public class AmazonTile implements Tile {
@@ -49,6 +52,7 @@ public class AmazonTile implements Tile {
         return mDelegate.data;
     }
 
+
     @Override public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
@@ -71,12 +75,26 @@ public class AmazonTile implements Tile {
     }
 
 
-    static Tile wrap(com.amazon.geo.mapsv2.model.Tile delegate) {
-        return new AmazonTile(delegate);
+    @Contract("null -> null; !null -> !null")
+    static @Nullable Tile wrap(@Nullable com.amazon.geo.mapsv2.model.Tile delegate) {
+        if (delegate == null) {
+            return null;
+        } else if (com.amazon.geo.mapsv2.model.TileProvider.NO_TILE.equals(delegate)) {
+            return TileProvider.NO_TILE;
+        } else {
+            return new AmazonTile(delegate);
+        }
     }
 
-    static com.amazon.geo.mapsv2.model.Tile unwrap(Tile wrapped) {
-        return ((AmazonTile) wrapped).mDelegate;
+    @Contract("null -> null; !null -> !null")
+    static @Nullable com.amazon.geo.mapsv2.model.Tile unwrap(@Nullable Tile wrapped) {
+        if (wrapped == null) {
+            return null;
+        } else if (TileProvider.NO_TILE.equals(wrapped)) {
+            return com.amazon.geo.mapsv2.model.TileProvider.NO_TILE;
+        } else {
+            return ((AmazonTile) wrapped).mDelegate;
+        }
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Supasin Tatiyanupanwong
+ * Copyright 2023 Supasin Tatiyanupanwong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 
-rootProject.allprojects {
-    repositories {
-        google()
-    }
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'com.vanniktech.maven.publish'
 
 android {
-    namespace 'dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google'
+    namespace 'dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil'
 
     compileSdkVersion 33
 
@@ -32,7 +26,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 33
 
-        consumerProguardFiles 'consumer-rules.pro'
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     compileOptions {
@@ -43,10 +37,6 @@ android {
 
 dependencies {
     api project(':maps-core')
-
-    implementation project(':maps-nil')
-
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
 
 tasks.withType(Javadoc).all { enabled = false }

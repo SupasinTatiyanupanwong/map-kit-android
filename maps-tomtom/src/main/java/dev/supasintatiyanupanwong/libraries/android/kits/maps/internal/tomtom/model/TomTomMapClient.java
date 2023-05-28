@@ -19,7 +19,6 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.tomtom.m
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
-
 import static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraMoveStartedListener.REASON_API_ANIMATION;
 import static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION;
 import static dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient.OnCameraMoveStartedListener.REASON_GESTURE;

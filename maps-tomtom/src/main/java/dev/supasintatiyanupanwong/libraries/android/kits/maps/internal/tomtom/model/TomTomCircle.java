@@ -27,7 +27,6 @@ import androidx.annotation.RestrictTo;
 
 import com.tomtom.sdk.maps.display.circle.RadiusUnit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;

@@ -99,7 +99,8 @@ public interface MapKitBackend {
 
     @NonNull MapClient.Style.Options newMapStyleOptions(
             @NonNull Context context,
-            @RawRes int resourceId);
+            @RawRes int resourceId
+    );
 
     @NonNull Marker.Options newMarkerOptions();
 
@@ -115,19 +116,24 @@ public interface MapKitBackend {
 
     @NonNull Tile newTile(int width, int height, byte[] data);
 
-    @NonNull Tile noTile();
+    @Deprecated
+    default @NonNull Tile noTile() {
+        return TileProvider.NO_TILE;
+    }
 
     @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,
-            @NonNull UrlTileProvider tileProvider);
+            @NonNull UrlTileProvider tileProvider
+    );
 
     @NonNull VisibleRegion newVisibleRegion(
             @NonNull LatLng nearLeft,
             @NonNull LatLng nearRight,
             @NonNull LatLng farLeft,
             @NonNull LatLng farRight,
-            @NonNull LatLngBounds bounds);
+            @NonNull LatLngBounds bounds
+    );
 
     @UiThread
     void getMapAsync(@NonNull Fragment fragment, @NonNull MapKit.OnMapReadyCallback callback);

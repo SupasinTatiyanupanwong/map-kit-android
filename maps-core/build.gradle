@@ -53,4 +53,6 @@ dependencies {
     // Assuming that Fragment APIs is very stable and clients will use compatible version
     // Keeping version 1.0.0 to avoid Java 8 requirement and version conflicts
     api 'androidx.fragment:fragment:1.0.0'
+
+    api 'org.jetbrains:annotations:23.0.0'
 }

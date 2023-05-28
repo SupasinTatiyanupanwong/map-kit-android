@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.R;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCameraUpdate;
@@ -195,10 +194,6 @@ class NilMapsBackend implements MapKitBackend {
     }
 
     @Override public @NonNull Tile newTile(int width, int height, byte[] data) {
-        return NilTile.INSTANCE; // Not supported, null object for API safe.
-    }
-
-    @Override public @NonNull Tile noTile() {
         return NilTile.INSTANCE; // Not supported, null object for API safe.
     }
 

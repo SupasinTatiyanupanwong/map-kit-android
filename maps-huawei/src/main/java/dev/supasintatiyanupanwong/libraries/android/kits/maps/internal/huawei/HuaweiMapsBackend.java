@@ -53,7 +53,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiSquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -209,10 +208,6 @@ public class HuaweiMapsBackend implements MapKitBackend {
 
     @Override public @NonNull Tile newTile(int width, int height, byte[] data) {
         return new HuaweiTile(width, height, data);
-    }
-
-    @Override public @NonNull Tile noTile() {
-        return HuaweiTileProvider.NO_TILE;
     }
 
     @Override public @NonNull TileProvider newUrlTileProvider(
