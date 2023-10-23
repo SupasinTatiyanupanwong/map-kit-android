@@ -18,10 +18,10 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
 /**
  * Represents a level in a building.
- *
- * <p>IndoorLevel objects are only equal by id. It is possible that may have different contents.
- *
- * <p>While a level is usually enclosed by a single building, a level might be enclosed by several
+ * <p>
+ * IndoorLevel objects are only equal by id. It is possible that may have different contents.
+ * <p>
+ * While a level is usually enclosed by a single building, a level might be enclosed by several
  * buildings (e.g., a carpark level might span multiple buildings).
  *
  * @since 1.0.0

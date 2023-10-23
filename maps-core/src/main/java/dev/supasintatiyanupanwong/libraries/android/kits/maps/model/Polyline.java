@@ -122,8 +122,8 @@ public interface Polyline {
 
     /**
      * Sets the joint type for all vertices of the polyline except the start and end vertices.
-     *
-     * <p>See {@link JointType} for allowed values. The default value {@link JointType#DEFAULT
+     * <p>
+     * See {@link JointType} for allowed values. The default value {@link JointType#DEFAULT
      * DEFAULT} will be used if joint type is undefined or is not one of the allowed values.
      *
      * @param jointType The joint type.
@@ -223,8 +223,8 @@ public interface Polyline {
 
     /**
      * Sets the tag for the polyline.
-     *
-     * <p>You can use this property to associate an arbitrary {@code Object} with this polyline.
+     * <p>
+     * You can use this property to associate an arbitrary {@code Object} with this polyline.
      * For example, the {@code Object} can contain data about what the polyline represents. This is
      * easier than storing a separate {@code Map<Polyline, Object>}. As another example, you can
      * associate a {@code String} ID corresponding to the ID from a data set. It is your
@@ -300,8 +300,8 @@ public interface Polyline {
 
         /**
          * Sets the joint type for all vertices of the polyline except the start and end vertices.
-         *
-         * <p>See {@link JointType} for allowed values. The default value {@link JointType#DEFAULT
+         * <p>
+         * See {@link JointType} for allowed values. The default value {@link JointType#DEFAULT
          * DEFAULT} will be used if joint type is undefined or is not one of the allowed values.
          *
          * @return This {@link Options} object for method chaining.

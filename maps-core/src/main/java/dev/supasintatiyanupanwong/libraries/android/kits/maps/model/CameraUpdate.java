@@ -26,8 +26,8 @@ import androidx.annotation.NonNull;
  * MapClient#animateCamera(CameraUpdate, MapClient.CancelableCallback) animateCamera(CameraUpdate,
  * MapClient.CancelableCallback)} or {@link MapClient#moveCamera(CameraUpdate) moveCamera(
  * CameraUpdate)}.
- *
- * <p>To obtain a {@link CameraUpdate} use the factory class {@link CameraUpdate.Factory}.
+ * <p>
+ * To obtain a {@link CameraUpdate} use the factory class {@link CameraUpdate.Factory}.
  *
  * @since 1.0.0
  */
@@ -61,8 +61,8 @@ public interface CameraUpdate {
         /**
          * Returns a {@link CameraUpdate} that scrolls the camera over the map, shifting the
          * center of view by the specified number of pixels in the x and y directions.
-         *
-         * <p>The scrolling is relative to the camera's current orientation. For example, if the
+         * <p>
+         * The scrolling is relative to the camera's current orientation. For example, if the
          * camera is bearing 90 degrees, then east is "up" and scrolling right will move the
          * camera south.
          *
@@ -90,8 +90,8 @@ public interface CameraUpdate {
         /**
          * Returns a {@link CameraUpdate} that shifts the zoom level of the current camera
          * viewpoint.
-         *
-         * <p>This method is different to {@link #zoomTo(float)} in that zoom is relative
+         * <p>
+         * This method is different to {@link #zoomTo(float)} in that zoom is relative
          * to the current camera.
          *
          * @param amount Amount to change the zoom level. Positive values indicate zooming closer
@@ -104,14 +104,14 @@ public interface CameraUpdate {
         /**
          * Returns a {@link CameraUpdate} that shifts the zoom level of the current camera
          * viewpoint.
-         *
-         * <p>A point specified by focus will remain fixed (i.e., it corresponds to the same
+         * <p>
+         * A point specified by focus will remain fixed (i.e., it corresponds to the same
          * lat/long both before and after the zoom process).
-         *
-         * <p>This method is different to {@link #zoomTo(float)} in that zoom is relative to the
+         * <p>
+         * This method is different to {@link #zoomTo(float)} in that zoom is relative to the
          * current camera.
-         *
-         * <p>For example, if the {@link LatLng} (11.11, 22.22) is currently at the screen location
+         * <p>
+         * For example, if the {@link LatLng} (11.11, 22.22) is currently at the screen location
          * (23, 45). After calling this method with a zoom amount and this {@link LatLng}, the
          * screen location of this {@link LatLng} will still be (23, 45).
          *
@@ -161,8 +161,8 @@ public interface CameraUpdate {
          * latitude/longitude bounds are centered on screen at the greatest possible zoom level.
          * You can specify padding, in order to inset the bounding box from the map view's edges.
          * The returned {@link CameraUpdate} has a bearing of 0 and a tilt of 0.
-         *
-         * <p>Do not change the camera with this camera update until the map has undergone layout
+         * <p>
+         * Do not change the camera with this camera update until the map has undergone layout
          * (in order for this method to correctly determine the appropriate bounding box and zoom
          * level, the map must have a size). Otherwise an {@link IllegalStateException} will be
          * thrown. It is NOT sufficient for the map to be available; the view containing the map
@@ -183,8 +183,8 @@ public interface CameraUpdate {
          * dimensions at the greatest possible zoom level. You can specify additional padding,
          * to further restrict the size of the bounding box. The returned {@link CameraUpdate}
          * has a bearing of 0 and a tilt of 0.
-         *
-         * <p>Unlike {@link #newLatLngBounds(LatLngBounds, int)}, you can use the {@link
+         * <p>
+         * Unlike {@link #newLatLngBounds(LatLngBounds, int)}, you can use the {@link
          * CameraUpdate} returned by this method to change the camera prior to the map's the
          * layout phase, because the arguments specify the desired size of the bounding box.
          *

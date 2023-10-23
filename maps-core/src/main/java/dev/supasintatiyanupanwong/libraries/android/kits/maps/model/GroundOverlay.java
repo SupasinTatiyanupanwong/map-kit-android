@@ -23,8 +23,8 @@ import androidx.annotation.UiThread;
 
 /**
  * A ground overlay is an image that is fixed to a map.
- *
- * <p>Methods in this class must be called on the Android UI thread. If not, an {@link
+ * <p>
+ * Methods in this class must be called on the Android UI thread. If not, an {@link
  * IllegalStateException} will be thrown at runtime.
  *
  * @since 1.0.0
@@ -198,8 +198,8 @@ public interface GroundOverlay {
 
     /**
      * Sets the tag for the ground overlay.
-     *
-     * <p>You can use this property to associate an arbitrary {@code Object} with this ground
+     * <p>
+     * You can use this property to associate an arbitrary {@code Object} with this ground
      * overlay. For example, the {@code Object} can contain data about what the ground overlay
      * represents. This is easier than storing a separate {@code Map<GroundOverlay, Object>}.
      * As another example, you can associate a String ID corresponding to the ID from a data set.
@@ -224,8 +224,8 @@ public interface GroundOverlay {
     interface Options {
         /**
          * Specifies the image for this ground overlay.
-         *
-         * <p>To load an image as a texture (which is used to draw the image on a map), it must be
+         * <p>
+         * To load an image as a texture (which is used to draw the image on a map), it must be
          * converted into an image with sides that are powers of two. This is so that a mipmap can
          * be created in order to render the texture at various zoom levels. Hence, to conserve
          * memory by avoiding this conversion, it is advised that the dimensions of the image are
@@ -240,11 +240,11 @@ public interface GroundOverlay {
 
         /**
          * Specifies the anchor.
-         *
-         * <p>The anchor aligns with the ground overlay's location.
-         *
-         * <p>The anchor point is specified in 2D continuous space where (0,0), (1,0), (0,1) and
-         * (1,1) denote the top-left, top-right, bottom-left and bottom-right corners respectively.
+         * <p>
+         * The anchor aligns with the ground overlay's location.
+         * <p>
+         * The anchor point is specified in 2D continuous space where (0,0), (1,0), (0,1), and (1,1)
+         * denote the top-left, top-right, bottom-left, and bottom-right corners respectively.
          *
          * <pre>
          * *-----+-----+-----+-----*
@@ -304,8 +304,8 @@ public interface GroundOverlay {
          * Specifies the bearing of the ground overlay in degrees clockwise from north.
          * The rotation is performed about the anchor point. If not specified, the default is 0
          * (i.e., up on the image points north).
-         *
-         * <p>Note that latitude-longitude bound applies before the rotation.
+         * <p>
+         * Note that latitude-longitude bound applies before the rotation.
          *
          * @param bearing The bearing in degrees clockwise from north. Values outside the range
          * [0, 360) will be normalized.

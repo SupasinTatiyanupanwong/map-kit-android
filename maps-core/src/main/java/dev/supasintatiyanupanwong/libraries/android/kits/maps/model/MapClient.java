@@ -35,12 +35,12 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapFragment;
  * This is the main class of the Map Kit and is the entry point for all methods related to the map.
  * You cannot instantiate a {@link MapClient} object directly, rather, you must obtain one from
  * {@link MapFragment#getMapAsync} that you have added to your application.
- *
- * <p>Note: Similar to a {@link View} object, a {@link MapClient} can only be read and modified from
+ * <p>
+ * Note: Similar to a {@link View} object, a {@link MapClient} can only be read and modified from
  * the Android UI thread. Calling {@link MapClient} methods from another thread will result in an
  * exception.
- *
- * <p>You can adjust the viewpoint of a map by changing the position of the camera (as opposed to
+ * <p>
+ * You can adjust the viewpoint of a map by changing the position of the camera (as opposed to
  * moving the map). You can use the map's camera to set parameters such as location, zoom level,
  * tilt angle, and bearing.
  *
@@ -77,8 +77,8 @@ public interface MapClient {
 
     /**
      * Gets the current position of the camera.
-     *
-     * <p>The {@link CameraPosition} returned is a snapshot of the current position, and will not
+     * <p>
+     * The {@link CameraPosition} returned is a snapshot of the current position, and will not
      * automatically update when the camera moves.
      *
      * @return The current position of the Camera.
@@ -105,8 +105,8 @@ public interface MapClient {
     /**
      * Repositions the camera according to the instructions defined in the update. The move is
      * instantaneous, and a subsequent {@link #getCameraPosition()} will reflect the new position.
-     *
-     * <p>See {@link CameraUpdate.Factory} for a set of updates.
+     * <p>
+     * See {@link CameraUpdate.Factory} for a set of updates.
      *
      * @param update The change that should be applied to the camera.
      */
@@ -116,8 +116,8 @@ public interface MapClient {
      * Animates the movement of the camera from the current position to the position defined in
      * the update. During the animation, a call to {@link #getCameraPosition()} returns an
      * intermediate location of the camera.
-     *
-     * <p>See {@link CameraUpdate.Factory} for a set of updates.
+     * <p>
+     * See {@link CameraUpdate.Factory} for a set of updates.
      *
      * @param update The change that should be applied to the camera.
      */
@@ -126,10 +126,10 @@ public interface MapClient {
     /**
      * Animates the movement of the camera from the current position to the position defined in
      * the update and calls an optional callback on completion.
-     *
-     * <p>See {@link CameraUpdate.Factory} for a set of updates.
-     *
-     * <p>During the animation, a call to {@link #getCameraPosition()} returns an intermediate
+     * <p>
+     * See {@link CameraUpdate.Factory} for a set of updates.
+     * <p>
+     * During the animation, a call to {@link #getCameraPosition()} returns an intermediate
      * location of the camera.
      *
      * @param update The change that should be applied to the camera.
@@ -143,10 +143,10 @@ public interface MapClient {
     /**
      * Moves the map according to the update with an animation over a specified duration, and calls
      * an optional callback on completion.
-     *
-     * <p>See {@link CameraUpdate.Factory} for a set of updates.
-     *
-     * <p>If {@link #getCameraPosition()} is called during the animation, it will return the
+     * <p>
+     * See {@link CameraUpdate.Factory} for a set of updates.
+     * <p>
+     * If {@link #getCameraPosition()} is called during the animation, it will return the
      * current location of the camera in flight.
      *
      * @param update The change that should be applied to the camera.
@@ -200,8 +200,8 @@ public interface MapClient {
 
     /**
      * Adds a marker to this map.
-     *
-     * <p>The marker's icon is rendered on the map at the location Marker.position. Clicking the
+     * <p>
+     * The marker's icon is rendered on the map at the location Marker.position. Clicking the
      * marker centers the camera on the marker. If Marker.title is defined, the map shows an info
      * box with the marker's title and snippet. If the marker is draggable, long-clicking and then
      * dragging the marker moves it.
@@ -224,7 +224,7 @@ public interface MapClient {
 
     /**
      * Adds a tile overlay to this map. See {@link TileOverlay} for more information.
-     *
+     * <p>
      * Note that unlike other overlays, if the map is recreated, tile overlays are not
      * automatically restored and must be re-added manually.
      *
@@ -257,8 +257,15 @@ public interface MapClient {
     void setOnIndoorStateChangeListener(@Nullable OnIndoorStateChangeListener listener);
 
     /**
-     * Gets the type of map that's currently displayed. See {@link #MAP_TYPE_NORMAL}, {@link
-     * #MAP_TYPE_SATELLITE}, {@link #MAP_TYPE_TERRAIN} for possible values.
+     * Gets the type of map that's currently displayed. The possible values are:
+     *
+     * <ul>
+     * <li>{@link #MAP_TYPE_NORMAL}: Basic map.
+     * <li>{@link #MAP_TYPE_SATELLITE}: Satellite imagery.
+     * <li>{@link #MAP_TYPE_HYBRID}: Satellite imagery with roads and labels.
+     * <li>{@link #MAP_TYPE_TERRAIN}: Topographic data.
+     * <li>{@link #MAP_TYPE_NONE}: No base map tiles.
+     * </ul>
      *
      * @return The map type.
      */
@@ -273,7 +280,7 @@ public interface MapClient {
      * <li>{@link #MAP_TYPE_HYBRID}: Satellite imagery with roads and labels.
      * <li>{@link #MAP_TYPE_TERRAIN}: Topographic data.
      * <li>{@link #MAP_TYPE_NONE}: No base map tiles.
-     *</ul>
+     * </ul>
      *
      * @param type type	The type of map to display.
      */
@@ -359,8 +366,8 @@ public interface MapClient {
     /**
      * Returns a {@link Projection} object that you can use to convert between screen coordinates
      * and latitude/longitude coordinates.
-     *
-     * <p></p>The {@code Projection} returned is a snapshot of the current projection, and will not
+     * <p>
+     * The {@code Projection} returned is a snapshot of the current projection, and will not
      * automatically update when the camera moves. As this operation is expensive, you should get
      * the projection only once per screen. Map Kit uses the Mercator projection to create its
      * maps from geographic data and convert points on the map into geographic coordinates.
@@ -453,8 +460,8 @@ public interface MapClient {
 
     /**
      * Sets a custom renderer for the contents of info windows.
-     *
-     * <p>Like the map's event listeners, this state is not serialized with the map. If the map
+     * <p>
+     * Like the map's event listeners, this state is not serialized with the map. If the map
      * gets re-created (e.g., due to a configuration change), you must ensure that you call this
      * method again in order to preserve the customization.
      *
@@ -465,8 +472,8 @@ public interface MapClient {
 
     /**
      * Sets a callback that's invoked when the my location button is clicked.
-     *
-     * <p>If the {@code listener} returns {@code true}, the event is consumed and the default
+     * <p>
+     * If the {@code listener} returns {@code true}, the event is consumed and the default
      * behavior will not occur. If it returns false, the default behavior will occur (i.e. The
      * camera moves such that it is centered on the user's location).
      *
@@ -525,13 +532,13 @@ public interface MapClient {
 
     /**
      * Takes a snapshot of the map.
-     *
-     * <p>You can use snapshots within your application when an interactive map would be difficult,
+     * <p>
+     * You can use snapshots within your application when an interactive map would be difficult,
      * or impossible, to use. For example, images produced with the {@code snapshot()} method can
      * be used to display a thumbnail of the map in your app, or a snapshot in the notification
      * center.
-     *
-     * <p><b>Note</b>: Images of the map must not be transmitted to your servers, or otherwise used
+     * <p>
+     * <b>Note</b>: Images of the map must not be transmitted to your servers, or otherwise used
      * outside of the application. If you need to send a map to another application or user, send
      * data that allows them to reconstruct the map for the new user instead of a snapshot.
      *
@@ -541,12 +548,12 @@ public interface MapClient {
 
     /**
      * Takes a snapshot of the map.
-     *
-     * <p>This method is equivalent to {@link #snapshot(SnapshotReadyCallback)} but lets you
+     * <p>
+     * This method is equivalent to {@link #snapshot(SnapshotReadyCallback)} but lets you
      * provide a pre-allocated {@link Bitmap}. If the bitmap does not match the current dimensions
      * of the map, another bitmap will be allocated that fits the map's dimensions.
-     *
-     * <p>Although in most cases the object passed by the callback method is the same as the one
+     * <p>
+     * Although in most cases the object passed by the callback method is the same as the one
      * given in the parameter to this method, in some cases the returned object can be different
      * (e.g., if the view's dimensions have changed by the time the snapshot is actually taken).
      * Thus, you should only trust the content of the bitmap passed by the callback method.
@@ -559,8 +566,8 @@ public interface MapClient {
 
     /**
      * Sets padding on the map.
-     *
-     * <p>This method allows you to define a visible region on the map, to signal to the map that
+     * <p>
+     * This method allows you to define a visible region on the map, to signal to the map that
      * portions of the map around the edges may be obscured, by setting padding on each of the four
      * edges of the map. Map functions will be adapted to the padding. For example, the zoom
      * controls, compass, copyright notices and logo will be moved to fit inside the defined region,
@@ -575,8 +582,8 @@ public interface MapClient {
 
     /**
      * Sets a contentDescription for the map.
-     *
-     * <p>This is used to provide a spoken description of the map in accessibility mode.
+     * <p>
+     * This is used to provide a spoken description of the map in accessibility mode.
      *
      * @param description A string to use as a description.
      */
@@ -584,8 +591,8 @@ public interface MapClient {
 
     /**
      * Sets a listener which will be triggered when a POI is clicked or tapped.
-     *
-     * <p>Pass {@code null} to clear the listener.
+     * <p>
+     * Pass {@code null} to clear the listener.
      *
      * @param listener The callback that's invoked when a POI is clicked. To unset the callback,
      * use {@code null}.
@@ -594,11 +601,11 @@ public interface MapClient {
 
     /**
      * Sets the styling of the base map.
-     *
-     * <p>Using the style options, you can apply custom styles to features and elements on the map.
+     * <p>
+     * Using the style options, you can apply custom styles to features and elements on the map.
      * See {@link MapClient.Style.Options} for style definition details.
-     *
-     * <p>Set to {@code null} to clear any previous custom styling.
+     * <p>
+     * Set to {@code null} to clear any previous custom styling.
      *
      * @param style The style of map to display.
      * @return {@code true} if the style was successfully parsed; {@code false} if problems were
@@ -610,12 +617,12 @@ public interface MapClient {
 
     /**
      * Sets a preferred lower bound for the camera zoom.
-     *
-     * <p>When the minimum zoom changes, the SDK adjusts all later camera updates to respect that
+     * <p>
+     * When the minimum zoom changes, the SDK adjusts all later camera updates to respect that
      * minimum if possible. Note that there are technical considerations that may prevent the SDK
      * from allowing users to zoom too low.
-     *
-     * <p>The SDK resolves any conflicts in the minimum and maximum values. If you set the minimum
+     * <p>
+     * The SDK resolves any conflicts in the minimum and maximum values. If you set the minimum
      * zoom to a higher zoom level than the current maximum, then the SDK uses the new minimum
      * value for both minimum and maximum. If you set the maximum zoom to a lower zoom level than
      * the minimum, the SDK uses the new maximum value for both minimum and maximum. For example:
@@ -628,13 +635,13 @@ public interface MapClient {
 
     /**
      * Sets a preferred upper bound for the camera zoom.
-     *
-     * <p>When the maximum zoom changes, the SDK adjusts all later camera updates to respect that
+     * <p>
+     * When the maximum zoom changes, the SDK adjusts all later camera updates to respect that
      * maximum if possible. Note that there are technical considerations that may prevent the SDK
      * from allowing users to zoom too deep into the map. For example, satellite or terrain may
      * have a lower maximum zoom than the base map tiles.
-     *
-     * <p>The SDK resolves any conflicts in the minimum and maximum values. If you set the minimum
+     * <p>
+     * The SDK resolves any conflicts in the minimum and maximum values. If you set the minimum
      * zoom to a higher zoom level than the current maximum, then the SDK uses the new minimum
      * value for both minimum and maximum. If you set the maximum zoom to a lower zoom level than
      * the minimum, the SDK uses the new maximum value for both minimum and maximum. For example:
@@ -653,11 +660,11 @@ public interface MapClient {
     /**
      * Specifies a {@link LatLngBounds} to constrain the camera target, so that when users scroll
      * and pan the map, the camera target does not move outside these bounds.
-     *
-     * <p>Set to {@code null} to clear the bounding box completely. The new bounds replaces any
+     * <p>
+     * Set to {@code null} to clear the bounding box completely. The new bounds replaces any
      * previously specified bounding box.
-     *
-     * <p>When the LatLngBounds changes, the SDK adjusts all later camera updates to respect those
+     * <p>
+     * When the LatLngBounds changes, the SDK adjusts all later camera updates to respect those
      * bounds if possible. Note that there are technical considerations that may prevent the SDK
      * from keeping the camera target strictly within the bounds. For example, floating point
      * precision rounding errors or a very low zoom level.
@@ -673,8 +680,8 @@ public interface MapClient {
     interface OnPoiClickListener {
         /**
          * Called when a POI is clicked.
-         *
-         * <p>This is called on the Android UI thread.
+         * <p>
+         * This is called on the Android UI thread.
          *
          * @param poi The point of interest that was clicked.
          */

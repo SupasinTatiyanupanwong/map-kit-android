@@ -58,8 +58,8 @@ public interface VisibleRegion {
 
     /**
      * The smallest bounding box that includes the visible region defined in this class.
-     *
-     * <p>If this box crosses the 180Â° meridian (the vertical line from north to south), the
+     * <p>
+     * If this box crosses the 180Â° meridian (the vertical line from north to south), the
      * longitude in {@link #getFarRight() farRight} will be negative and the longitude in {@link
      * #getFarLeft() farLeft} will be positive. This rule also applies to {@link #getNearRight()
      * nearRight} and {@link #getNearLeft() nearLeft}.

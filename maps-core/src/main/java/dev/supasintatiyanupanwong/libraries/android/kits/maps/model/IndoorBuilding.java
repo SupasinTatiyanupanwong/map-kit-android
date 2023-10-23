@@ -20,8 +20,8 @@ import java.util.List;
 
 /**
  * Represents a building.
- *
- * <p>Two IndoorBuildings are .equal() if the physical building they represent is the same.
+ * <p>
+ * Two IndoorBuildings are .equal() if the physical building they represent is the same.
  * However, if a building's structural model changes, e.g., due to an update to building models,
  * then an old IndoorBuilding object and a new IndoorBuilding object will be .equal(), but might
  * have different contents.

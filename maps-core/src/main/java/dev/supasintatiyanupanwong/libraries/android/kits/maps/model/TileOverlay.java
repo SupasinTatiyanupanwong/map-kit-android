@@ -23,8 +23,8 @@ import androidx.annotation.UiThread;
 /**
  * A tile overlay is a set of images which are displayed on top of the base map tiles. These tiles
  * may be transparent, allowing you to add features to existing maps.
- *
- * <p>Methods in this class must be called on the Android UI thread. If not, an {@link
+ * <p>
+ * Methods in this class must be called on the Android UI thread. If not, an {@link
  * IllegalStateException} will be thrown at runtime.
  *
  * @since 1.0.0

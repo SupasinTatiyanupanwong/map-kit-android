@@ -21,8 +21,8 @@ import java.net.URL;
 /**
  * An alternative to a {@link TileProvider} that only requires a URL that points to an image to be
  * provided.
- *
- * <p>Note that this class requires that all the images have the same dimensions.
+ * <p>
+ * Note that this class requires that all the images have the same dimensions.
  *
  * @since 1.0.0
  */

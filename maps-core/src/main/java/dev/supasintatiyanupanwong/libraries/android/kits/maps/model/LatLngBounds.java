@@ -51,8 +51,8 @@ public interface LatLngBounds {
      * Returns a new {@link LatLngBounds} that extends this LatLngBounds to include the given
      * {@link LatLng}. This will return the smallest LatLngBounds that contains both this and the
      * extra point.
-     *
-     * <p>In particular, it will consider extending the bounds both in the eastward and westward
+     * <p>
+     * In particular, it will consider extending the bounds both in the eastward and westward
      * directions (one of which may cross the antimeridian) and choose the smaller of the two. In
      * the case that both directions result in a LatLngBounds of the same size, this will extend
      * it in the eastward direction.
@@ -80,8 +80,8 @@ public interface LatLngBounds {
         /**
          * Includes this point for building of the bounds. The bounds will be extended in a minimum
          * way to include this point.
-         *
-         * <p>More precisely, it will consider extending the bounds both in the eastward and
+         * <p>
+         * More precisely, it will consider extending the bounds both in the eastward and
          * westward directions (one of which may cross the antimeridian) and choose the smaller of
          * the two. In the case that both directions result in a LatLngBounds of the same size,
          * this will extend it in the eastward direction. For example, adding points (0, -179) and

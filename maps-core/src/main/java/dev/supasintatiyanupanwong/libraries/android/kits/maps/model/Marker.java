@@ -75,11 +75,11 @@ public interface Marker {
 
     /**
      * Sets the anchor point for the marker.
-     *
-     * <p>The anchor specifies the point in the icon image that is anchored to the marker's
+     * <p>
+     * The anchor specifies the point in the icon image that is anchored to the marker's
      * position on the Earth's surface.
-     *
-     * <p>The anchor point is specified in the continuous space [0.0, 1.0] x [0.0, 1.0], where
+     * <p>
+     * The anchor point is specified in the continuous space [0.0, 1.0] x [0.0, 1.0], where
      * (0, 0) is the top-left corner of the image, and (1, 1) is the bottom-right corner. The
      * anchoring point in a <i>W</i> x <i>H</i> image is the nearest discrete grid point in a
      * <i>(W + 1)</i> x <i>(H + 1)</i> grid, obtained by scaling the then rounding. For example,
@@ -174,8 +174,8 @@ public interface Marker {
 
     /**
      * Hides the info window if it is shown from this marker.
-     *
-     * <p>This method has no effect if this marker is not visible.
+     * <p>
+     * This method has no effect if this marker is not visible.
      */
     void hideInfoWindow();
 
@@ -246,8 +246,8 @@ public interface Marker {
 
     /**
      * Sets the tag for the marker.
-     *
-     * <p>You can use this property to associate an arbitrary {@code Object} with this marker. For
+     * <p>
+     * You can use this property to associate an arbitrary {@code Object} with this marker. For
      * example, the {@code Object} can contain data about what the marker represents. This is easier
      * than storing a separate {@code Map<Marker, Object>}. As another example, you can associate a
      * {@code String} ID corresponding to the ID from a data set. It is your responsibility to call
@@ -289,11 +289,11 @@ public interface Marker {
 
         /**
          * Sets the anchor point for the marker.
-         *
-         * <p>The anchor specifies the point in the icon image that is anchored to the marker's
+         * <p>
+         * The anchor specifies the point in the icon image that is anchored to the marker's
          * position on the Earth's surface.
-         *
-         * <p>The anchor point is specified in the continuous space [0.0, 1.0] x [0.0, 1.0], where
+         * <p>
+         * The anchor point is specified in the continuous space [0.0, 1.0] x [0.0, 1.0], where
          * (0, 0) is the top-left corner of the image, and (1, 1) is the bottom-right corner. The
          * anchoring point in a <i>W</i> x <i>H</i> image is the nearest discrete grid point in a
          * <i>(W + 1)</i> x <i>(H + 1)</i> grid, obtained by scaling the then rounding. For example,

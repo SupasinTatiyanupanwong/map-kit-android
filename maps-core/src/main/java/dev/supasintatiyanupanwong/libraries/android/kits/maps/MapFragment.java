@@ -44,11 +44,11 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
  *     android:layout_width="match_parent"
  *     android:layout_height="match_parent" /&gt;
  * </pre>
- *
- * <p>A {@link MapClient} must be acquired using {@link #getMapAsync(MapKit.OnMapReadyCallback)}.
+ * <p>
+ * A {@link MapClient} must be acquired using {@link #getMapAsync(MapKit.OnMapReadyCallback)}.
  * This class automatically initializes the maps system and the view.
- *
- * <p>Any objects obtained from the {@link MapClient} are associated with the view. It's important
+ * <p>
+ * Any objects obtained from the {@link MapClient} are associated with the view. It's important
  * to not hold on to objects (e.g. {@link Marker}) beyond the view's life. Otherwise it will cause
  * a memory leak as the view cannot be released.
  *

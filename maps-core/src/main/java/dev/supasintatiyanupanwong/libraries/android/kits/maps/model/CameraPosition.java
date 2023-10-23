@@ -22,8 +22,8 @@ import androidx.annotation.NonNull;
 /**
  * An immutable class that aggregates all camera position parameters such as location, zoom level,
  * tilt angle, and bearing.
- *
- * <p>Use {@link CameraPosition.Builder} to construct a {@link CameraPosition} instance, which you
+ * <p>
+ * Use {@link CameraPosition.Builder} to construct a {@link CameraPosition} instance, which you
  * can then use in conjunction with {@link CameraUpdate.Factory}.
  *
  * @since 1.0.0
@@ -81,7 +81,7 @@ public interface CameraPosition {
          * Increasing the zoom level by 1 doubles the width of the world on the screen.
          * Hence at zoom level N, the width of the world is approximately 256 * 2<sup>N</sup> dp,
          * i.e., at zoom level 2, the whole world is approximately 1024dp wide.
-         *
+         * <p>
          * When changing the camera position for a map, the zoom level of the camera is restricted
          * to a certain range depending on various factors including location, map type and map
          * size. Use {@link MapClient#getMinZoomLevel} and {@link MapClient#getMaxZoomLevel} to
@@ -104,8 +104,8 @@ public interface CameraPosition {
          * <li>For zoom levels from 14 to 15.5 the maximum increases linearly from 45 to 67.5.
          * <li>For zoom levels greater than 15.5 the maximum is 67.5.
          * </ul>
-         *
-         * <p>The minimum is always 0 (directly down). If you specify a value outside this range
+         * <p>
+         * The minimum is always 0 (directly down). If you specify a value outside this range
          * and try to move the camera to this camera position it will be clamped to these bounds.
          *
          * @param tilt The angle, in degrees, of the camera from the nadir (directly facing the

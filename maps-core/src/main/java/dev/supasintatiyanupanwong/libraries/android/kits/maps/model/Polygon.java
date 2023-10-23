@@ -25,8 +25,8 @@ import java.util.List;
 /**
  * A polygon on the earth's surface. A polygon can be convex or concave, it may span the 180
  * meridian and it can have holes that are not filled in.
- *
- * <p>Methods in this class must be called on the Android UI thread. If not, an {@link
+ * <p>
+ * Methods in this class must be called on the Android UI thread. If not, an {@link
  * IllegalStateException} will be thrown at runtime.
  *
  * @since 1.0.0
@@ -112,8 +112,8 @@ public interface Polygon {
 
     /**
      * Sets the joint type for all vertices of the polygon's outline.
-     *
-     * <p>See {@link JointType} for allowed values. The default value {@link JointType#DEFAULT
+     * <p>
+     * See {@link JointType} for allowed values. The default value {@link JointType#DEFAULT
      * DEFAULT} will be used if joint type is undefined or is not one of the allowed values.
      *
      * @param jointType The stroke joint type.
@@ -227,8 +227,8 @@ public interface Polygon {
 
     /**
      * Sets the tag for the polygon.
-     *
-     * <p>You can use this property to associate an arbitrary {@code Object} with this polygon.
+     * <p>
+     * You can use this property to associate an arbitrary {@code Object} with this polygon.
      * For example, the {@code Object} can contain data about what the polygon represents. This is
      * easier than storing a separate {@code Map<Polygon, Object>}. As another example, you can
      * associate a {@code String} ID corresponding to the ID from a data set. It is your

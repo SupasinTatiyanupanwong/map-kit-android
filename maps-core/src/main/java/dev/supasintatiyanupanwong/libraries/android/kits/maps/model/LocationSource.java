@@ -22,12 +22,12 @@ import androidx.annotation.NonNull;
 
 /**
  * Defines an interface for providing location data, typically to a {@link MapClient} object.
- *
- * <p>A {@link MapClient} object has a built-in location provider for its my-location layer,
+ * <p>
+ * A {@link MapClient} object has a built-in location provider for its my-location layer,
  * but it can be {@link MapClient#setLocationSource replaced} with another one that implements
  * this interface.
- *
- * <p>A {@link MapClient} object activates its location provider using {@link
+ * <p>
+ * A {@link MapClient} object activates its location provider using {@link
  * #activate(OnLocationChangedListener)}. While active (between {@link
  * #activate(OnLocationChangedListener)} and {@link #deactivate()}), a location provider should
  * push periodic location updates to the listener registered in {@link

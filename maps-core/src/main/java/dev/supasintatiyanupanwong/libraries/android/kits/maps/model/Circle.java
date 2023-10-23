@@ -46,8 +46,8 @@ public interface Circle {
 
     /**
      * Sets the center using a {@link LatLng}.
-     *
-     * <p>The center must not be null, as there is no default value.
+     * <p>
+     * The center must not be null, as there is no default value.
      *
      * @param center The geographic center of the circle, specified as a {@link LatLng}.
      */
@@ -62,8 +62,8 @@ public interface Circle {
 
     /**
      * Sets the radius in meters.
-     *
-     * <p>The radius must be zero or greater.
+     * <p>
+     * The radius must be zero or greater.
      *
      * @param radius The radius, in meters.
      */
@@ -78,8 +78,8 @@ public interface Circle {
 
     /**
      * Sets the stroke width.
-     *
-     * <p>The stroke width is the width (in screen pixels) of the circle's outline. It must be
+     * <p>
+     * The stroke width is the width (in screen pixels) of the circle's outline. It must be
      * zero or greater. If it is zero then no outline is drawn. The default value is 10.
      *
      * @param width The stroke width, in screen pixels.
@@ -96,9 +96,9 @@ public interface Circle {
 
     /**
      * Sets the stroke color.
-     *
-     * <p>The stroke color is the color of this circle's outline, in the integer format specified
-     * by {@link Color}. If TRANSPARENT is used then no outline is drawn.
+     * <p>
+     * The stroke color is the color of this circle's outline, in the integer format specified
+     * by {@link Color}. If {@link Color#TRANSPARENT} is used then no outline is drawn.
      *
      * @param color The stroke color in the {@link Color} format.
      */
@@ -128,9 +128,9 @@ public interface Circle {
 
     /**
      * Sets the fill color.
-     *
-     * <p>The fill color is the color inside the circle, in the integer format specified by
-     * {@link Color}. If TRANSPARENT is used then no fill is drawn.
+     * <p>
+     * The fill color is the color inside the circle, in the integer format specified by
+     * {@link Color}. If {@link Color#TRANSPARENT} is used then no fill is drawn.
      *
      * @param color The color in the {@link Color} format.
      */
@@ -145,8 +145,8 @@ public interface Circle {
 
     /**
      * Sets the zIndex.
-     *
-     * <p>Overlays (such as circles) with higher zIndices are drawn above those with lower indices.
+     * <p>
+     * Overlays (such as circles) with higher zIndices are drawn above those with lower indices.
      *
      * @param zIndex The zIndex value.
      */
@@ -226,10 +226,10 @@ public interface Circle {
     interface Options {
         /**
          * Sets the center using a {@link LatLng}.
-         *
-         * <p>The center must not be {@code null}.
-         *
-         * <p>This method is mandatory because there is no default center.
+         * <p>
+         * The center must not be {@code null}.
+         * <p>
+         * This method is mandatory because there is no default center.
          *
          * @param center The geographic center as a {@link LatLng}.
          * @return This {@link Options} object for method chaining.
@@ -238,8 +238,8 @@ public interface Circle {
 
         /**
          * Sets the radius in meters.
-         *
-         * <p>The radius must be zero or greater. The default radius is zero.
+         * <p>
+         * The radius must be zero or greater. The default radius is zero.
          *
          * @param radius Radius in meters.
          * @return This {@link Options} object for method chaining.
@@ -248,11 +248,11 @@ public interface Circle {
 
         /**
          * Sets the stroke width.
-         *
-         * <p>The stroke width is the width (in screen pixels) of the circle's outline.
+         * <p>
+         * The stroke width is the width (in screen pixels) of the circle's outline.
          * It must be zero or greater. If it is zero then no outline is drawn.
-         *
-         * <p>The default width is 10 pixels.
+         * <p>
+         * The default width is 10 pixels.
          *
          * @param width Width in pixels.
          * @return This {@link Options} object for method chaining.
@@ -261,11 +261,11 @@ public interface Circle {
 
         /**
          * Sets the stroke color.
-         *
-         * <p>The stroke color is the color of this circle's outline, in the integer format
+         * <p>
+         * The stroke color is the color of this circle's outline, in the integer format
          * specified by Color. If TRANSPARENT is used then no outline is drawn.
-         *
-         * <p>By default the stroke color is black ({@code 0xff000000}).
+         * <p>
+         * By default the stroke color is black ({@code 0xff000000}).
          *
          * @param color Color in the {@link Color} format.
          * @return This {@link Options} object for method chaining.
@@ -283,11 +283,11 @@ public interface Circle {
 
         /**
          * Sets the fill color.
-         *
-         * <p>The fill color is the color inside the circle, in the integer format specified by
+         * <p>
+         * The fill color is the color inside the circle, in the integer format specified by
          * {@link Color}. If TRANSPARENT is used then no fill is drawn.
-         *
-         * <p>By default the fill color is transparent ({@code 0x00000000}).
+         * <p>
+         * By default the fill color is transparent ({@code 0x00000000}).
          *
          * @param color Color in the {@link Color} format.
          * @return This {@link Options} object for method chaining.
@@ -296,11 +296,11 @@ public interface Circle {
 
         /**
          * Sets the zIndex.
-         *
-         * <p>Overlays (such as circles) with higher zIndices are drawn above those with lower
+         * <p>
+         * Overlays (such as circles) with higher zIndices are drawn above those with lower
          * indices.
-         *
-         * <p>By default the zIndex is 0.0.
+         * <p>
+         * By default the zIndex is 0.0.
          *
          * @param zIndex The zIndex value.
          * @return This {@link Options} object for method chaining.
@@ -309,8 +309,8 @@ public interface Circle {
 
         /**
          * Sets the visibility.
-         *
-         * <p>If this circle is not visible then it is not drawn, but all other state is preserved.
+         * <p>
+         * If this circle is not visible then it is not drawn, but all other state is preserved.
          *
          * @param visible {@code false} to make this circle invisible.
          * @return This {@link Options} object for method chaining.
