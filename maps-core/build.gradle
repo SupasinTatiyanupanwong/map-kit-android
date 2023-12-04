@@ -30,11 +30,11 @@ apply plugin: "me.tylerbwong.gradle.metalava"
 android {
     namespace 'dev.supasintatiyanupanwong.libraries.android.kits.maps'
 
-    compileSdkVersion 33
+    compileSdk 33
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 33
+        minSdk 19
+        targetSdk 33
     }
 
     compileOptions {
