@@ -51,11 +51,11 @@ android {
 
             minSdkVersion 22 // The minimum supported API level is Fire OS 5 (API 22).
         }
-        tomtom {
-            applicationIdSuffix '.tomtom'
-
-            minSdkVersion 21 // The minimum supported API level for TomTom Maps SDK
-        }
+//        tomtom {
+//            applicationIdSuffix '.tomtom'
+//
+//            minSdkVersion 21 // The minimum supported API level for TomTom Maps SDK
+//        }
     }
 
     compileOptions {
@@ -68,7 +68,7 @@ dependencies {
     googleImplementation project(':maps-google')
     huaweiImplementation project(':maps-huawei')
     amazonImplementation project(':maps-amazon')
-    tomtomImplementation project(':maps-tomtom')
+//    tomtomImplementation project(':maps-tomtom')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
