@@ -155,25 +155,25 @@ public class HuaweiMapClient implements MapClient {
     }
 
     @Override public @Nullable IndoorBuilding getFocusedBuilding() {
-        return HuaweiIndoorBuilding.wrap(mDelegate.getFocusedBuilding());
+        return null; //HuaweiIndoorBuilding.wrap(mDelegate.getFocusedBuilding());
     }
 
     @Override public void setOnIndoorStateChangeListener(
             final @Nullable OnIndoorStateChangeListener listener) {
-        mDelegate.setOnIndoorStateChangeListener(listener == null
-                ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnIndoorStateChangeListener() {
-                    @Override public void onIndoorBuildingFocused() {
-                        listener.onIndoorBuildingFocused();
-                    }
-
-                    @Override public void onIndoorLevelActivated(
-                            com.huawei.hms.maps.model.IndoorBuilding indoorBuilding) {
-                        listener.onIndoorLevelActivated(
-                                HuaweiIndoorBuilding.wrap(mDelegate.getFocusedBuilding()));
-                    }
-                }
-        );
+//        mDelegate.setOnIndoorStateChangeListener(listener == null
+//                ? null
+//                : new com.huawei.hms.maps.HuaweiMap.OnIndoorStateChangeListener() {
+//                    @Override public void onIndoorBuildingFocused() {
+//                        listener.onIndoorBuildingFocused();
+//                    }
+//
+//                    @Override public void onIndoorLevelActivated(
+//                            com.huawei.hms.maps.model.IndoorBuilding indoorBuilding) {
+//                        listener.onIndoorLevelActivated(
+//                                HuaweiIndoorBuilding.wrap(mDelegate.getFocusedBuilding()));
+//                    }
+//                }
+//        );
     }
 
     @Override public int getMapType() {
