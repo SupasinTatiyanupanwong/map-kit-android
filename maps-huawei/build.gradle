@@ -46,7 +46,7 @@ dependencies {
 
     implementation project(':maps-nil')
 
-    implementation 'com.huawei.hms:maps:5.0.0.300'
+    implementation 'com.huawei.hms:maps:6.11.2.301'
 }
 
 tasks.withType(Javadoc).all { enabled = false }
