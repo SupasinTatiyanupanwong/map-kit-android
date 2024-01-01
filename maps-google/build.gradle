@@ -46,7 +46,7 @@ dependencies {
 
     implementation project(':maps-nil')
 
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
 }
 
 tasks.withType(Javadoc).all { enabled = false }
