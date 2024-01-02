@@ -46,8 +46,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPolyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonVisibleRegion;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.NilMapsBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
@@ -68,12 +68,11 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
-class AmazonMapsBackend implements MapKitBackend {
+@Keep
+class AmazonMapsBackend extends NilMapsBackend {
 
     private AmazonMapsBackend() {}
 
@@ -197,13 +196,6 @@ class AmazonMapsBackend implements MapKitBackend {
         return new AmazonTile(width, height, data);
     }
 
-    @Override public @NonNull TileProvider newUrlTileProvider(
-            int width,
-            int height,
-            @NonNull UrlTileProvider tileProvider) {
-        return new AmazonUrlTileProvider(width, height, tileProvider);
-    }
-
     @Override public @NonNull VisibleRegion newVisibleRegion(
             @NonNull LatLng nearLeft,
             @NonNull LatLng nearRight,
@@ -235,5 +227,4 @@ class AmazonMapsBackend implements MapKitBackend {
 
         return new AmazonMapsBackend();
     }
-
 }

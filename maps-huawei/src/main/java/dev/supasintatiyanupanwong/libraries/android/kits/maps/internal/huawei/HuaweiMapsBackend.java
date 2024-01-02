@@ -19,6 +19,7 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei;
 import android.content.Context;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.Keep;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,8 +54,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiSquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiVisibleRegion;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.NilMapsBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
@@ -75,12 +76,11 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
-public class HuaweiMapsBackend implements MapKitBackend {
+@Keep
+public class HuaweiMapsBackend extends NilMapsBackend {
 
     private static final List<Integer> UNAVAILABLE_RESULTS = Arrays.asList(
             ConnectionResult.SERVICE_DISABLED,
@@ -210,13 +210,6 @@ public class HuaweiMapsBackend implements MapKitBackend {
         return new HuaweiTile(width, height, data);
     }
 
-    @Override public @NonNull TileProvider newUrlTileProvider(
-            int width,
-            int height,
-            @NonNull UrlTileProvider tileProvider) {
-        return new HuaweiUrlTileProvider(width, height, tileProvider);
-    }
-
     @Override public @NonNull VisibleRegion newVisibleRegion(
             @NonNull LatLng nearLeft,
             @NonNull LatLng nearRight,
@@ -238,6 +231,7 @@ public class HuaweiMapsBackend implements MapKitBackend {
     }
 
 
+    @Keep
     public static @Nullable MapKitBackend buildIfSupported(@NonNull Context context) {
         final int result =
                 HuaweiApiAvailability.getInstance().isHuaweiMobileServicesAvailable(context);
@@ -247,5 +241,4 @@ public class HuaweiMapsBackend implements MapKitBackend {
 
         return new HuaweiMapsBackend();
     }
-
 }

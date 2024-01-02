@@ -16,32 +16,68 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
+import androidx.annotation.Nullable;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
+
 /**
- * An alternative to a {@link TileProvider} that only requires a URL that points to an image to be
- * provided.
+ * A partial implementation of {@link TileProvider} that only requires a {@link URL} that points
+ * to an image to be provided.
  * <p>
  * Note that this class requires that all the images have the same dimensions.
  *
  * @since 1.0.0
  */
-public interface UrlTileProvider {
+public abstract class UrlTileProvider implements TileProvider {
+
+    private final int mWidth;
+    private final int mHeight;
+
+    protected UrlTileProvider(int width, int height) {
+        mWidth = width;
+        mHeight = height;
+    }
 
     /**
      * Returns a {@link URL} that points to the image to be used for this tile. If no image is
      * found on the initial request, further requests will be made with an exponential backoff.
      * If you do not wish to provide an image for this tile coordinate, return {@code null}.
      *
-     * @param x The x coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
-     * inclusive.
-     * @param y The y coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
-     * inclusive.
+     * @param x    The x coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
+     *             inclusive.
+     * @param y    The y coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
+     *             inclusive.
      * @param zoom The zoom level of the tile. This will be in the range [{@link
-     * MapClient#getMinZoomLevel}, {@link MapClient#getMaxZoomLevel}] inclusive.
+     *             MapClient#getMinZoomLevel}, {@link MapClient#getMaxZoomLevel}] inclusive.
      * @return URL a {@link URL} that points to the image to be used for this tile. If you do not
      * wish to provide an image for this tile coordinate, return {@code null}.
      */
-    URL getTileUrl(int x, int y, int zoom);
+    protected abstract @Nullable URL getTileUrl(int x, int y, int zoom);
 
+
+    @Override public final @Nullable Tile getTile(int x, int y, int zoom) {
+        final URL url = getTileUrl(x, y, zoom);
+        if (url == null) {
+            return NO_TILE;
+        }
+
+        try (InputStream stream = url.openStream()) {
+            final ByteArrayOutputStream arr = new ByteArrayOutputStream();
+            final byte[] buffer = new byte[4096];
+
+            int read;
+            while ((read = stream.read(buffer)) != -1) {
+                arr.write(buffer, 0, read);
+            }
+
+            return MapKit.newTile(mWidth, mHeight, arr.toByteArray());
+        } catch (IOException ex) {
+            return null;
+        }
+    }
 }

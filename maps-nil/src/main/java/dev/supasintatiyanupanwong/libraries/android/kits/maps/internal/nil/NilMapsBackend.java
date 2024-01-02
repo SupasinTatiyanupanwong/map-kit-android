@@ -16,12 +16,16 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
 import android.content.Context;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Keep;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 import androidx.fragment.app.Fragment;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKit;
@@ -68,9 +72,11 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
-class NilMapsBackend implements MapKitBackend {
+@Keep
+@RestrictTo(LIBRARY_GROUP)
+public class NilMapsBackend implements MapKitBackend {
 
-    private NilMapsBackend() {}
+    protected NilMapsBackend() {}
 
     @Override public @LayoutRes int getMapFragmentLayoutRes() {
         return R.layout.kits_maps_internal_nil_map_view;
@@ -222,8 +228,11 @@ class NilMapsBackend implements MapKitBackend {
     }
 
 
+    /**
+     * @noinspection DataFlowIssue
+     */
     @Keep
-    public static @NonNull MapKitBackend buildIfSupported(@NonNull Context context) {
+    public static @Nullable MapKitBackend buildIfSupported(@NonNull Context context) {
         return new NilMapsBackend();
     }
 

@@ -70,7 +70,7 @@ public class TileOverlayDemoActivity extends AppCompatActivity implements
     @Override public void onMapReady(@NonNull MapClient map) {
         map.setMapType(MapClient.MAP_TYPE_NONE);
 
-        TileProvider tileProvider = MapKit.newUrlTileProvider(256, 256, new UrlTileProvider() {
+        TileProvider tileProvider = new UrlTileProvider(256, 256) {
             @Override public synchronized URL getTileUrl(int x, int y, int zoom) {
                 // The moon tile coordinate system is reversed.  This is not normal.
                 int reversedY = (1 << zoom) - y - 1;
@@ -82,7 +82,7 @@ public class TileOverlayDemoActivity extends AppCompatActivity implements
                     throw new AssertionError(e);
                 }
             }
-        });
+        };
 
         mMoonTiles = map.addTileOverlay(MapKit.newTileOverlayOptions().tileProvider(tileProvider));
         mTransparencyBar.setOnSeekBarChangeListener(this);

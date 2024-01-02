@@ -121,6 +121,7 @@ public interface MapKitBackend {
         return TileProvider.NO_TILE;
     }
 
+    @Deprecated
     @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,

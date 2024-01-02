@@ -19,6 +19,7 @@ package dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google;
 import android.content.Context;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.Keep;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,8 +54,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleSquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleUrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleVisibleRegion;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.NilMapsBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
@@ -80,7 +81,8 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
-class GoogleMapsBackend implements MapKitBackend {
+@Keep
+class GoogleMapsBackend extends NilMapsBackend {
 
     private static final List<Integer> UNAVAILABLE_RESULTS = Arrays.asList(
             ConnectionResult.SERVICE_DISABLED,
@@ -209,13 +211,6 @@ class GoogleMapsBackend implements MapKitBackend {
         return new GoogleTile(width, height, data);
     }
 
-    @Override public @NonNull TileProvider newUrlTileProvider(
-            int width,
-            int height,
-            @NonNull UrlTileProvider tileProvider) {
-        return new GoogleUrlTileProvider(width, height, tileProvider);
-    }
-
     @Override public @NonNull VisibleRegion newVisibleRegion(
             @NonNull LatLng nearLeft,
             @NonNull LatLng nearRight,
@@ -238,6 +233,7 @@ class GoogleMapsBackend implements MapKitBackend {
     }
 
 
+    @Keep
     public static @Nullable MapKitBackend buildIfSupported(@NonNull Context context) {
         final int result =
                 GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
@@ -247,5 +243,4 @@ class GoogleMapsBackend implements MapKitBackend {
 
         return new GoogleMapsBackend();
     }
-
 }

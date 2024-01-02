@@ -269,13 +269,15 @@ public final class MapKit {
 
     /**
      * @since 1.2.0
+     * @deprecated Instantiate {@link UrlTileProvider} directly.
      */
+    @Deprecated
     public static @NonNull TileProvider newUrlTileProvider(
             int width,
             int height,
             @NonNull UrlTileProvider tileProvider
     ) {
-        return getBackend().newUrlTileProvider(width, height, tileProvider);
+        return tileProvider;
     }
 
     /**
