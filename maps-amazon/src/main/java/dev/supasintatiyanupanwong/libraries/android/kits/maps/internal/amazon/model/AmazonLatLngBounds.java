@@ -41,9 +41,10 @@ public class AmazonLatLngBounds implements LatLngBounds {
     }
 
     public AmazonLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
-        this(new com.amazon.geo.mapsv2.model.LatLngBounds(
+        mDelegate = new com.amazon.geo.mapsv2.model.LatLngBounds(
                 Objects.requireNonNull(AmazonLatLng.unwrap(southwest), "southwest == null"),
-                Objects.requireNonNull(AmazonLatLng.unwrap(northeast), "northeast == null")));
+                Objects.requireNonNull(AmazonLatLng.unwrap(northeast), "northeast == null")
+        );
     }
 
     @Override public @NonNull LatLng getSouthwest() {
@@ -71,7 +72,8 @@ public class AmazonLatLngBounds implements LatLngBounds {
 
     @Override public @NonNull LatLngBounds including(@NonNull LatLng point) {
         return AmazonLatLngBounds.wrap(mDelegate.including(
-                Objects.requireNonNull(AmazonLatLng.unwrap(point), "point == null")));
+                Objects.requireNonNull(AmazonLatLng.unwrap(point), "point == null"))
+        );
     }
 
     @Override public @NonNull LatLng getCenter() {
@@ -103,12 +105,15 @@ public class AmazonLatLngBounds implements LatLngBounds {
     }
 
 
-    static @Nullable LatLngBounds wrap(@Nullable com.amazon.geo.mapsv2.model.LatLngBounds delegate) {
+    static @Nullable LatLngBounds wrap(
+            @Nullable com.amazon.geo.mapsv2.model.LatLngBounds delegate
+    ) {
         return delegate == null ? null : new AmazonLatLngBounds(delegate);
     }
 
     static @Nullable com.amazon.geo.mapsv2.model.LatLngBounds unwrap(
-            @Nullable LatLngBounds wrapped) {
+            @Nullable LatLngBounds wrapped
+    ) {
         return wrapped == null ? null : ((AmazonLatLngBounds) wrapped).mDelegate;
     }
 
@@ -129,5 +134,4 @@ public class AmazonLatLngBounds implements LatLngBounds {
             return Objects.requireNonNull(AmazonLatLngBounds.wrap(mDelegate.build()));
         }
     }
-
 }

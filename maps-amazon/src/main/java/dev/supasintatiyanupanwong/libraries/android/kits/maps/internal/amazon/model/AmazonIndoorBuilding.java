@@ -75,8 +75,8 @@ public class AmazonIndoorBuilding implements IndoorBuilding {
 
 
     static @Nullable IndoorBuilding wrap(
-            @Nullable com.amazon.geo.mapsv2.model.IndoorBuilding delegate) {
+            @Nullable com.amazon.geo.mapsv2.model.IndoorBuilding delegate
+    ) {
         return delegate == null ? null : new AmazonIndoorBuilding(delegate);
     }
-
 }

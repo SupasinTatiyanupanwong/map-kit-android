@@ -293,9 +293,9 @@ public class AmazonPolyline implements Polyline {
 
 
         static @Nullable com.amazon.geo.mapsv2.model.PolylineOptions unwrap(
-                @Nullable Polyline.Options wrapped) {
+                @Nullable Polyline.Options wrapped
+        ) {
             return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
-
 }

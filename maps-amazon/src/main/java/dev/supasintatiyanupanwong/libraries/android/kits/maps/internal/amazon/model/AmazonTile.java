@@ -96,5 +96,4 @@ public class AmazonTile implements Tile {
             return ((AmazonTile) wrapped).mDelegate;
         }
     }
-
 }

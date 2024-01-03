@@ -103,7 +103,8 @@ public class AmazonBitmapDescriptor implements BitmapDescriptor {
     private final @NonNull com.amazon.geo.mapsv2.model.BitmapDescriptor mDelegate;
 
     private AmazonBitmapDescriptor(
-            @NonNull com.amazon.geo.mapsv2.model.BitmapDescriptor delegate) {
+            @NonNull com.amazon.geo.mapsv2.model.BitmapDescriptor delegate
+    ) {
         mDelegate = delegate;
     }
 
@@ -131,14 +132,15 @@ public class AmazonBitmapDescriptor implements BitmapDescriptor {
 
     @Contract("null -> null; !null -> !null")
     static @Nullable BitmapDescriptor wrap(
-            @Nullable com.amazon.geo.mapsv2.model.BitmapDescriptor delegate) {
+            @Nullable com.amazon.geo.mapsv2.model.BitmapDescriptor delegate
+    ) {
         return delegate == null ? null : new AmazonBitmapDescriptor(delegate);
     }
 
     @Contract("null -> null; !null -> !null")
     static @Nullable com.amazon.geo.mapsv2.model.BitmapDescriptor unwrap(
-            @Nullable BitmapDescriptor wrapped) {
+            @Nullable BitmapDescriptor wrapped
+    ) {
         return wrapped == null ? null : ((AmazonBitmapDescriptor) wrapped).mDelegate;
     }
-
 }

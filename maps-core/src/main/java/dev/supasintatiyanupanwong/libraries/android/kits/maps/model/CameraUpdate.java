@@ -132,7 +132,7 @@ public interface CameraUpdate {
          *
          * @return A {@link CameraUpdate} containing the transformation.
          */
-        @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition cameraPosition);
+        @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition camera);
 
         /**
          * Returns a {@link CameraUpdate} that moves the camera to a specified

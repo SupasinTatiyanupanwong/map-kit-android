@@ -159,9 +159,9 @@ public class AmazonTileOverlay implements TileOverlay {
 
 
         static @Nullable com.amazon.geo.mapsv2.model.TileOverlayOptions unwrap(
-                @Nullable TileOverlay.Options wrapped) {
+                @Nullable TileOverlay.Options wrapped
+        ) {
             return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
-
 }

@@ -77,7 +77,8 @@ public class AmazonLatLng implements LatLng {
     }
 
     static @Nullable List<LatLng> wrap(
-            @Nullable Iterable<com.amazon.geo.mapsv2.model.LatLng> delegates) {
+            @Nullable Iterable<com.amazon.geo.mapsv2.model.LatLng> delegates
+    ) {
         if (delegates == null) {
             return null;
         }
@@ -102,7 +103,8 @@ public class AmazonLatLng implements LatLng {
     }
 
     static @Nullable List<com.amazon.geo.mapsv2.model.LatLng> unwrap(
-            @Nullable Iterable<LatLng> wrappeds) {
+            @Nullable Iterable<LatLng> wrappeds
+    ) {
         if (wrappeds == null) {
             return null;
         }
@@ -121,5 +123,4 @@ public class AmazonLatLng implements LatLng {
         }
         return list;
     }
-
 }

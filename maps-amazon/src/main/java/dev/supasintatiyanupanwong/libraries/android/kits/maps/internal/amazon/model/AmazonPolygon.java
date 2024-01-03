@@ -191,7 +191,8 @@ public class AmazonPolygon implements Polygon {
 
         @Override public @NonNull Polygon.Options add(@NonNull LatLng point) {
             mDelegate.add(
-                    Objects.requireNonNull(AmazonLatLng.unwrap(point), "point == null"));
+                    Objects.requireNonNull(AmazonLatLng.unwrap(point), "point == null")
+            );
             return this;
         }
 
@@ -201,13 +202,15 @@ public class AmazonPolygon implements Polygon {
 
         @Override public @NonNull Polygon.Options addAll(@NonNull Iterable<LatLng> points) {
             mDelegate.addAll(
-                    Objects.requireNonNull(AmazonLatLng.unwrap(points), "points == null"));
+                    Objects.requireNonNull(AmazonLatLng.unwrap(points), "points == null")
+            );
             return this;
         }
 
         @Override public @NonNull Polygon.Options addHole(@NonNull Iterable<LatLng> points) {
             mDelegate.addHole(
-                    Objects.requireNonNull(AmazonLatLng.unwrap(points), "points == null"));
+                    Objects.requireNonNull(AmazonLatLng.unwrap(points), "points == null")
+            );
             return this;
         }
 
@@ -227,7 +230,8 @@ public class AmazonPolygon implements Polygon {
         }
 
         @Override public @NonNull Polygon.Options strokePattern(
-                @Nullable List<PatternItem> pattern) {
+                @Nullable List<PatternItem> pattern
+        ) {
             // Not supported, no-op.
             return this;
         }
@@ -307,9 +311,9 @@ public class AmazonPolygon implements Polygon {
 
 
         static @Nullable com.amazon.geo.mapsv2.model.PolygonOptions unwrap(
-                @Nullable Polygon.Options wrapped) {
+                @Nullable Polygon.Options wrapped
+        ) {
             return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
-
 }

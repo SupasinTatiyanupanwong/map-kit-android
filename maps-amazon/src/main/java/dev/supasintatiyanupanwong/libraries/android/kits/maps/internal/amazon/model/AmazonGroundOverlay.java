@@ -155,7 +155,8 @@ public class AmazonGroundOverlay implements GroundOverlay {
 
 
     static @Nullable GroundOverlay wrap(
-            @Nullable com.amazon.geo.mapsv2.model.GroundOverlay delegate) {
+            @Nullable com.amazon.geo.mapsv2.model.GroundOverlay delegate
+    ) {
         return delegate == null ?  null : new AmazonGroundOverlay(delegate);
     }
 
@@ -168,7 +169,8 @@ public class AmazonGroundOverlay implements GroundOverlay {
         }
 
         @Override public @NonNull GroundOverlay.Options image(
-                @NonNull BitmapDescriptor imageDescriptor) {
+                @NonNull BitmapDescriptor imageDescriptor
+        ) {
             mDelegate.image(AmazonBitmapDescriptor.unwrap(imageDescriptor));
             return this;
         }
@@ -180,7 +182,8 @@ public class AmazonGroundOverlay implements GroundOverlay {
 
         @Override public @NonNull GroundOverlay.Options position(
                 @NonNull LatLng location,
-                float width) {
+                float width
+        ) {
             mDelegate.position(AmazonLatLng.unwrap(location), width);
             return this;
         }
@@ -188,7 +191,8 @@ public class AmazonGroundOverlay implements GroundOverlay {
         @Override public @NonNull GroundOverlay.Options position(
                 @NonNull LatLng location,
                 float width,
-                float height) {
+                float height
+        ) {
             mDelegate.position(AmazonLatLng.unwrap(location), width, height);
             return this;
         }
@@ -273,9 +277,9 @@ public class AmazonGroundOverlay implements GroundOverlay {
 
 
         static @Nullable com.amazon.geo.mapsv2.model.GroundOverlayOptions unwrap(
-                @Nullable GroundOverlay.Options wrapped) {
+                @Nullable GroundOverlay.Options wrapped
+        ) {
             return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
-
 }

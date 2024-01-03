@@ -74,14 +74,14 @@ public class TomTomCameraUpdate implements CameraUpdate {
         }
 
         @Override public @NonNull CameraUpdate newCameraPosition(
-                @NonNull CameraPosition cameraPosition
+                @NonNull CameraPosition camera
         ) {
             return wrap(
                     new CameraOptions(
-                            TomTomLatLng.unwrap(cameraPosition.getTarget()),
-                            (double) cameraPosition.getZoom(),
-                            (double) cameraPosition.getTilt(),
-                            (double) cameraPosition.getBearing()
+                            TomTomLatLng.unwrap(camera.getTarget()),
+                            (double) camera.getZoom(),
+                            (double) camera.getTilt(),
+                            (double) camera.getBearing()
                     )
             );
         }

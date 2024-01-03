@@ -23,7 +23,6 @@ import androidx.annotation.Keep;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RawRes;
 import androidx.fragment.app.Fragment;
 
 import com.amazon.geo.mapsv2.util.AmazonMapsRuntimeUtil;
@@ -53,7 +52,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -86,7 +84,8 @@ class AmazonMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
             @NonNull LatLng target,
-            float zoom) {
+            float zoom
+    ) {
         return newCameraPositionBuilder()
                 .target(target)
                 .zoom(zoom)
@@ -98,7 +97,8 @@ class AmazonMapsBackend extends NilMapsBackend {
     }
 
     @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder(
-            @NonNull CameraPosition camera) {
+            @NonNull CameraPosition camera
+    ) {
         return new AmazonCameraPosition.Builder(camera);
     }
 
@@ -116,21 +116,13 @@ class AmazonMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull LatLngBounds newLatLngBounds(
             @NonNull LatLng southwest,
-            @NonNull LatLng northeast) {
+            @NonNull LatLng northeast
+    ) {
         return new AmazonLatLngBounds(southwest, northeast);
     }
 
     @Override public @NonNull LatLngBounds.Builder newLatLngBoundsBuilder() {
         return new AmazonLatLngBounds.Builder();
-    }
-
-    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
-        return AmazonMapClient.Style.Options.NULL; // Not supported, null object for API safe.
-    }
-
-    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
-            @NonNull Context context, @RawRes int resourceId) {
-        return AmazonMapClient.Style.Options.NULL; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {
@@ -158,20 +150,17 @@ class AmazonMapsBackend extends NilMapsBackend {
             @NonNull LatLng nearRight,
             @NonNull LatLng farLeft,
             @NonNull LatLng farRight,
-            @NonNull LatLngBounds bounds) {
+            @NonNull LatLngBounds bounds
+    ) {
         return new AmazonVisibleRegion(nearLeft, nearRight, farLeft, farRight, bounds);
     }
 
     @Override public void getMapAsync(
             @NonNull Fragment fragment,
-            @NonNull final MapKit.OnMapReadyCallback callback) {
+            @NonNull final MapKit.OnMapReadyCallback callback
+    ) {
         ((com.amazon.geo.mapsv2.SupportMapFragment) fragment)
-                .getMapAsync(new com.amazon.geo.mapsv2.OnMapReadyCallback() {
-                    @Override public void onMapReady(
-                            @NonNull com.amazon.geo.mapsv2.AmazonMap amazonMap) {
-                        callback.onMapReady(new AmazonMapClient(amazonMap));
-                    }
-                });
+                .getMapAsync(map -> callback.onMapReady(new AmazonMapClient(map)));
     }
 
 

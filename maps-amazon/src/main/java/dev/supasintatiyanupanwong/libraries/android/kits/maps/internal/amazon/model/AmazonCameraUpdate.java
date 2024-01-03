@@ -64,36 +64,47 @@ public class AmazonCameraUpdate implements CameraUpdate {
             }
         }
 
-        @Override public @NonNull CameraUpdate newCameraPosition(
-                @NonNull CameraPosition cameraPosition) {
-            return new AmazonCameraUpdate(CameraUpdateFactory.newCameraPosition(
-                    AmazonCameraPosition.unwrap(cameraPosition)));
+        @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition camera) {
+            return new AmazonCameraUpdate(
+                    CameraUpdateFactory.newCameraPosition(AmazonCameraPosition.unwrap(camera))
+            );
         }
 
         @Override public @NonNull CameraUpdate newLatLng(@NonNull LatLng latLng) {
-            return new AmazonCameraUpdate(CameraUpdateFactory.newLatLng(
-                    AmazonLatLng.unwrap(latLng)));
+            return new AmazonCameraUpdate(
+                    CameraUpdateFactory.newLatLng(AmazonLatLng.unwrap(latLng))
+            );
         }
 
         @Override public @NonNull CameraUpdate newLatLngZoom(@NonNull LatLng latLng, float zoom) {
-            return new AmazonCameraUpdate(CameraUpdateFactory.newLatLngZoom(
-                    AmazonLatLng.unwrap(latLng), zoom));
+            return new AmazonCameraUpdate(
+                    CameraUpdateFactory.newLatLngZoom(AmazonLatLng.unwrap(latLng), zoom)
+            );
         }
 
         @Override public @NonNull CameraUpdate newLatLngBounds(
                 @NonNull LatLngBounds bounds,
-                int padding) {
-            return new AmazonCameraUpdate(CameraUpdateFactory.newLatLngBounds(
-                    AmazonLatLngBounds.unwrap(bounds), padding));
+                int padding
+        ) {
+            return new AmazonCameraUpdate(
+                    CameraUpdateFactory.newLatLngBounds(AmazonLatLngBounds.unwrap(bounds), padding)
+            );
         }
 
         @Override public @NonNull CameraUpdate newLatLngBounds(
                 @NonNull LatLngBounds bounds,
                 int width,
                 int height,
-                int padding) {
-            return new AmazonCameraUpdate(CameraUpdateFactory.newLatLngBounds(
-                    AmazonLatLngBounds.unwrap(bounds), width, height, padding));
+                int padding
+        ) {
+            return new AmazonCameraUpdate(
+                    CameraUpdateFactory.newLatLngBounds(
+                            AmazonLatLngBounds.unwrap(bounds),
+                            width,
+                            height,
+                            padding
+                    )
+            );
         }
     };
 
@@ -129,5 +140,4 @@ public class AmazonCameraUpdate implements CameraUpdate {
     static @Nullable com.amazon.geo.mapsv2.CameraUpdate unwrap(@Nullable CameraUpdate wrapped) {
         return wrapped == null ? null : ((AmazonCameraUpdate) wrapped).mDelegate;
     }
-
 }

@@ -52,7 +52,7 @@ public class AmazonCircle implements Circle {
         mDelegate.setCenter(Objects.requireNonNull(AmazonLatLng.unwrap(center), "center == null"));
     }
 
-    @Override public LatLng getCenter() {
+    @Override public @NonNull LatLng getCenter() {
         return AmazonLatLng.wrap(mDelegate.getCenter());
     }
 
@@ -183,7 +183,8 @@ public class AmazonCircle implements Circle {
         }
 
         @Override public @NonNull Circle.Options strokePattern(
-                @Nullable List<PatternItem> pattern) {
+                @Nullable List<PatternItem> pattern
+        ) {
             // Not supported, no-op.
             return this;
         }
@@ -246,9 +247,9 @@ public class AmazonCircle implements Circle {
 
 
         static @Nullable com.amazon.geo.mapsv2.model.CircleOptions unwrap(
-                @Nullable Circle.Options wrapped) {
+                @Nullable Circle.Options wrapped
+        ) {
             return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
-
 }

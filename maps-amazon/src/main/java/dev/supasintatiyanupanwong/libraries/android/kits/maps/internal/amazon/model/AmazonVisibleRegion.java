@@ -48,13 +48,15 @@ public class AmazonVisibleRegion implements VisibleRegion {
             @NonNull LatLng nearRight,
             @NonNull LatLng farLeft,
             @NonNull LatLng farRight,
-            @NonNull LatLngBounds bounds) {
-        this(new com.amazon.geo.mapsv2.model.VisibleRegion(
+            @NonNull LatLngBounds bounds
+    ) {
+        mDelegate = new com.amazon.geo.mapsv2.model.VisibleRegion(
                 Objects.requireNonNull(AmazonLatLng.unwrap(nearLeft), "nearLeft == null"),
                 Objects.requireNonNull(AmazonLatLng.unwrap(nearRight), "nearRight == null"),
                 Objects.requireNonNull(AmazonLatLng.unwrap(farLeft), "farLeft == null"),
                 Objects.requireNonNull(AmazonLatLng.unwrap(farRight), "farRight == null"),
-                Objects.requireNonNull(AmazonLatLngBounds.unwrap(bounds), "bounds == null")));
+                Objects.requireNonNull(AmazonLatLngBounds.unwrap(bounds), "bounds == null")
+        );
     }
 
     @Override public @NonNull LatLng getNearLeft() {
@@ -115,8 +117,8 @@ public class AmazonVisibleRegion implements VisibleRegion {
 
 
     static @NonNull VisibleRegion wrap(
-            @NonNull com.amazon.geo.mapsv2.model.VisibleRegion delegate) {
+            @NonNull com.amazon.geo.mapsv2.model.VisibleRegion delegate
+    ) {
         return new AmazonVisibleRegion(delegate);
     }
-
 }

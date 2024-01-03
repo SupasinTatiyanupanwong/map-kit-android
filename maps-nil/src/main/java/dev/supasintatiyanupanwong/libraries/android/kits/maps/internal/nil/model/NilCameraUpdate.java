@@ -58,7 +58,7 @@ public class NilCameraUpdate implements CameraUpdate {
             return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 
-        @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition cameraPosition) {
+        @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition camera) {
             return NilCameraUpdate.INSTANCE; // Not supported, null object for API safe.
         }
 

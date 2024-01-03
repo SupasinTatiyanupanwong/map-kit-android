@@ -76,5 +76,4 @@ public class AmazonTileProvider implements TileProvider {
     static com.amazon.geo.mapsv2.model.TileProvider unwrap(TileProvider wrapped) {
         return new AmazonTileProvider(wrapped).mDelegate;
     }
-
 }

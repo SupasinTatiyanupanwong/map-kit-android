@@ -74,5 +74,4 @@ public class AmazonProjection implements Projection {
     static @NonNull Projection wrap(@NonNull com.amazon.geo.mapsv2.Projection delegate) {
         return new AmazonProjection(delegate);
     }
-
 }

@@ -64,9 +64,9 @@ public class HuaweiCameraUpdate implements CameraUpdate {
             }
         }
 
-        @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition cameraPosition) {
+        @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition camera) {
             return new HuaweiCameraUpdate(CameraUpdateFactory.newCameraPosition(
-                    HuaweiCameraPosition.unwrap(cameraPosition)
+                    HuaweiCameraPosition.unwrap(camera)
             ));
         }
 

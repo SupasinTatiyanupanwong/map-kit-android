@@ -64,10 +64,9 @@ public class GoogleCameraUpdate implements CameraUpdate {
             }
         }
 
-        @Override public @NonNull CameraUpdate newCameraPosition(
-                @NonNull CameraPosition cameraPosition) {
+        @Override public @NonNull CameraUpdate newCameraPosition(@NonNull CameraPosition camera) {
             return new GoogleCameraUpdate(CameraUpdateFactory.newCameraPosition(
-                    GoogleCameraPosition.unwrap(cameraPosition)
+                    GoogleCameraPosition.unwrap(camera)
             ));
         }
 

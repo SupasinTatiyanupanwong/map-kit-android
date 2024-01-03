@@ -30,6 +30,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.annotation.RestrictTo;
 
+import com.amazon.geo.mapsv2.AmazonMap;
+
 import java.util.Objects;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
@@ -82,7 +84,8 @@ public class AmazonMapClient implements MapClient {
 
     @Override public void animateCamera(
             @NonNull CameraUpdate update,
-            final @Nullable CancelableCallback callback) {
+            final @Nullable CancelableCallback callback
+    ) {
         mDelegate.animateCamera(
                 Objects.requireNonNull(AmazonCameraUpdate.unwrap(update), "update == null"),
                 callback == null
@@ -102,7 +105,8 @@ public class AmazonMapClient implements MapClient {
     @Override public void animateCamera(
             @NonNull CameraUpdate update,
             @IntRange(from = 0) int durationMs,
-            final @Nullable CancelableCallback callback) {
+            final @Nullable CancelableCallback callback
+    ) {
         mDelegate.animateCamera(
                 Objects.requireNonNull(AmazonCameraUpdate.unwrap(update), "update == null"),
                 durationMs,
@@ -194,7 +198,8 @@ public class AmazonMapClient implements MapClient {
     }
 
     @Override public void setOnIndoorStateChangeListener(
-            final @Nullable OnIndoorStateChangeListener listener) {
+            final @Nullable OnIndoorStateChangeListener listener
+    ) {
         mDelegate.setOnIndoorStateChangeListener(listener == null
                 ? null
                 : new com.amazon.geo.mapsv2.AmazonMap.OnIndoorStateChangeListener() {
@@ -203,7 +208,8 @@ public class AmazonMapClient implements MapClient {
                     }
 
                     @Override public void onIndoorLevelActivated(
-                            @NonNull com.amazon.geo.mapsv2.model.IndoorBuilding indoorBuilding) {
+                            @NonNull com.amazon.geo.mapsv2.model.IndoorBuilding indoorBuilding
+                    ) {
                         listener.onIndoorLevelActivated(
                                 AmazonIndoorBuilding.wrap(mDelegate.getFocusedBuilding()));
                     }
@@ -257,11 +263,7 @@ public class AmazonMapClient implements MapClient {
                 ? null
                 : new com.amazon.geo.mapsv2.LocationSource() {
                     @Override public void activate(final OnLocationChangedListener listener) {
-                        source.activate(new LocationSource.OnLocationChangedListener() {
-                            @Override public void onLocationChanged(@NonNull Location location) {
-                                listener.onLocationChanged(location);
-                            }
-                        });
+                        source.activate(listener::onLocationChanged);
                     }
 
                     @Override public void deactivate() {
@@ -280,81 +282,77 @@ public class AmazonMapClient implements MapClient {
     }
 
     @Override public void setOnCameraMoveStartedListener(
-            final @Nullable OnCameraMoveStartedListener listener) {
+            final @Nullable OnCameraMoveStartedListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnCameraMoveListener(
-            final @Nullable OnCameraMoveListener listener) {
+            final @Nullable OnCameraMoveListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnCameraMoveCanceledListener(
-            final @Nullable OnCameraMoveCanceledListener listener) {
+            final @Nullable OnCameraMoveCanceledListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnCameraIdleListener(
-            final @Nullable OnCameraIdleListener listener) {
+            final @Nullable OnCameraIdleListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnMapClickListener(
-            final @Nullable OnMapClickListener listener) {
+            final @Nullable OnMapClickListener listener
+    ) {
         mDelegate.setOnMapClickListener(listener == null
                 ? null
-                : new com.amazon.geo.mapsv2.AmazonMap.OnMapClickListener() {
-                    @Override public void onMapClick(
-                            @NonNull com.amazon.geo.mapsv2.model.LatLng point) {
-                        listener.onMapClick(AmazonLatLng.wrap(point));
-                    }
-                }
+                : point -> listener.onMapClick(AmazonLatLng.wrap(point))
         );
     }
 
     @Override public void setOnMapLongClickListener(
-            final @Nullable OnMapLongClickListener listener) {
+            final @Nullable OnMapLongClickListener listener
+    ) {
         mDelegate.setOnMapLongClickListener(listener == null
                 ? null
-                : new com.amazon.geo.mapsv2.AmazonMap.OnMapLongClickListener() {
-                    @Override public void onMapLongClick(
-                            @NonNull com.amazon.geo.mapsv2.model.LatLng point) {
-                        listener.onMapLongClick(AmazonLatLng.wrap(point));
-                    }
-                }
+                : point -> listener.onMapLongClick(AmazonLatLng.wrap(point))
         );
     }
 
     @Override public void setOnMarkerClickListener(
-            final @Nullable OnMarkerClickListener listener) {
+            final @Nullable OnMarkerClickListener listener
+    ) {
         mDelegate.setOnMarkerClickListener(listener == null
                 ? null
-                : new com.amazon.geo.mapsv2.AmazonMap.OnMarkerClickListener() {
-                    @Override public boolean onMarkerClick(
-                            @NonNull com.amazon.geo.mapsv2.model.Marker marker) {
-                        return listener.onMarkerClick(AmazonMarker.wrap(marker));
-                    }
-                }
+                : marker -> listener.onMarkerClick(AmazonMarker.wrap(marker))
         );
     }
 
     @Override public void setOnMarkerDragListener(
-            final @Nullable OnMarkerDragListener listener) {
+            final @Nullable OnMarkerDragListener listener
+    ) {
         mDelegate.setOnMarkerDragListener(listener == null
                 ? null
                 : new com.amazon.geo.mapsv2.AmazonMap.OnMarkerDragListener() {
                     @Override public void onMarkerDragStart(
-                            @NonNull com.amazon.geo.mapsv2.model.Marker marker) {
+                            @NonNull com.amazon.geo.mapsv2.model.Marker marker
+                    ) {
                         listener.onMarkerDragStart(AmazonMarker.wrap(marker));
                     }
 
                     @Override public void onMarkerDrag(
-                            @NonNull com.amazon.geo.mapsv2.model.Marker marker) {
+                            @NonNull com.amazon.geo.mapsv2.model.Marker marker
+                    ) {
                         listener.onMarkerDrag(AmazonMarker.wrap(marker));
                     }
 
                     @Override public void onMarkerDragEnd(
-                            @NonNull com.amazon.geo.mapsv2.model.Marker marker) {
+                            @NonNull com.amazon.geo.mapsv2.model.Marker marker
+                    ) {
                         listener.onMarkerDragEnd(AmazonMarker.wrap(marker));
                     }
                 }
@@ -362,25 +360,23 @@ public class AmazonMapClient implements MapClient {
     }
 
     @Override public void setOnInfoWindowClickListener(
-            final @Nullable OnInfoWindowClickListener listener) {
+            final @Nullable OnInfoWindowClickListener listener
+    ) {
         mDelegate.setOnInfoWindowClickListener(listener == null
                 ? null
-                : new com.amazon.geo.mapsv2.AmazonMap.OnInfoWindowClickListener() {
-                    @Override public void onInfoWindowClick(
-                            @NonNull com.amazon.geo.mapsv2.model.Marker marker) {
-                        listener.onInfoWindowClick(AmazonMarker.wrap(marker));
-                    }
-                }
+                : marker -> listener.onInfoWindowClick(AmazonMarker.wrap(marker))
         );
     }
 
     @Override public void setOnInfoWindowLongClickListener(
-            final @Nullable OnInfoWindowLongClickListener listener) {
+            final @Nullable OnInfoWindowLongClickListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnInfoWindowCloseListener(
-            final @Nullable OnInfoWindowCloseListener listener) {
+            final @Nullable OnInfoWindowCloseListener listener
+    ) {
         // Not supported, no-op.
     }
 
@@ -389,12 +385,14 @@ public class AmazonMapClient implements MapClient {
                 ? null
                 : new com.amazon.geo.mapsv2.AmazonMap.InfoWindowAdapter() {
                     @Override public View getInfoWindow(
-                            @NonNull com.amazon.geo.mapsv2.model.Marker marker) {
+                            @NonNull com.amazon.geo.mapsv2.model.Marker marker
+                    ) {
                         return adapter.getInfoWindow(AmazonMarker.wrap(marker));
                     }
 
                     @Override public View getInfoContents(
-                            @NonNull com.amazon.geo.mapsv2.model.Marker marker) {
+                            @NonNull com.amazon.geo.mapsv2.model.Marker marker
+                    ) {
                         return adapter.getInfoContents(AmazonMarker.wrap(marker));
                     }
                 }
@@ -402,73 +400,62 @@ public class AmazonMapClient implements MapClient {
     }
 
     @Override public void setOnMyLocationButtonClickListener(
-            final @Nullable OnMyLocationButtonClickListener listener) {
+            final @Nullable OnMyLocationButtonClickListener listener
+    ) {
         mDelegate.setOnMyLocationButtonClickListener(listener == null
                 ? null
-                : new com.amazon.geo.mapsv2.AmazonMap.OnMyLocationButtonClickListener() {
-                    @Override public boolean onMyLocationButtonClick() {
-                        return listener.onMyLocationButtonClick();
-                    }
-                }
+                : listener::onMyLocationButtonClick
         );
     }
 
     @Override public void setOnMyLocationClickListener(
-            final @Nullable OnMyLocationClickListener listener) {
+            final @Nullable OnMyLocationClickListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnMapLoadedCallback(
-            final @Nullable OnMapLoadedCallback callback) {
+            final @Nullable OnMapLoadedCallback callback
+    ) {
         mDelegate.setOnMapLoadedCallback(callback == null
                 ? null
-                : new com.amazon.geo.mapsv2.AmazonMap.OnMapLoadedCallback() {
-                    @Override public void onMapLoaded() {
-                        callback.onMapLoaded();
-                    }
-                }
+                : callback::onMapLoaded
         );
     }
 
     @Override public void setOnGroundOverlayClickListener(
-            final @Nullable OnGroundOverlayClickListener listener) {
+            final @Nullable OnGroundOverlayClickListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnCircleClickListener(
-            final @Nullable OnCircleClickListener listener) {
+            final @Nullable OnCircleClickListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnPolygonClickListener(
-            final @Nullable OnPolygonClickListener listener) {
+            final @Nullable OnPolygonClickListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void setOnPolylineClickListener(
-            final @Nullable OnPolylineClickListener listener) {
+            final @Nullable OnPolylineClickListener listener
+    ) {
         // Not supported, no-op.
     }
 
     @Override public void snapshot(@NonNull final SnapshotReadyCallback callback) {
-        mDelegate.snapshot(new com.amazon.geo.mapsv2.AmazonMap.SnapshotReadyCallback() {
-            @Override public void onSnapshotReady(@Nullable Bitmap bitmap) {
-                callback.onSnapshotReady(bitmap);
-            }
-        });
+        mDelegate.snapshot(callback::onSnapshotReady);
     }
 
     @Override public void snapshot(
             @NonNull final SnapshotReadyCallback callback,
-            @Nullable Bitmap bitmap) {
-        mDelegate.snapshot(
-                new com.amazon.geo.mapsv2.AmazonMap.SnapshotReadyCallback() {
-                    @Override public void onSnapshotReady(@Nullable Bitmap bitmap) {
-                        callback.onSnapshotReady(bitmap);
-                    }
-                },
-                bitmap
-        );
+            @Nullable Bitmap bitmap
+    ) {
+        mDelegate.snapshot(callback::onSnapshotReady, bitmap);
     }
 
     @Override public void setPadding(int left, int top, int right, int bottom) {
@@ -501,17 +488,6 @@ public class AmazonMapClient implements MapClient {
 
     @Override public void setLatLngBoundsForCameraTarget(@Nullable LatLngBounds bounds) {
         // Not supported, no-op.
-    }
-
-
-    public static class Style implements MapClient.Style {
-        private Style() {}
-
-        public static class Options implements MapClient.Style.Options {
-            public static final @NonNull Options NULL = new Options();
-
-            private Options() {}
-        }
     }
 
 
@@ -606,5 +582,4 @@ public class AmazonMapClient implements MapClient {
             return mDelegate.isMapToolbarEnabled();
         }
     }
-
 }

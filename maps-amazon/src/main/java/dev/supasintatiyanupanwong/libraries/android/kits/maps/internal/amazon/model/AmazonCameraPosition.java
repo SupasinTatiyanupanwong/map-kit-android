@@ -81,12 +81,14 @@ public class AmazonCameraPosition implements CameraPosition {
 
 
     static @Nullable CameraPosition wrap(
-            @Nullable com.amazon.geo.mapsv2.model.CameraPosition delegate) {
+            @Nullable com.amazon.geo.mapsv2.model.CameraPosition delegate
+    ) {
         return delegate == null ? null : new AmazonCameraPosition(delegate);
     }
 
     static @Nullable com.amazon.geo.mapsv2.model.CameraPosition unwrap(
-            @Nullable CameraPosition wrapped) {
+            @Nullable CameraPosition wrapped
+    ) {
         return wrapped == null ? null : ((AmazonCameraPosition) wrapped).mDelegate;
     }
 
@@ -100,12 +102,14 @@ public class AmazonCameraPosition implements CameraPosition {
 
         public Builder(@NonNull CameraPosition camera) {
             mDelegate = com.amazon.geo.mapsv2.model.CameraPosition.builder(
-                    Objects.requireNonNull(AmazonCameraPosition.unwrap(camera), "camera == null"));
+                    Objects.requireNonNull(AmazonCameraPosition.unwrap(camera), "camera == null")
+            );
         }
 
         @Override public @NonNull CameraPosition.Builder target(@NonNull LatLng location) {
             mDelegate.target(
-                    Objects.requireNonNull(AmazonLatLng.unwrap(location), "location == null"));
+                    Objects.requireNonNull(AmazonLatLng.unwrap(location), "location == null")
+            );
             return this;
         }
 
@@ -115,7 +119,8 @@ public class AmazonCameraPosition implements CameraPosition {
         }
 
         @Override public @NonNull CameraPosition.Builder tilt(
-                @FloatRange(from = 0.0, to = 90.0) float tilt) {
+                @FloatRange(from = 0.0, to = 90.0) float tilt
+        ) {
             mDelegate.tilt(tilt);
             return this;
         }
@@ -129,5 +134,4 @@ public class AmazonCameraPosition implements CameraPosition {
             return AmazonCameraPosition.wrap(mDelegate.build());
         }
     }
-
 }

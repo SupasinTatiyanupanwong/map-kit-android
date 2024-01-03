@@ -51,6 +51,7 @@ public final class MapKitInitProvider extends ContentProvider {
                     return true;
                 }
             } catch (Exception ignored) {
+                // continue
             }
         }
 

@@ -72,7 +72,8 @@ public class AmazonIndoorLevel implements IndoorLevel {
 
 
     static @Nullable List<IndoorLevel> wrap(
-            @Nullable List<com.amazon.geo.mapsv2.model.IndoorLevel> delegates) {
+            @Nullable List<com.amazon.geo.mapsv2.model.IndoorLevel> delegates
+    ) {
         if (delegates == null) {
             return null;
         }
@@ -90,5 +91,4 @@ public class AmazonIndoorLevel implements IndoorLevel {
         }
         return list;
     }
-
 }

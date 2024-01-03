@@ -303,9 +303,9 @@ public class AmazonMarker implements Marker {
 
 
         static @Nullable com.amazon.geo.mapsv2.model.MarkerOptions unwrap(
-                @Nullable Marker.Options wrapped) {
+                @Nullable Marker.Options wrapped
+        ) {
             return wrapped == null ? null : ((Options) wrapped).mDelegate;
         }
     }
-
 }

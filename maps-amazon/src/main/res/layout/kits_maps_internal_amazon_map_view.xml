@@ -22,4 +22,4 @@
     android:name="com.amazon.geo.mapsv2.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:keep="@layout/kits_maps_internal_google_map_view" />
+    tools:keep="@layout/kits_maps_internal_amazon_map_view" />
