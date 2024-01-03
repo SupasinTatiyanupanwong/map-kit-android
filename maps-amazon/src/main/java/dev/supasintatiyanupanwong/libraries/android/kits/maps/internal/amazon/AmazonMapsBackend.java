@@ -40,7 +40,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonMapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonMarker;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPatternItem;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPolygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonPolyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonTile;
@@ -51,9 +50,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescri
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
@@ -108,18 +104,6 @@ class AmazonMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull Circle.Options newCircleOptions() {
         return new AmazonCircle.Options();
-    }
-
-    @Override public @NonNull Dot newDot() {
-        return AmazonPatternItem.NULL; // Not supported, null object for API safe.
-    }
-
-    @Override public @NonNull Dash newDash(float length) {
-        return AmazonPatternItem.NULL; // Not supported, null object for API safe.
-    }
-
-    @Override public @NonNull Gap newGap(float length) {
-        return AmazonPatternItem.NULL; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull GroundOverlay.Options newGroundOverlayOptions() {
