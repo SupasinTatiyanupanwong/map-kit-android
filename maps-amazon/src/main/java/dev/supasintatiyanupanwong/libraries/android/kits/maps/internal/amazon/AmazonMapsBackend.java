@@ -34,7 +34,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.MapKitBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonBitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonCameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonCameraUpdate;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonCircle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonGroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonLatLng;
@@ -49,11 +48,9 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.amazon.model.AmazonVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.NilMapsBackend;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Circle;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CustomCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dash;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Dot;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
@@ -64,8 +61,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
@@ -87,10 +82,6 @@ class AmazonMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull BitmapDescriptor.Factory getBitmapDescriptorFactory() {
         return AmazonBitmapDescriptor.FACTORY;
-    }
-
-    @Override public @NonNull ButtCap newButtCap() {
-        return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull CameraUpdate.Factory getCameraUpdateFactory() {
@@ -117,16 +108,6 @@ class AmazonMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull Circle.Options newCircleOptions() {
         return new AmazonCircle.Options();
-    }
-
-    @Override public @NonNull CustomCap newCustomCap(
-            @NonNull BitmapDescriptor bitmapDescriptor,
-            float refWidth) {
-        return AmazonCap.NULL; // Not supported, null object for API safe.
-    }
-
-    @Override public @NonNull CustomCap newCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
-        return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Dot newDot() {
@@ -178,14 +159,6 @@ class AmazonMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull Polyline.Options newPolylineOptions() {
         return new AmazonPolyline.Options();
-    }
-
-    @Override public @NonNull RoundCap newRoundCap() {
-        return AmazonCap.NULL; // Not supported, null object for API safe.
-    }
-
-    @Override public @NonNull SquareCap newSquareCap() {
-        return AmazonCap.NULL; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull TileOverlay.Options newTileOverlayOptions() {

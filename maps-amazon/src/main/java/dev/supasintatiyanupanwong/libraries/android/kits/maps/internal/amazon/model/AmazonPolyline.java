@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Cap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.JointType;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
@@ -80,7 +81,7 @@ public class AmazonPolyline implements Polyline {
     }
 
     @Override public @NonNull Cap getStartCap() {
-        return AmazonCap.NULL; // Not supported, null object for API safe.
+        return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public void setEndCap(@NonNull Cap endCap) {
@@ -88,7 +89,7 @@ public class AmazonPolyline implements Polyline {
     }
 
     @Override public @NonNull Cap getEndCap() {
-        return AmazonCap.NULL; // Not supported, null object for API safe.
+        return NilCap.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public void setJointType(int jointType) {
@@ -259,11 +260,11 @@ public class AmazonPolyline implements Polyline {
         }
 
         @Override public @NonNull Cap getStartCap() {
-            return AmazonCap.NULL; // Not supported, null object for API safe.
+            return NilCap.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public @NonNull Cap getEndCap() {
-            return AmazonCap.NULL; // Not supported, null object for API safe.
+            return NilCap.INSTANCE; // Not supported, null object for API safe.
         }
 
         @Override public int getJointType() {
