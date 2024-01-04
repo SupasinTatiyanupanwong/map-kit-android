@@ -16,7 +16,10 @@
 
 package dev.supasintatiyanupanwong.libraries.android.kits.maps.model;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -57,7 +60,7 @@ public abstract class UrlTileProvider implements TileProvider {
      * @return URL a {@link URL} that points to the image to be used for this tile. If you do not
      * wish to provide an image for this tile coordinate, return {@code null}.
      */
-    protected abstract @Nullable URL getTileUrl(int x, int y, int zoom);
+    public abstract @Nullable URL getTileUrl(int x, int y, int zoom);
 
 
     @Override public final @Nullable Tile getTile(int x, int y, int zoom) {
@@ -79,5 +82,15 @@ public abstract class UrlTileProvider implements TileProvider {
         } catch (IOException ex) {
             return null;
         }
+    }
+
+    @RestrictTo(LIBRARY_GROUP)
+    public final int getWidth() {
+        return mWidth;
+    }
+
+    @RestrictTo(LIBRARY_GROUP)
+    public final int getHeight() {
+        return mHeight;
     }
 }

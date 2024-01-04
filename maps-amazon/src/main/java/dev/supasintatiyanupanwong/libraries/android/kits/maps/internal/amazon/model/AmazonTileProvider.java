@@ -22,11 +22,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import java.net.URL;
+
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 
 @RestrictTo(LIBRARY)
 public class AmazonTileProvider implements TileProvider {
+
+    private static final @NonNull URL NULL_URL;
+    static {
+        try {
+            NULL_URL = new URL("http://null.sun.com/");
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 
     private final com.amazon.geo.mapsv2.model.TileProvider mDelegate;
 
@@ -35,11 +47,25 @@ public class AmazonTileProvider implements TileProvider {
     }
 
     private AmazonTileProvider(final TileProvider tileProvider) {
-        this(new com.amazon.geo.mapsv2.model.TileProvider() {
-            @Override public com.amazon.geo.mapsv2.model.Tile getTile(int x, int y, int zoom) {
-                return AmazonTile.unwrap(tileProvider.getTile(x, y, zoom));
-            }
-        });
+        // Amazon Maps SDK only supports URL tile overlay
+        if (tileProvider instanceof UrlTileProvider) {
+            final UrlTileProvider urlTileProvider = (UrlTileProvider) tileProvider;
+            mDelegate = new com.amazon.geo.mapsv2.model.UrlTileProvider(
+                    urlTileProvider.getWidth(),
+                    urlTileProvider.getHeight()
+            ) {
+                @Override public @NonNull URL getTileUrl(int x, int y, int zoom) {
+                    final @Nullable URL url = urlTileProvider.getTileUrl(x, y, zoom);
+                    return url == null ? NULL_URL : url;
+                }
+            };
+        } else {
+            mDelegate = new com.amazon.geo.mapsv2.model.UrlTileProvider(-1, -1) {
+                @Override public @NonNull URL getTileUrl(int x, int y, int zoom) {
+                    return NULL_URL;
+                }
+            };
+        }
     }
 
     @Override public Tile getTile(int x, int y, int zoom) {
