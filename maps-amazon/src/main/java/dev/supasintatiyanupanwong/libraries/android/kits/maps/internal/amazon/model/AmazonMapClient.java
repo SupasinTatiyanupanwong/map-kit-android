@@ -58,6 +58,8 @@ public class AmazonMapClient implements MapClient {
     public AmazonMapClient(@NonNull com.amazon.geo.mapsv2.AmazonMap map) {
         mDelegate = map;
         mSettings = new UiSettings(map.getUiSettings());
+
+        setMapType(MapClient.MAP_TYPE_NORMAL);
     }
 
     @Override public @NonNull CameraPosition getCameraPosition() {
