@@ -40,7 +40,7 @@ dependencies {
 
     implementation project(':maps-nil')
 
-    implementation files('libs/amazon-maps-api-v2.aar')
+    compileOnly files("$rootDir/libs/maps-amazon/amazon-maps-api-v2.aar")
 }
 
 tasks.withType(Javadoc).all { enabled = false }

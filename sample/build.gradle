@@ -40,7 +40,7 @@ android {
         targetSdk 33
     }
 
-    flavorDimensions 'vendor'
+    flavorDimensions = ['provider']
     productFlavors {
         google
         huawei {
@@ -66,8 +66,12 @@ android {
 
 dependencies {
     googleImplementation project(':maps-google')
+
     huaweiImplementation project(':maps-huawei')
+
     amazonImplementation project(':maps-amazon')
+    amazonImplementation files("$rootDir/libs/maps-amazon/amazon-maps-api-v2.aar")
+
 //    tomtomImplementation project(':maps-tomtom')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
