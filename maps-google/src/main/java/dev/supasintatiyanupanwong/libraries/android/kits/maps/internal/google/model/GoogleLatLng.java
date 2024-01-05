@@ -99,7 +99,8 @@ public class GoogleLatLng implements LatLng {
     }
 
     static @Nullable List<com.google.android.gms.maps.model.LatLng> unwrap(
-            @Nullable Iterable<LatLng> wrappeds) {
+            @Nullable Iterable<LatLng> wrappeds
+    ) {
         if (wrappeds == null) {
             return null;
         }
@@ -119,5 +120,4 @@ public class GoogleLatLng implements LatLng {
         }
         return list;
     }
-
 }

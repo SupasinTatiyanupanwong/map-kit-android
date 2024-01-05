@@ -96,5 +96,4 @@ public class GoogleTile implements Tile {
             return ((GoogleTile) wrapped).mDelegate;
         }
     }
-
 }

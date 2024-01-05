@@ -29,7 +29,8 @@ class GoogleIndoorBuilding implements IndoorBuilding {
     private final com.google.android.gms.maps.model.IndoorBuilding mDelegate;
 
     private GoogleIndoorBuilding(
-            @NonNull com.google.android.gms.maps.model.IndoorBuilding delegate) {
+            @NonNull com.google.android.gms.maps.model.IndoorBuilding delegate
+    ) {
         mDelegate = delegate;
     }
 
@@ -72,8 +73,8 @@ class GoogleIndoorBuilding implements IndoorBuilding {
 
 
     static @Nullable IndoorBuilding wrap(
-            @Nullable com.google.android.gms.maps.model.IndoorBuilding delegate) {
+            @Nullable com.google.android.gms.maps.model.IndoorBuilding delegate
+    ) {
         return delegate == null ? null : new GoogleIndoorBuilding(delegate);
     }
-
 }

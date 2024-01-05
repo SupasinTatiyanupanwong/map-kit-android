@@ -103,7 +103,8 @@ public class GoogleBitmapDescriptor implements BitmapDescriptor {
     private final @NonNull com.google.android.gms.maps.model.BitmapDescriptor mDelegate;
 
     private GoogleBitmapDescriptor(
-            @NonNull com.google.android.gms.maps.model.BitmapDescriptor delegate) {
+            @NonNull com.google.android.gms.maps.model.BitmapDescriptor delegate
+    ) {
         mDelegate = delegate;
     }
 
@@ -131,14 +132,15 @@ public class GoogleBitmapDescriptor implements BitmapDescriptor {
 
     @Contract("null -> null; !null -> !null")
     static @Nullable BitmapDescriptor wrap(
-            @Nullable com.google.android.gms.maps.model.BitmapDescriptor delegate) {
+            @Nullable com.google.android.gms.maps.model.BitmapDescriptor delegate
+    ) {
         return delegate == null ? null : new GoogleBitmapDescriptor(delegate);
     }
 
     @Contract("null -> null; !null -> !null")
     static @Nullable com.google.android.gms.maps.model.BitmapDescriptor unwrap(
-            @Nullable BitmapDescriptor wrapped) {
+            @Nullable BitmapDescriptor wrapped
+    ) {
         return wrapped == null ? null : ((GoogleBitmapDescriptor) wrapped).mDelegate;
     }
-
 }

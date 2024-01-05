@@ -70,5 +70,4 @@ class GoogleProjection implements Projection {
     static Projection wrap(com.google.android.gms.maps.Projection delegate) {
         return new GoogleProjection(delegate);
     }
-
 }

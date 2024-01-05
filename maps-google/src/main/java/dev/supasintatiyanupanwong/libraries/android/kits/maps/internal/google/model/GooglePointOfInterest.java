@@ -72,5 +72,4 @@ class GooglePointOfInterest implements PointOfInterest {
     static PointOfInterest wrap(com.google.android.gms.maps.model.PointOfInterest delegate) {
         return new GooglePointOfInterest(delegate);
     }
-
 }

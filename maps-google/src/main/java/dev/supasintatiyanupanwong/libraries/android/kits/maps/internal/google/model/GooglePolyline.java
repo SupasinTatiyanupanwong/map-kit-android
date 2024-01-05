@@ -291,5 +291,4 @@ public class GooglePolyline implements Polyline {
             return ((GooglePolyline.Options) wrapped).mDelegate;
         }
     }
-
 }

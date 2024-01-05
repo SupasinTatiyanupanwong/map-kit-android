@@ -46,13 +46,15 @@ public class GoogleVisibleRegion implements VisibleRegion {
             LatLng nearRight,
             LatLng farLeft,
             LatLng farRight,
-            LatLngBounds latLngBounds) {
-        this(new com.google.android.gms.maps.model.VisibleRegion(
+            LatLngBounds latLngBounds
+    ) {
+        mDelegate = new com.google.android.gms.maps.model.VisibleRegion(
                 GoogleLatLng.unwrap(nearLeft),
                 GoogleLatLng.unwrap(nearRight),
                 GoogleLatLng.unwrap(farLeft),
                 GoogleLatLng.unwrap(farRight),
-                GoogleLatLngBounds.unwrap(latLngBounds)));
+                GoogleLatLngBounds.unwrap(latLngBounds)
+        );
     }
 
     @Override public @NonNull LatLng getNearLeft() {
@@ -115,5 +117,4 @@ public class GoogleVisibleRegion implements VisibleRegion {
     static VisibleRegion wrap(com.google.android.gms.maps.model.VisibleRegion delegate) {
         return new GoogleVisibleRegion(delegate);
     }
-
 }

@@ -36,7 +36,8 @@ public class GoogleCameraPosition implements CameraPosition {
     private @Nullable LatLng mTarget;
 
     private GoogleCameraPosition(
-            @NonNull com.google.android.gms.maps.model.CameraPosition delegate) {
+            @NonNull com.google.android.gms.maps.model.CameraPosition delegate
+    ) {
         mDelegate = delegate;
     }
 
@@ -99,12 +100,14 @@ public class GoogleCameraPosition implements CameraPosition {
 
         public Builder(@NonNull CameraPosition camera) {
             mDelegate = com.google.android.gms.maps.model.CameraPosition.builder(
-                    Objects.requireNonNull(GoogleCameraPosition.unwrap(camera), "camera == null"));
+                    Objects.requireNonNull(GoogleCameraPosition.unwrap(camera), "camera == null")
+            );
         }
 
         @Override public @NonNull CameraPosition.Builder target(@NonNull LatLng location) {
             mDelegate.target(
-                    Objects.requireNonNull(GoogleLatLng.unwrap(location), "location == null"));
+                    Objects.requireNonNull(GoogleLatLng.unwrap(location), "location == null")
+            );
             return this;
         }
 
@@ -114,7 +117,8 @@ public class GoogleCameraPosition implements CameraPosition {
         }
 
         @Override public @NonNull CameraPosition.Builder tilt(
-                @FloatRange(from = 0.0, to = 90.0) float tilt) {
+                @FloatRange(from = 0.0, to = 90.0) float tilt
+        ) {
             mDelegate.tilt(tilt);
             return this;
         }
@@ -128,5 +132,4 @@ public class GoogleCameraPosition implements CameraPosition {
             return GoogleCameraPosition.wrap(mDelegate.build());
         }
     }
-
 }

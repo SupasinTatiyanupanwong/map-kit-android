@@ -66,5 +66,4 @@ public class GoogleRoundCap extends GoogleCap implements RoundCap {
     static com.google.android.gms.maps.model.RoundCap unwrap(RoundCap wrapped) {
         return ((GoogleRoundCap) wrapped).mDelegate;
     }
-
 }

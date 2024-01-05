@@ -163,5 +163,4 @@ public class GoogleTileOverlay implements TileOverlay {
             return ((GoogleTileOverlay.Options) wrapped).mDelegate;
         }
     }
-
 }

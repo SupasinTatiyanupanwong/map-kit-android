@@ -42,7 +42,8 @@ abstract class GoogleCap implements Cap {
         }
 
         throw new UnsupportedOperationException(
-                "Unsupported cap type " + (delegate != null ? delegate.toString() : null));
+                "Unsupported cap type " + (delegate != null ? delegate.toString() : null)
+        );
     }
 
     static @Nullable com.google.android.gms.maps.model.Cap unwrap(@Nullable Cap wrapped) {
@@ -60,7 +61,7 @@ abstract class GoogleCap implements Cap {
         }
 
         throw new UnsupportedOperationException(
-                "Unsupported cap type " + (wrapped != null ? wrapped.toString() : null));
+                "Unsupported cap type " + (wrapped != null ? wrapped.toString() : null)
+        );
     }
-
 }

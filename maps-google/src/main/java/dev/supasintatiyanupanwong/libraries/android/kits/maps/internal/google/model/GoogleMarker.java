@@ -302,5 +302,4 @@ public class GoogleMarker implements Marker {
             return ((GoogleMarker.Options) wrapped).mDelegate;
         }
     }
-
 }

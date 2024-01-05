@@ -179,7 +179,9 @@ public class GoogleCircle implements Circle {
             return this;
         }
 
-        @Override public @NonNull Circle.Options strokePattern(@Nullable List<PatternItem> pattern) {
+        @Override public @NonNull Circle.Options strokePattern(
+                @Nullable List<PatternItem> pattern
+        ) {
             mDelegate.strokePattern(GooglePatternItem.unwrap(pattern));
             return this;
         }
@@ -245,5 +247,4 @@ public class GoogleCircle implements Circle {
             return ((GoogleCircle.Options) wrapped).mDelegate;
         }
     }
-
 }

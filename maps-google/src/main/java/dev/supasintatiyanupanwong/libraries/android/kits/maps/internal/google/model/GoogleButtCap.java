@@ -66,5 +66,4 @@ public class GoogleButtCap extends GoogleCap implements ButtCap {
     static @Nullable com.google.android.gms.maps.model.ButtCap unwrap(@Nullable ButtCap wrapped) {
         return wrapped == null ? null : ((GoogleButtCap) wrapped).mDelegate;
     }
-
 }

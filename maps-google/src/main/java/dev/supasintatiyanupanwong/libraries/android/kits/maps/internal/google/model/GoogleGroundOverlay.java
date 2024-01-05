@@ -162,7 +162,9 @@ public class GoogleGroundOverlay implements GroundOverlay {
             mDelegate = new com.google.android.gms.maps.model.GroundOverlayOptions();
         }
 
-        @Override public @NonNull GroundOverlay.Options image(@NonNull BitmapDescriptor imageDescriptor) {
+        @Override public @NonNull GroundOverlay.Options image(
+                @NonNull BitmapDescriptor imageDescriptor
+        ) {
             mDelegate.image(GoogleBitmapDescriptor.unwrap(imageDescriptor));
             return this;
         }
@@ -172,7 +174,10 @@ public class GoogleGroundOverlay implements GroundOverlay {
             return this;
         }
 
-        @Override public @NonNull GroundOverlay.Options position(@NonNull LatLng location, float width) {
+        @Override public @NonNull GroundOverlay.Options position(
+                @NonNull LatLng location,
+                float width
+        ) {
             mDelegate.position(GoogleLatLng.unwrap(location), width);
             return this;
         }
@@ -180,7 +185,8 @@ public class GoogleGroundOverlay implements GroundOverlay {
         @Override public @NonNull GroundOverlay.Options position(
                 @NonNull LatLng location,
                 float width,
-                float height) {
+                float height
+        ) {
             mDelegate.position(GoogleLatLng.unwrap(location), width, height);
             return this;
         }
@@ -265,9 +271,9 @@ public class GoogleGroundOverlay implements GroundOverlay {
 
 
         static com.google.android.gms.maps.model.GroundOverlayOptions unwrap(
-                GroundOverlay.Options wrapped) {
+                GroundOverlay.Options wrapped
+        ) {
             return ((GoogleGroundOverlay.Options) wrapped).mDelegate;
         }
     }
-
 }

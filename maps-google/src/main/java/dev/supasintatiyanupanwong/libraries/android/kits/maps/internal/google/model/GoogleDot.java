@@ -66,5 +66,4 @@ public class GoogleDot extends GooglePatternItem implements Dot {
     static com.google.android.gms.maps.model.Dot unwrap(Dot wrapped) {
         return ((GoogleDot) wrapped).mDelegate;
     }
-
 }

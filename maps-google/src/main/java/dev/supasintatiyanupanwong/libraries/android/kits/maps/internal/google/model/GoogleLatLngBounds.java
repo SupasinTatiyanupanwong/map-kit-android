@@ -39,8 +39,10 @@ public class GoogleLatLngBounds implements LatLngBounds {
     }
 
     public GoogleLatLngBounds(@NonNull LatLng southwest, @NonNull LatLng northeast) {
-        this(new com.google.android.gms.maps.model.LatLngBounds(
-                GoogleLatLng.unwrap(southwest), GoogleLatLng.unwrap(northeast)));
+        mDelegate = new com.google.android.gms.maps.model.LatLngBounds(
+                GoogleLatLng.unwrap(southwest),
+                GoogleLatLng.unwrap(northeast)
+        );
     }
 
     @Override public @NonNull LatLng getSouthwest() {
@@ -99,7 +101,8 @@ public class GoogleLatLngBounds implements LatLngBounds {
     }
 
     static @Nullable com.google.android.gms.maps.model.LatLngBounds unwrap(
-            @Nullable LatLngBounds wrapped) {
+            @Nullable LatLngBounds wrapped
+    ) {
         return wrapped == null ? null : ((GoogleLatLngBounds) wrapped).mDelegate;
     }
 
@@ -120,5 +123,4 @@ public class GoogleLatLngBounds implements LatLngBounds {
             return GoogleLatLngBounds.wrap(mDelegate.build());
         }
     }
-
 }

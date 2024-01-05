@@ -76,8 +76,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
@@ -87,7 +85,8 @@ class GoogleMapsBackend extends NilMapsBackend {
     private static final List<Integer> UNAVAILABLE_RESULTS = Arrays.asList(
             ConnectionResult.SERVICE_DISABLED,
             ConnectionResult.SERVICE_MISSING,
-            ConnectionResult.SERVICE_INVALID);
+            ConnectionResult.SERVICE_INVALID
+    );
 
     private GoogleMapsBackend() {}
 
@@ -114,7 +113,8 @@ class GoogleMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
             @NonNull LatLng target,
-            float zoom) {
+            float zoom
+    ) {
         return newCameraPositionBuilder()
                 .target(target)
                 .zoom(zoom)
@@ -126,7 +126,8 @@ class GoogleMapsBackend extends NilMapsBackend {
     }
 
     @Override public @NonNull CameraPosition.Builder newCameraPositionBuilder(
-            @NonNull CameraPosition camera) {
+            @NonNull CameraPosition camera
+    ) {
         return new GoogleCameraPosition.Builder(camera);
     }
 
@@ -136,7 +137,8 @@ class GoogleMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull CustomCap newCustomCap(
             @NonNull BitmapDescriptor bitmapDescriptor,
-            float refWidth) {
+            float refWidth
+    ) {
         return new GoogleCustomCap(bitmapDescriptor, refWidth);
     }
 
@@ -166,7 +168,8 @@ class GoogleMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull LatLngBounds newLatLngBounds(
             @NonNull LatLng southwest,
-            @NonNull LatLng northeast) {
+            @NonNull LatLng northeast
+    ) {
         return new GoogleLatLngBounds(southwest, northeast);
     }
 
@@ -179,7 +182,9 @@ class GoogleMapsBackend extends NilMapsBackend {
     }
 
     @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
-            @NonNull Context context, @RawRes int resourceId) {
+            @NonNull Context context,
+            @RawRes int resourceId
+    ) {
         return new GoogleMapClient.Style.Options(context, resourceId);
     }
 
@@ -216,20 +221,17 @@ class GoogleMapsBackend extends NilMapsBackend {
             @NonNull LatLng nearRight,
             @NonNull LatLng farLeft,
             @NonNull LatLng farRight,
-            @NonNull LatLngBounds bounds) {
+            @NonNull LatLngBounds bounds
+    ) {
         return new GoogleVisibleRegion(nearLeft, nearRight, farLeft, farRight, bounds);
     }
 
     @Override public void getMapAsync(
             @NonNull Fragment fragment,
-            @NonNull final MapKit.OnMapReadyCallback callback) {
-        ((com.google.android.gms.maps.SupportMapFragment) fragment).getMapAsync(
-                new com.google.android.gms.maps.OnMapReadyCallback() {
-                    @Override public void onMapReady(
-                            @NonNull com.google.android.gms.maps.GoogleMap googleMap) {
-                        callback.onMapReady(new GoogleMapClient(googleMap));
-                    }
-                });
+            final @NonNull MapKit.OnMapReadyCallback callback
+    ) {
+        ((com.google.android.gms.maps.SupportMapFragment) fragment)
+                .getMapAsync(map -> callback.onMapReady(new GoogleMapClient(map)));
     }
 
 

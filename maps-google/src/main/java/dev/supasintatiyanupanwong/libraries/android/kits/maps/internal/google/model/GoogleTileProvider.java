@@ -35,11 +35,7 @@ public class GoogleTileProvider implements TileProvider {
     }
 
     private GoogleTileProvider(final TileProvider tileProvider) {
-        this(new com.google.android.gms.maps.model.TileProvider() {
-            @Override public com.google.android.gms.maps.model.Tile getTile(int x, int y, int zoom) {
-                return GoogleTile.unwrap(tileProvider.getTile(x, y, zoom));
-            }
-        });
+        mDelegate = (x, y, zoom) -> GoogleTile.unwrap(tileProvider.getTile(x, y, zoom));
     }
 
     @Override public Tile getTile(int x, int y, int zoom) {
@@ -76,5 +72,4 @@ public class GoogleTileProvider implements TileProvider {
     static com.google.android.gms.maps.model.TileProvider unwrap(TileProvider wrapped) {
         return new GoogleTileProvider(wrapped).mDelegate;
     }
-
 }

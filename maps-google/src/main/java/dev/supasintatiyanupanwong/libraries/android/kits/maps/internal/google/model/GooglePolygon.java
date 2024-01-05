@@ -222,7 +222,9 @@ public class GooglePolygon implements Polygon {
             return this;
         }
 
-        @Override public @NonNull Polygon.Options strokePattern(@Nullable List<PatternItem> pattern) {
+        @Override public @NonNull Polygon.Options strokePattern(
+                @Nullable List<PatternItem> pattern
+        ) {
             mDelegate.strokePattern(GooglePatternItem.unwrap(pattern));
             return this;
         }
@@ -305,5 +307,4 @@ public class GooglePolygon implements Polygon {
             return ((GooglePolygon.Options) wrapped).mDelegate;
         }
     }
-
 }

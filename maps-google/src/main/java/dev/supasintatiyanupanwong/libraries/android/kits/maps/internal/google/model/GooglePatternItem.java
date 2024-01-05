@@ -77,5 +77,4 @@ abstract class GooglePatternItem implements PatternItem {
         }
         return list;
     }
-
 }

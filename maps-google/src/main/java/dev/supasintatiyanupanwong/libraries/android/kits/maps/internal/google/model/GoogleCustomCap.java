@@ -37,13 +37,15 @@ public class GoogleCustomCap extends GoogleCap implements CustomCap {
     }
 
     public GoogleCustomCap(@NonNull BitmapDescriptor bitmapDescriptor, float refWidth) {
-        this(new com.google.android.gms.maps.model.CustomCap(
-                GoogleBitmapDescriptor.unwrap(bitmapDescriptor), refWidth));
+        mDelegate = new com.google.android.gms.maps.model.CustomCap(
+                GoogleBitmapDescriptor.unwrap(bitmapDescriptor), refWidth
+        );
     }
 
     public GoogleCustomCap(@NonNull BitmapDescriptor bitmapDescriptor) {
-        this(new com.google.android.gms.maps.model.CustomCap(
-                GoogleBitmapDescriptor.unwrap(bitmapDescriptor)));
+        mDelegate = new com.google.android.gms.maps.model.CustomCap(
+                GoogleBitmapDescriptor.unwrap(bitmapDescriptor)
+        );
     }
 
     @Override public @NonNull BitmapDescriptor getBitmapDescriptor() {
@@ -86,5 +88,4 @@ public class GoogleCustomCap extends GoogleCap implements CustomCap {
     static com.google.android.gms.maps.model.CustomCap unwrap(CustomCap wrapped) {
         return ((GoogleCustomCap) wrapped).mDelegate;
     }
-
 }

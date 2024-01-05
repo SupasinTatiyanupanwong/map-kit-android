@@ -66,5 +66,4 @@ public class GoogleSquareCap extends GoogleCap implements SquareCap {
     static com.google.android.gms.maps.model.SquareCap unwrap(SquareCap wrapped) {
         return ((GoogleSquareCap) wrapped).mDelegate;
     }
-
 }

@@ -77,5 +77,4 @@ class GoogleIndoorLevel implements IndoorLevel {
         }
         return list;
     }
-
 }

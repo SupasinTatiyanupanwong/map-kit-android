@@ -70,5 +70,4 @@ public class GoogleGap extends GooglePatternItem implements Gap {
     static com.google.android.gms.maps.model.Gap unwrap(Gap wrapped) {
         return ((GoogleGap) wrapped).mDelegate;
     }
-
 }

@@ -70,5 +70,4 @@ public class GoogleDash extends GooglePatternItem implements Dash {
     static com.google.android.gms.maps.model.Dash unwrap(Dash wrapped) {
         return ((GoogleDash) wrapped).mDelegate;
     }
-
 }
