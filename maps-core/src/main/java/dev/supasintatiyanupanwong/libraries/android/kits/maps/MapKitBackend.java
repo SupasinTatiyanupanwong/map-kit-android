@@ -48,8 +48,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 /**
@@ -115,18 +113,6 @@ public interface MapKitBackend {
     @NonNull TileOverlay.Options newTileOverlayOptions();
 
     @NonNull Tile newTile(int width, int height, byte[] data);
-
-    @Deprecated
-    default @NonNull Tile noTile() {
-        return TileProvider.NO_TILE;
-    }
-
-    @Deprecated
-    @NonNull TileProvider newUrlTileProvider(
-            int width,
-            int height,
-            @NonNull UrlTileProvider tileProvider
-    );
 
     @NonNull VisibleRegion newVisibleRegion(
             @NonNull LatLng nearLeft,

@@ -45,7 +45,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPolyline;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilVisibleRegion;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.ButtCap;
@@ -67,8 +66,6 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.RoundCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.SquareCap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Tile;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileProvider;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.UrlTileProvider;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.VisibleRegion;
 
 @SuppressWarnings("unused")
@@ -201,13 +198,6 @@ public class NilMapsBackend implements MapKitBackend {
 
     @Override public @NonNull Tile newTile(int width, int height, byte[] data) {
         return NilTile.INSTANCE; // Not supported, null object for API safe.
-    }
-
-    @Override public @NonNull TileProvider newUrlTileProvider(
-            int width,
-            int height,
-            @NonNull UrlTileProvider tileProvider) {
-        return NilTileProvider.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull VisibleRegion newVisibleRegion(
