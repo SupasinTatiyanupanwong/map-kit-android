@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,15 +37,19 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 @RestrictTo(LIBRARY)
 public class AmazonPolygon implements Polygon {
 
-    private final com.amazon.geo.mapsv2.model.Polygon mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.Polygon mDelegate;
+    private final @NonNull AmazonMapClient$TagManager mTagManager;
 
-    private @Nullable Object mTag; // Providing tag support for Amazon's Polygon
-
-    private AmazonPolygon(com.amazon.geo.mapsv2.model.Polygon delegate) {
+    private AmazonPolygon(
+            @NonNull com.amazon.geo.mapsv2.model.Polygon delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
         mDelegate = delegate;
+        mTagManager = tagManager;
     }
 
     @Override public void remove() {
+        mTagManager.remove(getId());
         mDelegate.remove();
     }
 
@@ -148,11 +154,11 @@ public class AmazonPolygon implements Polygon {
     }
 
     @Override public void setTag(@Nullable Object tag) {
-        mTag = tag;
+        mTagManager.setTag(getId(), tag);
     }
 
     @Override public @Nullable Object getTag() {
-        return mTag;
+        return mTagManager.getTag(getId());
     }
 
     @Override public boolean equals(@Nullable Object obj) {
@@ -165,7 +171,8 @@ public class AmazonPolygon implements Polygon {
 
         AmazonPolygon that = (AmazonPolygon) obj;
 
-        return mDelegate.equals(that.mDelegate) && Objects.equals(mTag, that.mTag);
+        return mDelegate.equals(that.mDelegate) &&
+                Objects.equals(mTagManager.getTag(getId()), mTagManager.getTag(that.getId()));
     }
 
     @Override public int hashCode() {
@@ -177,8 +184,12 @@ public class AmazonPolygon implements Polygon {
     }
 
 
-    static @Nullable Polygon wrap(@Nullable com.amazon.geo.mapsv2.model.Polygon delegate) {
-        return delegate == null ? null : new AmazonPolygon(delegate);
+    @Contract("null, _ -> null; !null, _ -> !null")
+    static @Nullable Polygon wrap(
+            @Nullable com.amazon.geo.mapsv2.model.Polygon delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
+        return delegate == null ? null : new AmazonPolygon(delegate, tagManager);
     }
 
 

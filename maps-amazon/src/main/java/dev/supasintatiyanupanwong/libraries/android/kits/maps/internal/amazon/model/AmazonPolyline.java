@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -37,14 +39,18 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
 public class AmazonPolyline implements Polyline {
 
     private final @NonNull com.amazon.geo.mapsv2.model.Polyline mDelegate;
+    private final @NonNull AmazonMapClient$TagManager mTagManager;
 
-    private @Nullable Object mTag; // Providing tag support for Amazon's Polyline
-
-    private AmazonPolyline(@NonNull com.amazon.geo.mapsv2.model.Polyline delegate) {
+    private AmazonPolyline(
+            @NonNull com.amazon.geo.mapsv2.model.Polyline delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
         mDelegate = delegate;
+        mTagManager = tagManager;
     }
 
     @Override public void remove() {
+        mTagManager.remove(getId());
         mDelegate.remove();
     }
 
@@ -141,11 +147,11 @@ public class AmazonPolyline implements Polyline {
     }
 
     @Override public void setTag(@Nullable Object tag) {
-        mTag = tag;
+        mTagManager.setTag(getId(), tag);
     }
 
     @Override public @Nullable Object getTag() {
-        return mTag;
+        return mTagManager.getTag(getId());
     }
 
     @Override public boolean equals(@Nullable Object obj) {
@@ -158,7 +164,8 @@ public class AmazonPolyline implements Polyline {
 
         AmazonPolyline that = (AmazonPolyline) obj;
 
-        return mDelegate.equals(that.mDelegate) && Objects.equals(mTag, that.mTag);
+        return mDelegate.equals(that.mDelegate) &&
+                Objects.equals(mTagManager.getTag(getId()), mTagManager.getTag(that.getId()));
     }
 
     @Override public int hashCode() {
@@ -170,8 +177,12 @@ public class AmazonPolyline implements Polyline {
     }
 
 
-    static @Nullable Polyline wrap(@Nullable com.amazon.geo.mapsv2.model.Polyline delegate) {
-        return delegate == null ? null : new AmazonPolyline(delegate);
+    @Contract("null, _ -> null; !null, _ -> !null")
+    static @Nullable Polyline wrap(
+            @Nullable com.amazon.geo.mapsv2.model.Polyline delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
+        return delegate == null ? null : new AmazonPolyline(delegate, tagManager);
     }
 
 

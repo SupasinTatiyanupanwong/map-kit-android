@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Objects;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -33,14 +35,18 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds
 public class AmazonGroundOverlay implements GroundOverlay {
 
     private final @NonNull com.amazon.geo.mapsv2.model.GroundOverlay mDelegate;
+    private final @NonNull AmazonMapClient$TagManager mTagManager;
 
-    private @Nullable Object mTag; // Providing tag support for Amazon's GroundOverlay
-
-    private AmazonGroundOverlay(@NonNull com.amazon.geo.mapsv2.model.GroundOverlay delegate) {
+    private AmazonGroundOverlay(
+            @NonNull com.amazon.geo.mapsv2.model.GroundOverlay delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
+        mTagManager = tagManager;
         mDelegate = delegate;
     }
 
     @Override public void remove() {
+        mTagManager.remove(getId());
         mDelegate.remove();
     }
 
@@ -125,11 +131,11 @@ public class AmazonGroundOverlay implements GroundOverlay {
     }
 
     @Override public void setTag(@Nullable Object tag) {
-        mTag = tag;
+        mTagManager.setTag(getId(), tag);
     }
 
     @Override public @Nullable Object getTag() {
-        return mTag;
+        return mTagManager.getTag(getId());
     }
 
     @Override public boolean equals(@Nullable Object obj) {
@@ -142,7 +148,8 @@ public class AmazonGroundOverlay implements GroundOverlay {
 
         AmazonGroundOverlay that = (AmazonGroundOverlay) obj;
 
-        return mDelegate.equals(that.mDelegate) && Objects.equals(mTag, that.mTag);
+        return mDelegate.equals(that.mDelegate) &&
+                Objects.equals(mTagManager.getTag(getId()), mTagManager.getTag(that.getId()));
     }
 
     @Override public int hashCode() {
@@ -154,10 +161,12 @@ public class AmazonGroundOverlay implements GroundOverlay {
     }
 
 
+    @Contract("null, _ -> null; !null, _ -> !null")
     static @Nullable GroundOverlay wrap(
-            @Nullable com.amazon.geo.mapsv2.model.GroundOverlay delegate
+            @Nullable com.amazon.geo.mapsv2.model.GroundOverlay delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
     ) {
-        return delegate == null ?  null : new AmazonGroundOverlay(delegate);
+        return delegate == null ?  null : new AmazonGroundOverlay(delegate, tagManager);
     }
 
 

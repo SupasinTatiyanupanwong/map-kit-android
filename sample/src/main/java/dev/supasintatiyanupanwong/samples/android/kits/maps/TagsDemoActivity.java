@@ -134,45 +134,73 @@ public class TagsDemoActivity extends AppCompatActivity implements
 
     private void addObjectsToMap() {
         // A circle centered on Adelaide.
-        Circle adelaideCircle = mMap.addCircle(MapKit.newCircleOptions()
-                .center(ADELAIDE)
-                .radius(500000)
-                .fillColor(Color.argb(150, 66, 173, 244))
-                .strokeColor(Color.rgb(66, 173, 244))
-                .clickable(true));
-        adelaideCircle.setTag(new CustomTag("Adelaide circle"));
+        Circle adelaideCircle = mMap.addCircle(
+                MapKit.newCircleOptions()
+                        .center(ADELAIDE)
+                        .radius(500000)
+                        .fillColor(Color.argb(150, 66, 173, 244))
+                        .strokeColor(Color.rgb(66, 173, 244))
+                        .clickable(true)
+        );
+        if (adelaideCircle != null) {
+            adelaideCircle.setTag(new CustomTag("Adelaide circle"));
+        }
 
         // A ground overlay at Sydney.
         GroundOverlay sydneyGroundOverlay = mMap.addGroundOverlay(
                 MapKit.newGroundOverlayOptions()
                         .image(MapKit.getBitmapDescriptorFactory()
-                                .fromResource(R.drawable.harbour_bridge))
+                                .fromResource(R.drawable.harbour_bridge)
+                        )
                         .position(SYDNEY, 700000)
-                        .clickable(true));
-        sydneyGroundOverlay.setTag(new CustomTag("Sydney ground overlay"));
+                        .clickable(true)
+        );
+        if (sydneyGroundOverlay != null) {
+            sydneyGroundOverlay.setTag(new CustomTag("Sydney ground overlay"));
+        }
 
         // A marker at Hobart.
         Marker hobartMarker = mMap.addMarker(MapKit.newMarkerOptions().position(HOBART));
-        hobartMarker.setTag(new CustomTag("Hobart marker"));
+        if (hobartMarker != null) {
+            hobartMarker.setTag(new CustomTag("Hobart marker"));
+        }
 
         // A polygon centered at Darwin.
-        Polygon darwinPolygon = mMap.addPolygon(MapKit.newPolygonOptions()
-                .add(MapKit.newLatLng(DARWIN.getLatitude() + 3, DARWIN.getLongitude() - 3),
-                        MapKit.newLatLng(DARWIN.getLatitude() + 3, DARWIN.getLongitude() + 3),
-                        MapKit.newLatLng(DARWIN.getLatitude() - 3, DARWIN.getLongitude() + 3),
-                        MapKit.newLatLng(DARWIN.getLatitude() - 3, DARWIN.getLongitude() - 3))
-                .fillColor(Color.argb(150, 34, 173, 24))
-                .strokeColor(Color.rgb(34, 173, 24))
-                .clickable(true));
-        darwinPolygon.setTag(new CustomTag("Darwin polygon"));
+        Polygon darwinPolygon = mMap.addPolygon(
+                MapKit.newPolygonOptions()
+                        .add(
+                                MapKit.newLatLng(
+                                        DARWIN.getLatitude() + 3, DARWIN.getLongitude() - 3
+                                ),
+                                MapKit.newLatLng(
+                                        DARWIN.getLatitude() + 3, DARWIN.getLongitude() + 3
+                                ),
+                                MapKit.newLatLng(
+                                        DARWIN.getLatitude() - 3, DARWIN.getLongitude() + 3
+                                ),
+                                MapKit.newLatLng(
+                                        DARWIN.getLatitude() - 3, DARWIN.getLongitude() - 3
+                                )
+                        )
+                        .fillColor(Color.argb(150, 34, 173, 24))
+                        .strokeColor(Color.rgb(34, 173, 24))
+                        .clickable(true)
+        );
+        if (darwinPolygon != null) {
+            darwinPolygon.setTag(new CustomTag("Darwin polygon"));
+        }
 
         // A polyline from Perth to Brisbane.
-        Polyline polyline = mMap.addPolyline(MapKit.newPolylineOptions()
-                .add(PERTH, BRISBANE)
-                .color(Color.rgb(103, 24, 173))
-                .width(30)
-                .clickable(true));
-        polyline.setTag(new CustomTag("Perth to Brisbane polyline"));
+        Polyline polyline = mMap.addPolyline(
+                MapKit.newPolylineOptions()
+                        .add(PERTH, BRISBANE)
+                        .color(Color.rgb(103, 24, 173))
+                        .width(30)
+                        .clickable(true)
+        );
+        if (polyline != null) {
+            polyline.setTag(new CustomTag("Perth to Brisbane polyline"));
+        }
     }
 
     //

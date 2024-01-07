@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Objects;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.BitmapDescriptor;
@@ -31,15 +33,19 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 @RestrictTo(LIBRARY)
 public class AmazonMarker implements Marker {
 
-    private final com.amazon.geo.mapsv2.model.Marker mDelegate;
+    private final @NonNull com.amazon.geo.mapsv2.model.Marker mDelegate;
+    private final @NonNull AmazonMapClient$TagManager mTagManager;
 
-    private @Nullable Object mTag; // Providing tag support for Amazon's Marker
-
-    private AmazonMarker(@NonNull com.amazon.geo.mapsv2.model.Marker delegate) {
+    private AmazonMarker(
+            @NonNull com.amazon.geo.mapsv2.model.Marker delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
         mDelegate = delegate;
+        mTagManager = tagManager;
     }
 
     @Override public void remove() {
+        mTagManager.remove(getId());
         mDelegate.remove();
     }
 
@@ -144,11 +150,11 @@ public class AmazonMarker implements Marker {
     }
 
     @Override public void setTag(@Nullable Object tag) {
-        mTag = tag;
+        mTagManager.setTag(getId(), tag);
     }
 
     @Override public @Nullable Object getTag() {
-        return mTag;
+        return mTagManager.getTag(getId());
     }
 
     @Override public boolean equals(@Nullable Object obj) {
@@ -161,7 +167,8 @@ public class AmazonMarker implements Marker {
 
         AmazonMarker that = (AmazonMarker) obj;
 
-        return mDelegate.equals(that.mDelegate) && Objects.equals(mTag, that.mTag);
+        return mDelegate.equals(that.mDelegate) &&
+                Objects.equals(mTagManager.getTag(getId()), mTagManager.getTag(that.getId()));
     }
 
     @Override public int hashCode() {
@@ -173,8 +180,12 @@ public class AmazonMarker implements Marker {
     }
 
 
-    static @Nullable Marker wrap(@Nullable com.amazon.geo.mapsv2.model.Marker delegate) {
-        return delegate == null ? null : new AmazonMarker(delegate);
+    @Contract("null, _ -> null; !null, _ -> !null")
+    static @Nullable Marker wrap(
+            @Nullable com.amazon.geo.mapsv2.model.Marker delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
+        return delegate == null ? null : new AmazonMarker(delegate, tagManager);
     }
 
 

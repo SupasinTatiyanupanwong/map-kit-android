@@ -53,12 +53,24 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.TileOverlay;
 @RestrictTo(LIBRARY)
 public class AmazonMapClient implements MapClient {
 
-    private final com.amazon.geo.mapsv2.AmazonMap mDelegate;
-    private final UiSettings mSettings;
+    private final @NonNull com.amazon.geo.mapsv2.AmazonMap mDelegate;
+    private final @NonNull UiSettings mSettings;
+
+    private final @NonNull AmazonMapClient$TagManager mCircleTags;
+    private final @NonNull AmazonMapClient$TagManager mGroundOverlayTags;
+    private final @NonNull AmazonMapClient$TagManager mMarkerTags;
+    private final @NonNull AmazonMapClient$TagManager mPolygonTags;
+    private final @NonNull AmazonMapClient$TagManager mPolylineTags;
 
     public AmazonMapClient(@NonNull com.amazon.geo.mapsv2.AmazonMap map) {
         mDelegate = map;
         mSettings = new UiSettings(map.getUiSettings());
+
+        mCircleTags = new AmazonMapClient$TagManager();
+        mGroundOverlayTags = new AmazonMapClient$TagManager();
+        mMarkerTags = new AmazonMapClient$TagManager();
+        mPolygonTags = new AmazonMapClient$TagManager();
+        mPolylineTags = new AmazonMapClient$TagManager();
 
         setMapType(MapClient.MAP_TYPE_NORMAL);
     }
@@ -137,7 +149,7 @@ public class AmazonMapClient implements MapClient {
         if (unwrap == null) {
             return null;
         } else {
-            return AmazonPolyline.wrap(mDelegate.addPolyline(unwrap));
+            return AmazonPolyline.wrap(mDelegate.addPolyline(unwrap), mPolylineTags);
         }
     }
 
@@ -147,7 +159,7 @@ public class AmazonMapClient implements MapClient {
         if (unwrap == null) {
             return null;
         } else {
-            return AmazonPolygon.wrap(mDelegate.addPolygon(unwrap));
+            return AmazonPolygon.wrap(mDelegate.addPolygon(unwrap), mPolygonTags);
         }
     }
 
@@ -157,7 +169,7 @@ public class AmazonMapClient implements MapClient {
         if (unwrap == null) {
             return null;
         } else {
-            return AmazonCircle.wrap(mDelegate.addCircle(unwrap));
+            return AmazonCircle.wrap(mDelegate.addCircle(unwrap), mCircleTags);
         }
     }
 
@@ -167,7 +179,7 @@ public class AmazonMapClient implements MapClient {
         if (unwrap == null) {
             return null;
         } else {
-            return AmazonMarker.wrap(mDelegate.addMarker(unwrap));
+            return AmazonMarker.wrap(mDelegate.addMarker(unwrap), mMarkerTags);
         }
     }
 
@@ -178,7 +190,7 @@ public class AmazonMapClient implements MapClient {
         if (unwrap == null) {
             return null;
         } else {
-            return AmazonGroundOverlay.wrap(mDelegate.addGroundOverlay(unwrap));
+            return AmazonGroundOverlay.wrap(mDelegate.addGroundOverlay(unwrap), mGroundOverlayTags);
         }
     }
 
@@ -193,6 +205,12 @@ public class AmazonMapClient implements MapClient {
     }
 
     @Override public void clear() {
+        mCircleTags.clear();
+        mGroundOverlayTags.clear();
+        mMarkerTags.clear();
+        mPolygonTags.clear();
+        mPolylineTags.clear();
+
         mDelegate.clear();
     }
 
@@ -331,7 +349,7 @@ public class AmazonMapClient implements MapClient {
     ) {
         mDelegate.setOnMarkerClickListener(listener == null
                 ? null
-                : marker -> listener.onMarkerClick(AmazonMarker.wrap(marker))
+                : marker -> listener.onMarkerClick(AmazonMarker.wrap(marker, mMarkerTags))
         );
     }
 
@@ -344,19 +362,19 @@ public class AmazonMapClient implements MapClient {
                     @Override public void onMarkerDragStart(
                             @NonNull com.amazon.geo.mapsv2.model.Marker marker
                     ) {
-                        listener.onMarkerDragStart(AmazonMarker.wrap(marker));
+                        listener.onMarkerDragStart(AmazonMarker.wrap(marker, mMarkerTags));
                     }
 
                     @Override public void onMarkerDrag(
                             @NonNull com.amazon.geo.mapsv2.model.Marker marker
                     ) {
-                        listener.onMarkerDrag(AmazonMarker.wrap(marker));
+                        listener.onMarkerDrag(AmazonMarker.wrap(marker, mMarkerTags));
                     }
 
                     @Override public void onMarkerDragEnd(
                             @NonNull com.amazon.geo.mapsv2.model.Marker marker
                     ) {
-                        listener.onMarkerDragEnd(AmazonMarker.wrap(marker));
+                        listener.onMarkerDragEnd(AmazonMarker.wrap(marker, mMarkerTags));
                     }
                 }
         );
@@ -367,7 +385,7 @@ public class AmazonMapClient implements MapClient {
     ) {
         mDelegate.setOnInfoWindowClickListener(listener == null
                 ? null
-                : marker -> listener.onInfoWindowClick(AmazonMarker.wrap(marker))
+                : marker -> listener.onInfoWindowClick(AmazonMarker.wrap(marker, mMarkerTags))
         );
     }
 
@@ -390,13 +408,13 @@ public class AmazonMapClient implements MapClient {
                     @Override public View getInfoWindow(
                             @NonNull com.amazon.geo.mapsv2.model.Marker marker
                     ) {
-                        return adapter.getInfoWindow(AmazonMarker.wrap(marker));
+                        return adapter.getInfoWindow(AmazonMarker.wrap(marker, mMarkerTags));
                     }
 
                     @Override public View getInfoContents(
                             @NonNull com.amazon.geo.mapsv2.model.Marker marker
                     ) {
-                        return adapter.getInfoContents(AmazonMarker.wrap(marker));
+                        return adapter.getInfoContents(AmazonMarker.wrap(marker, mMarkerTags));
                     }
                 }
         );

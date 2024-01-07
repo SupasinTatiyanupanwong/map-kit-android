@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -33,14 +35,18 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.PatternItem;
 public class AmazonCircle implements Circle {
 
     private final @NonNull com.amazon.geo.mapsv2.model.Circle mDelegate;
+    private final @NonNull AmazonMapClient$TagManager mTagManager;
 
-    private @Nullable Object mTag; // Providing tag support for Amazon's Circle
-
-    private AmazonCircle(@NonNull com.amazon.geo.mapsv2.model.Circle delegate) {
+    private AmazonCircle(
+            @NonNull com.amazon.geo.mapsv2.model.Circle delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
         mDelegate = delegate;
+        mTagManager = tagManager;
     }
 
     @Override public void remove() {
+        mTagManager.remove(getId());
         mDelegate.remove();
     }
 
@@ -121,11 +127,11 @@ public class AmazonCircle implements Circle {
     }
 
     @Override public void setTag(@Nullable Object tag) {
-        mTag = tag;
+        mTagManager.setTag(getId(), tag);
     }
 
     @Override public @Nullable Object getTag() {
-        return mTag;
+        return mTagManager.getTag(getId());
     }
 
     @Override public boolean equals(@Nullable Object obj) {
@@ -138,7 +144,8 @@ public class AmazonCircle implements Circle {
 
         AmazonCircle that = (AmazonCircle) obj;
 
-        return mDelegate.equals(that.mDelegate) && Objects.equals(mTag, that.mTag);
+        return mDelegate.equals(that.mDelegate) &&
+                Objects.equals(mTagManager.getTag(getId()), mTagManager.getTag(that.getId()));
     }
 
     @Override public int hashCode() {
@@ -150,8 +157,12 @@ public class AmazonCircle implements Circle {
     }
 
 
-    static @Nullable Circle wrap(@Nullable com.amazon.geo.mapsv2.model.Circle delegate) {
-        return delegate == null ? null : new AmazonCircle(delegate);
+    @Contract("null, _ -> null; !null, _ -> !null")
+    static @Nullable Circle wrap(
+            @Nullable com.amazon.geo.mapsv2.model.Circle delegate,
+            @NonNull AmazonMapClient$TagManager tagManager
+    ) {
+        return delegate == null ? null : new AmazonCircle(delegate, tagManager);
     }
 
 
