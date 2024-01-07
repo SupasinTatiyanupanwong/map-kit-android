@@ -21,21 +21,16 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 
 @RestrictTo(LIBRARY)
-public class NilMapClient {
+public class NilMapStyle implements MapStyle {
 
-    private NilMapClient() {}
+    private NilMapStyle() {}
 
-    public static class Style implements MapClient.Style {
-        private Style() {}
+    public static class Options implements MapStyle.Options {
+        public static final @NonNull Options INSTANCE = new Options();
 
-        public static class Options implements MapClient.Style.Options {
-            public static final @NonNull Options INSTANCE = new Options();
-
-            private Options() {}
-        }
+        private Options() {}
     }
-
 }

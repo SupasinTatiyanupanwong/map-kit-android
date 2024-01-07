@@ -47,6 +47,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiMapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiMarker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiPolygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.huawei.model.HuaweiPolyline;
@@ -68,7 +69,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -172,14 +173,15 @@ public class HuaweiMapsBackend extends NilMapsBackend {
         return new HuaweiLatLngBounds.Builder();
     }
 
-    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
-        return new HuaweiMapClient.Style.Options(json);
+    @Override public @NonNull MapStyle.Options newMapStyleOptions(String json) {
+        return new HuaweiMapStyle.Options(json);
     }
 
-    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
+    @Override public @NonNull MapStyle.Options newMapStyleOptions(
             @NonNull Context context,
-            @RawRes int resourceId) {
-        return new HuaweiMapClient.Style.Options(context, resourceId);
+            @RawRes int resourceId
+    ) {
+        return new HuaweiMapStyle.Options(context, resourceId);
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {

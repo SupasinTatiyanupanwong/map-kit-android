@@ -47,6 +47,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.mo
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleLatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleMapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GoogleMarker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GooglePolygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.google.model.GooglePolyline;
@@ -68,7 +69,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -177,15 +178,15 @@ class GoogleMapsBackend extends NilMapsBackend {
         return new GoogleLatLngBounds.Builder();
     }
 
-    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
-        return new GoogleMapClient.Style.Options(json);
+    @Override public @NonNull MapStyle.Options newMapStyleOptions(String json) {
+        return new GoogleMapStyle.Options(json);
     }
 
-    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
+    @Override public @NonNull MapStyle.Options newMapStyleOptions(
             @NonNull Context context,
             @RawRes int resourceId
     ) {
-        return new GoogleMapClient.Style.Options(context, resourceId);
+        return new GoogleMapStyle.Options(context, resourceId);
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {

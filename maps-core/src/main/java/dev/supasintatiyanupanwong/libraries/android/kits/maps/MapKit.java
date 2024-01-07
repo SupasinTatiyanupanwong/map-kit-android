@@ -39,6 +39,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverla
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -195,14 +196,14 @@ public final class MapKit {
     /**
      * @since 1.2.0
      */
-    public static @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
+    public static @NonNull MapStyle.Options newMapStyleOptions(String json) {
         return getBackend().newMapStyleOptions(json);
     }
 
     /**
      * @since 1.2.0
      */
-    public static @NonNull MapClient.Style.Options newMapStyleOptions(
+    public static @NonNull MapStyle.Options newMapStyleOptions(
             @NonNull Context context,
             @RawRes int resourceId
     ) {
@@ -363,5 +364,4 @@ public final class MapKit {
         @UiThread
         void onMapAndViewReady(@NonNull MapClient map);
     }
-
 }

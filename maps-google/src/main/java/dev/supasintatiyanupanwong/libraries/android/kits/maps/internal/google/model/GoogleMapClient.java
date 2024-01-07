@@ -20,18 +20,14 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RawRes;
 import androidx.annotation.RequiresPermission;
 import androidx.annotation.RestrictTo;
-
-import org.jetbrains.annotations.Contract;
 
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraPosition;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.CameraUpdate;
@@ -41,6 +37,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorBuildi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LocationSource;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -475,7 +472,11 @@ public class GoogleMapClient implements MapClient {
     }
 
     @Override public boolean setMapStyle(@Nullable MapClient.Style.Options style) {
-        return mDelegate.setMapStyle(Style.Options.unwrap(style));
+        return mDelegate.setMapStyle(GoogleMapStyle.Options.unwrap(style));
+    }
+
+    @Override public boolean setMapStyle(@Nullable MapStyle.Options style) {
+        return mDelegate.setMapStyle(GoogleMapStyle.Options.unwrap(style));
     }
 
     @Override public void setMinZoomPreference(float minZoomPreference) {
@@ -492,53 +493,6 @@ public class GoogleMapClient implements MapClient {
 
     @Override public void setLatLngBoundsForCameraTarget(@Nullable LatLngBounds bounds) {
         mDelegate.setLatLngBoundsForCameraTarget(GoogleLatLngBounds.unwrap(bounds));
-    }
-
-
-    public static class Style implements MapClient.Style {
-        private Style() {}
-
-        public static class Options implements MapClient.Style.Options {
-            private final com.google.android.gms.maps.model.MapStyleOptions mDelegate;
-
-            public Options(String json) {
-                mDelegate = new com.google.android.gms.maps.model.MapStyleOptions(json);
-            }
-
-            public Options(@NonNull Context context, @RawRes int resourceId) {
-                mDelegate = com.google.android.gms.maps.model.MapStyleOptions
-                        .loadRawResourceStyle(context, resourceId);
-            }
-
-            @Override public boolean equals(@Nullable Object obj) {
-                if (this == obj) {
-                    return true;
-                }
-                if (obj == null || getClass() != obj.getClass()) {
-                    return false;
-                }
-
-                Options that = (Options) obj;
-
-                return mDelegate.equals(that.mDelegate);
-            }
-
-            @Override public int hashCode() {
-                return mDelegate.hashCode();
-            }
-
-            @Override public @NonNull String toString() {
-                return mDelegate.toString();
-            }
-
-
-            @Contract("null -> null; !null -> !null")
-            static @Nullable com.google.android.gms.maps.model.MapStyleOptions unwrap(
-                    @Nullable MapClient.Style.Options wrapped
-            ) {
-                return wrapped == null ? null : ((Style.Options) wrapped).mDelegate;
-            }
-        }
     }
 
 
@@ -633,5 +587,4 @@ public class GoogleMapClient implements MapClient {
             return mDelegate.isMapToolbarEnabled();
         }
     }
-
 }

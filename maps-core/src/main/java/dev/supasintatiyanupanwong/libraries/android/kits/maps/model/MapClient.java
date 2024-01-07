@@ -612,8 +612,27 @@ public interface MapClient {
      * detected with the {@link MapClient.Style.Options}, including, e.g. unparsable styling JSON,
      * unrecognized feature type, unrecognized element type, or invalid styler keys. If the return
      * value is {@code false}, the current style is left unchanged.
+     * @see #setMapStyle(MapStyle.Options)
+     * @deprecated Use {@link #setMapStyle(MapStyle.Options)} instead.
      */
+    @Deprecated
     boolean setMapStyle(@Nullable Style.Options style);
+
+    /**
+     * Sets the styling of the base map.
+     * <p>
+     * Using the style options, you can apply custom styles to features and elements on the map.
+     * See {@link MapStyle.Options} for style definition details.
+     * <p>
+     * Set to {@code null} to clear any previous custom styling.
+     *
+     * @param style The style of map to display.
+     * @return {@code true} if the style was successfully parsed; {@code false} if problems were
+     * detected with the {@link MapStyle.Options}, including, e.g. unparsable styling JSON,
+     * unrecognized feature type, unrecognized element type, or invalid styler keys. If the return
+     * value is {@code false}, the current style is left unchanged.
+     */
+    boolean setMapStyle(@Nullable MapStyle.Options style);
 
     /**
      * Sets a preferred lower bound for the camera zoom.
@@ -1137,6 +1156,11 @@ public interface MapClient {
     }
 
 
+    /**
+     * @see MapStyle
+     * @deprecated Use {@link MapStyle} instead.
+     */
+    @Deprecated
     interface Style {
         /**
          * Defines styling options for a {@link MapClient}.
@@ -1146,7 +1170,11 @@ public interface MapClient {
          * As well as changing the style of these features, you can also hide features entirely.
          * This means that you can emphasize particular components of the map or make the map
          * complement the content of your app.
+         *
+         * @see MapStyle.Options
+         * @deprecated Use {@link MapStyle.Options} instead.
          */
+        @Deprecated
         interface Options {}
     }
 
@@ -1378,5 +1406,4 @@ public interface MapClient {
          */
         boolean isMapToolbarEnabled();
     }
-
 }

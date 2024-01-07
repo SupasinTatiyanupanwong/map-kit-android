@@ -20,7 +20,6 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.location.Location;
@@ -29,7 +28,6 @@ import android.view.View;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RawRes;
 import androidx.annotation.RequiresPermission;
 import androidx.annotation.RestrictTo;
 
@@ -41,6 +39,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorBuildi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LocationSource;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -523,7 +522,11 @@ public class HuaweiMapClient implements MapClient {
     }
 
     @Override public boolean setMapStyle(@Nullable MapClient.Style.Options style) {
-        return mDelegate.setMapStyle(Style.Options.unwrap(style));
+        return mDelegate.setMapStyle(HuaweiMapStyle.Options.unwrap(style));
+    }
+
+    @Override public boolean setMapStyle(@Nullable MapStyle.Options style) {
+        return mDelegate.setMapStyle(HuaweiMapStyle.Options.unwrap(style));
     }
 
     @Override public void setMinZoomPreference(float minZoomPreference) {
@@ -540,51 +543,6 @@ public class HuaweiMapClient implements MapClient {
 
     @Override public void setLatLngBoundsForCameraTarget(@Nullable LatLngBounds bounds) {
         mDelegate.setLatLngBoundsForCameraTarget(HuaweiLatLngBounds.unwrap(bounds));
-    }
-
-
-    public static class Style implements MapClient.Style {
-        private Style() {}
-
-        public static class Options implements MapClient.Style.Options {
-            private final com.huawei.hms.maps.model.MapStyleOptions mDelegate;
-
-            public Options(String json) {
-                mDelegate = new com.huawei.hms.maps.model.MapStyleOptions(json);
-            }
-
-            public Options(@NonNull Context context, @RawRes int resourceId) {
-                mDelegate = com.huawei.hms.maps.model.MapStyleOptions
-                        .loadRawResourceStyle(context, resourceId);
-            }
-
-            @Override public boolean equals(@Nullable Object obj) {
-                if (this == obj) {
-                    return true;
-                }
-                if (obj == null || getClass() != obj.getClass()) {
-                    return false;
-                }
-
-                Options that = (Options) obj;
-
-                return mDelegate.equals(that.mDelegate);
-            }
-
-            @Override public int hashCode() {
-                return mDelegate.hashCode();
-            }
-
-            @Override public @NonNull String toString() {
-                return mDelegate.toString();
-            }
-
-
-            static @Nullable com.huawei.hms.maps.model.MapStyleOptions unwrap(
-                    @Nullable MapClient.Style.Options wrapped) {
-                return wrapped == null ? null : ((Style.Options) wrapped).mDelegate;
-            }
-        }
     }
 
 

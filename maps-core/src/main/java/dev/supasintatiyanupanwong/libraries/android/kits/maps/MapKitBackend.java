@@ -40,7 +40,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -95,9 +95,9 @@ public interface MapKitBackend {
 
     @NonNull LatLngBounds.Builder newLatLngBoundsBuilder();
 
-    @NonNull MapClient.Style.Options newMapStyleOptions(String json);
+    @NonNull MapStyle.Options newMapStyleOptions(String json);
 
-    @NonNull MapClient.Style.Options newMapStyleOptions(
+    @NonNull MapStyle.Options newMapStyleOptions(
             @NonNull Context context,
             @RawRes int resourceId
     );
@@ -138,5 +138,4 @@ public interface MapKitBackend {
 
     @UiThread
     void getMapAsync(@NonNull Fragment fragment, @NonNull MapKit.OnMapReadyCallback callback);
-
 }

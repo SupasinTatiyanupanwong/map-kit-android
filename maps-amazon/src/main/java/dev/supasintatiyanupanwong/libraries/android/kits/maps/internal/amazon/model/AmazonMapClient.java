@@ -42,6 +42,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.IndoorBuildi
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LocationSource;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -473,6 +474,10 @@ public class AmazonMapClient implements MapClient {
     }
 
     @Override public boolean setMapStyle(@Nullable MapClient.Style.Options style) {
+        return false; // Not supported, the style is left unchanged.
+    }
+
+    @Override public boolean setMapStyle(@Nullable MapStyle.Options style) {
         return false; // Not supported, the style is left unchanged.
     }
 

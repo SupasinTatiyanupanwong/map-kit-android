@@ -38,7 +38,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilGroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilLatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilLatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilMarker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPatternItem;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.internal.nil.model.NilPolygon;
@@ -59,7 +59,7 @@ import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Gap;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.GroundOverlay;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLng;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.LatLngBounds;
-import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapClient;
+import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.MapStyle;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Marker;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polygon;
 import dev.supasintatiyanupanwong.libraries.android.kits.maps.model.Polyline;
@@ -164,15 +164,15 @@ public class NilMapsBackend implements MapKitBackend {
         return NilLatLngBounds.Builder.INSTANCE; // Not supported, null object for API safe.
     }
 
-    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(String json) {
-        return NilMapClient.Style.Options.INSTANCE; // Not supported, null object for API safe.
+    @Override public @NonNull MapStyle.Options newMapStyleOptions(String json) {
+        return NilMapStyle.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
-    @Override public @NonNull MapClient.Style.Options newMapStyleOptions(
+    @Override public @NonNull MapStyle.Options newMapStyleOptions(
             @NonNull Context context,
             int resourceId
     ) {
-        return NilMapClient.Style.Options.INSTANCE; // Not supported, null object for API safe.
+        return NilMapStyle.Options.INSTANCE; // Not supported, null object for API safe.
     }
 
     @Override public @NonNull Marker.Options newMarkerOptions() {
@@ -235,5 +235,4 @@ public class NilMapsBackend implements MapKitBackend {
     public static @Nullable MapKitBackend buildIfSupported(@NonNull Context context) {
         return new NilMapsBackend();
     }
-
 }
