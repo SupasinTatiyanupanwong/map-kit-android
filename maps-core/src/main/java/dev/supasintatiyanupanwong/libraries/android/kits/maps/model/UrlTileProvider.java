@@ -41,6 +41,12 @@ public abstract class UrlTileProvider implements TileProvider {
     private final int mWidth;
     private final int mHeight;
 
+    /**
+     * Constructs a UrlTileProvider.
+     *
+     * @param width  The width of the images used for tiles.
+     * @param height The height of the images used for tiles
+     */
     protected UrlTileProvider(int width, int height) {
         mWidth = width;
         mHeight = height;

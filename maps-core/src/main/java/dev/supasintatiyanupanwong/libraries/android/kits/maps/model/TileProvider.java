@@ -47,14 +47,16 @@ public interface TileProvider {
     /**
      * Returns the tile to be used for this tile coordinate.
      *
-     * @param x The x coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
-     * inclusive.
-     * @param y The y coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
-     * inclusive.
+     * @param x    The x coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
+     *             inclusive.
+     * @param y    The y coordinate of the tile. This will be in the range [0, 2<sup>zoom</sup> - 1]
+     *             inclusive.
      * @param zoom The zoom level of the tile. This will be in the range [{@link
-     * MapClient#getMinZoomLevel}, {@link MapClient#getMaxZoomLevel}] inclusive.
-     * @return the {@link Tile} to be used for this tile coordinate.
+     *             MapClient#getMinZoomLevel}, {@link MapClient#getMaxZoomLevel}] inclusive.
+     * @return the {@link Tile} to be used for this tile coordinate. If you do not wish to provide
+     * a tile for this tile coordinate, return {@code NO_TILE}. If the tile could not be found at
+     * this point in time, return {@code null} and further requests might be made with an
+     * exponential backoff.
      */
-    Tile getTile(int x, int y, int zoom);
-
+    @Nullable Tile getTile(int x, int y, int zoom);
 }

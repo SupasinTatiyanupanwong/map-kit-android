@@ -425,7 +425,7 @@ public class MarkerDemoActivity extends AppCompatActivity implements
     // Marker related listeners.
     //
 
-    @Override public boolean onMarkerClick(@NonNull final Marker marker) {
+    @Override public boolean onMarkerClick(final @NonNull Marker marker) {
         if (marker.equals(mPerth)) {
             // This causes the marker at Perth to bounce into position when it is clicked.
             final Handler handler = new Handler();

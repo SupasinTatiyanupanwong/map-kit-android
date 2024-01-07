@@ -113,7 +113,8 @@ public class HuaweiMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull CameraPosition newCameraPositionFromLatLngZoom(
             @NonNull LatLng target,
-            float zoom) {
+            float zoom
+    ) {
         return newCameraPositionBuilder()
                 .target(target)
                 .zoom(zoom)
@@ -135,7 +136,8 @@ public class HuaweiMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull CustomCap newCustomCap(
             @NonNull BitmapDescriptor bitmapDescriptor,
-            float refWidth) {
+            float refWidth
+    ) {
         return new HuaweiCustomCap(bitmapDescriptor, refWidth);
     }
 
@@ -165,7 +167,8 @@ public class HuaweiMapsBackend extends NilMapsBackend {
 
     @Override public @NonNull LatLngBounds newLatLngBounds(
             @NonNull LatLng southwest,
-            @NonNull LatLng northeast) {
+            @NonNull LatLng northeast
+    ) {
         return new HuaweiLatLngBounds(southwest, northeast);
     }
 
@@ -217,19 +220,17 @@ public class HuaweiMapsBackend extends NilMapsBackend {
             @NonNull LatLng nearRight,
             @NonNull LatLng farLeft,
             @NonNull LatLng farRight,
-            @NonNull LatLngBounds bounds) {
+            @NonNull LatLngBounds bounds
+    ) {
         return new HuaweiVisibleRegion(nearLeft, nearRight, farLeft, farRight, bounds);
     }
 
     @Override public void getMapAsync(
             @NonNull Fragment fragment,
-            @NonNull final MapKit.OnMapReadyCallback callback) {
+            final @NonNull MapKit.OnMapReadyCallback callback
+    ) {
         ((com.huawei.hms.maps.SupportMapFragment) fragment)
-                .getMapAsync(new com.huawei.hms.maps.OnMapReadyCallback() {
-                    @Override public void onMapReady(com.huawei.hms.maps.HuaweiMap huaweiMap) {
-                        callback.onMapReady(new HuaweiMapClient(huaweiMap));
-                    }
-                });
+                .getMapAsync(map -> callback.onMapReady(new HuaweiMapClient(map)));
     }
 
 

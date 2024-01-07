@@ -21,7 +21,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import android.graphics.Bitmap;
-import android.location.Location;
 import android.view.View;
 
 import androidx.annotation.IntRange;
@@ -29,8 +28,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.annotation.RestrictTo;
-
-import com.amazon.geo.mapsv2.AmazonMap;
 
 import java.util.Objects;
 
@@ -88,13 +85,11 @@ public class AmazonMapClient implements MapClient {
     }
 
     @Override public void moveCamera(@NonNull CameraUpdate update) {
-        mDelegate.moveCamera(
-                Objects.requireNonNull(AmazonCameraUpdate.unwrap(update), "update == null"));
+        mDelegate.moveCamera(Objects.requireNonNull(AmazonCameraUpdate.unwrap(update)));
     }
 
     @Override public void animateCamera(@NonNull CameraUpdate update) {
-        mDelegate.animateCamera(
-                Objects.requireNonNull(AmazonCameraUpdate.unwrap(update), "update == null"));
+        mDelegate.animateCamera(Objects.requireNonNull(AmazonCameraUpdate.unwrap(update)));
     }
 
     @Override public void animateCamera(
@@ -102,7 +97,7 @@ public class AmazonMapClient implements MapClient {
             final @Nullable CancelableCallback callback
     ) {
         mDelegate.animateCamera(
-                Objects.requireNonNull(AmazonCameraUpdate.unwrap(update), "update == null"),
+                Objects.requireNonNull(AmazonCameraUpdate.unwrap(update)),
                 callback == null
                         ? null
                         : new com.amazon.geo.mapsv2.AmazonMap.CancelableCallback() {
@@ -123,7 +118,7 @@ public class AmazonMapClient implements MapClient {
             final @Nullable CancelableCallback callback
     ) {
         mDelegate.animateCamera(
-                Objects.requireNonNull(AmazonCameraUpdate.unwrap(update), "update == null"),
+                Objects.requireNonNull(AmazonCameraUpdate.unwrap(update)),
                 durationMs,
                 callback == null
                         ? null
@@ -468,12 +463,12 @@ public class AmazonMapClient implements MapClient {
         // Not supported, no-op.
     }
 
-    @Override public void snapshot(@NonNull final SnapshotReadyCallback callback) {
+    @Override public void snapshot(final @NonNull SnapshotReadyCallback callback) {
         mDelegate.snapshot(callback::onSnapshotReady);
     }
 
     @Override public void snapshot(
-            @NonNull final SnapshotReadyCallback callback,
+            final @NonNull SnapshotReadyCallback callback,
             @Nullable Bitmap bitmap
     ) {
         mDelegate.snapshot(callback::onSnapshotReady, bitmap);
@@ -517,7 +512,7 @@ public class AmazonMapClient implements MapClient {
 
 
     static class UiSettings implements MapClient.UiSettings {
-        private final com.amazon.geo.mapsv2.UiSettings mDelegate;
+        private final @NonNull com.amazon.geo.mapsv2.UiSettings mDelegate;
 
         UiSettings(@NonNull com.amazon.geo.mapsv2.UiSettings delegate) {
             mDelegate = delegate;

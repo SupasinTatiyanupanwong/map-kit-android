@@ -124,7 +124,7 @@ public class HuaweiGroundOverlay implements GroundOverlay {
         mDelegate.setTag(tag);
     }
 
-    @Override public Object getTag() {
+    @Override public @Nullable Object getTag() {
         return mDelegate.getTag();
     }
 

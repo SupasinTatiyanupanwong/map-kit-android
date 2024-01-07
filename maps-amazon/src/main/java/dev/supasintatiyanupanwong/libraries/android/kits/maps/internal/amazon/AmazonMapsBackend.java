@@ -157,7 +157,7 @@ class AmazonMapsBackend extends NilMapsBackend {
 
     @Override public void getMapAsync(
             @NonNull Fragment fragment,
-            @NonNull final MapKit.OnMapReadyCallback callback
+            final @NonNull MapKit.OnMapReadyCallback callback
     ) {
         ((com.amazon.geo.mapsv2.SupportMapFragment) fragment)
                 .getMapAsync(map -> callback.onMapReady(new AmazonMapClient(map)));

@@ -67,5 +67,4 @@ public interface VisibleRegion {
      * @return The smallest bounding box that includes the visible region defined in this class.
      */
     @NonNull LatLngBounds getLatLngBounds();
-
 }

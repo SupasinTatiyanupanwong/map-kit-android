@@ -219,8 +219,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
                         .tilt(newTilt)
                         .build();
 
-        changeCamera(
-                MapKit.getCameraUpdateFactory().newCameraPosition(cameraPosition));
+        changeCamera(MapKit.getCameraUpdateFactory().newCameraPosition(cameraPosition));
     }
 
     /**
@@ -243,8 +242,7 @@ public class CameraDemoActivity extends AppCompatActivity implements
                         .tilt(newTilt)
                         .build();
 
-        changeCamera(
-                MapKit.getCameraUpdateFactory().newCameraPosition(cameraPosition));
+        changeCamera(MapKit.getCameraUpdateFactory().newCameraPosition(cameraPosition));
     }
 
     /**

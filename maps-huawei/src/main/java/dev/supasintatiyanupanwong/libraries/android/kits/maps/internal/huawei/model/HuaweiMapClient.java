@@ -22,7 +22,6 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.location.Location;
 import android.view.View;
 
 import androidx.annotation.IntRange;
@@ -81,7 +80,9 @@ public class HuaweiMapClient implements MapClient {
     }
 
     @Override public void animateCamera(
-            @NonNull CameraUpdate update, final @Nullable CancelableCallback callback) {
+            @NonNull CameraUpdate update,
+            final @Nullable CancelableCallback callback
+    ) {
         mDelegate.animateCamera(
                 HuaweiCameraUpdate.unwrap(update),
                 callback == null
@@ -101,7 +102,8 @@ public class HuaweiMapClient implements MapClient {
     @Override public void animateCamera(
             @NonNull CameraUpdate update,
             @IntRange(from = 0) int durationMs,
-            final @Nullable CancelableCallback callback) {
+            final @Nullable CancelableCallback callback
+    ) {
         mDelegate.animateCamera(
                 HuaweiCameraUpdate.unwrap(update),
                 durationMs,
@@ -139,14 +141,18 @@ public class HuaweiMapClient implements MapClient {
         return HuaweiMarker.wrap(mDelegate.addMarker(HuaweiMarker.Options.unwrap(options)));
     }
 
-    @Override public @NonNull GroundOverlay addGroundOverlay(@NonNull GroundOverlay.Options options) {
+    @Override public @NonNull GroundOverlay addGroundOverlay(
+            @NonNull GroundOverlay.Options options
+    ) {
         return HuaweiGroundOverlay.wrap(
-                mDelegate.addGroundOverlay(HuaweiGroundOverlay.Options.unwrap(options)));
+                mDelegate.addGroundOverlay(HuaweiGroundOverlay.Options.unwrap(options))
+        );
     }
 
     @Override public @NonNull TileOverlay addTileOverlay(@NonNull TileOverlay.Options options) {
         return HuaweiTileOverlay.wrap(
-                mDelegate.addTileOverlay(HuaweiTileOverlay.Options.unwrap(options)));
+                mDelegate.addTileOverlay(HuaweiTileOverlay.Options.unwrap(options))
+        );
     }
 
     @Override public void clear() {
@@ -224,11 +230,7 @@ public class HuaweiMapClient implements MapClient {
                 ? null
                 : new com.huawei.hms.maps.LocationSource() {
                     @Override public void activate(final OnLocationChangedListener listener) {
-                        source.activate(new LocationSource.OnLocationChangedListener() {
-                            @Override public void onLocationChanged(@NonNull Location location) {
-                                listener.onLocationChanged(location);
-                            }
-                        });
+                        source.activate(listener::onLocationChanged);
                     }
 
                     @Override public void deactivate() {
@@ -246,131 +248,119 @@ public class HuaweiMapClient implements MapClient {
     }
 
     @Override public void setOnCameraMoveStartedListener(
-            final @Nullable OnCameraMoveStartedListener listener) {
+            final @Nullable OnCameraMoveStartedListener listener
+    ) {
         mDelegate.setOnCameraMoveStartedListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnCameraMoveStartedListener() {
-                    @Override public void onCameraMoveStarted(int reason) {
-                        listener.onCameraMoveStarted(reason);
-                    }
-                }
+                : listener::onCameraMoveStarted
         );
     }
 
-    @Override public void setOnCameraMoveListener(final @Nullable OnCameraMoveListener listener) {
+    @Override public void setOnCameraMoveListener(
+            final @Nullable OnCameraMoveListener listener
+    ) {
         mDelegate.setOnCameraMoveListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnCameraMoveListener() {
-                    @Override public void onCameraMove() {
-                        listener.onCameraMove();
-                    }
-                }
+                : listener::onCameraMove
         );
     }
 
     @Override public void setOnCameraMoveCanceledListener(
-            final @Nullable OnCameraMoveCanceledListener listener) {
+            final @Nullable OnCameraMoveCanceledListener listener
+    ) {
         mDelegate.setOnCameraMoveCanceledListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnCameraMoveCanceledListener() {
-                    @Override public void onCameraMoveCanceled() {
-                        listener.onCameraMoveCanceled();
-                    }
-                }
+                : listener::onCameraMoveCanceled
         );
     }
 
-    @Override public void setOnCameraIdleListener(final @Nullable OnCameraIdleListener listener) {
+    @Override public void setOnCameraIdleListener(
+            final @Nullable OnCameraIdleListener listener
+    ) {
         mDelegate.setOnCameraIdleListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnCameraIdleListener() {
-                    @Override public void onCameraIdle() {
-                        listener.onCameraIdle();
-                    }
-                }
+                : listener::onCameraIdle
         );
     }
 
-    @Override public void setOnMapClickListener(final @Nullable OnMapClickListener listener) {
+    @Override public void setOnMapClickListener(
+            final @Nullable OnMapClickListener listener
+    ) {
         mDelegate.setOnMapClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnMapClickListener() {
-                    @Override public void onMapClick(com.huawei.hms.maps.model.LatLng point) {
-                        listener.onMapClick(HuaweiLatLng.wrap(point));
-                    }
-                }
+                : point -> listener.onMapClick(HuaweiLatLng.wrap(point))
         );
     }
 
-    @Override public void setOnMapLongClickListener(final @Nullable OnMapLongClickListener listener) {
+    @Override public void setOnMapLongClickListener(
+            final @Nullable OnMapLongClickListener listener
+    ) {
         mDelegate.setOnMapLongClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnMapLongClickListener() {
-                    @Override public void onMapLongClick(com.huawei.hms.maps.model.LatLng point) {
-                        listener.onMapLongClick(HuaweiLatLng.wrap(point));
-                    }
-                }
+                : point -> listener.onMapLongClick(HuaweiLatLng.wrap(point))
         );
     }
 
-    @Override public void setOnMarkerClickListener(final @Nullable OnMarkerClickListener listener) {
+    @Override public void setOnMarkerClickListener(
+            final @Nullable OnMarkerClickListener listener
+    ) {
         mDelegate.setOnMarkerClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnMarkerClickListener() {
-                    @Override public boolean onMarkerClick(com.huawei.hms.maps.model.Marker marker) {
-                        return listener.onMarkerClick(HuaweiMarker.wrap(marker));
-                    }
-                }
+                : marker -> listener.onMarkerClick(HuaweiMarker.wrap(marker))
         );
     }
 
-    @Override public void setOnMarkerDragListener(final @Nullable OnMarkerDragListener listener) {
+    @Override public void setOnMarkerDragListener(
+            final @Nullable OnMarkerDragListener listener
+    ) {
         mDelegate.setOnMarkerDragListener(listener == null
                 ? null
                 : new com.huawei.hms.maps.HuaweiMap.OnMarkerDragListener() {
-                    @Override public void onMarkerDragStart(com.huawei.hms.maps.model.Marker marker) {
+                    @Override public void onMarkerDragStart(
+                            com.huawei.hms.maps.model.Marker marker
+                    ) {
                         listener.onMarkerDragStart(HuaweiMarker.wrap(marker));
                     }
 
-                    @Override public void onMarkerDrag(com.huawei.hms.maps.model.Marker marker) {}
+                    @Override public void onMarkerDrag(
+                            com.huawei.hms.maps.model.Marker marker
+                    ) {
+                        listener.onMarkerDrag(HuaweiMarker.wrap(marker));
+                    }
 
-                    @Override public void onMarkerDragEnd(com.huawei.hms.maps.model.Marker marker) {}
+                    @Override public void onMarkerDragEnd(
+                            com.huawei.hms.maps.model.Marker marker
+                    ) {
+                        listener.onMarkerDragEnd(HuaweiMarker.wrap(marker));
+                    }
                 }
         );
     }
 
-    @Override public void setOnInfoWindowClickListener(final @Nullable OnInfoWindowClickListener listener) {
+    @Override public void setOnInfoWindowClickListener(
+            final @Nullable OnInfoWindowClickListener listener
+    ) {
         mDelegate.setOnInfoWindowClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnInfoWindowClickListener() {
-                    @Override public void onInfoWindowClick(com.huawei.hms.maps.model.Marker marker) {
-                        listener.onInfoWindowClick(HuaweiMarker.wrap(marker));
-                    }
-                }
+                : marker -> listener.onInfoWindowClick(HuaweiMarker.wrap(marker))
         );
     }
 
     @Override public void setOnInfoWindowLongClickListener(
-            final @Nullable OnInfoWindowLongClickListener listener) {
+            final @Nullable OnInfoWindowLongClickListener listener
+    ) {
         mDelegate.setOnInfoWindowLongClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnInfoWindowLongClickListener() {
-                    @Override public void onInfoWindowLongClick(
-                            com.huawei.hms.maps.model.Marker marker) {
-                        listener.onInfoWindowLongClick(HuaweiMarker.wrap(marker));
-                    }
-                }
+                : marker -> listener.onInfoWindowLongClick(HuaweiMarker.wrap(marker))
         );
     }
 
-    @Override public void setOnInfoWindowCloseListener(final @Nullable OnInfoWindowCloseListener listener) {
+    @Override public void setOnInfoWindowCloseListener(
+            final @Nullable OnInfoWindowCloseListener listener
+    ) {
         mDelegate.setOnInfoWindowCloseListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnInfoWindowCloseListener() {
-                    @Override public void onInfoWindowClose(com.huawei.hms.maps.model.Marker marker) {
-                        listener.onInfoWindowClose(HuaweiMarker.wrap(marker));
-                    }
-                }
+                : marker -> listener.onInfoWindowClose(HuaweiMarker.wrap(marker))
         );
     }
 
@@ -378,11 +368,15 @@ public class HuaweiMapClient implements MapClient {
         mDelegate.setInfoWindowAdapter(adapter == null
                 ? null
                 : new com.huawei.hms.maps.HuaweiMap.InfoWindowAdapter() {
-                    @Override public View getInfoWindow(com.huawei.hms.maps.model.Marker marker) {
+                    @Override public View getInfoWindow(
+                            com.huawei.hms.maps.model.Marker marker
+                    ) {
                         return adapter.getInfoWindow(HuaweiMarker.wrap(marker));
                     }
 
-                    @Override public View getInfoContents(com.huawei.hms.maps.model.Marker marker) {
+                    @Override public View getInfoContents(
+                            com.huawei.hms.maps.model.Marker marker
+                    ) {
                         return adapter.getInfoContents(HuaweiMarker.wrap(marker));
                     }
                 }
@@ -390,100 +384,77 @@ public class HuaweiMapClient implements MapClient {
     }
 
     @Override public void setOnMyLocationButtonClickListener(
-            final @Nullable OnMyLocationButtonClickListener listener) {
+            final @Nullable OnMyLocationButtonClickListener listener
+    ) {
         mDelegate.setOnMyLocationButtonClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnMyLocationButtonClickListener() {
-                    @Override public boolean onMyLocationButtonClick() {
-                        return listener.onMyLocationButtonClick();
-                    }
-                }
+                : listener::onMyLocationButtonClick
         );
     }
 
-    @Override public void setOnMyLocationClickListener(final @Nullable OnMyLocationClickListener listener) {
+    @Override public void setOnMyLocationClickListener(
+            final @Nullable OnMyLocationClickListener listener
+    ) {
         mDelegate.setOnMyLocationClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnMyLocationClickListener() {
-                    @Override public void onMyLocationClick(@NonNull Location location) {
-                        listener.onMyLocationClick(location);
-                    }
-                }
+                : listener::onMyLocationClick
         );
     }
 
-    @Override public void setOnMapLoadedCallback(final @Nullable OnMapLoadedCallback callback) {
+    @Override public void setOnMapLoadedCallback(
+            final @Nullable OnMapLoadedCallback callback
+    ) {
         mDelegate.setOnMapLoadedCallback(callback == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnMapLoadedCallback() {
-                    @Override public void onMapLoaded() {
-                        callback.onMapLoaded();
-                    }
-                }
+                : callback::onMapLoaded
         );
     }
 
     @Override public void setOnGroundOverlayClickListener(
-            final @Nullable OnGroundOverlayClickListener listener) {
+            final @Nullable OnGroundOverlayClickListener listener
+    ) {
         mDelegate.setOnGroundOverlayClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnGroundOverlayClickListener() {
-                    @Override public void onGroundOverlayClick(
-                            com.huawei.hms.maps.model.GroundOverlay groundOverlay) {
-                        listener.onGroundOverlayClick(HuaweiGroundOverlay.wrap(groundOverlay));
-                    }
-                }
+                : overlay -> listener.onGroundOverlayClick(HuaweiGroundOverlay.wrap(overlay))
         );
     }
 
-    @Override public void setOnCircleClickListener(final @Nullable OnCircleClickListener listener) {
+    @Override public void setOnCircleClickListener(
+            final @Nullable OnCircleClickListener listener
+    ) {
         mDelegate.setOnCircleClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnCircleClickListener() {
-                    @Override public void onCircleClick(com.huawei.hms.maps.model.Circle circle) {
-                        listener.onCircleClick(HuaweiCircle.wrap(circle));
-                    }
-                }
+                : circle -> listener.onCircleClick(HuaweiCircle.wrap(circle))
         );
     }
 
-    @Override public void setOnPolygonClickListener(final @Nullable OnPolygonClickListener listener) {
+    @Override public void setOnPolygonClickListener(
+            final @Nullable OnPolygonClickListener listener
+    ) {
         mDelegate.setOnPolygonClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnPolygonClickListener() {
-                    @Override public void onPolygonClick(com.huawei.hms.maps.model.Polygon polygon) {
-                        listener.onPolygonClick(HuaweiPolygon.wrap(polygon));
-                    }
-                }
+                : polygon -> listener.onPolygonClick(HuaweiPolygon.wrap(polygon))
         );
     }
 
-    @Override public void setOnPolylineClickListener(final @Nullable OnPolylineClickListener listener) {
+    @Override public void setOnPolylineClickListener(
+            final @Nullable OnPolylineClickListener listener
+    ) {
         mDelegate.setOnPolylineClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnPolylineClickListener() {
-                    @Override public void onPolylineClick(
-                            com.huawei.hms.maps.model.Polyline polyline) {
-                        listener.onPolylineClick(HuaweiPolyline.wrap(polyline));
-                    }
-                }
+                : polyline -> listener.onPolylineClick(HuaweiPolyline.wrap(polyline))
         );
     }
 
-    @Override public void snapshot(@NonNull final SnapshotReadyCallback callback) {
-        mDelegate.snapshot(new com.huawei.hms.maps.HuaweiMap.SnapshotReadyCallback() {
-            @Override public void onSnapshotReady(Bitmap bitmap) {
-                callback.onSnapshotReady(bitmap);
-            }
-        });
+    @Override public void snapshot(final @NonNull SnapshotReadyCallback callback) {
+        mDelegate.snapshot(callback::onSnapshotReady);
     }
 
-    @Override public void snapshot(@NonNull final SnapshotReadyCallback callback, @Nullable Bitmap bitmap) {
-        mDelegate.snapshot(new com.huawei.hms.maps.HuaweiMap.SnapshotReadyCallback() {
-            @Override public void onSnapshotReady(Bitmap bitmap) {
-                callback.onSnapshotReady(bitmap);
-            }
-        }, bitmap);
+    @Override public void snapshot(
+            final @NonNull SnapshotReadyCallback callback,
+            @Nullable Bitmap bitmap
+    ) {
+        mDelegate.snapshot(callback::onSnapshotReady, bitmap);
     }
 
     @Override public void setPadding(int left, int top, int right, int bottom) {
@@ -497,7 +468,8 @@ public class HuaweiMapClient implements MapClient {
         if (mLastPadding.left == left &&
                 mLastPadding.top == top &&
                 mLastPadding.right == right &&
-                mLastPadding.bottom == bottom) {
+                mLastPadding.bottom == bottom
+        ) {
             return;
         }
 
@@ -512,12 +484,7 @@ public class HuaweiMapClient implements MapClient {
     @Override public void setOnPoiClickListener(final @Nullable OnPoiClickListener listener) {
         mDelegate.setOnPoiClickListener(listener == null
                 ? null
-                : new com.huawei.hms.maps.HuaweiMap.OnPoiClickListener() {
-                    @Override public void onPoiClick(
-                            com.huawei.hms.maps.model.PointOfInterest pointOfInterest) {
-                        listener.onPoiClick(HuaweiPointOfInterest.wrap(pointOfInterest));
-                    }
-                }
+                : poi -> listener.onPoiClick(HuaweiPointOfInterest.wrap(poi))
         );
     }
 

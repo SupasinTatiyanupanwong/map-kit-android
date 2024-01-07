@@ -132,11 +132,12 @@ public interface MapClient {
      * During the animation, a call to {@link #getCameraPosition()} returns an intermediate
      * location of the camera.
      *
-     * @param update The change that should be applied to the camera.
+     * @param update   The change that should be applied to the camera.
      * @param callback The callback to invoke from the Android UI thread when the animation stops.
-     * If the animation completes normally, {@link CancelableCallback#onFinish() onFinish()} is
-     * called; otherwise, {@link CancelableCallback#onCancel() onCancel()} is called. Do not update
-     * or animate the camera from within {@link CancelableCallback#onCancel() onCancel()}.
+     *                 If the animation completes normally, {@link CancelableCallback#onFinish()
+     *                 onFinish()} is called; otherwise, {@link CancelableCallback#onCancel()
+     *                 onCancel()} is called. Do not update or animate the camera from within
+     *                 {@link CancelableCallback#onCancel() onCancel()}.
      */
     void animateCamera(@NonNull CameraUpdate update, @Nullable CancelableCallback callback);
 
@@ -149,16 +150,17 @@ public interface MapClient {
      * If {@link #getCameraPosition()} is called during the animation, it will return the
      * current location of the camera in flight.
      *
-     * @param update The change that should be applied to the camera.
+     * @param update     The change that should be applied to the camera.
      * @param durationMs The duration of the animation in milliseconds. This must be strictly
-     * positive, otherwise an {@link IllegalArgumentException} will be thrown.
-     * @param callback An optional callback to be notified from the Android UI thread when the
-     * animation stops. If the animation stops due to its natural completion, the callback will
-     * be notified with {@link CancelableCallback#onFinish() onFinish()}. If the animation stops
-     * due to interruption by a later camera movement or a user gesture, {@link
-     * CancelableCallback#onCancel() onCancel()} will be called. The callback should not attempt
-     * to move or animate the camera in its cancellation method. If a callback isn't required,
-     * leave it as {@code null}.
+     *                   positive, otherwise an {@link IllegalArgumentException} will be thrown.
+     * @param callback   An optional callback to be notified from the Android UI thread when the
+     *                   animation stops. If the animation stops due to its natural completion,
+     *                   the callback will be notified with {@link CancelableCallback#onFinish()
+     *                   onFinish()}. If the animation stops due to interruption by a later camera
+     *                   movement or a user gesture, {@link CancelableCallback#onCancel()
+     *                   onCancel()} will be called. The callback should not attempt to move or
+     *                   animate the camera in its cancellation method. If a callback isn't
+     *                   required, leave it as {@code null}.
      */
     void animateCamera(
             @NonNull CameraUpdate update,
@@ -216,7 +218,7 @@ public interface MapClient {
      * Adds an image to this map.
      *
      * @param options A ground-overlay options object that defines how to render the overlay.
-     * Options must have an image (AnchoredBitmap) and position specified.
+     *                Options must have an image (AnchoredBitmap) and position specified.
      * @return The {@link GroundOverlay} that was added to the map. Might be {@code null} if
      * there's an error adding the overlay.
      */
@@ -229,8 +231,8 @@ public interface MapClient {
      * automatically restored and must be re-added manually.
      *
      * @param options A tile-overlay options object that defines how to render the overlay.
-     * Options must have a {@link TileProvider} specified, otherwise an {@link
-     * IllegalArgumentException} will be thrown.
+     *                Options must have a {@link TileProvider} specified, otherwise an {@link
+     *                IllegalArgumentException} will be thrown.
      * @return The {@link TileOverlay} that was added to the map. Might be {@code null} if there's
      * an error adding the overlay.
      */
@@ -298,7 +300,7 @@ public interface MapClient {
      * Sets whether the traffic data should be enabled.
      *
      * @param enabled {@code true} to try to enable traffic data; {@code false} to disable traffic
-     * data.
+     *                data.
      */
     void setTrafficEnabled(boolean enabled);
 
@@ -318,7 +320,7 @@ public interface MapClient {
      * indoor will return {@code null}, or {@code false}.
      *
      * @param enabled {@code true} to try to enable indoor maps; {@code false} to disable indoor
-     * maps.
+     *                maps.
      * @return Whether it was possible to enable indoor maps.
      */
     boolean setIndoorEnabled(boolean enabled);
@@ -334,7 +336,7 @@ public interface MapClient {
      * Sets whether 3D buildings layer is enabled.
      *
      * @param enabled {@code true} to enable the 3D buildings layer; {@code false} to disable 3D
-     * buildings.
+     *                buildings.
      */
     void setBuildingsEnabled(boolean enabled);
 
@@ -352,7 +354,7 @@ public interface MapClient {
      * Replaces the location source of the my-location layer.
      *
      * @param source A location source to use in the my-location layer. Set to {@code null} to use
-     * the default location source.
+     *               the default location source.
      */
     void setLocationSource(@Nullable LocationSource source);
 
@@ -380,8 +382,8 @@ public interface MapClient {
      * Sets a callback that's invoked when the camera starts moving or the reason for camera motion
      * has changed.
      *
-     * @param listener The callback that's invoked. To unset the callback, use {@code null}.
-     * Do not update or animate the camera from within {@code onCameraMoveStarted()}.
+     * @param listener The callback that's invoked. To unset the callback, use {@code null}. Do not
+     *                 update or animate the camera from within {@code onCameraMoveStarted()}.
      */
     void setOnCameraMoveStartedListener(@Nullable OnCameraMoveStartedListener listener);
 
@@ -397,8 +399,8 @@ public interface MapClient {
      * Sets a callback that is invoked when camera motion is stopped or interrupted by a new type
      * of animation.
      *
-     * @param listener The callback that's invoked. To unset the callback, use {@code null}.
-     * Do not update or animate the camera from within {@code onCameraMoveCanceled()}.
+     * @param listener The callback that's invoked. To unset the callback, use {@code null}. Do not
+     *                 update or animate the camera from within {@code onCameraMoveCanceled()}.
      */
     void setOnCameraMoveCanceledListener(@Nullable OnCameraMoveCanceledListener listener);
 
@@ -466,7 +468,7 @@ public interface MapClient {
      * method again in order to preserve the customization.
      *
      * @param adapter The adapter to use for info window contents, or {@code null} to use the
-     * default content rendering in info windows.
+     *                default content rendering in info windows.
      */
     void setInfoWindowAdapter(@Nullable InfoWindowAdapter adapter);
 
@@ -492,7 +494,7 @@ public interface MapClient {
     /**
      * Sets a callback that's invoked when this map has finished rendering. The callback will only
      * be invoked once.
-     *
+     * <p>
      * If this method is called when the map is fully rendered, the callback will be invoked
      * immediately. This event will not fire if the map never loads due to connectivity issues, or
      * if the map is continuously changing and never completes loading due to the user constantly
@@ -559,8 +561,8 @@ public interface MapClient {
      * Thus, you should only trust the content of the bitmap passed by the callback method.
      *
      * @param callback Callback method invoked when the snapshot is taken.
-     * @param bitmap A pre-allocated bitmap. If {@code null}, behaves like {@link
-     * #snapshot(SnapshotReadyCallback)}.
+     * @param bitmap   A pre-allocated bitmap. If {@code null}, behaves like {@link
+     *                 #snapshot(SnapshotReadyCallback)}.
      */
     void snapshot(@NonNull SnapshotReadyCallback callback, @Nullable Bitmap bitmap);
 
@@ -573,9 +575,9 @@ public interface MapClient {
      * controls, compass, copyright notices and logo will be moved to fit inside the defined region,
      * camera movements will be relative to the center of the visible region, etc.
      *
-     * @param left The number of pixels of padding to be added on the left of the map.
-     * @param top The number of pixels of padding to be added on the top of the map.
-     * @param right The number of pixels of padding to be added on the right of the map.
+     * @param left   The number of pixels of padding to be added on the left of the map.
+     * @param top    The number of pixels of padding to be added on the top of the map.
+     * @param right  The number of pixels of padding to be added on the right of the map.
      * @param bottom The number of pixels of padding to be added on the bottom of the map.
      */
     void setPadding(int left, int top, int right, int bottom);
@@ -595,7 +597,7 @@ public interface MapClient {
      * Pass {@code null} to clear the listener.
      *
      * @param listener The callback that's invoked when a POI is clicked. To unset the callback,
-     * use {@code null}.
+     *                 use {@code null}.
      */
     void setOnPoiClickListener(@Nullable OnPoiClickListener listener);
 
@@ -828,7 +830,7 @@ public interface MapClient {
          * <p>This is called on the Android UI thread.
          *
          * @param snapshot A bitmap containing the map as it is currently rendered, or {@code null}
-         * if the snapshot could not be taken.
+         *                 if the snapshot could not be taken.
          */
         @UiThread
         void onSnapshotReady(@Nullable Bitmap snapshot);
@@ -941,7 +943,7 @@ public interface MapClient {
     interface OnMarkerClickListener {
         /**
          * Called when a marker has been clicked.
-         *
+         * <p>
          * Note: the first thing that happens when a marker is clicked or tapped is that any
          * currently showing info window is closed, and the {@link OnInfoWindowCloseListener}
          * is triggered. Then the {@code OnMarkerClickListener} is triggered. Therefore, calling
@@ -1045,11 +1047,12 @@ public interface MapClient {
          * <p>This is called on the Android UI thread.
          *
          * @param reason The reason for the camera change. Possible values:
-         * <ul>
-         * <li>{@link #REASON_GESTURE}: User gestures on the map.
-         * <li>{@link #REASON_API_ANIMATION}: Default animations resulting from user interaction.
-         * <li>{@link #REASON_DEVELOPER_ANIMATION}: Developer animations.
-         * </ul>
+         *               <ul>
+         *               <li>{@link #REASON_GESTURE}: User gestures on the map.
+         *               <li>{@link #REASON_API_ANIMATION}: Default animations resulting from user
+         *               interaction.
+         *               <li>{@link #REASON_DEVELOPER_ANIMATION}: Developer animations.
+         *               </ul>
          */
         @UiThread
         void onCameraMoveStarted(int reason);
@@ -1193,7 +1196,7 @@ public interface MapClient {
          * <p>By default, the zoom controls are enabled.
          *
          * @param enabled {@code true} to enable the zoom controls; {@code false} to disable the
-         * zoom controls.
+         *                zoom controls.
          */
         void setZoomControlsEnabled(boolean enabled);
 
@@ -1220,7 +1223,7 @@ public interface MapClient {
          * layer is enabled).
          *
          * @param enabled {@code true} to enable the my-location button; {@code false} to disable
-         * the my-location button.
+         *                the my-location button.
          */
         void setMyLocationButtonEnabled(boolean enabled);
 
@@ -1244,7 +1247,7 @@ public interface MapClient {
          * <p>By default, scroll gestures are enabled.
          *
          * @param enabled {@code true} to enable scroll gestures; {@code false} to disable scroll
-         * gestures.
+         *                gestures.
          */
         void setScrollGesturesEnabled(boolean enabled);
 
@@ -1257,7 +1260,7 @@ public interface MapClient {
          * <p>By default, zoom gestures are enabled.
          *
          * @param enabled {@code true} to enable zoom gestures; {@code false} to disable zoom
-         * gestures.
+         *                gestures.
          */
         void setZoomGesturesEnabled(boolean enabled);
 
@@ -1271,7 +1274,7 @@ public interface MapClient {
          * <p>By default, tilt gestures are enabled.
          *
          * @param enabled {@code true} to enable tilt gestures; {@code false} to disable tilt
-         * gestures.
+         *                gestures.
          */
         void setTiltGesturesEnabled(boolean enabled);
 
@@ -1299,7 +1302,7 @@ public interface MapClient {
          * <p>By default, scroll gestures are enabled during rotation and zoom.
          *
          * @param enabled {@code true} to enable scroll gestures during rotate or zoom gestures;
-         * {@code false} to disable scroll gestures during rotate or zoom gestures.
+         *                {@code false} to disable scroll gestures during rotate or zoom gestures.
          */
         void setScrollGesturesEnabledDuringRotateOrZoom(boolean enabled);
 
@@ -1310,7 +1313,7 @@ public interface MapClient {
          * controls), nor does it restrict programmatic movements and animation.
          *
          * @param enabled {@code true} to enable all gestures; {@code false} to disable all
-         * gestures.
+         *                gestures.
          */
         void setAllGesturesEnabled(boolean enabled);
 
@@ -1322,7 +1325,7 @@ public interface MapClient {
          * <p>By default, the Map Toolbar is enabled.
          *
          * @param enabled {@code true} to enable the Map Toolbar; {@code false} to disable the Map
-         * Toolbar.
+         *                Toolbar.
          */
         void setMapToolbarEnabled(boolean enabled);
 

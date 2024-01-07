@@ -119,13 +119,13 @@ public class MarkerCloseInfoWindowOnRetapDemoActivity extends AppCompatActivity 
                 .snippet("Population: 1,213,000"));
     }
 
-    @Override public void onMapClick(@NonNull final LatLng point) {
+    @Override public void onMapClick(final @NonNull LatLng point) {
         // Any showing info window closes when the map is clicked.
         // Clear the currently selected marker.
         mSelectedMarker = null;
     }
 
-    @Override public boolean onMarkerClick(@NonNull final Marker marker) {
+    @Override public boolean onMarkerClick(final @NonNull Marker marker) {
         // The user has re-tapped on the marker which was already showing an info window.
         if (marker.equals(mSelectedMarker)) {
             // The showing info window has already been closed - that's the first thing to happen
