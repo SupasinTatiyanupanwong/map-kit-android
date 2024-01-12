@@ -30,7 +30,6 @@ The library consists of 4 artifacts; `maps-core`, `maps-google`, `maps-amazon`, 
 | ``new *Options()``       | ``new *Options()``       | ``new *Options()``       | ``MapKit.new*Options()``     |
 | ``*.builder()``          | ``*.builder()``          | ``*.builder()``          | ``MapKit.new*Builder()``     |
 | ``*Factory.*()``         | ``*Factory.*()``         | ``*Factory.*()``         | ``MapKit.get*Factory().*()`` |
-| ``TileProvider.NO_TILE`` | ``TileProvider.NO_TILE`` | ``TileProvider.NO_TILE`` | ``MapKit.noTile()``          |
 
 ### Limitation
 
@@ -45,16 +44,17 @@ Add the dependencies for the artifacts you need in the `build.gradle` file for y
 ```groovy
 dependencies {
     // Optional - To grant access to the Map Kit API without platform specific implementation
-    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-core:2.2.0'
+    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-core:2.3.0'
 
     // To use the Google Maps SDK via Map Kit
-    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.2.0'
+    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.3.0'
 
     // To use the Amazon Maps SDK via Map Kit
-    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.2.0-alpha01'
+    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.3.0'
+    implementation files('amazon-maps-api-v2.aar')
 
     // To use the HUAWEI Map Kit via Map Kit
-    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.2.0'
+    implementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.3.0'
 }
 ```
 
@@ -74,9 +74,12 @@ android {
 }
 
 dependencies {
-    googleImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.2.0'
-    amazonImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.2.0-alpha01'
-    huaweiImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.2.0'
+    googleImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-google:2.3.0'
+
+    amazonImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-amazon:2.3.0'
+    amazonImplementation files('amazon-maps-api-v2.aar')
+
+    huaweiImplementation 'dev.supasintatiyanupanwong.libraries.android.kits.maps:maps-huawei:2.3.0'
 }
 ```
 

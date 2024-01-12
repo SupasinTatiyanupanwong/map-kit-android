@@ -44,7 +44,7 @@ android {
 }
 
 metalava {
-    filename.set("api/api.txt")
+    filename.set("api/${project.properties['VERSION_NAME']}.txt")
 }
 
 dependencies {
